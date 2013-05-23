@@ -7,8 +7,22 @@ sys.setdefaultencoding("utf-8")
 
 from xml.dom import minidom
 import cgi
+import os.path
 
 scale = 20.0
+
+lang = sys.argv[1]
+
+if os.path.isfile("florence.xml"):
+	source = "florence.xml"
+elif os.path.isfile("../../data/layouts/florence.xml"):
+	source = "../../data/layouts/florence.xml"
+else:
+	source = "/usr/share/florence/layouts/florence.xml"
+	if os.getenv("DATADIR"):
+		source = "%s/florence/layouts/florence.xml" % os.getenv("DATADIR")
+	elif os.getenv("PREFIX"):
+		source = "%s/share/florence/layouts/florence.xml" % os.getenv("PREFIX")
 
 def get_element(node, name):
 	if len(node.getElementsByTagName(name)) > 0:
@@ -38,7 +52,7 @@ def get_mods(k, x, y, w, h, scale):
 	return t
 
 def get_symbol(code, x, y, w, h, scale):
-	xmldoc = minidom.parse("fr.xml")
+	xmldoc = minidom.parse(lang)
 	keys = xmldoc.getElementsByTagName('key')
 	for k in keys:
 		if k.getAttribute('code') == code:
@@ -51,7 +65,7 @@ def get_symbol(code, x, y, w, h, scale):
 			return (mod, get_mods(k, x, y, w, h, scale))
 	return (None, None)
 
-xmldoc = minidom.parse("florence.xml")
+xmldoc = minidom.parse(source)
 kbds = [ ( "Main", "mid", xmldoc.getElementsByTagName('keyboard')[0] ) ]
 exts = xmldoc.getElementsByTagName('extension')
 kbd = xmldoc.getElementsByTagName('keyboard')[0]

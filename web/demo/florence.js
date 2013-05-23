@@ -327,7 +327,7 @@ function onMouseOver(key) {
 	}
 };
 
-var doc = loadDoc("florence.svg");
+var doc = loadDoc("us.svg");
 var globalmod = "0";
 
 $(document).ready(function() {

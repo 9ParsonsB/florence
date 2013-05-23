@@ -1,3 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*- 
+
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
 import gtk.gdk
 from xml.dom import minidom
 import os
@@ -29,12 +36,14 @@ class symbol:
 
 if os.path.isfile("symbols.xml"):
 	source = "symbols.xml"
+elif os.path.isfile("../../data/styles/default/symbols.xml"):
+	source = "../../data/styles/default/symbols.xml"
 else:
 	source = "/usr/share/florence/styles/default/symbols.xml"
-if os.getenv("DATADIR"):
-	source = "%s/florence/styles/default/symbols.xml" % os.getenv("DATADIR")
-elif os.getenv("PREFIX"):
-	source = "%s/share/florence/styles/default/symbols.xml" % os.getenv("PREFIX")
+	if os.getenv("DATADIR"):
+		source = "%s/florence/styles/default/symbols.xml" % os.getenv("DATADIR")
+	elif os.getenv("PREFIX"):
+		source = "%s/share/florence/styles/default/symbols.xml" % os.getenv("PREFIX")
 xmldoc = minidom.parse(source)
 list = xmldoc.getElementsByTagName('symbol')
 
