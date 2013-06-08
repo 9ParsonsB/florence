@@ -44,10 +44,12 @@ def get_mods(k, x, y, w, h, scale):
 		elif get_element(sym, 'name'):
 		#	txt = get_element(sym, 'name')
 		#	t += '<text class="symbol mod%d" font-family="Arial" font-size="%d" text-anchor="middle" x="%d" y="%d"%s>%s</text>' % (m, scale*0.9, x + (w/2.0), y + (h/2.0) + (scale/2.0), style, txt)
+			t += '<text class="symbol-outline mod%d%s" font-family="Arial" font-size="%d" text-anchor="middle" x="%d" y="%d"%s>%s</text>' % (m, ks, scale*0.9, x + (w/2.0), y + (h/2.0) + (scale/2.0), style, "")
 			t += '<text class="symbol mod%d%s" font-family="Arial" font-size="%d" text-anchor="middle" x="%d" y="%d"%s>%s</text>' % (m, ks, scale*0.9, x + (w/2.0), y + (h/2.0) + (scale/2.0), style, "")
 			pass
 		else:
 			txt = cgi.escape(sym.firstChild.data)
+			t += '<text class="symbol-outline mod%d%s" font-family="Arial" font-size="%d" text-anchor="middle" x="%d" y="%d"%s>%s</text>' % (m, ks, scale*0.9, x + (w/2.0), y + (h/2.0) + (scale/2.0), style, txt)
 			t += '<text class="symbol mod%d%s" font-family="Arial" font-size="%d" text-anchor="middle" x="%d" y="%d"%s>%s</text>' % (m, ks, scale*0.9, x + (w/2.0), y + (h/2.0) + (scale/2.0), style, txt)
 	return t
 

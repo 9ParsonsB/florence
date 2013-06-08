@@ -119,7 +119,8 @@ for i in range(256):
 				keymap = gtk.gdk.keyval_from_name(val[5:])
 
 		ks = ""
-		if val in ['BackSpace', 'Return', 'Tab', 'ISO_Left_Tab', 'Left', 'Right', 'Up', 'Down']:
+		if val in ['BackSpace', 'Return', 'Tab', 'ISO_Left_Tab',\
+				'Left', 'Right', 'Up', 'Down', 'Home', 'End']:
 			ks = ' sym="%s"' % (val)
 		found = False
 		for s in syms:

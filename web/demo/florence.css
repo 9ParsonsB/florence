@@ -34,6 +34,12 @@
 	fill: white;
 }
 
+.symbol-outline {
+	fill: black;
+	stroke: black;
+	stroke-width: 2px;
+}
+
 svg.symbol {
 	stroke: black;
 	stroke-width: 2px;

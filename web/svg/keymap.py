@@ -62,7 +62,7 @@ for i in range(256):
 	val = gtk.gdk.keyval_name(keymap)
 	if val and val[:5] == "dead_":
 		if val == "dead_circumflex":
-			val = "^"
+			val = cgi.escape("^")
 		else:
 			val = val[5:]
 	found = False
