@@ -434,14 +434,16 @@ void flo_set_auto_hide(GSettings *settings, gchar *key, gpointer user_data)
 gboolean flo_mouse_leave_event (GtkWidget *window, GdkEvent *event, gpointer user_data)
 {
 	START_FUNC
+	gint x, y;
 	struct florence *florence=(struct florence *)user_data;
 	status_focus_set(florence->status, NULL);
 	status_timer_stop(florence->status);
 	/* As we don't support multitouch yet, and we no longer get button events when the mouse is outside,
 	 * we just release any pressed key when the mouse leaves. */
 	if (status_get_moving(florence->status)) {
-		gtk_window_move(GTK_WINDOW(window), (gint)((GdkEventCrossing*)event)->x_root-florence->xpos,
-			(gint)((GdkEventCrossing*)event)->y_root-florence->ypos);
+		gdk_device_get_position(gdk_device_manager_get_client_pointer(
+			gdk_display_get_device_manager(gdk_display_get_default())), NULL, &x, &y);
+		gtk_window_move(GTK_WINDOW(window), x-florence->xpos, y-florence->ypos);
 	} else {
 		status_pressed_set(florence->status, NULL);
 		status_press_latched(florence->status, NULL);
@@ -576,14 +578,16 @@ void flo_start_keep_on_top(struct florence *florence, gboolean keep_on_top)
 gboolean flo_mouse_move_event(GtkWidget *window, GdkEvent *event, gpointer user_data)
 {
 	START_FUNC
+	gint x, y;
 #ifdef ENABLE_RAMBLE
 	enum key_hit hit;
 	gchar *algo;
 #endif
 	struct florence *florence=(struct florence *)user_data;
 	if (status_get_moving(florence->status)) {
-		gtk_window_move(GTK_WINDOW(window), (gint)((GdkEventMotion*)event)->x_root-florence->xpos,
-			(gint)((GdkEventMotion*)event)->y_root-florence->ypos);
+		gdk_device_get_position(gdk_device_manager_get_client_pointer(
+			gdk_display_get_device_manager(gdk_display_get_default())), NULL, &x, &y);
+		gtk_window_move(GTK_WINDOW(window), x-florence->xpos, y-florence->ypos);
 	} else {
 		/* Remember mouse position for moving */
 		florence->xpos=(gint)((GdkEventMotion*)event)->x;
