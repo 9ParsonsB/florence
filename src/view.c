@@ -338,7 +338,7 @@ void view_create_window_mask(struct view *view)
 		cairo_destroy(cairoctx);
 		cairo_surface_destroy(view->background);
 		view->background=NULL;
-		g_object_unref(G_OBJECT(mask));
+		cairo_surface_destroy(mask);
 		status_focus_zoom_set(view->status, FALSE);
 	} else {
 		XShapeCombineMask(disp, GDK_WINDOW_XID(gtk_widget_get_window(GTK_WIDGET(view->window))),
