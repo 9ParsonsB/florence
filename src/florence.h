@@ -34,6 +34,7 @@
 	#include "ramble.h"
 #endif
 #include "service.h"
+#include "controller.h"
 
 /* There is one florence structure which contains all global data in florence.c */
 struct florence {
@@ -42,18 +43,12 @@ struct florence {
 	GSList *keyboards; /* the keyboard extensions (including main) of florence */
 	struct status *status; /* the status of florence */	
 	struct trayicon *trayicon; /* tray icon object */
-	GtkWindow *icon; /* intermediate icon */
 	gint xpos, ypos; /* remember pointer position */
 #ifdef ENABLE_RAMBLE
 	struct ramble *ramble; /* track the path of the mouse. */
 #endif
-#ifdef ENABLE_AT_SPI2
-	AtspiAccessible *obj; /* editable object being selected */
-#endif
-#ifdef ENABLE_AT_SPI
-	Accessible *obj; /* editable object being selected */
-#endif
 	struct service *service; /* dbus service object */
+	struct controller *controller; /* controller object */
 };
 
 /* create a new instance of florence. */

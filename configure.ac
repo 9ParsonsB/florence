@@ -83,11 +83,8 @@ if test "x$with_xtst" != "xno"; then
 	fi
 fi
 if test "x$with_at_spi" != "xno"; then
-	PKG_CHECK_MODULES([AT_SPI2], [atspi-2], AC_DEFINE([ENABLE_AT_SPI2], [], [dbus at-spi enabled.]), [at_spi2=x])
-	if test "x$at_spi2" = "xx"; then
-		PKG_CHECK_MODULES([AT_SPI], [cspi-1.0], AC_DEFINE([ENABLE_AT_SPI], [], [corba at-spi enabled.]),
-			AC_MSG_ERROR(Could not configure at-spi. Please either install at-spi or disable it: --without-at-spi configure option))
-	fi
+	PKG_CHECK_MODULES([AT_SPI2], [atspi-2], AC_DEFINE([ENABLE_AT_SPI2], [], [dbus at-spi enabled.]),
+		AC_MSG_ERROR(Could not configure at-spi. Please either install at-spi or disable it: --without-at-spi configure option))
 fi
 
 # Math library
@@ -104,8 +101,6 @@ AC_SUBST(XTST_CFLAGS)
 AC_SUBST(XTST_LIBS)
 AC_SUBST(AT_SPI2_CFLAGS)
 AC_SUBST(AT_SPI2_LIBS)
-AC_SUBST(AT_SPI_CFLAGS)
-AC_SUBST(AT_SPI_LIBS)
 AC_SUBST(LIBGNOME_CFLAGS)
 AC_SUBST(LIBGNOME_LIBS)
 AC_SUBST(DEPS_CFLAGS)

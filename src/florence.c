@@ -28,32 +28,10 @@
 #include "layoutreader.h"
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
-#ifdef ENABLE_AT_SPI2
-#define AT_SPI
-#include <dbus/dbus.h>
-#include <atspi/atspi.h>
-#endif
-#ifdef ENABLE_AT_SPI
-#define AT_SPI
-#include <cspi/spi.h>
-#endif
-#include <cairo-xlib.h>
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
-#include <X11/extensions/shape.h>
 
 
 /* bring the window back to front every seconds */
 #define FLO_TO_TOP_TIMEOUT 1000
-
-/* exit signal */
-static int flo_exit=FALSE;
-
-#ifdef ENABLE_AT_SPI2
-void flo_check_show (struct florence *florence, AtspiAccessible *obj);
-#else
-void flo_check_show (struct florence *florence, Accessible *obj);
-#endif
 
 /* terminate the program */
 void flo_terminate(void)
@@ -71,189 +49,11 @@ void flo_destroy (GtkWidget *widget, gpointer user_data)
 	END_FUNC
 }
 
-#ifdef AT_SPI
-/* Called to destroy the icon */
-void flo_icon_destroy (GtkWidget *widget, gpointer user_data)
-{
-	START_FUNC
-	struct florence *florence=(struct florence *)user_data;
-	if (florence->icon) {
-		gtk_widget_hide(GTK_WIDGET(florence->icon));
-		g_usleep(100000);
-	}
-	END_FUNC
-}
-
-/* Called to show the icon */
-void flo_icon_show (GtkWidget *widget, gpointer user_data)
-{
-	START_FUNC
-	struct florence *florence=(struct florence *)user_data;
-	if (florence->icon && florence->obj) {
-#ifdef ENABLE_AT_SPI2
-		g_object_ref(florence->obj);
-#else
-		Accessible_ref(florence->obj);
-#endif
-		flo_check_show(florence, florence->obj);
-	}
-	END_FUNC
-}
-
-/* on button-press events: destroy the icon and show the actual keyboard */
-void flo_icon_press (GtkWidget *window, GdkEventButton *event, gpointer user_data)
-{
-	START_FUNC
-	struct florence *florence=(struct florence *)user_data;
-	flo_icon_destroy(NULL, (gpointer)florence);
-	view_show(florence->view, florence->obj);
-	END_FUNC
-}
-
-/* on expose event: display florence icon */
-void flo_icon_expose (GtkWidget *window, cairo_t* context, void *userdata)
-{
-	START_FUNC
-	cairo_t *mask_context;
-	RsvgHandle *handle;
-	GError *error=NULL;
-	gdouble w, h;
-	cairo_surface_t *mask=NULL;
-	Pixmap shape;
-	Display *disp=(Display *)gdk_x11_get_default_xdisplay();
-
-	cairo_set_operator(context, CAIRO_OPERATOR_SOURCE);
-
-	handle=rsvg_handle_new_from_file(ICONDIR "/florence.svg", &error);
-	if (error) flo_error(_("Error loading florence icon: %s"), error->message);
-	else {
-		w=settings_get_double(SETTINGS_SCALEX)*2;
-		h=settings_get_double(SETTINGS_SCALEY)*2;
-		shape=XCreatePixmap(disp, GDK_WINDOW_XID(gtk_widget_get_window(window)), w, h, 1);
-		mask=cairo_xlib_surface_create_for_bitmap(disp, shape,
-			DefaultScreenOfDisplay(disp), w, h);
-		mask_context=cairo_create(mask);
-		cairo_set_source_rgba(mask_context, 0.0, 0.0, 0.0, 0.0);
-		cairo_set_operator(mask_context, CAIRO_OPERATOR_SOURCE);
-		cairo_paint(mask_context);
-		cairo_set_operator(mask_context, CAIRO_OPERATOR_OVER);
-		style_render_svg(mask_context, handle, w, h, TRUE, NULL);
-		XShapeCombineMask(disp, GDK_WINDOW_XID(gtk_widget_get_window(window)),
-			ShapeBounding, 0, 0, cairo_xlib_surface_get_drawable(mask), ShapeSet);
-
-		cairo_set_source_rgba(context, 0.0, 0.0, 0.0, 100.0);
-		cairo_set_operator(context, CAIRO_OPERATOR_DEST_OUT);
-		cairo_paint(context);
-		cairo_set_operator(context, CAIRO_OPERATOR_OVER);
-		style_render_svg(context, handle, w, h, TRUE, NULL);
-		cairo_destroy(mask_context);
-		cairo_surface_destroy(mask);
-		g_object_unref(G_OBJECT(handle));
-	}
-	END_FUNC
-}
-
-/* Show an intermediate icon before showing the keyboard (if intermediate_icon is activated) 
- * otherwise, directly show the keyboard */
-#ifdef ENABLE_AT_SPI2
-void flo_check_show (struct florence *florence, AtspiAccessible *obj)
-#else
-void flo_check_show (struct florence *florence, Accessible *obj)
-#endif
-{
-	START_FUNC
-	if (flo_exit || (!florence->view)) return;
-	if (gtk_widget_get_visible(GTK_WIDGET(florence->view->window))) view_hide(florence->view);
-	if (settings_get_bool(SETTINGS_INTERMEDIATE_ICON)) {
-#ifdef ENABLE_AT_SPI2
-		if (florence->obj) g_object_unref(florence->obj);
-#else
-		if (florence->obj) Accessible_unref(florence->obj);
-#endif
-		florence->obj=obj;
-		if (!florence->icon) {
-			florence->icon=GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
-			gtk_window_set_keep_above(florence->icon, TRUE);
-			gtk_window_set_skip_taskbar_hint(florence->icon, TRUE);
-			gtk_widget_set_size_request(GTK_WIDGET(florence->icon), settings_get_double(SETTINGS_SCALEX)*2,
-				settings_get_double(SETTINGS_SCALEY)*2);
-			gtk_container_set_border_width(GTK_CONTAINER(florence->icon), 0);
-			gtk_window_set_decorated(florence->icon, FALSE);
-			gtk_window_set_position(florence->icon, GTK_WIN_POS_MOUSE);
-			gtk_window_set_accept_focus(florence->icon, FALSE);
-			gtk_widget_set_events(GTK_WIDGET(florence->icon),
-				GDK_EXPOSURE_MASK|GDK_BUTTON_PRESS_MASK|GDK_BUTTON_RELEASE_MASK);
-			g_signal_connect(G_OBJECT(florence->icon), "draw", G_CALLBACK(flo_icon_expose), florence);
-			g_signal_connect(G_OBJECT(florence->icon), "button-press-event",
-				G_CALLBACK(flo_icon_press), florence);
-			g_signal_connect(G_OBJECT(florence->view->window), "show",
-				G_CALLBACK(flo_icon_destroy), florence);
-			g_signal_connect(G_OBJECT(florence->view->window), "hide",
-				G_CALLBACK(flo_icon_show), florence);
-			g_signal_connect(G_OBJECT(florence->icon), "screen-changed",
-				G_CALLBACK(view_screen_changed), NULL);
-			view_screen_changed(GTK_WIDGET(florence->icon), NULL, NULL);
-		}
-		tools_window_move(florence->icon, obj);
-		gtk_widget_show(GTK_WIDGET(florence->icon));
-	} else view_show(florence->view, obj);
-	END_FUNC
-}
-
-/* Called when a widget is focused.
- * Check if the widget is editable and show the keyboard or hide if not. */
-#ifdef ENABLE_AT_SPI2
-void flo_focus_event (const AtspiEvent *event, void *user_data)
-#else
-void flo_focus_event (const AccessibleEvent *event, void *user_data)
-#endif
-{
-	START_FUNC
-	struct florence *florence=(struct florence *)user_data;
-	gboolean hide=FALSE;
-#ifdef ENABLE_AT_SPI2
-	GError *error=NULL;
-
-	AtspiStateSet *state_set=atspi_accessible_get_state_set(event->source);
-	AtspiRole role=atspi_accessible_get_role(event->source, &error);
-	if (error) flo_error(_("Event error: %s"), error->message);
-	if (role==ATSPI_ROLE_TERMINAL ||
-		(((role==ATSPI_ROLE_TEXT) || (role==ATSPI_ROLE_PASSWORD_TEXT)) &&
-		 state_set && atspi_state_set_contains(state_set, ATSPI_STATE_EDITABLE))) {
-#else
-	if (Accessible_getRole(event->source)==SPI_ROLE_TERMINAL || Accessible_isEditableText(event->source)) {
-#endif
-		if (event->detail1) {
-			flo_check_show(florence, event->source);
-#ifdef ENABLE_AT_SPI2
-			g_object_ref(event->source);
-#else
-			Accessible_ref(event->source);
-#endif
-		} else {
-			hide=TRUE;
-		}
-	} else {
-		hide=TRUE;
-	}
-	if (hide) {
-		view_hide(florence->view);
-		flo_icon_destroy(NULL, (gpointer)florence);
-#ifdef ENABLE_AT_SPI2
-		if (florence->obj) g_object_unref(florence->obj);
-#else
-		if (florence->obj) Accessible_unref(florence->obj);
-#endif
-		florence->obj=NULL;
-	}
-	END_FUNC
-}
-#endif
-
-#ifdef AT_SPI
+/*#ifdef AT_SPI*/
 /* Shouldn't be used but it seems like we need to traverse accessible widgets when a new window is open to trigger
  * focus events. This is at least the case for gedit. Will need to check how this all work.
  * Can't we get a focus event when the widget is greated focussed? */
+/*
 #ifdef ENABLE_AT_SPI2
 void flo_traverse (struct florence *florence, AtspiAccessible *obj)
 #else
@@ -299,94 +99,7 @@ void flo_traverse (struct florence *florence, Accessible *obj)
 		}
 	}
 	END_FUNC
-}
-
-/* Called when a window is created */
-#ifdef ENABLE_AT_SPI2
-void flo_window_create_event (const AtspiEvent *event, gpointer user_data)
-#else
-void flo_window_create_event (const AccessibleEvent *event, gpointer user_data)
-#endif
-{
-	START_FUNC
-	/* For some reason, focus state change does happen after traverse 
-	 * ==> did I misunderstand? */
-	/* TODO: remettre le keyboard au front. Attention: always_on_screen désactive cette fonction */
-	flo_traverse((struct florence *)user_data, event->source);
-	END_FUNC
-}
-#endif
-
-/* Switches between always on screen mode and hidden mode.
- * When in hidden mode, the spi events are registered to monitor focus and show on editable widgets.
- * the events are deregistered when always on screen mode is activated */
-void flo_switch_mode (struct florence *florence, gboolean auto_hide)
-{
-	START_FUNC
-#ifdef ENABLE_AT_SPI
-	static AccessibleEventListener *focus_listener=NULL;
-	static AccessibleEventListener *window_listener=NULL;
-	Accessible *obj=NULL;
-	int i;
-#endif
-
-	if (auto_hide) {
-		if (!status_spi_is_enabled(florence->status)) {
-			flo_warn(_("SPI is disabled: Unable to switch auto-hide mode on."));
-			END_FUNC
-			return;
-		}
-#ifdef AT_SPI
-		view_hide(florence->view);
-#ifdef ENABLE_AT_SPI2
-		if (!atspi_event_listener_register_from_callback(flo_focus_event, (void*)florence, NULL, "object:state-changed:focused", NULL))
-			flo_error(_("ATSPI listener register failed"));
-		if (!atspi_event_listener_register_from_callback(flo_window_create_event, (void*)florence, NULL, "window:activate", NULL))
-			flo_error(_("ATSPI listener register failed"));
-#else
-		focus_listener=SPI_createAccessibleEventListener(flo_focus_event, (void*)florence);
-		SPI_registerGlobalEventListener(focus_listener, "object:state-changed:focused");
-		window_listener=SPI_createAccessibleEventListener(flo_window_create_event, (void*)florence);
-		SPI_registerGlobalEventListener(window_listener, "window:activate");
-		for (i=1;i<=SPI_getDesktopCount();i++) {
-			obj=SPI_getDesktop(i);
-			if (obj) {
-				flo_traverse(florence, obj);
-				Accessible_unref(obj);
-			}
-		}
-#endif
-	} else {
-#ifdef ENABLE_AT_SPI2
-		if (!atspi_event_listener_deregister_from_callback(flo_focus_event, (void*)florence, "object:state-changed:focused", NULL)) {
-			flo_warn(_("AT SPI: problem deregistering focus listener"));
-		}
-		if (!atspi_event_listener_deregister_from_callback(flo_window_create_event, (void*)florence, "window:activate", NULL)) {
-			flo_warn(_("AT SPI: problem deregistering window listener"));
-		}
-#endif
-#ifdef ENABLE_AT_SPI
-		if (focus_listener) {
-			SPI_deregisterGlobalEventListenerAll(focus_listener);
-			AccessibleEventListener_unref(focus_listener);
-			focus_listener=NULL;
-		}
-		if (window_listener) {
-			SPI_deregisterGlobalEventListenerAll(window_listener);
-			AccessibleEventListener_unref(window_listener);
-			window_listener=NULL;
-		}
-#endif
-		flo_icon_destroy(NULL, (gpointer)florence);
-		view_show(florence->view, NULL);
-#ifdef ENABLE_AT_SPI
-		if (florence->obj) Accessible_unref(obj);
-#endif
-		florence->obj=NULL;
-#endif
-	}
-	END_FUNC
-}
+}*/
 
 /* load the keyboards from the layout file into the keyboards member of florence */
 GSList *flo_keyboards_load(struct florence *florence, struct layout *layout)
@@ -415,19 +128,6 @@ GSList *flo_keyboards_load(struct florence *florence, struct layout *layout)
 	xkeyboard_client_map_free(florence->status->xkeyboard);
 	END_FUNC
 	return keyboards;
-}
-
-/* Triggered by gconf when the "auto_hide" parameter is changed. */
-void flo_set_auto_hide(GSettings *settings, gchar *key, gpointer user_data)
-{
-	START_FUNC
-	struct florence *florence=(struct florence *)user_data;
-	flo_switch_mode(florence, settings_get_bool(SETTINGS_AUTO_HIDE));
-	if ((!settings_get_bool(SETTINGS_AUTO_HIDE)) && (florence->icon)) {
-		gtk_widget_destroy(GTK_WIDGET(florence->icon));
-		florence->icon=NULL;
-	}
-	END_FUNC
 }
 
 /* handles mouse leave events */
@@ -730,24 +430,12 @@ struct florence *flo_new(gboolean gnome, const gchar *focus_back)
 #endif
 
 	florence->status=status_new(focus_back);
-#ifdef AT_SPI
-#ifdef ENABLE_AT_SPI2
-	if (atspi_init()) {
-#else
-	if (SPI_init() && (!gnome)) {
-#endif
-		flo_warn(_("AT-SPI has been disabled at run time: auto-hide mode is disabled."));
-		status_spi_disable(florence->status);
-	}
-#else
-	flo_warn(_("AT-SPI has been disabled at compile time: auto-hide mode is disabled."));
-	status_spi_disable(florence->status);
-#endif
 
 	flo_layout_load(florence);
 	florence->view=view_new(florence->status, florence->style, florence->keyboards);
 	status_view_set(florence->status, florence->view);
 	flo_start_keep_on_top(florence, settings_get_bool(SETTINGS_KEEP_ON_TOP));
+	florence->controller=controller_new(florence->status);
 
 	g_signal_connect(G_OBJECT(view_window_get(florence->view)), "destroy",
 		G_CALLBACK(flo_destroy), florence);
@@ -761,11 +449,7 @@ struct florence *flo_new(gboolean gnome, const gchar *focus_back)
 		G_CALLBACK(flo_button_press_event), florence);
 	g_signal_connect(G_OBJECT(view_window_get(florence->view)), "button-release-event",
 		G_CALLBACK(flo_button_release_event), florence);
-	if (settings_get_bool(SETTINGS_HIDE_ON_START) && (!settings_get_bool(SETTINGS_AUTO_HIDE)))
-		view_hide(florence->view);
-	else flo_switch_mode(florence, settings_get_bool(SETTINGS_AUTO_HIDE));
 	florence->trayicon=trayicon_new(florence->view, G_CALLBACK(flo_destroy));
-	settings_changecb_register(SETTINGS_AUTO_HIDE, flo_set_auto_hide, florence);
 	settings_changecb_register(SETTINGS_KEEP_ON_TOP, flo_set_keep_on_top, florence);
 	/* TODO: just reload the style, no need to reload the whole layout */
 	settings_changecb_register(SETTINGS_STYLE_ITEM, flo_layout_reload, florence);
@@ -780,17 +464,9 @@ struct florence *flo_new(gboolean gnome, const gchar *focus_back)
 void flo_free(struct florence *florence)
 {
 	START_FUNC
-	flo_exit=TRUE;
 
-	if (florence->icon) gtk_widget_destroy(GTK_WIDGET(florence->icon));
-	florence->icon=NULL;
-#ifdef ENABLE_AT_SPI2
-	if (florence->obj) g_object_unref(florence->obj);
-	atspi_exit();
-#else
-	if (florence->obj) Accessible_unref(florence->obj);
-	SPI_exit();
-#endif
+	controller_free(florence->controller);
+	florence->controller=NULL;
 	trayicon_free(florence->trayicon);
 	florence->trayicon=NULL;
 	flo_layout_unload(florence);
