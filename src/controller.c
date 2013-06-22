@@ -158,6 +158,7 @@ void controller_focus_event (const AtspiEvent *event, void *user_data)
 	AtspiStateSet *state_set=atspi_accessible_get_state_set(event->source);
 	AtspiRole role=atspi_accessible_get_role(event->source, &error);
 	if (error) flo_error(_("Event error: %s"), error->message);
+	flo_debug(TRACE_DEBUG, _("Receives atspi focus event. Object role=%d"), role);
 	if (role==ATSPI_ROLE_TERMINAL ||
 		(((role==ATSPI_ROLE_TEXT) || (role==ATSPI_ROLE_PASSWORD_TEXT)) &&
 		 state_set && atspi_state_set_contains(state_set, ATSPI_STATE_EDITABLE))) {
@@ -181,17 +182,6 @@ void controller_focus_event (const AtspiEvent *event, void *user_data)
 	END_FUNC
 }
 
-/* Called when a window is created */
-void controller_window_create_event (const AtspiEvent *event, gpointer user_data)
-{
-	START_FUNC
-	/* For some reason, focus state change does happen after traverse 
-	 * ==> did I misunderstand? */
-	/* TODO: remettre le keyboard au front. Attention: always_on_screen désactive cette fonction */
-	// flo_traverse((struct florence *)user_data, event->source);
-	END_FUNC
-}
-
 /* Registered the spi events to monitor focus and show on editable widgets. */
 void controller_register_events (struct controller *controller)
 {
@@ -202,7 +192,7 @@ void controller_register_events (struct controller *controller)
 		view_hide(controller->status->view);
 		if (!atspi_event_listener_register_from_callback(controller_focus_event, (void*)controller, NULL, "object:state-changed:focused", NULL))
 			flo_error(_("ATSPI listener register failed"));
-		if (!atspi_event_listener_register_from_callback(controller_window_create_event, (void*)controller, NULL, "window:activate", NULL))
+		if (!atspi_event_listener_register_from_callback(controller_focus_event, (void*)controller, NULL, "focus:", NULL))
 			flo_error(_("ATSPI listener register failed"));
 	}
 	END_FUNC
@@ -215,7 +205,7 @@ void controller_deregister_events (struct controller *controller)
 	if (!atspi_event_listener_deregister_from_callback(controller_focus_event, (void*)controller, "object:state-changed:focused", NULL)) {
 		flo_warn(_("AT SPI: problem deregistering focus listener"));
 	}
-	if (!atspi_event_listener_deregister_from_callback(controller_window_create_event, (void*)controller, "window:activate", NULL)) {
+	if (!atspi_event_listener_deregister_from_callback(controller_focus_event, (void*)controller, "focus:", NULL)) {
 		flo_warn(_("AT SPI: problem deregistering window listener"));
 	}
 	controller_icon_hide(NULL, (gpointer)controller);

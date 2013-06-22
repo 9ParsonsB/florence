@@ -49,58 +49,6 @@ void flo_destroy (GtkWidget *widget, gpointer user_data)
 	END_FUNC
 }
 
-/*#ifdef AT_SPI*/
-/* Shouldn't be used but it seems like we need to traverse accessible widgets when a new window is open to trigger
- * focus events. This is at least the case for gedit. Will need to check how this all work.
- * Can't we get a focus event when the widget is greated focussed? */
-/*
-#ifdef ENABLE_AT_SPI2
-void flo_traverse (struct florence *florence, AtspiAccessible *obj)
-#else
-void flo_traverse (struct florence *florence, Accessible *obj)
-#endif
-{
-	START_FUNC
-	int n_children, i;
-#ifdef ENABLE_AT_SPI2
-	AtspiAccessible *child;
-	n_children=atspi_accessible_get_child_count(obj, NULL);
-
-	if (!atspi_accessible_get_table(obj)) {
-#else
-	Accessible *child;
-	n_children=Accessible_getChildCount(obj);
-
-	if (!Accessible_isTable(obj)) {
-#endif
-		for (i=0;i<n_children;++i)
-		{
-#ifdef ENABLE_AT_SPI2
-			child=atspi_accessible_get_child_at_index(obj, i, NULL);
-			if (atspi_state_set_contains(atspi_accessible_get_state_set(child), ATSPI_STATE_FOCUSED) &&
-				(atspi_accessible_get_role(child, NULL)==ATSPI_ROLE_TERMINAL ||
-				(((atspi_accessible_get_role(child, NULL)==ATSPI_ROLE_TEXT) ||
-				(atspi_accessible_get_role(child, NULL)==ATSPI_ROLE_PASSWORD_TEXT)) &&
-				 atspi_state_set_contains(atspi_accessible_get_state_set(child), ATSPI_STATE_EDITABLE)))) {
-#else
-			child=Accessible_getChildAtIndex(obj, i);
-			if (Accessible_isEditableText(child) &&
-				AccessibleStateSet_contains(Accessible_getStateSet(child), SPI_STATE_FOCUSED)) {
-#endif
-				flo_check_show(florence, child);
-			} else {
-				flo_traverse(florence, child);
-#ifdef ENABLE_AT_SPI2
-				if (child) g_object_unref(child);
-#else
-				if (child) Accessible_unref(child);
-#endif
-			}
-		}
-	}
-	END_FUNC
-}*/
-
 /* load the keyboards from the layout file into the keyboards member of florence */
 GSList *flo_keyboards_load(struct florence *florence, struct layout *layout)
 {
