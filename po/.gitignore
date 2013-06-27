@@ -3,3 +3,4 @@ POTFILES
 stamp-it
 *.gmo
 .intltool-merge-cache
+florence.pot

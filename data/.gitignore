@@ -1,3 +1,5 @@
 florence.desktop
 florence.desktop.in
 florence.schemas
+org.florence.gschema.valid
+org.florence.gschema.xml
