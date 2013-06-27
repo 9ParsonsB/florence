@@ -1,6 +1,7 @@
 AC_INIT([Florence Gnome virtual keyboard], [0.6.0], [f.agrech@gmail.com], [florence])
 AC_CONFIG_HEADERS(config.h)
 AM_INIT_AUTOMAKE(no-dist-gzip dist-bzip2)
+LT_INIT
 
 # Options
 AC_ARG_WITH([docs], AS_HELP_STRING([--without-docs], [Build without docs (default: enabled)]))
@@ -65,6 +66,9 @@ PKG_CHECK_MODULES(DEPS, $DEP_MODULES)
 
 PKG_CHECK_MODULES([GTK3], [gtk+-3.0], AC_DEFINE([ENABLE_GTK3], [], [GTK3 enabled.]),
 	AC_MSG_ERROR(gtk version 3.0 or superior required. Please install the dev package of gtk))
+
+PKG_CHECK_MODULES([GIO], [gio-2.0], AC_DEFINE([ENABLE_GIO], [], [GIO enabled.]),
+	AC_MSG_ERROR(GIO version 2.0 or superior required. Please install the dev package of gtk))
 
 if test "x$with_docs" != "xno"; then
 	PKG_CHECK_MODULES([GNOME_DOC_UTILS], [gnome-doc-utils], AC_DEFINE([ENABLE_HELP], [], [Help enabled.]), AC_MSG_ERROR(Couldn't find gnome-doc-utils.
@@ -146,6 +150,7 @@ AC_CONFIG_FILES([Makefile
                  docs/florence.1
                  docs/florence_applet.1
                  src/Makefile
+		 src/florence-1.0.pc
 		 po/Makefile.in])
 AC_OUTPUT
 

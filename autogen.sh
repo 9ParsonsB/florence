@@ -48,8 +48,9 @@ CURR_PWD=$PWD
 run gnome-doc-prepare --force
 run glib-gettextize --force --copy
 run intltoolize --copy --force --automake
+run libtoolize
 run autoheader
-run automake --foreign
+run automake --foreign --add-missing
 run autoconf
 
 cd data
