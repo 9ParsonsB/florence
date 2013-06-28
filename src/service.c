@@ -22,6 +22,7 @@
 #include "system.h"
 #include "trace.h"
 #include "service.h"
+#include "settings.h"
 
 /* Service interface */
 static const gchar service_introspection[]=
@@ -55,6 +56,9 @@ static void service_method_call (GDBusConnection *connection, const gchar *sende
 	} else if (g_strcmp0(method_name, "move")==0) {
 		g_variant_get(parameters, "(uu)", &x, &y);
 		gtk_window_move(GTK_WINDOW(view_window_get(service->view)), x, y);
+		/* For when the keyboard is hidden */
+		settings_set_int(SETTINGS_XPOS, x);
+		settings_set_int(SETTINGS_YPOS, y);
 	} else if (g_strcmp0(method_name, "hide")==0) view_hide(service->view);
 	else if (g_strcmp0(method_name, "terminate")==0) service->quit();
 	else flo_error(_("Unknown dbus method called: <%s>"), method_name);

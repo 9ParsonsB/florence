@@ -94,14 +94,14 @@ florence_error florence_exit()
 }
 
 /* Send a dbus command to florence Keyboard object */
-florence_error florence_send(gchar *command)
+florence_error florence_send(gchar *command, GVariant *parameters)
 {
 	guint source_id;
 	if (florence) {
 		if (florence->connection) {
 			g_dbus_connection_call(florence->connection, "org.florence.Keyboard",
 				"/org/florence/Keyboard", "org.florence.Keyboard", command,
-				NULL, NULL, G_DBUS_CALL_FLAGS_NONE, -1, NULL, florence_done, NULL);
+				parameters, NULL, G_DBUS_CALL_FLAGS_NONE, -1, NULL, florence_done, NULL);
 			/* 3 seconds timeout */
 			source_id=g_timeout_add_seconds(3, florence_timeout, florence);
 			g_main_loop_run(florence->loop);
@@ -114,12 +114,18 @@ florence_error florence_send(gchar *command)
 /* Show the keyboard */
 florence_error florence_show()
 {
-	return florence_send("show");
+	return florence_send("show", NULL);
 }
 
 /* Hide the keyboard */
 florence_error florence_hide()
 {
-	return florence_send("hide");
+	return florence_send("hide", NULL);
+}
+
+/* Move the keyboard */
+florence_error florence_move(unsigned int x, unsigned int y)
+{
+	return florence_send("move", g_variant_new("(uu)", (guint)x, (guint)y));
 }
 

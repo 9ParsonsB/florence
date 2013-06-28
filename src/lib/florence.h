@@ -37,5 +37,8 @@ florence_error florence_show();
 /* Hide the keyboard */
 florence_error florence_hide();
 
+/* Move the keyboard */
+florence_error florence_move(unsigned int x, unsigned int y);
+
 #endif
 
