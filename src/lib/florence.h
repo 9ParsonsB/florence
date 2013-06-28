@@ -19,8 +19,8 @@
 
 */
 
-#ifndef FLORENCE
-#define FLORENCE
+#ifndef LIB_FLORENCE
+#define LIB_FLORENCE
 
 typedef enum { FLORENCE_SUCCESS=0, FLORENCE_FAIL, FLORENCE_TIMEOUT } florence_error;
 typedef void (*terminate_func)();

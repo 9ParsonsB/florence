@@ -29,6 +29,7 @@
 #include "settings.h"
 #include "tools.h"
 #include "florence.h"
+#include "lib/florence.h"
 
 #define EXIT_FAILURE 1
 
@@ -36,6 +37,10 @@
 char *program_name=NULL;
 /* config file, if given as argument, or NULL. */
 char *config_file=NULL;
+/* command to execute. */
+char *command=NULL;
+/* command's argument. */
+char *argument=NULL;
 /* focus window name, if given as argument, or NULL */
 char *focus=NULL;
 /* debug level */
@@ -56,6 +61,7 @@ static struct option const long_options[] =
 
 static void usage (int status);
 static int decode_switches (int argc, char **argv);
+void exec_command();
 
 int main (int argc, char **argv)
 {
@@ -82,14 +88,16 @@ int main (int argc, char **argv)
 	flo_info(_("XRECORD has been disabled at compile time."));
 #endif
 
-	gst_init(&argc, &argv);
-
-	if (config&1) {
+	if (command) {
+		exec_command();
+	} else if (config&1) {
 		settings_init(TRUE, config_file);
 		settings();
 		gtk_main();
 		settings_exit();
 	} else {
+		gst_init(&argc, &argv);
+
 		settings_init(FALSE, config_file);
 		florence=flo_new(!(config&4), focus);
 
@@ -107,6 +115,38 @@ int main (int argc, char **argv)
 	END_FUNC
 	trace_exit();
 	return ret;
+}
+
+/* Send dbus command to existing florence process. */
+void exec_command()
+{
+	unsigned int x, y;
+
+	if (FLORENCE_SUCCESS!=florence_init(NULL)) {
+		flo_fatal(_("Florence does not seem to be running."));
+	}
+
+	if (!strcmp(command, "show")) {
+		if (argument) usage(EXIT_FAILURE);
+		if (FLORENCE_SUCCESS!=florence_show()) {
+			flo_fatal(_("Show command failed. Probably Florence exited."));
+		}
+	} else if (!strcmp(command, "hide")) {
+		if (argument) usage(EXIT_FAILURE);
+		if (FLORENCE_SUCCESS!=florence_hide()) {
+			flo_fatal(_("Hide command failed. Probably Florence exited."));
+		}
+	} else if (!strcmp(command, "move")) {
+		if (!argument) usage(EXIT_FAILURE);
+		if (2!=sscanf(argument, "%d,%d", &x, &y)) usage(EXIT_FAILURE);
+		if (FLORENCE_SUCCESS!=florence_move(x, y)) {
+			flo_fatal(_("Move command failed. Probably Florence exited."));
+		}
+	} else usage(EXIT_FAILURE);
+
+	if (FLORENCE_SUCCESS!=florence_exit()) {
+		flo_fatal(_("libflorence failed at exit."));
+	}
 }
 
 /* Set all the option flags according to the switches specified.
@@ -147,6 +187,10 @@ static int decode_switches (int argc, char **argv)
 		}
 	}
 
+	if (optind < argc) command=argv[optind++];
+	if (optind < argc) argument=argv[optind++];
+	if (optind < argc) usage(EXIT_FAILURE);
+
 	return ret;
 }
 
@@ -155,16 +199,20 @@ static void usage (int status)
 {
 	printf (_("%s - \
 Florence is a simple virtual keyboard for Gnome.\n"), program_name);
-	printf (_("Usage: %s [OPTION]...\n"), program_name);
+	printf (_("Usage: %s [OPTION] ... [COMMAND] [ARG]\n"), program_name);
 	printf (_("\
 Options:\n\
-  -h, --help              display this help and exit\n\
-  -V, --version	          output version information and exit\n\
-  -c, --config            open configuration window\n\
-  -d, --debug [level]     print debug information to stdout\n\
-  -n, --no-gnome          use this flag if you are not using GNOME\n\
-  -f, --focus [window]    give the focus to the window\n\
-  -u, --use-config file   use the given config file instead of gsettings\n\n\
+  -h, --help                display this help and exit\n\
+  -V, --version	            output version information and exit\n\
+  -c, --config              open configuration window\n\
+  -d, --debug [level]       print debug information to stdout\n\
+  -n, --no-gnome            use this flag if you are not using GNOME\n\
+  -f, --focus [window]      give the focus to the window\n\
+  -u, --use-config file     use the given config file instead of gsettings\n\
+Available commands are:\n\
+  show                      show the keyboard.\n\
+  hide                      hide the keyboard.\n\
+  move x,y                  move the keyboard at x,y position on the screen.\n\n\
 Report bugs to <f.agrech@gmail.com>.\n\
 More informations at <http://florence.sourceforge.net>.\n"));
 	exit (status);
