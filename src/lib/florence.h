@@ -23,10 +23,11 @@
 #define LIB_FLORENCE
 
 typedef enum { FLORENCE_SUCCESS=0, FLORENCE_FAIL, FLORENCE_TIMEOUT } florence_error;
-typedef void (*terminate_func)();
+typedef enum { FLORENCE_TERMINATE, FLORENCE_SHOW, FLORENCE_HIDE } florence_signal;
+typedef void (*florence_signal_cb)(void *user_data);
 
 /* Initialize the dbus connection */
-florence_error florence_init(terminate_func terminate);
+florence_error florence_init();
 
 /* Free memory */
 florence_error florence_exit();
@@ -39,6 +40,12 @@ florence_error florence_hide();
 
 /* Move the keyboard */
 florence_error florence_move(unsigned int x, unsigned int y);
+
+/* Move the keyboard to near rect */
+florence_error florence_move_to(unsigned int x, unsigned int y, unsigned int w, unsigned int h);
+
+/* Register for signal */
+florence_error florence_register(florence_signal signal, florence_signal_cb signalcb, void *user_data);
 
 #endif
 

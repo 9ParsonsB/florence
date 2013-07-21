@@ -27,7 +27,8 @@ struct florence {
 	GMainLoop *loop;
 	guint dbus_id;
 	GDBusConnection *connection;
-	terminate_func terminate;
+	florence_signal_cb terminate, show, hide;
+	guint terminate_id, show_id, hide_id;
 	florence_error error;
 };
 struct florence *florence=NULL;
@@ -43,9 +44,9 @@ void florence_on_name_appeared(GDBusConnection *con, const gchar *name, const gc
 /* Called when dbus name has vanished */
 void florence_on_name_vanished(GDBusConnection *con, const gchar *name, gpointer user_data)
 {
-	florence->error=FLORENCE_FAIL;
-	if (florence->terminate) florence->terminate();
-	g_main_loop_quit(florence->loop);
+	//florence->error=FLORENCE_FAIL;
+	//if (florence->terminate) florence->terminate(NULL);
+	//g_main_loop_quit(florence->loop);
 }
 
 /* Exit main loop after timeout */
@@ -64,19 +65,17 @@ void florence_done (GObject *source_object, GAsyncResult *res, gpointer user_dat
 }
 
 /* Initialize the dbus connection */
-florence_error florence_init(terminate_func terminate)
+florence_error florence_init()
 {
 	guint source_id;
 	g_type_init();
 	florence=(struct florence *)g_malloc(sizeof(struct florence));
 	if (!florence) return FLORENCE_FAIL;
 	memset(florence, 0, sizeof(struct florence));
-	florence->terminate=terminate;
 	florence->dbus_id=g_bus_watch_name(G_BUS_TYPE_SESSION, "org.florence.Keyboard",
 		G_BUS_NAME_WATCHER_FLAGS_NONE, florence_on_name_appeared,
 		florence_on_name_vanished, florence, NULL);
 	florence->loop = g_main_loop_new(NULL, FALSE);
-	/* 3 seconds timeout */
 	source_id=g_timeout_add_seconds(3, florence_timeout, florence);
 	g_main_loop_run(florence->loop);
 	g_source_remove(source_id);
@@ -127,5 +126,63 @@ florence_error florence_hide()
 florence_error florence_move(unsigned int x, unsigned int y)
 {
 	return florence_send("move", g_variant_new("(uu)", (guint)x, (guint)y));
+}
+
+/* Move the keyboard to near rect */
+florence_error florence_move_to(unsigned int x, unsigned int y, unsigned int w, unsigned int h)
+{
+	return florence_send("move_to", g_variant_new("(uuuu)", (guint)x, (guint)y, (guint)w, (guint)h));
+}
+
+/* Callback called when a signal is received */
+void florence_on_signal (GDBusConnection *connection, const gchar *sender_name,
+		const gchar *object_path, const gchar *interface_name, const gchar *signal_name,
+		GVariant *parameters, gpointer user_data)
+{
+	if (!florence) return;
+	if (!strcmp(signal_name, "terminate")) {
+		if (florence->terminate) florence->terminate(user_data);
+	} else if (!strcmp(signal_name, "show")) {
+		if (florence->show) florence->show(user_data);
+	} else if (!strcmp(signal_name, "hide")) {
+		if (florence->hide) florence->hide(user_data);
+	} 
+}
+
+/* Register for signal */
+florence_error florence_register(florence_signal signal, florence_signal_cb signalcb, void *user_data)
+{
+	guint *id=NULL;
+	gchar *name=NULL;
+
+	if (!florence) return FLORENCE_FAIL;
+	if (!florence->connection) return FLORENCE_FAIL;
+
+	switch(signal) {
+		case FLORENCE_TERMINATE:
+			florence->terminate = signalcb;
+			id=&(florence->terminate_id);
+			name="terminate";
+			break;
+		case FLORENCE_SHOW:
+			florence->show = signalcb;
+			id=&(florence->show_id);
+			name="show";
+			break;
+		case FLORENCE_HIDE:
+			florence->hide = signalcb;
+			id=&(florence->hide_id);
+			name="hide";
+			break;
+		default:
+			return FLORENCE_FAIL;
+	}
+
+	if (*id) g_dbus_connection_signal_unsubscribe(florence->connection, *id);
+	*id=g_dbus_connection_signal_subscribe(florence->connection, "org.florence.Keyboard",
+		"org.florence.Keyboard", name, "/org/florence/Keyboard", NULL, G_DBUS_SIGNAL_FLAGS_NONE,
+		florence_on_signal, user_data, NULL);
+
+	return FLORENCE_SUCCESS;
 }
 

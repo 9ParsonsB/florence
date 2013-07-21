@@ -33,10 +33,10 @@
 
 /* controller structure  */
 struct controller {
-	struct status *status;
 #ifdef ENABLE_AT_SPI2
 	GtkWindow *icon; /* intermediate icon */
 	AtspiAccessible *obj; /* editable object being selected */
+	gboolean atspi_enabled; /* Set to false to disable atspi. */
 #endif
 };
 
@@ -44,7 +44,7 @@ struct controller {
 void controller_set_mode (struct controller *controller, gboolean auto_hide);
 
 /* create a new instance of controller. */
-struct controller *controller_new(struct status *status);
+struct controller *controller_new();
 /* liberate all the memory used by the controller */
 void controller_free(struct controller *controller);
 

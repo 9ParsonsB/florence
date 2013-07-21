@@ -23,6 +23,7 @@
 #include "trace.h"
 #include "settings.h"
 #include "tools.h"
+#include "lib/florence.h"
 #include <cairo-xlib.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
@@ -30,8 +31,27 @@
 
 #ifdef ENABLE_AT_SPI2
 
-void controller_icon_hide (GtkWidget *widget, gpointer user_data);
-void controller_icon_show (GtkWidget *widget, gpointer user_data);
+void controller_icon_hide (gpointer user_data);
+void controller_icon_show (gpointer user_data);
+
+/* Move the window to near the accessible onject. */
+void controller_move_to(struct controller *controller)
+{
+	AtspiRect *rect;
+	AtspiComponent *component=NULL;
+	guint x, y;
+
+	if (settings_get_bool(SETTINGS_MOVE_TO_WIDGET) && controller->obj) {
+		component=atspi_accessible_get_component(controller->obj);
+		if (component) {
+			rect=atspi_component_get_extents(component, ATSPI_COORD_TYPE_SCREEN, NULL);
+			if (rect->x<0) x=0; else x=(guint)rect->x;
+			if (rect->y<0) y=0; else y=(guint)rect->y;
+			florence_move_to(x, y, (unsigned int)rect->width, (unsigned int)rect->height);
+			g_free(rect);
+		}
+	}
+}
 
 /* on expose event: display florence icon */
 void controller_icon_expose (GtkWidget *window, cairo_t* context, void *userdata)
@@ -81,8 +101,9 @@ void controller_icon_press (GtkWidget *window, GdkEventButton *event, gpointer u
 {
 	START_FUNC
 	struct controller *controller=(struct controller *)user_data;
-	controller_icon_hide(NULL, (gpointer)controller);
-	view_show(controller->status->view, controller->obj);
+	controller_icon_hide((gpointer)controller);
+	controller_move_to(controller);
+	florence_show();
 	END_FUNC
 }
 
@@ -91,9 +112,7 @@ void controller_icon_press (GtkWidget *window, GdkEventButton *event, gpointer u
 void controller_show (struct controller *controller)
 {
 	START_FUNC
-	if (!controller->status->view) return;
-	if (gtk_widget_get_visible(GTK_WIDGET(controller->status->view->window)))
-		view_hide(controller->status->view);
+	florence_hide();
 	if (settings_get_bool(SETTINGS_INTERMEDIATE_ICON)) {
 		if (!controller->icon) {
 			controller->icon=GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
@@ -110,22 +129,23 @@ void controller_show (struct controller *controller)
 			g_signal_connect(G_OBJECT(controller->icon), "draw", G_CALLBACK(controller_icon_expose), controller);
 			g_signal_connect(G_OBJECT(controller->icon), "button-press-event",
 				G_CALLBACK(controller_icon_press), controller);
-			g_signal_connect(G_OBJECT(controller->status->view->window), "show",
-				G_CALLBACK(controller_icon_hide), controller);
-			g_signal_connect(G_OBJECT(controller->status->view->window), "hide",
-				G_CALLBACK(controller_icon_show), controller);
+			florence_register(FLORENCE_SHOW, controller_icon_hide, controller);
+			florence_register(FLORENCE_HIDE, controller_icon_show, controller);
 			g_signal_connect(G_OBJECT(controller->icon), "screen-changed",
 				G_CALLBACK(view_screen_changed), NULL);
 			view_screen_changed(GTK_WIDGET(controller->icon), NULL, NULL);
 		}
 		tools_window_move(controller->icon, controller->obj);
 		gtk_widget_show(GTK_WIDGET(controller->icon));
-	} else view_show(controller->status->view, controller->obj);
+	} else {
+		controller_move_to(controller);
+		florence_show();
+	}
 	END_FUNC
 }
 
 /* Called to hide the icon */
-void controller_icon_hide (GtkWidget *widget, gpointer user_data)
+void controller_icon_hide (gpointer user_data)
 {
 	START_FUNC
 	struct controller *controller=(struct controller *)user_data;
@@ -136,7 +156,7 @@ void controller_icon_hide (GtkWidget *widget, gpointer user_data)
 }
 
 /* Called to show the icon */
-void controller_icon_show (GtkWidget *widget, gpointer user_data)
+void controller_icon_show (gpointer user_data)
 {
 	START_FUNC
 	struct controller *controller=(struct controller *)user_data;
@@ -174,8 +194,8 @@ void controller_focus_event (const AtspiEvent *event, void *user_data)
 		hide=TRUE;
 	}
 	if (hide) {
-		view_hide(controller->status->view);
-		controller_icon_hide(NULL, (gpointer)controller);
+		florence_hide();
+		controller_icon_hide((gpointer)controller);
 		if (controller->obj) g_object_unref(controller->obj);
 		controller->obj=NULL;
 	}
@@ -186,10 +206,10 @@ void controller_focus_event (const AtspiEvent *event, void *user_data)
 void controller_register_events (struct controller *controller)
 {
 	START_FUNC
-	if (!status_spi_is_enabled(controller->status)) {
+	if (!controller->atspi_enabled) {
 		flo_warn(_("SPI is disabled: Unable to switch auto-hide mode on."));
 	} else {
-		view_hide(controller->status->view);
+		florence_hide();
 		if (!atspi_event_listener_register_from_callback(controller_focus_event, (void*)controller, NULL, "object:state-changed:focused", NULL))
 			flo_error(_("ATSPI listener register failed"));
 		if (!atspi_event_listener_register_from_callback(controller_focus_event, (void*)controller, NULL, "focus:", NULL))
@@ -208,8 +228,8 @@ void controller_deregister_events (struct controller *controller)
 	if (!atspi_event_listener_deregister_from_callback(controller_focus_event, (void*)controller, "focus:", NULL)) {
 		flo_warn(_("AT SPI: problem deregistering window listener"));
 	}
-	controller_icon_hide(NULL, (gpointer)controller);
-	view_show(controller->status->view, NULL);
+	controller_icon_hide((gpointer)controller);
+	florence_show();
 	controller->obj=NULL;
 	END_FUNC
 }
@@ -240,28 +260,26 @@ void controller_set_auto_hide(GSettings *settings, gchar *key, gpointer user_dat
 #endif
 
 /* create a new instance of controller. */
-struct controller *controller_new(struct status *status)
+struct controller *controller_new()
 {
 	START_FUNC
 	struct controller *controller=(struct controller *)g_malloc(sizeof(struct controller));
 	if (!controller) flo_fatal(_("Unable to allocate memory for the controller"));
 	memset(controller, 0, sizeof(struct controller));
 
-	controller->status=status;
-
 #ifdef ENABLE_AT_SPI2
+	controller->atspi_enabled=TRUE;
 	if (atspi_init()) {
+		controller->atspi_enabled=FALSE;
 		flo_warn(_("AT-SPI has been disabled at run time: auto-hide mode is disabled."));
-		status_spi_disable(status);
 	}
 	settings_changecb_register(SETTINGS_AUTO_HIDE, controller_set_auto_hide, controller);
 
 	if (settings_get_bool(SETTINGS_HIDE_ON_START) && (!settings_get_bool(SETTINGS_AUTO_HIDE)))
-		view_hide(status->view);
+		florence_hide();
 	else controller_set_mode(controller, settings_get_bool(SETTINGS_AUTO_HIDE));
 #else
 	flo_warn(_("AT-SPI has been disabled at compile time: auto-hide mode is disabled."));
-	status_spi_disable(status);
 #endif
 
 	return controller;
@@ -272,7 +290,6 @@ void controller_free(struct controller *controller)
 {
 	START_FUNC
 
-	controller->status->view = NULL;
 	if (controller->icon) gtk_widget_destroy(GTK_WIDGET(controller->icon));
 	controller->icon=NULL;
 #ifdef ENABLE_AT_SPI2

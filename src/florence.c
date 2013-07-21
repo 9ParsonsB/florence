@@ -383,7 +383,6 @@ struct florence *flo_new(gboolean gnome, const gchar *focus_back)
 	florence->view=view_new(florence->status, florence->style, florence->keyboards);
 	status_view_set(florence->status, florence->view);
 	flo_start_keep_on_top(florence, settings_get_bool(SETTINGS_KEEP_ON_TOP));
-	florence->controller=controller_new(florence->status);
 
 	g_signal_connect(G_OBJECT(view_window_get(florence->view)), "destroy",
 		G_CALLBACK(flo_destroy), florence);
@@ -413,8 +412,6 @@ void flo_free(struct florence *florence)
 {
 	START_FUNC
 
-	controller_free(florence->controller);
-	florence->controller=NULL;
 	trayicon_free(florence->trayicon);
 	florence->trayicon=NULL;
 	flo_layout_unload(florence);

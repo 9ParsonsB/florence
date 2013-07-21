@@ -48,7 +48,6 @@ struct florence {
 	struct ramble *ramble; /* track the path of the mouse. */
 #endif
 	struct service *service; /* dbus service object */
-	struct controller *controller; /* controller object */
 };
 
 /* create a new instance of florence. */

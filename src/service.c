@@ -33,9 +33,17 @@ static const gchar service_introspection[]=
 	"      <arg type='u' name='x' direction='in'/>"
 	"      <arg type='u' name='y' direction='in'/>"
 	"    </method>"
+	"    <method name='move_to'>"
+	"      <arg type='u' name='x' direction='in'/>"
+	"      <arg type='u' name='y' direction='in'/>"
+	"      <arg type='u' name='w' direction='in'/>"
+	"      <arg type='u' name='h' direction='in'/>"
+	"    </method>"
 	"    <method name='hide'/>"
 	"    <method name='terminate'/>"
 	"    <signal name='terminate'/>"
+	"    <signal name='show'/>"
+	"    <signal name='hide'/>"
 	"  </interface>"
 	"</node>";
 
@@ -45,7 +53,10 @@ static void service_method_call (GDBusConnection *connection, const gchar *sende
 	GVariant *parameters, GDBusMethodInvocation *invocation, gpointer user_data)
 {
 	START_FUNC
-	guint x, y;
+	guint x, y, w, h;
+	gint screen_width, screen_height;
+	gint win_width, win_height;
+	GdkRectangle win_rect;
 	struct service *service=(struct service *)user_data;
 	if (g_strcmp0(method_name, "show")==0) {
 #ifdef AT_SPI
@@ -55,6 +66,28 @@ static void service_method_call (GDBusConnection *connection, const gchar *sende
 #endif
 	} else if (g_strcmp0(method_name, "move")==0) {
 		g_variant_get(parameters, "(uu)", &x, &y);
+		gtk_window_move(GTK_WINDOW(view_window_get(service->view)), x, y);
+		/* For when the keyboard is hidden */
+		settings_set_int(SETTINGS_XPOS, x);
+		settings_set_int(SETTINGS_YPOS, y);
+	} else if (g_strcmp0(method_name, "move_to")==0) {
+		g_variant_get(parameters, "(uuuu)", &x, &y, &w, &h);
+		screen_height=gdk_screen_get_height(gdk_screen_get_default());
+		screen_width=gdk_screen_get_width(gdk_screen_get_default());
+		if (gtk_window_get_decorated(GTK_WINDOW(view_window_get(service->view)))) {
+			gdk_window_get_frame_extents(gtk_widget_get_window(
+				GTK_WIDGET(view_window_get(service->view))), &win_rect);
+			win_width=win_rect.width;
+			win_height=win_rect.height;
+		} else gtk_window_get_size(view_window_get(service->view),
+			&win_width, &win_height);
+		if (win_width>(screen_width-x)) x=screen_width-win_width;
+
+		gtk_window_set_gravity(view_window_get(service->view), GDK_GRAVITY_NORTH_WEST);
+		if (win_height<(screen_height-y-h)) y=y+h;
+		else if (y>win_height) y=y-win_height;
+		else y=screen_height-win_height;
+
 		gtk_window_move(GTK_WINDOW(view_window_get(service->view)), x, y);
 		/* For when the keyboard is hidden */
 		settings_set_int(SETTINGS_XPOS, x);
@@ -94,6 +127,28 @@ static void service_on_name_lost (GDBusConnection *connection, const gchar *name
 	END_FUNC
 }
 
+/* Send the show signal */
+void service_on_show(GtkWidget *widget, gpointer data)
+{
+	GError *error=NULL;
+	struct service *service=(struct service *)data;
+	g_dbus_connection_emit_signal(service->connection, NULL, "/org/florence/Keyboard",
+		"org.florence.Keyboard", "show", NULL, &error);
+	if (error) flo_error(_("Error emitting show signal: %s"), error->message);
+	else flo_debug(TRACE_DEBUG, _("DBus signal <show> sent"));
+}
+
+/* Send the hide signal */
+void service_on_hide(GtkWidget *widget, gpointer data)
+{
+	GError *error=NULL;
+	struct service *service=(struct service *)data;
+	g_dbus_connection_emit_signal(service->connection, NULL, "/org/florence/Keyboard",
+		"org.florence.Keyboard", "hide", NULL, &error);
+	if (error) flo_error(_("Error emitting hide signal: %s"), error->message);
+	else flo_debug(TRACE_DEBUG, _("DBus signal <hide> sent"));
+}
+
 /* Create a service object */
 struct service *service_new(struct view *view, GCallback quit)
 {
@@ -106,6 +161,10 @@ struct service *service_new(struct view *view, GCallback quit)
 		G_BUS_NAME_OWNER_FLAGS_NONE, service_on_bus_acquired, service_on_name_acquired,
 		service_on_name_lost, service, NULL);
 	service->view=view;
+	g_signal_connect(G_OBJECT(view_window_get(view)), "show",
+		G_CALLBACK(service_on_show), service);
+	g_signal_connect(G_OBJECT(view_window_get(view)), "hide",
+		G_CALLBACK(service_on_hide), service);
 	service->quit=quit;
 	END_FUNC
 	return service;
