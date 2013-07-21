@@ -29,9 +29,7 @@
 #include "settings.h"
 #include "tools.h"
 #include "florence.h"
-#ifdef ENABLE_AT_SPI2
 #include "lib/florence.h"
-#endif
 
 #define EXIT_FAILURE 1
 
@@ -39,12 +37,10 @@
 char *program_name=NULL;
 /* config file, if given as argument, or NULL. */
 char *config_file=NULL;
-#ifdef ENABLE_AT_SPI2
 /* command to execute. */
 char *command=NULL;
 /* command's argument. */
 char *argument=NULL;
-#endif
 /* focus window name, if given as argument, or NULL */
 char *focus=NULL;
 /* debug level */
@@ -73,10 +69,8 @@ int main (int argc, char **argv)
 	struct florence *florence;
 	int ret=EXIT_FAILURE;
 	int config;
-#ifdef ENABLE_AT_SPI2
 	gchar *auto_command=NULL;
 	int i, auto_command_len=0;
-#endif
 
 	setlocale (LC_ALL, "");
 	bindtextdomain (GETTEXT_PACKAGE, FLORENCELOCALEDIR);
@@ -97,13 +91,9 @@ int main (int argc, char **argv)
 	flo_info(_("XRECORD has been disabled at compile time."));
 #endif
 
-#ifdef ENABLE_AT_SPI2
 	if (command) {
 		exec_command();
 	} else if (config&1) {
-#else
-	if (config&1) {
-#endif
 		settings_init(TRUE, config_file);
 		settings();
 		gtk_main();
@@ -114,7 +104,6 @@ int main (int argc, char **argv)
 
 		florence=flo_new(!(config&4), focus);
 
-#ifdef ENABLE_AT_SPI2
 		/* launch controller process */
 		auto_command_len=8;
 		for (i=0; i<argc; ++i) {
@@ -128,7 +117,6 @@ int main (int argc, char **argv)
 		}
 		strcat(auto_command, " auto &");
 		system(auto_command);
-#endif
 
 		gtk_main();
 
@@ -148,7 +136,6 @@ int main (int argc, char **argv)
 	return ret;
 }
 
-#ifdef ENABLE_AT_SPI2
 /* Terminate the controller. */
 void terminate()
 {
@@ -196,7 +183,6 @@ void exec_command()
 		flo_fatal(_("libflorence failed at exit."));
 	}
 }
-#endif
 
 /* Set all the option flags according to the switches specified.
    Return a flag list of decoded switches.  */
@@ -236,11 +222,9 @@ static int decode_switches (int argc, char **argv)
 		}
 	}
 
-#ifdef ENABLE_AT_SPI2
 	if (optind < argc) command=argv[optind++];
 	if (optind < argc) argument=argv[optind++];
 	if (optind < argc) usage(EXIT_FAILURE);
-#endif
 
 	return ret;
 }
@@ -250,11 +234,7 @@ static void usage (int status)
 {
 	printf (_("%s - \
 Florence is a simple virtual keyboard for Gnome.\n\n"), program_name);
-#ifdef ENABLE_AT_SPI2
 	printf (_("Usage: %s [OPTION] ... [COMMAND] [ARG]\n\n"), program_name);
-#else
-	printf (_("Usage: %s [OPTION] ...\n\n"), program_name);
-#endif
 	printf (_("\
 Options:\n\
   -h, --help                display this help and exit\n\
@@ -263,17 +243,13 @@ Options:\n\
   -d, --debug [level]       print debug information to stdout\n\
   -n, --no-gnome            use this flag if you are not using GNOME\n\
   -f, --focus [window]      give the focus to the window\n\
-  -u, --use-config file     use the given config file instead of gsettings\n\n"));
-#ifdef ENABLE_AT_SPI2
-	printf (_("\
+  -u, --use-config file     use the given config file instead of gsettings\n\n\
 Available commands are:\n\
   show                      show the keyboard.\n\
   hide                      hide the keyboard.\n\
-  move x,y                  move the keyboard at x,y position on the screen.\n\n"));
-#endif
-	printf (_("\
+  move x,y                  move the keyboard at x,y position on the screen.\n\n\
 Report bugs to <f.agrech@gmail.com>.\n\
-More informations at <http://florence.sourceforge.net>.\n"));
+More informations at <http://florence.sourceforge.net>.\n\n"));
 	exit (status);
 }
 

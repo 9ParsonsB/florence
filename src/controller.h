@@ -37,6 +37,8 @@ struct controller {
 	GtkWindow *icon; /* intermediate icon */
 	AtspiAccessible *obj; /* editable object being selected */
 	gboolean atspi_enabled; /* Set to false to disable atspi. */
+#else
+	int dummy; /* unused */
 #endif
 };
 
