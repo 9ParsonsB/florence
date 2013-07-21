@@ -73,8 +73,10 @@ int main (int argc, char **argv)
 	struct florence *florence;
 	int ret=EXIT_FAILURE;
 	int config;
+#ifdef ENABLE_AT_SPI2
 	gchar *auto_command=NULL;
 	int i, auto_command_len=0;
+#endif
 
 	setlocale (LC_ALL, "");
 	bindtextdomain (GETTEXT_PACKAGE, FLORENCELOCALEDIR);
@@ -112,6 +114,7 @@ int main (int argc, char **argv)
 
 		florence=flo_new(!(config&4), focus);
 
+#ifdef ENABLE_AT_SPI2
 		/* launch controller process */
 		auto_command_len=8;
 		for (i=0; i<argc; ++i) {
@@ -125,12 +128,15 @@ int main (int argc, char **argv)
 		}
 		strcat(auto_command, " auto &");
 		system(auto_command);
+#endif
 
 		gtk_main();
 
 		service_terminate(florence->service);
 		flo_free(florence);
+#ifdef ENABLE_AT_SPI2
 		putenv("AT_BRIDGE_SHUTDOWN=1");
+#endif
 		ret=EXIT_SUCCESS;
 		settings_exit();
 	}
@@ -230,9 +236,11 @@ static int decode_switches (int argc, char **argv)
 		}
 	}
 
+#ifdef ENABLE_AT_SPI2
 	if (optind < argc) command=argv[optind++];
 	if (optind < argc) argument=argv[optind++];
 	if (optind < argc) usage(EXIT_FAILURE);
+#endif
 
 	return ret;
 }

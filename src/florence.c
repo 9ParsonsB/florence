@@ -378,6 +378,9 @@ struct florence *flo_new(gboolean gnome, const gchar *focus_back)
 #endif
 
 	florence->status=status_new(focus_back);
+#ifndef ENABLE_AT_SPI2
+	status_spi_disable(florence->status);
+#endif
 
 	flo_layout_load(florence);
 	florence->view=view_new(florence->status, florence->style, florence->keyboards);

@@ -290,9 +290,9 @@ void controller_free(struct controller *controller)
 {
 	START_FUNC
 
+#ifdef ENABLE_AT_SPI2
 	if (controller->icon) gtk_widget_destroy(GTK_WIDGET(controller->icon));
 	controller->icon=NULL;
-#ifdef ENABLE_AT_SPI2
 	atspi_exit();
 #endif
 

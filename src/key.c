@@ -164,12 +164,8 @@ gboolean key_event(unsigned int code, gboolean pressed, gboolean spi_enabled)
 	gboolean ret=TRUE;
 #ifdef ENABLE_XTST
 	if (spi_enabled)
-#ifdef AT_SPI
 #ifdef ENABLE_AT_SPI2
 		ret=atspi_generate_keyboard_event(code, NULL, pressed?ATSPI_KEY_PRESS:ATSPI_KEY_RELEASE, NULL);
-#else
-		ret=SPI_generateKeyboardEvent(code, NULL, pressed?SPI_KEY_PRESS:SPI_KEY_RELEASE);
-#endif
 	if (!ret) flo_warn(_("ATSPI doesn't work. Using Xtst instead."));
 #else
 		flo_fatal(_("Unreachable code"));
@@ -181,12 +177,8 @@ gboolean key_event(unsigned int code, gboolean pressed, gboolean spi_enabled)
 		ret=FALSE;
 	}
 #else
-#ifdef AT_SPI
 #ifdef ENABLE_AT_SPI2
 	ret=atspi_generate_keyboard_event(code NULL, pressed?ATSPI_KEY_PRESS:ATSPI_KEY_RELEASE);
-#else
-	ret=SPI_generateKeyboardEvent(code, NULL, pressed?SPI_KEY_PRESS:SPI_KEY_RELEASE);
-#endif
 	if (!ret) flo_warn(_("ATSPI doesn't work."));
 #else
 #error _("Neither at-spi nor Xtest is compiled. You should compile one.")
