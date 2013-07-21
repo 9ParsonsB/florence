@@ -660,6 +660,13 @@ void settings_window_new(gboolean exit)
 	settings_window_layouts_populate();
 	settings_window_input_method_populate();
 
+#ifndef ENABLE_AT_SPI
+	gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(settings_window->gtkbuilder,
+		"flo_auto_hide")), FALSE);
+	gtk_widget_set_tooltip_text(GTK_WIDGET(gtk_builder_get_object(settings_window->gtkbuilder,
+		"flo_auto_hide")), _("AT-SPI has been disabled at compile time, this option is not available."));
+#endif
+
 	settings_window_update();
 	settings_window->notify_id=settings_register_all(
 		(settings_callback)settings_window_update);
