@@ -145,6 +145,7 @@ AC_CONFIG_FILES([Makefile
                  data/styles/default/Makefile
                  data/styles/default/sounds/Makefile
                  data/styles/hard/Makefile
+                 data/styles/flat/Makefile
                  data/svg11/Makefile
                  docs/Makefile
                  docs/florence.1
