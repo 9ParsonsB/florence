@@ -44,9 +44,9 @@ void florence_on_name_appeared(GDBusConnection *con, const gchar *name, const gc
 /* Called when dbus name has vanished */
 void florence_on_name_vanished(GDBusConnection *con, const gchar *name, gpointer user_data)
 {
-	//florence->error=FLORENCE_FAIL;
-	//if (florence->terminate) florence->terminate(NULL);
-	//g_main_loop_quit(florence->loop);
+	florence->error=FLORENCE_FAIL;
+	if (florence->terminate) florence->terminate(user_data);
+	g_main_loop_quit(florence->loop);
 }
 
 /* Exit main loop after timeout */
