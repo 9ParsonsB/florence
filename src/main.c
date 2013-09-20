@@ -46,6 +46,9 @@ char *focus=NULL;
 /* debug level */
 enum trace_level debug_level=TRACE_WARNING;
 
+/* florence structure */
+struct florence *florence=NULL;
+
 /* Option flags and variables */
 static struct option const long_options[] =
 {
@@ -64,9 +67,13 @@ static int decode_switches (int argc, char **argv);
 void exec_command();
 void terminate();
 
+void sig_handler(int signo)
+{
+	if (signo==SIGINT) flo_terminate(florence);
+}
+
 int main (int argc, char **argv)
 {
-	struct florence *florence;
 	int ret=EXIT_FAILURE;
 	int config;
 	gchar *auto_command=NULL;
@@ -102,6 +109,8 @@ int main (int argc, char **argv)
 		settings_init(FALSE, config_file);
 		gst_init(&argc, &argv);
 
+		if (signal(SIGINT, sig_handler)==SIG_ERR)
+			flo_error(_("Failed to register SIGINT signal handler."));
 		florence=flo_new(!(config&4), focus);
 
 		/* launch controller process */

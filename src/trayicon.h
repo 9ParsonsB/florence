@@ -30,6 +30,7 @@
 struct trayicon {
 	GtkStatusIcon *tray_icon; /* GTK representation of the tray icon */
 	GCallback trayicon_quit; /* Callback called to quit the applications (when the Quit menu is selected) */
+	gpointer user_data; /* User data passed to the quit callback. */
 	struct view *view; /* View shown or hidden on left click on the tray icon */
 #ifdef ENABLE_NOTIFICATION
 	NotifyNotification *notification; /* startup notification */
@@ -42,7 +43,7 @@ void trayicon_about(void);
 void trayicon_help(void);
 
 /* Creates a new trayicon instance */
-struct trayicon *trayicon_new(struct view *view, GCallback quit_cb);
+struct trayicon *trayicon_new(struct view *view, GCallback quit_cb, gpointer user_data);
 /* Deallocate all the memory used bu the trayicon. */
 void trayicon_free(struct trayicon *trayicon);
 

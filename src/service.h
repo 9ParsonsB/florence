@@ -22,20 +22,23 @@
 #include <gio/gio.h>
 #include "view.h"
 
+typedef void (*service_cb)(void *);
+
 /* Service object */
 struct service {
 	GDBusConnection *connection;
 	guint owner_id;
 	GDBusNodeInfo *introspection_data;
 	struct view *view;
-	GCallback quit; /* Callback called to quit the applications (when the terminate method is called) */
+	service_cb quit; /* Callback called to quit the applications (when the terminate method is called) */
+	gpointer user_data;
 };
 
 /* Send the terminate signal */
 void service_terminate(struct service *service);
 
 /* Create a service object */
-struct service *service_new(struct view *view, GCallback quit);
+struct service *service_new(struct view *view, service_cb quit, gpointer user_data);
 /* Destroy a service object */
 void service_free(struct service *service);
 

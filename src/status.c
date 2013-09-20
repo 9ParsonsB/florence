@@ -260,6 +260,7 @@ void status_press (struct status *status, struct key *key)
 {
 	START_FUNC
 	flo_debug(TRACE_DEBUG, _("sending press event"));
+	status->pressed = key;
 	key_press(key, status);
 #ifdef ENABLE_XRECORD
 	if (((struct key_mod *)(key->mods->data))->type==KEY_ACTION)

@@ -93,7 +93,7 @@ static void service_method_call (GDBusConnection *connection, const gchar *sende
 		settings_set_int(SETTINGS_XPOS, x);
 		settings_set_int(SETTINGS_YPOS, y);
 	} else if (g_strcmp0(method_name, "hide")==0) view_hide(service->view);
-	else if (g_strcmp0(method_name, "terminate")==0) service->quit();
+	else if (g_strcmp0(method_name, "terminate")==0) service->quit(service->user_data);
 	else flo_error(_("Unknown dbus method called: <%s>"), method_name);
 	g_dbus_method_invocation_return_value(invocation, NULL);
 	END_FUNC
@@ -150,7 +150,7 @@ void service_on_hide(GtkWidget *widget, gpointer data)
 }
 
 /* Create a service object */
-struct service *service_new(struct view *view, GCallback quit)
+struct service *service_new(struct view *view, service_cb quit, gpointer user_data)
 {
 	START_FUNC
 	struct service *service=(struct service *)g_malloc(sizeof(struct service));
@@ -166,6 +166,7 @@ struct service *service_new(struct view *view, GCallback quit)
 	g_signal_connect(G_OBJECT(view_window_get(view)), "hide",
 		G_CALLBACK(service_on_hide), service);
 	service->quit=quit;
+	service->user_data=user_data;
 	END_FUNC
 	return service;
 }

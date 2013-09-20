@@ -118,7 +118,7 @@ void trayicon_on_menu(GtkStatusIcon *status_icon, guint button, guint activate_t
 	quit=gtk_image_menu_item_new_with_mnemonic(_("_Quit"));
 	gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(quit),
 		gtk_image_new_from_stock(GTK_STOCK_QUIT, GTK_ICON_SIZE_MENU));
-	g_signal_connect_swapped(quit, "activate", trayicon->trayicon_quit, NULL);
+	g_signal_connect_swapped(quit, "activate", trayicon->trayicon_quit, trayicon->user_data);
 
 #ifdef ENABLE_HELP
 	help=gtk_image_menu_item_new_with_mnemonic(_("_Help"));
@@ -204,7 +204,7 @@ void trayicon_free(struct trayicon *trayicon)
 }
 
 /* Creates a new trayicon instance */
-struct trayicon *trayicon_new(struct view *view, GCallback quit_cb)
+struct trayicon *trayicon_new(struct view *view, GCallback quit_cb, gpointer user_data)
 {
 	START_FUNC
 	struct trayicon *trayicon;
@@ -213,6 +213,7 @@ struct trayicon *trayicon_new(struct view *view, GCallback quit_cb)
 	memset(trayicon, 0, sizeof(struct trayicon));
 
 	trayicon->trayicon_quit=quit_cb;
+	trayicon->user_data=user_data;
 	trayicon->tray_icon=gtk_status_icon_new();
 	trayicon->view=view;
 	g_signal_connect(G_OBJECT(trayicon->tray_icon), "activate",

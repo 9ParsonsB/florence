@@ -54,6 +54,8 @@ struct florence {
 struct florence *flo_new(gboolean gnome, const gchar *focus_back);
 /* liberate all the memory used by florence */
 void flo_free(struct florence *florence);
+/* stop florence. */
+void flo_terminate(struct florence *florence);
 
 #endif
 

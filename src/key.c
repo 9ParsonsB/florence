@@ -162,6 +162,7 @@ gboolean key_event(unsigned int code, gboolean pressed, gboolean spi_enabled)
 {
 	START_FUNC
 	gboolean ret=TRUE;
+	flo_debug(TRACE_HIDEBUG, _("Send event %s on key [%d]"), pressed?_("press"):_("release"), code);
 #ifdef ENABLE_XTST
 	if (spi_enabled)
 #ifdef ENABLE_AT_SPI2

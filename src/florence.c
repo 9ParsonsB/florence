@@ -34,9 +34,16 @@
 #define FLO_TO_TOP_TIMEOUT 1000
 
 /* terminate the program */
-void flo_terminate(void)
+void flo_terminate(struct florence *florence)
 {
 	START_FUNC
+	/* release all keys */
+	if (!florence->status) {
+		flo_warn(_("NULL status detected."));
+		return;
+	}
+	status_pressed_set(florence->status, NULL);
+
 	gtk_main_quit();
 	END_FUNC
 }
@@ -45,7 +52,7 @@ void flo_terminate(void)
 void flo_destroy (GtkWidget *widget, gpointer user_data)
 {
 	START_FUNC
-	flo_terminate();
+	flo_terminate((struct florence *)user_data);
 	END_FUNC
 }
 
@@ -399,13 +406,13 @@ struct florence *flo_new(gboolean gnome, const gchar *focus_back)
 		G_CALLBACK(flo_button_press_event), florence);
 	g_signal_connect(G_OBJECT(view_window_get(florence->view)), "button-release-event",
 		G_CALLBACK(flo_button_release_event), florence);
-	florence->trayicon=trayicon_new(florence->view, G_CALLBACK(flo_destroy));
+	florence->trayicon=trayicon_new(florence->view, G_CALLBACK(flo_destroy), (gpointer)florence);
 	settings_changecb_register(SETTINGS_KEEP_ON_TOP, flo_set_keep_on_top, florence);
 	/* TODO: just reload the style, no need to reload the whole layout */
 	settings_changecb_register(SETTINGS_STYLE_ITEM, flo_layout_reload, florence);
 	settings_changecb_register(SETTINGS_FILE, flo_layout_reload, florence);
 
-	florence->service=service_new(florence->view, flo_terminate);
+	florence->service=service_new(florence->view, (service_cb)flo_terminate, (gpointer)florence);
 	END_FUNC
 	return florence;
 }
@@ -414,7 +421,7 @@ struct florence *flo_new(gboolean gnome, const gchar *focus_back)
 void flo_free(struct florence *florence)
 {
 	START_FUNC
-
+	flo_info(_("Terminating."));
 	trayicon_free(florence->trayicon);
 	florence->trayicon=NULL;
 	flo_layout_unload(florence);
