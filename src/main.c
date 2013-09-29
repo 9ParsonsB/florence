@@ -69,7 +69,7 @@ void terminate();
 
 void sig_handler(int signo)
 {
-	if (signo==SIGINT) flo_terminate(florence);
+	flo_terminate(florence);
 }
 
 int main (int argc, char **argv)
@@ -111,6 +111,8 @@ int main (int argc, char **argv)
 
 		if (signal(SIGINT, sig_handler)==SIG_ERR)
 			flo_error(_("Failed to register SIGINT signal handler."));
+		if (signal(SIGTERM, sig_handler)==SIG_ERR)
+			flo_error(_("Failed to register SIGTERM signal handler."));
 		florence=flo_new(!(config&4), focus);
 
 		/* launch controller process */
