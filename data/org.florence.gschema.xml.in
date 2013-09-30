@@ -5,6 +5,24 @@
     <child name="colours" schema="org.florence.colours"/>
     <child name="layout" schema="org.florence.layout"/>
     <child name="style" schema="org.florence.style"/>
+    <child name="controller" schema="org.florence.controller"/>
+  </schema>
+  <schema id="org.florence.controller" path="/apps/florence/controller/">
+    <key name="icon" type="b">
+      <default>true</default>
+      <_summary>Show a floating icon.</_summary>
+      <_description>The floating icon can be used to control the keyboard (show/hide, congigure, quit)</_description>
+    </key>
+    <key name="icon-xpos" type="i">
+      <default>0</default>
+      <_summary>Position of the icon along the X axis</_summary>
+      <_description>Horizontal position of the icon window on the screen (in pixel).</_description>
+    </key>
+    <key name="icon-ypos" type="i">
+      <default>0</default>
+      <_summary>Position of the icon along the Y axis</_summary>
+      <_description>Vertical position of the icon window on the screen (in pixel).</_description>
+    </key>
   </schema>
   <schema id="org.florence.behaviour" path="/apps/florence/behaviour/">
     <key name="auto-hide" type="b">

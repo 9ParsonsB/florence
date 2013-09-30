@@ -31,19 +31,24 @@
 #include <atspi/atspi.h>
 #endif
 
-/* controller structure  */
-struct controller {
-#ifdef ENABLE_AT_SPI2
-	GtkWindow *icon; /* intermediate icon */
-	AtspiAccessible *obj; /* editable object being selected */
-	gboolean atspi_enabled; /* Set to false to disable atspi. */
-#else
-	int dummy; /* unused */
-#endif
+enum controller_moving_status {
+	CONTROLLER_IMMOBILE,
+	CONTROLLER_PRESSED,
+	CONTROLLER_MOVING
 };
 
-/* Set auto hide mode on or off. */
-void controller_set_mode (struct controller *controller, gboolean auto_hide);
+/* controller structure  */
+struct controller {
+	GtkWindow *controller_icon; /* controller icon */
+	enum controller_moving_status icon_moving; /* icon moving status */
+	gint xpos; /* moving position along the x axis. */
+	gint ypos; /* moving position along the y axis. */
+#ifdef ENABLE_AT_SPI2
+	GtkWindow *autohide_icon; /* intermediate icon */
+	AtspiAccessible *obj; /* editable object being selected */
+	gboolean atspi_enabled; /* Set to false to disable atspi. */
+#endif
+};
 
 /* create a new instance of controller. */
 struct controller *controller_new();

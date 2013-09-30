@@ -160,6 +160,9 @@ gboolean status_focus_zoom_get(struct status *status);
 /* get selected input method */
 enum status_input_method status_im_get(struct status *status);
 
+/* terminate the application */
+void status_terminate(struct status *status);
+
 #endif
 
 

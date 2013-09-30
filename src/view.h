@@ -70,6 +70,9 @@ struct view *view_new (struct status *status, struct style *style, GSList *keybo
 /* liberate all the memory used by the view */
 void view_free (struct view *view);
 
+/* destroy the view */
+void view_destroy(struct view *view);
+
 /* Show the view next to the accessible object if specified. */
 #ifdef AT_SPI
 #ifdef ENABLE_AT_SPI2

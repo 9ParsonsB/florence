@@ -29,6 +29,7 @@ typedef void (*settings_callback) (GSettings *settings, gchar *key, gpointer use
 /* This is a settings catetory */
 enum settings_cat {
 	SETTINGS_ALL,
+	SETTINGS_CONTROLLER,
 	SETTINGS_BEHAVIOUR,
 	SETTINGS_WINDOW,
 	SETTINGS_COLORS,
@@ -39,6 +40,9 @@ enum settings_cat {
 
 /* This is a settings key */
 enum settings_item {
+	SETTINGS_CONTROLLER_ICON,
+	SETTINGS_CONTROLLER_ICON_XPOS,
+	SETTINGS_CONTROLLER_ICON_YPOS,
 	SETTINGS_RESIZABLE,
 	SETTINGS_KEEP_RATIO,
 	SETTINGS_DECORATED,

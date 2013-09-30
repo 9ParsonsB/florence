@@ -54,6 +54,7 @@ struct settings_info {
 /* GSettings category names */
 static const gchar *settings_cat_names[]={
 	"org.florence",
+	"org.florence.controller",
 	"org.florence.behaviour",
 	"org.florence.window",
 	"org.florence.colours",
@@ -64,6 +65,9 @@ static const gchar *settings_cat_names[]={
 /* settings defaults. { "gtk builder name", "settings name", "type", "default value" } */
 /* C99 */
 static const struct settings_param settings_defaults[] = {
+	{ SETTINGS_CONTROLLER, SETTINGS_NONE, "icon", SETTINGS_BOOL, { .vbool = TRUE } },
+	{ SETTINGS_CONTROLLER, SETTINGS_NONE, "icon-xpos", SETTINGS_INTEGER, { .vinteger = 0 } },
+	{ SETTINGS_CONTROLLER, SETTINGS_NONE, "icon-ypos", SETTINGS_INTEGER, { .vinteger = 0 } },
 	{ SETTINGS_WINDOW, "flo_resizable", "resizable", SETTINGS_BOOL, { .vbool = TRUE } },
 	{ SETTINGS_WINDOW, "flo_keep_ratio", "keep-ratio", SETTINGS_BOOL, { .vbool = FALSE } },
 	{ SETTINGS_WINDOW, "flo_decorated", "decorated", SETTINGS_BOOL, { .vbool = FALSE } },

@@ -69,6 +69,14 @@ void view_hide (struct view *view)
 	END_FUNC
 }
 
+/* destroy the view */
+void view_destroy(struct view *view)
+{
+	START_FUNC
+	gtk_widget_destroy(GTK_WIDGET(view->window));
+	END_FUNC
+}
+
 /* resize the window */
 void view_resize (struct view *view)
 {

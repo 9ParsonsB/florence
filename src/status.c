@@ -31,6 +31,14 @@
 /* show visual effect for touched keys for 200ms */
 #define STATUS_TOUCH_TIMEOUT 200
 
+/* terminate the application */
+void status_terminate(struct status *status)
+{
+	START_FUNC
+	view_destroy(status->view);
+	END_FUNC
+}
+
 /* handle X11 errors */
 int status_error_handler(Display *my_dpy, XErrorEvent *event)
 {

@@ -334,7 +334,7 @@ void key_release(struct key *key, struct status *status)
 			case KEY_ACTION:
 				action=(struct key_action *)mod->data;
 				switch (action->type) {
-					case KEY_CLOSE: gtk_main_quit(); break;
+					case KEY_CLOSE: status_terminate(status); break;
 					case KEY_REDUCE: view_hide(status->view); break;
 					case KEY_CONFIG: settings(); break;
 					case KEY_MOVE: status_set_moving(status, FALSE); break;

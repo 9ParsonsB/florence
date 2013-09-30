@@ -29,29 +29,7 @@
 #include <X11/Xutil.h>
 #include <X11/extensions/shape.h>
 
-#ifdef ENABLE_AT_SPI2
-
-void controller_icon_hide (gpointer user_data);
-void controller_icon_show (gpointer user_data);
-
-/* Move the window to near the accessible onject. */
-void controller_move_to(struct controller *controller)
-{
-	AtspiRect *rect;
-	AtspiComponent *component=NULL;
-	guint x, y;
-
-	if (settings_get_bool(SETTINGS_MOVE_TO_WIDGET) && controller->obj) {
-		component=atspi_accessible_get_component(controller->obj);
-		if (component) {
-			rect=atspi_component_get_extents(component, ATSPI_COORD_TYPE_SCREEN, NULL);
-			if (rect->x<0) x=0; else x=(guint)rect->x;
-			if (rect->y<0) y=0; else y=(guint)rect->y;
-			florence_move_to(x, y, (unsigned int)rect->width, (unsigned int)rect->height);
-			g_free(rect);
-		}
-	}
-}
+#define MOVING_THRESHOLD 15
 
 /* on expose event: display florence icon */
 void controller_icon_expose (GtkWidget *window, cairo_t* context, void *userdata)
@@ -64,14 +42,12 @@ void controller_icon_expose (GtkWidget *window, cairo_t* context, void *userdata
 	cairo_surface_t *mask=NULL;
 	Pixmap shape;
 	Display *disp=(Display *)gdk_x11_get_default_xdisplay();
-
 	cairo_set_operator(context, CAIRO_OPERATOR_SOURCE);
-
 	handle=rsvg_handle_new_from_file(ICONDIR "/florence.svg", &error);
 	if (error) flo_error(_("Error loading florence icon: %s"), error->message);
 	else {
-		w=settings_get_double(SETTINGS_SCALEX)*2;
-		h=settings_get_double(SETTINGS_SCALEY)*2;
+		w=gtk_widget_get_allocated_width(window);
+		h=gtk_widget_get_allocated_height(window);
 		shape=XCreatePixmap(disp, GDK_WINDOW_XID(gtk_widget_get_window(window)), w, h, 1);
 		mask=cairo_xlib_surface_create_for_bitmap(disp, shape,
 			DefaultScreenOfDisplay(disp), w, h);
@@ -96,8 +72,59 @@ void controller_icon_expose (GtkWidget *window, cairo_t* context, void *userdata
 	END_FUNC
 }
 
+/* create icon */
+void controller_icon_create (struct controller *controller, GtkWindow **icon, gdouble scale)
+{
+	START_FUNC
+	if (!*icon) {
+		*icon=GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
+		gtk_window_set_keep_above(*icon, TRUE);
+		gtk_window_set_skip_taskbar_hint(*icon, TRUE);
+		gtk_widget_set_size_request(GTK_WIDGET(*icon),
+			settings_get_double(SETTINGS_SCALEX)*scale,
+			settings_get_double(SETTINGS_SCALEY)*scale);
+		gtk_container_set_border_width(GTK_CONTAINER(*icon), 0);
+		gtk_window_set_decorated(*icon, FALSE);
+		gtk_window_set_position(*icon, GTK_WIN_POS_MOUSE);
+		gtk_window_set_accept_focus(*icon, FALSE);
+		gtk_widget_set_events(GTK_WIDGET(*icon),
+			GDK_EXPOSURE_MASK|GDK_POINTER_MOTION_HINT_MASK|GDK_BUTTON_PRESS_MASK|GDK_BUTTON_RELEASE_MASK|
+			GDK_ENTER_NOTIFY_MASK|GDK_LEAVE_NOTIFY_MASK|GDK_STRUCTURE_MASK|GDK_POINTER_MOTION_MASK);
+		g_signal_connect(G_OBJECT(*icon), "draw", G_CALLBACK(controller_icon_expose), NULL);
+		g_signal_connect(G_OBJECT(*icon), "screen-changed",
+			G_CALLBACK(view_screen_changed), NULL);
+		view_screen_changed(GTK_WIDGET(*icon), NULL, NULL);
+	}
+	END_FUNC
+}
+
+#ifdef ENABLE_AT_SPI2
+
+void controller_icon_hide (gpointer user_data);
+void controller_icon_show (gpointer user_data);
+void controller_set_mode (struct controller *controller);
+
+/* Move the window to near the accessible onject. */
+void controller_move_to(struct controller *controller)
+{
+	AtspiRect *rect;
+	AtspiComponent *component=NULL;
+	guint x, y;
+
+	if (settings_get_bool(SETTINGS_MOVE_TO_WIDGET) && controller->obj) {
+		component=atspi_accessible_get_component(controller->obj);
+		if (component) {
+			rect=atspi_component_get_extents(component, ATSPI_COORD_TYPE_SCREEN, NULL);
+			if (rect->x<0) x=0; else x=(guint)rect->x;
+			if (rect->y<0) y=0; else y=(guint)rect->y;
+			florence_move_to(x, y, (unsigned int)rect->width, (unsigned int)rect->height);
+			g_free(rect);
+		}
+	}
+}
+
 /* on button-press events: destroy the icon and show the actual keyboard */
-void controller_icon_press (GtkWidget *window, GdkEventButton *event, gpointer user_data)
+void controller_autohide_icon_press (GtkWidget *window, GdkEventButton *event, gpointer user_data)
 {
 	START_FUNC
 	struct controller *controller=(struct controller *)user_data;
@@ -112,31 +139,18 @@ void controller_icon_press (GtkWidget *window, GdkEventButton *event, gpointer u
 void controller_show (struct controller *controller)
 {
 	START_FUNC
+	GtkWindow *icon=controller->autohide_icon;
 	florence_hide();
 	if (settings_get_bool(SETTINGS_INTERMEDIATE_ICON)) {
-		if (!controller->icon) {
-			controller->icon=GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
-			gtk_window_set_keep_above(controller->icon, TRUE);
-			gtk_window_set_skip_taskbar_hint(controller->icon, TRUE);
-			gtk_widget_set_size_request(GTK_WIDGET(controller->icon), settings_get_double(SETTINGS_SCALEX)*2,
-				settings_get_double(SETTINGS_SCALEY)*2);
-			gtk_container_set_border_width(GTK_CONTAINER(controller->icon), 0);
-			gtk_window_set_decorated(controller->icon, FALSE);
-			gtk_window_set_position(controller->icon, GTK_WIN_POS_MOUSE);
-			gtk_window_set_accept_focus(controller->icon, FALSE);
-			gtk_widget_set_events(GTK_WIDGET(controller->icon),
-				GDK_EXPOSURE_MASK|GDK_BUTTON_PRESS_MASK|GDK_BUTTON_RELEASE_MASK);
-			g_signal_connect(G_OBJECT(controller->icon), "draw", G_CALLBACK(controller_icon_expose), controller);
-			g_signal_connect(G_OBJECT(controller->icon), "button-press-event",
-				G_CALLBACK(controller_icon_press), controller);
+		controller_icon_create(controller, &(controller->autohide_icon), 2.0);
+		if (!icon) {
+			g_signal_connect(G_OBJECT(controller->autohide_icon), "button-press-event",
+				G_CALLBACK(controller_autohide_icon_press), controller);
 			florence_register(FLORENCE_SHOW, controller_icon_hide, controller);
 			florence_register(FLORENCE_HIDE, controller_icon_show, controller);
-			g_signal_connect(G_OBJECT(controller->icon), "screen-changed",
-				G_CALLBACK(view_screen_changed), NULL);
-			view_screen_changed(GTK_WIDGET(controller->icon), NULL, NULL);
 		}
-		tools_window_move(controller->icon, controller->obj);
-		gtk_widget_show(GTK_WIDGET(controller->icon));
+		tools_window_move(controller->autohide_icon, controller->obj);
+		gtk_widget_show(GTK_WIDGET(controller->autohide_icon));
 	} else {
 		controller_move_to(controller);
 		florence_show();
@@ -149,8 +163,8 @@ void controller_icon_hide (gpointer user_data)
 {
 	START_FUNC
 	struct controller *controller=(struct controller *)user_data;
-	if (controller->icon) {
-		gtk_widget_hide(GTK_WIDGET(controller->icon));
+	if (controller->autohide_icon) {
+		gtk_widget_hide(GTK_WIDGET(controller->autohide_icon));
 	}
 	END_FUNC
 }
@@ -160,7 +174,7 @@ void controller_icon_show (gpointer user_data)
 {
 	START_FUNC
 	struct controller *controller=(struct controller *)user_data;
-	if (controller->icon && controller->obj) {
+	if (controller->autohide_icon && controller->obj) {
 		controller_show(controller);
 	}
 	END_FUNC
@@ -234,30 +248,113 @@ void controller_deregister_events (struct controller *controller)
 	END_FUNC
 }
 
-/* Set auto hide mode on or off. */
-void controller_set_mode (struct controller *controller, gboolean auto_hide)
-{
-	if (auto_hide) {
-		controller_register_events(controller);
-	} else {
-		controller_deregister_events(controller);
-	}
-}
-
 /* Triggered by gconf when the "auto_hide" parameter is changed. */
 void controller_set_auto_hide(GSettings *settings, gchar *key, gpointer user_data)
 {
 	START_FUNC
 	struct controller *controller=(struct controller *)user_data;
-	controller_set_mode(controller, settings_get_bool(SETTINGS_AUTO_HIDE));
-	if ((!settings_get_bool(SETTINGS_AUTO_HIDE)) && (controller->icon)) {
-		gtk_widget_destroy(GTK_WIDGET(controller->icon));
-		controller->icon=NULL;
+	controller_set_mode(controller);
+	if ((!settings_get_bool(SETTINGS_AUTO_HIDE)) && (controller->autohide_icon)) {
+		gtk_widget_destroy(GTK_WIDGET(controller->autohide_icon));
+		controller->autohide_icon=NULL;
 	}
 	END_FUNC
 }
 
 #endif
+
+/* on press event: record position and wait for release. */
+void controller_icon_on_press (GtkWidget *window, GdkEventButton *event, gpointer user_data)
+{
+	START_FUNC
+	struct controller *controller=(struct controller *)user_data;
+	controller->icon_moving=CONTROLLER_PRESSED;
+/*	gdk_device_get_position(gdk_device_manager_get_client_pointer(
+		gdk_display_get_device_manager(gdk_display_get_default())), NULL,
+		&(controller->xpos), &(controller->ypos));*/
+	controller->xpos=(gint)((GdkEventMotion*)event)->x;
+	controller->ypos=(gint)((GdkEventMotion*)event)->y;
+	END_FUNC
+}
+
+/* on release event: show/hide the keyboard. */
+void controller_icon_on_release (GtkWidget *window, GdkEventButton *event, gpointer user_data)
+{
+	START_FUNC
+	struct controller *controller=(struct controller *)user_data;
+	controller->icon_moving=CONTROLLER_IMMOBILE;
+	END_FUNC
+}
+
+/* on move event: move the icon. */
+void controller_icon_on_move (GtkWidget *window, GdkEventButton *event, gpointer user_data)
+{
+	START_FUNC
+	struct controller *controller=(struct controller *)user_data;
+	gint x, y, dx, dy;
+	gdk_device_get_position(gdk_device_manager_get_client_pointer(
+		gdk_display_get_device_manager(gdk_display_get_default())), NULL, &x, &y);
+	switch(controller->icon_moving) {
+		case CONTROLLER_IMMOBILE: break;
+		case CONTROLLER_PRESSED:
+			dx=(gint)((GdkEventMotion*)event)->x-controller->xpos;
+			dy=(gint)((GdkEventMotion*)event)->y-controller->ypos;
+			if (dx > MOVING_THRESHOLD || dx < -MOVING_THRESHOLD ||
+				dy > MOVING_THRESHOLD || dy < -MOVING_THRESHOLD)
+				controller->icon_moving=CONTROLLER_MOVING;
+			else break;
+		case CONTROLLER_MOVING:
+			dx=x-controller->xpos;
+			dy=y-controller->ypos;
+			gtk_window_move(GTK_WINDOW(window), dx, dy);
+			settings_set_int(SETTINGS_CONTROLLER_ICON_XPOS, dx);
+			settings_set_int(SETTINGS_CONTROLLER_ICON_YPOS, dy);
+			break;
+		default:
+			flo_warn(_("Controller: unknown moving state."));
+			break;
+	}
+	END_FUNC
+}
+
+/* Set auto hide mode on or off. */
+void controller_set_mode (struct controller *controller)
+{
+	START_FUNC
+#ifdef ENABLE_AT_SPI2
+	if (settings_get_bool(SETTINGS_AUTO_HIDE)) {
+		controller_register_events(controller);
+	} else {
+		controller_deregister_events(controller);
+	}
+#endif
+	if (settings_get_bool(SETTINGS_CONTROLLER_ICON)) {
+		GtkWindow *icon=controller->controller_icon;
+		controller_icon_create(controller, &(controller->controller_icon), 4.0);
+		if (!icon) {
+			g_signal_connect(G_OBJECT(controller->controller_icon), "button-press-event",
+				G_CALLBACK(controller_icon_on_press), controller);
+			g_signal_connect(G_OBJECT(controller->controller_icon), "button-release-event",
+				G_CALLBACK(controller_icon_on_release), controller);
+			g_signal_connect(G_OBJECT(controller->controller_icon), "motion-notify-event",
+				G_CALLBACK(controller_icon_on_move), controller);
+			g_signal_connect(G_OBJECT(controller->controller_icon), "leave-notify-event",
+				G_CALLBACK(controller_icon_on_move), controller);
+		}
+		gtk_widget_show(GTK_WIDGET(controller->controller_icon));
+		gtk_window_move(GTK_WINDOW(controller->controller_icon),
+			settings_get_int(SETTINGS_CONTROLLER_ICON_XPOS),
+			settings_get_int(SETTINGS_CONTROLLER_ICON_YPOS));
+	}
+	END_FUNC
+}
+
+void controller_terminate (gpointer user_data)
+{
+	START_FUNC
+	gtk_main_quit();
+	END_FUNC
+}
 
 /* create a new instance of controller. */
 struct controller *controller_new()
@@ -277,11 +374,13 @@ struct controller *controller_new()
 
 	if (settings_get_bool(SETTINGS_HIDE_ON_START) && (!settings_get_bool(SETTINGS_AUTO_HIDE)))
 		florence_hide();
-	else controller_set_mode(controller, settings_get_bool(SETTINGS_AUTO_HIDE));
+	else controller_set_mode(controller);
 #else
 	flo_warn(_("AT-SPI has been disabled at compile time: auto-hide mode is disabled."));
 #endif
+	florence_register(FLORENCE_TERMINATE, controller_terminate, controller);
 
+	END_FUNC
 	return controller;
 }
 
@@ -291,10 +390,12 @@ void controller_free(struct controller *controller)
 	START_FUNC
 
 #ifdef ENABLE_AT_SPI2
-	if (controller->icon) gtk_widget_destroy(GTK_WIDGET(controller->icon));
-	controller->icon=NULL;
+	if (controller->autohide_icon) gtk_widget_destroy(GTK_WIDGET(controller->autohide_icon));
+	controller->autohide_icon=NULL;
 	atspi_exit();
 #endif
+	if (controller->controller_icon) gtk_widget_destroy(GTK_WIDGET(controller->controller_icon));
+	controller->controller_icon=NULL;
 
 	g_free(controller);
 	END_FUNC
