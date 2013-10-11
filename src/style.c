@@ -23,7 +23,6 @@
 #include <glib.h>
 #include <glib/gprintf.h>
 #include <librsvg/rsvg.h>
-#include <librsvg/rsvg-cairo.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 #include <libxml/xmlsave.h>

@@ -167,16 +167,15 @@ void settings_window_preview_build()
 	END_FUNC
 }
 
-/* converts a color from string ro gdk */
-GdkColor *settings_window_convert_color(gchar *strcolor)
+/* converts a color from string to gdk */
+GdkRGBA *settings_window_convert_color(gchar *strcolor)
 {
 	START_FUNC
-	static GdkColor ret;
-	sscanf(strcolor, "#%02x%02x%02x",
-		(unsigned int *)&ret.red,
-		(unsigned int *)&ret.green,
-		(unsigned int *)&ret.blue);
-	ret.red<<=8; ret.green<<=8; ret.blue<<=8;
+	static GdkRGBA ret;
+	unsigned int r, g, b;
+	sscanf(strcolor, "#%02x%02x%02x", &r, &g, &b);
+	ret.red=((gdouble)r)/256.; ret.green=((gdouble)g)/256.; ret.blue=((gdouble)b)/256.;
+	ret.alpha=1.0;
 	END_FUNC
 	return &ret;
 }
@@ -341,8 +340,8 @@ void settings_window_update()
 					break;
 				case SETTINGS_COLOR:
 					color=settings_get_string(searchidx);
-					gtk_color_button_set_color(
-						GTK_COLOR_BUTTON(gtk_builder_get_object(settings_window->gtkbuilder,
+					gtk_color_chooser_set_rgba(
+						GTK_COLOR_CHOOSER(gtk_builder_get_object(settings_window->gtkbuilder,
 							params[searchidx].builder_name)),
 						settings_window_convert_color(color));
 					if (color) g_free(color);
@@ -444,14 +443,15 @@ void settings_window_style_change (GtkIconView *iconview, gpointer user_data)
 }
 
 /* on color change */
-void settings_window_change_color(GtkColorButton *button)
+void settings_window_change_color(GtkColorChooser *button)
 {
 	START_FUNC
-	GdkColor color;
+	GdkRGBA color;
 	gchar strcolor[8];
 	enum settings_item item=settings_get_settings_name(GTK_WIDGET(button));
-	gtk_color_button_get_color(button, &color);
-	g_sprintf(strcolor, "#%02X%02X%02X", (color.red)>>8, (color.green)>>8, (color.blue)>>8);
+	gtk_color_chooser_get_rgba(button, &color);
+	g_sprintf(strcolor, "#%02X%02X%02X", (int)((color.red)*256.),
+		(int)((color.green)*256.), (int)((color.blue)*256.));
 	settings_set_string(item, strcolor);
 	/* update style preview */
 	if (item==SETTINGS_KEY) settings_window_preview_build();
