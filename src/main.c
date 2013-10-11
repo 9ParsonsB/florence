@@ -76,7 +76,7 @@ int main (int argc, char **argv)
 {
 	int ret=EXIT_FAILURE;
 	int config;
-	gchar *auto_command=NULL;
+	char *auto_command=NULL;
 	int i, auto_command_len=0;
 
 	setlocale (LC_ALL, "");
@@ -116,18 +116,19 @@ int main (int argc, char **argv)
 		florence=flo_new(!(config&4), focus);
 
 		/* launch controller process */
-		auto_command_len=8;
-		for (i=0; i<argc; ++i) {
+		auto_command_len=9;
+		for (i=0; i<argc; i++) {
 			auto_command_len+=strlen(1+argv[i]);
 		}
-		auto_command=g_malloc(auto_command_len);
+		auto_command=malloc(sizeof(char)*auto_command_len);
 		auto_command[0]='\0';
-		for (i=0; i<argc; ++i) {
+		for (i=0; i<argc; i++) {
 			strcat(auto_command, " ");
 			strcat(auto_command, argv[i]);
 		}
 		strcat(auto_command, " auto &");
 		system(auto_command);
+		free(auto_command);
 
 		gtk_main();
 
