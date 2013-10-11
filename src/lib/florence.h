@@ -22,8 +22,8 @@
 #ifndef LIB_FLORENCE
 #define LIB_FLORENCE
 
-typedef enum { FLORENCE_SUCCESS=0, FLORENCE_FAIL, FLORENCE_TIMEOUT } florence_error;
-typedef enum { FLORENCE_TERMINATE, FLORENCE_SHOW, FLORENCE_HIDE } florence_signal;
+typedef enum { FLORENCE_FAIL=0, FLORENCE_SUCCESS, FLORENCE_TIMEOUT } florence_error;
+typedef enum { FLORENCE_TERMINATE, FLORENCE_SHOW, FLORENCE_HIDE, FLORENCE_SIGNALS_NB } florence_signal;
 typedef void (*florence_signal_cb)(void *user_data);
 
 /* Initialize the dbus connection */
@@ -45,7 +45,10 @@ florence_error florence_move(unsigned int x, unsigned int y);
 florence_error florence_move_to(unsigned int x, unsigned int y, unsigned int w, unsigned int h);
 
 /* Register for signal */
-florence_error florence_register(florence_signal signal, florence_signal_cb signalcb, void *user_data);
+unsigned int florence_register(florence_signal signal, florence_signal_cb signalcb, void *user_data);
+
+/* Unregister signal */
+florence_error florence_unregister(florence_signal signal, unsigned int id);
 
 #endif
 

@@ -23,15 +23,26 @@
 #include "florence.h"
 #include <gio/gio.h>
 
+struct registration {
+	guint id;
+	florence_signal_cb cb;
+	struct registration *next;
+};
 struct florence {
 	GMainLoop *loop;
 	guint dbus_id;
 	GDBusConnection *connection;
-	florence_signal_cb terminate, show, hide;
-	guint terminate_id, show_id, hide_id;
+	struct registration *regs[FLORENCE_SIGNALS_NB];
 	florence_error error;
 };
 struct florence *florence=NULL;
+
+/* call all registrations */
+void registration_call(struct registration *registration, gpointer user_data)
+{
+	struct registration *reg=registration;
+	while (reg) { reg->cb(user_data); reg=reg->next; }
+}
 
 /* Called when dbus name has appeared */
 void florence_on_name_appeared(GDBusConnection *con, const gchar *name, const gchar *name_owner, gpointer user_data)
@@ -45,7 +56,7 @@ void florence_on_name_appeared(GDBusConnection *con, const gchar *name, const gc
 void florence_on_name_vanished(GDBusConnection *con, const gchar *name, gpointer user_data)
 {
 	florence->error=FLORENCE_FAIL;
-	if (florence->terminate) florence->terminate(user_data);
+	registration_call(florence->regs[FLORENCE_TERMINATE], user_data);
 	g_main_loop_quit(florence->loop);
 }
 
@@ -141,16 +152,29 @@ void florence_on_signal (GDBusConnection *connection, const gchar *sender_name,
 {
 	if (!florence) return;
 	if (!strcmp(signal_name, "terminate")) {
-		if (florence->terminate) florence->terminate(user_data);
+		registration_call(florence->regs[FLORENCE_TERMINATE], user_data);
 	} else if (!strcmp(signal_name, "show")) {
-		if (florence->show) florence->show(user_data);
+		registration_call(florence->regs[FLORENCE_SHOW], user_data);
 	} else if (!strcmp(signal_name, "hide")) {
-		if (florence->hide) florence->hide(user_data);
+		registration_call(florence->regs[FLORENCE_HIDE], user_data);
 	} 
 }
 
+/* add a registration to the list */
+guint *registration_append(struct registration **reg, florence_signal_cb cb)
+{
+	if (*reg) {
+	       while ((*reg)->next) *reg=(*reg)->next;
+	       (*reg)->next=malloc(sizeof(struct registration));
+	       *reg=(*reg)->next;
+	} else *reg=malloc(sizeof(struct registration));
+	memset((*reg), 0, sizeof(struct registration));
+	(*reg)->cb=cb;
+	return &((*reg)->id);
+}
+
 /* Register for signal */
-florence_error florence_register(florence_signal signal, florence_signal_cb signalcb, void *user_data)
+unsigned int florence_register(florence_signal signal, florence_signal_cb signalcb, void *user_data)
 {
 	guint *id=NULL;
 	gchar *name=NULL;
@@ -160,29 +184,44 @@ florence_error florence_register(florence_signal signal, florence_signal_cb sign
 
 	switch(signal) {
 		case FLORENCE_TERMINATE:
-			florence->terminate = signalcb;
-			id=&(florence->terminate_id);
 			name="terminate";
 			break;
 		case FLORENCE_SHOW:
-			florence->show = signalcb;
-			id=&(florence->show_id);
 			name="show";
 			break;
 		case FLORENCE_HIDE:
-			florence->hide = signalcb;
-			id=&(florence->hide_id);
 			name="hide";
 			break;
 		default:
 			return FLORENCE_FAIL;
 	}
 
-	if (*id) g_dbus_connection_signal_unsubscribe(florence->connection, *id);
+	id=registration_append(&(florence->regs[signal]), signalcb);
 	*id=g_dbus_connection_signal_subscribe(florence->connection, "org.florence.Keyboard",
 		"org.florence.Keyboard", name, "/org/florence/Keyboard", NULL, G_DBUS_SIGNAL_FLAGS_NONE,
 		florence_on_signal, user_data, NULL);
 
+	return (int)(*id);
+}
+
+florence_error florence_unregister(florence_signal signal, unsigned int id)
+{
+	struct registration *reg=florence->regs[signal];
+	if (!florence) return FLORENCE_FAIL;
+	if (!florence->connection) return FLORENCE_FAIL;
+	if (signal>=FLORENCE_SIGNALS_NB) return FLORENCE_FAIL;
+	g_dbus_connection_signal_unsubscribe(florence->connection, id);
+	if (reg->id==id) {
+		florence->regs[signal]=reg->next;
+		free(reg);
+	} else {
+		struct registration *preg=reg;
+		while ((reg=reg->next) && reg->id!=id) preg=reg;
+		if (reg && (reg->id==id)) {
+			preg->next=reg->next;
+			free(reg);
+		}
+	}
 	return FLORENCE_SUCCESS;
 }
 

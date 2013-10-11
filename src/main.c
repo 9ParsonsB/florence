@@ -162,7 +162,7 @@ void exec_command()
 	if (FLORENCE_SUCCESS!=florence_init()) {
 		flo_fatal(_("Florence does not seem to be running."));
 	}
-	if (FLORENCE_SUCCESS!=florence_register(FLORENCE_TERMINATE, terminate, NULL)) {
+	if (FLORENCE_FAIL==florence_register(FLORENCE_TERMINATE, terminate, NULL)) {
 		flo_fatal(_("Failed to register for terminate signal."));
 	}
 
