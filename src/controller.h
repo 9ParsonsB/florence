@@ -43,6 +43,7 @@ struct controller {
 	enum controller_moving_status icon_moving; /* icon moving status */
 	gint xpos; /* moving position along the x axis. */
 	gint ypos; /* moving position along the y axis. */
+	gboolean visible; /* true when the keyboard is visible. */
 #ifdef ENABLE_AT_SPI2
 	GtkWindow *autohide_icon; /* intermediate icon */
 	AtspiAccessible *obj; /* editable object being selected */
