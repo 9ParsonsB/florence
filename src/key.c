@@ -314,6 +314,13 @@ void key_press(struct key *key, struct status *status)
 	END_FUNC
 }
 
+gboolean key_terminate(gpointer userdata)
+{
+	struct status *status=(struct status *)userdata;
+	status_terminate(status);
+	return FALSE;
+}
+
 /* Send a key release event. */
 void key_release(struct key *key, struct status *status)
 {
@@ -334,7 +341,8 @@ void key_release(struct key *key, struct status *status)
 			case KEY_ACTION:
 				action=(struct key_action *)mod->data;
 				switch (action->type) {
-					case KEY_CLOSE: status_terminate(status); break;
+					case KEY_CLOSE: g_timeout_add(20, key_terminate, (gpointer)status);
+						break;
 					case KEY_REDUCE: view_hide(status->view); break;
 					case KEY_CONFIG: settings(); break;
 					case KEY_MOVE: status_set_moving(status, FALSE); break;
