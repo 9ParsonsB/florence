@@ -69,11 +69,22 @@ void view_hide (struct view *view)
 	END_FUNC
 }
 
+void view_on_destroy(gpointer user_data)
+{
+	START_FUNC
+	struct view *view=(struct view *)user_data;
+	view->window=NULL;
+}
+
 /* destroy the view */
 void view_destroy(struct view *view)
 {
 	START_FUNC
-	gtk_widget_destroy(GTK_WIDGET(view->window));
+	if (view->window) {
+		GtkWidget *window=GTK_WIDGET(view->window);
+		view->window=NULL;
+		gtk_widget_destroy(window);
+	}
 	END_FUNC
 }
 
@@ -450,6 +461,7 @@ void view_update(struct view *view, struct key *key, gboolean statechange)
 	GdkRectangle *rect;
 	GdkCursor *cursor;
 
+	if (!view->window) return;
 	if (key) {
 		if (statechange) {
 			if (view->symbols) cairo_surface_destroy(view->symbols);
@@ -458,7 +470,9 @@ void view_update(struct view *view, struct key *key, gboolean statechange)
 		} else {
 			rect=keyboard_key_getrect((struct keyboard *)key_get_keyboard(key),
 				key, status_focus_zoom_get(view->status));
-			gdk_window_invalidate_rect(gtk_widget_get_window(GTK_WIDGET(view->window)), rect, TRUE);
+			gdk_window_invalidate_rect(
+				gtk_widget_get_window(GTK_WIDGET(view->window)),
+				rect, TRUE);
 		}
 	}
 	if (status_focus_get(view->status)) {
@@ -498,7 +512,7 @@ void view_configure (GtkWidget *window, GdkEventConfigure* pConfig, struct view 
 	START_FUNC
 	GdkRectangle rect;
 	gint xpos, ypos;
-	if (!gtk_widget_get_visible(window)) return;
+	if ((!view->window)||(!gtk_widget_get_visible(window))) return;
 
 	/* record window position */
 	if (gtk_window_get_decorated(GTK_WINDOW(view->window)))
@@ -659,7 +673,7 @@ void view_on_keys_changed(gpointer user_data)
 	struct view *view=(struct view *)user_data;
 	if (view->symbols) cairo_surface_destroy(view->symbols);
 	view->symbols=NULL;
-	gtk_widget_queue_draw(GTK_WIDGET(view->window));
+	if (view->window) gtk_widget_queue_draw(GTK_WIDGET(view->window));
 	END_FUNC
 }
 
@@ -806,6 +820,7 @@ struct view *view_new (struct status *status, struct style *style, GSList *keybo
 	g_signal_connect(G_OBJECT(view->window), "draw", G_CALLBACK(view_expose), view);
 	g_signal_connect(G_OBJECT(view->window), "window-state-event", G_CALLBACK(view_window_state), view);
 	view_screen_changed(GTK_WIDGET(view->window), NULL, view);
+	g_signal_connect(G_OBJECT(view->window), "destroy", G_CALLBACK(view_on_destroy), view);
 	gtk_widget_show(GTK_WIDGET(view->window));
 	view_create_window_mask(view);
 

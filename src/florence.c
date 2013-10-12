@@ -52,7 +52,8 @@ void flo_terminate(struct florence *florence)
 void flo_destroy (GtkWidget *widget, gpointer user_data)
 {
 	START_FUNC
-	flo_terminate((struct florence *)user_data);
+	struct florence *florence=(struct florence *)user_data;
+	flo_terminate(florence);
 	END_FUNC
 }
 

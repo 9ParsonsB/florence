@@ -116,7 +116,7 @@ int main (int argc, char **argv)
 		florence=flo_new(!(config&4), focus);
 
 		/* launch controller process */
-		auto_command_len=9;
+		auto_command_len=10;
 		for (i=0; i<argc; i++) {
 			auto_command_len+=strlen(1+argv[i]);
 		}
