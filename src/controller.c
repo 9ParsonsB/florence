@@ -271,7 +271,7 @@ void controller_icon_on_press (GtkWidget *window, GdkEventButton *event, gpointe
 	struct controller *controller=(struct controller *)user_data;
 	/* right click */
 	if (event->button==3) {
-		menu_show(window, event->button, event->time, (GCallback)florence_terminate, NULL);
+		menu_show(G_OBJECT(window), event->button, event->time, (GCallback)florence_terminate, NULL);
 	} else {
 		controller->icon_moving=CONTROLLER_PRESSED;
 		controller->xpos=(gint)((GdkEventMotion*)event)->x;

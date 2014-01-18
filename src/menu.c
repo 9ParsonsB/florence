@@ -79,8 +79,8 @@ void menu_help(void)
 
 /* Called when the icon is right->clicked
  * Displays the menu. */
-void menu_show(GtkWidget *parent, guint button, guint activate_time, GCallback quit_func,
-	GtkMenuPositionFunc pos_func)
+void menu_show(GObject *parent, guint button, guint activate_time,
+	GCallback quit_func, GtkMenuPositionFunc pos_func)
 {
 	START_FUNC
 	GtkWidget *menu, *about, *config, *quit;
