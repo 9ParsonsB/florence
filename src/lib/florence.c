@@ -145,6 +145,12 @@ florence_error florence_move_to(unsigned int x, unsigned int y, unsigned int w, 
 	return florence_send("move_to", g_variant_new("(uuuu)", (guint)x, (guint)y, (guint)w, (guint)h));
 }
 
+/* Terminate the keyboard */
+florence_error florence_terminate()
+{
+	return florence_send("terminate", NULL);
+}
+
 /* Callback called when a signal is received */
 void florence_on_signal (GDBusConnection *connection, const gchar *sender_name,
 		const gchar *object_path, const gchar *interface_name, const gchar *signal_name,

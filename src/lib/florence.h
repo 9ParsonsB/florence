@@ -44,6 +44,9 @@ florence_error florence_move(unsigned int x, unsigned int y);
 /* Move the keyboard to near rect */
 florence_error florence_move_to(unsigned int x, unsigned int y, unsigned int w, unsigned int h);
 
+/* Terminate the keyboard */
+florence_error florence_terminate();
+
 /* Register for signal */
 unsigned int florence_register(florence_signal signal, florence_signal_cb signalcb, void *user_data);
 

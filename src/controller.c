@@ -20,6 +20,7 @@
 */
 
 #include "controller.h"
+#include "menu.h"
 #include "trace.h"
 #include "settings.h"
 #include "tools.h"
@@ -268,9 +269,14 @@ void controller_icon_on_press (GtkWidget *window, GdkEventButton *event, gpointe
 {
 	START_FUNC
 	struct controller *controller=(struct controller *)user_data;
-	controller->icon_moving=CONTROLLER_PRESSED;
-	controller->xpos=(gint)((GdkEventMotion*)event)->x;
-	controller->ypos=(gint)((GdkEventMotion*)event)->y;
+	/* right click */
+	if (event->button==3) {
+		menu_show(window, event->button, event->time, (GCallback)florence_terminate, NULL);
+	} else {
+		controller->icon_moving=CONTROLLER_PRESSED;
+		controller->xpos=(gint)((GdkEventMotion*)event)->x;
+		controller->ypos=(gint)((GdkEventMotion*)event)->y;
+	}
 	END_FUNC
 }
 
