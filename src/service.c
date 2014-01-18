@@ -23,6 +23,7 @@
 #include "trace.h"
 #include "service.h"
 #include "settings.h"
+#include "menu.h"
 
 /* Service interface */
 static const gchar service_introspection[]=
@@ -41,6 +42,7 @@ static const gchar service_introspection[]=
 	"    </method>"
 	"    <method name='hide'/>"
 	"    <method name='terminate'/>"
+	"    <method name='menu'/>"
 	"    <signal name='terminate'/>"
 	"    <signal name='show'/>"
 	"    <signal name='hide'/>"
@@ -58,19 +60,19 @@ static void service_method_call (GDBusConnection *connection, const gchar *sende
 	gint win_width, win_height;
 	GdkRectangle win_rect;
 	struct service *service=(struct service *)user_data;
-	if (g_strcmp0(method_name, "show")==0) {
+	if (!g_strcmp0(method_name, "show")) {
 #ifdef AT_SPI
 		view_show(service->view, NULL);
 #else
 		view_show(service->view);
 #endif
-	} else if (g_strcmp0(method_name, "move")==0) {
+	} else if (!g_strcmp0(method_name, "move")) {
 		g_variant_get(parameters, "(uu)", &x, &y);
 		gtk_window_move(GTK_WINDOW(view_window_get(service->view)), x, y);
 		/* For when the keyboard is hidden */
 		settings_set_int(SETTINGS_XPOS, x);
 		settings_set_int(SETTINGS_YPOS, y);
-	} else if (g_strcmp0(method_name, "move_to")==0) {
+	} else if (!g_strcmp0(method_name, "move_to")) {
 		g_variant_get(parameters, "(uuuu)", &x, &y, &w, &h);
 		screen_height=gdk_screen_get_height(gdk_screen_get_default());
 		screen_width=gdk_screen_get_width(gdk_screen_get_default());
@@ -92,8 +94,10 @@ static void service_method_call (GDBusConnection *connection, const gchar *sende
 		/* For when the keyboard is hidden */
 		settings_set_int(SETTINGS_XPOS, x);
 		settings_set_int(SETTINGS_YPOS, y);
-	} else if (g_strcmp0(method_name, "hide")==0) view_hide(service->view);
-	else if (g_strcmp0(method_name, "terminate")==0) service->quit(service->user_data);
+	} else if (!g_strcmp0(method_name, "hide")) view_hide(service->view);
+	else if (!g_strcmp0(method_name, "terminate")) service->quit(service->user_data);
+	else if (!g_strcmp0(method_name, "menu"))
+		menu_show(NULL, 3, (GCallback)service->quit, NULL, service->user_data);
 	else flo_error(_("Unknown dbus method called: <%s>"), method_name);
 	g_dbus_method_invocation_return_value(invocation, NULL);
 	END_FUNC

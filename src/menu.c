@@ -79,8 +79,8 @@ void menu_help(void)
 
 /* Called when the icon is right->clicked
  * Displays the menu. */
-void menu_show(GObject *parent, guint button, guint activate_time,
-	GCallback quit_func, GtkMenuPositionFunc pos_func)
+void menu_show(GObject *parent, guint button, GCallback quit_func,
+	GtkMenuPositionFunc pos_func, gpointer user_data)
 {
 	START_FUNC
 	GtkWidget *menu, *about, *config, *quit;
@@ -92,7 +92,7 @@ void menu_show(GObject *parent, guint button, guint activate_time,
 	quit=gtk_image_menu_item_new_with_mnemonic(_("_Quit"));
 	gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(quit),
 		gtk_image_new_from_stock(GTK_STOCK_QUIT, GTK_ICON_SIZE_MENU));
-	g_signal_connect_swapped(quit, "activate", quit_func, NULL);
+	g_signal_connect_swapped(quit, "activate", quit_func, user_data);
 
 #ifdef ENABLE_HELP
 	help=gtk_image_menu_item_new_with_mnemonic(_("_Help"));
@@ -121,6 +121,6 @@ void menu_show(GObject *parent, guint button, guint activate_time,
 	gtk_widget_show_all(menu);
  
 	gtk_menu_popup(GTK_MENU(menu), NULL, NULL, pos_func,
-		parent, button, activate_time);
+		parent, button, gtk_get_current_event_time());
 	END_FUNC
 }

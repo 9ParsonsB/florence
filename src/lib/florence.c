@@ -151,6 +151,12 @@ florence_error florence_terminate()
 	return florence_send("terminate", NULL);
 }
 
+/* Open florence menu */
+florence_error florence_menu()
+{
+	return florence_send("menu", NULL);
+}
+
 /* Callback called when a signal is received */
 void florence_on_signal (GDBusConnection *connection, const gchar *sender_name,
 		const gchar *object_path, const gchar *interface_name, const gchar *signal_name,
