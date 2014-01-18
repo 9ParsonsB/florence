@@ -37,11 +37,6 @@ struct trayicon {
 #endif
 };
 
-/* Display the about dialog window */
-void trayicon_about(void);
-/* Open yelp */
-void trayicon_help(void);
-
 /* Creates a new trayicon instance */
 struct trayicon *trayicon_new(struct view *view, GCallback quit_cb, gpointer user_data);
 /* Deallocate all the memory used bu the trayicon. */

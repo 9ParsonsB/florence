@@ -3,7 +3,7 @@ lib_LTLIBRARIES = libflorence-1.0.la
 
 florence_SOURCES = main.c florence.c keyboard.c key.c trace.c settings.c trayicon.c\
                    layoutreader.c style.c view.c status.c tools.c settings-window.c\
-                   xkeyboard.c fsm.c service.c controller.c
+                   xkeyboard.c fsm.c service.c controller.c menu.c
 
 if WITH_RAMBLE
    florence_SOURCES += ramble.c
@@ -27,7 +27,7 @@ pkgconfig_DATA = florence-1.0.pc
 
 EXTRA_DIST = florence.h keyboard.h key.h layoutreader.h settings.h settings-window.h\
              status.h style.h system.h tools.h trace.h trayicon.h view.h xkeyboard.h\
-             ramble.h fsm.h service.h florence.server.in.in controller.h
+             ramble.h fsm.h service.h florence.server.in.in controller.h menu.h
  
 DISTCLEANFILES = $(server_in_files) $(server_DATA) $(lib_LTLIBRARIES)
 
