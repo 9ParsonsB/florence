@@ -269,13 +269,9 @@ void controller_icon_on_press (GtkWidget *window, GdkEventButton *event, gpointe
 	START_FUNC
 	struct controller *controller=(struct controller *)user_data;
 	/* right click */
-	if (event->button==3) {
-		florence_menu();
-	} else {
-		controller->icon_moving=CONTROLLER_PRESSED;
-		controller->xpos=(gint)((GdkEventMotion*)event)->x;
-		controller->ypos=(gint)((GdkEventMotion*)event)->y;
-	}
+	controller->icon_moving=CONTROLLER_PRESSED;
+	controller->xpos=(gint)((GdkEventMotion*)event)->x;
+	controller->ypos=(gint)((GdkEventMotion*)event)->y;
 	END_FUNC
 }
 
@@ -285,7 +281,8 @@ void controller_icon_on_release (GtkWidget *window, GdkEventButton *event, gpoin
 	START_FUNC
 	struct controller *controller=(struct controller *)user_data;
 	if (controller->icon_moving==CONTROLLER_PRESSED) {
-		if (controller->visible) florence_hide();
+		if (event->button==3) florence_menu(event->time);
+		else if (controller->visible) florence_hide();
 		else florence_show();
 	}
 	controller->icon_moving=CONTROLLER_IMMOBILE;

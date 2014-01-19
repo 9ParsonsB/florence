@@ -152,9 +152,9 @@ florence_error florence_terminate()
 }
 
 /* Open florence menu */
-florence_error florence_menu()
+florence_error florence_menu(unsigned int time)
 {
-	return florence_send("menu", NULL);
+	return florence_send("menu", g_variant_new("(u)", (guint)time));
 }
 
 /* Callback called when a signal is received */

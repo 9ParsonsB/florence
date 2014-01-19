@@ -240,6 +240,7 @@ void xkeyboard_register_events(struct xkeyboard *xkeyboard, xkeyboard_layout_cha
 
 /* get keyval according to modifier */
 /* TODO: cache group state value */
+/* TODO: --without-xkb is broken */
 guint xkeyboard_getKeyval(struct xkeyboard *xkeyboard, guint code, GdkModifierType mod)
 {
 	START_FUNC
@@ -271,24 +272,26 @@ void xkeyboard_key_properties_get(struct xkeyboard *xkeyboard, guint code, GdkMo
 		}
 	}
 #else
-	gchar *symbolname symbolname=gdk_keyval_name(xkeyboard_getKeyval(xkeyboard, code, 0));
-	if (symbolname) if (!strcmp(symbolname, "Caps_Lock")) {
-		*locker=TRUE;
-		*mod=2;
-	} else if (!strcmp(symbolname, "Num_Lock")) {
-		*locker=TRUE;
-		*mod=16;
-	} else if (!strcmp(symbolname, "Shift_L") ||
-		!strcmp(symbolname, "Shift_R")) {
-		*mod=1;
-	} else if ( !strcmp(symbolname, "Alt_L") ||
-		!strcmp(symbolname, "Alt_R")) {
-		*mod=8;
-	} else if (!strcmp(symbolname, "Control_L") ||
-		!strcmp(symbolname, "Control_R")) {
-		*mod=4;
-	} else if (!strcmp(symbolname, "ISO_Level3_Shift")) {
-		*mod=128;
+	gchar *symbolname=gdk_keyval_name(xkeyboard_getKeyval(xkeyboard, code, 0));
+	if (symbolname) {
+		if ((!strcmp(symbolname, "Caps_Lock"))) {
+			*locker=TRUE;
+			*mod=2;
+		} else if ((!strcmp(symbolname, "Num_Lock"))) {
+			*locker=TRUE;
+			*mod=16;
+		} else if ((!strcmp(symbolname, "Shift_L")) ||
+			(!strcmp(symbolname, "Shift_R"))) {
+			*mod=1;
+		} else if ((!strcmp(symbolname, "Alt_L")) ||
+			(!strcmp(symbolname, "Alt_R"))) {
+			*mod=8;
+		} else if ((!strcmp(symbolname, "Control_L")) ||
+			(!strcmp(symbolname, "Control_R"))) {
+			*mod=4;
+		} else if ((!strcmp(symbolname, "ISO_Level3_Shift"))) {
+			*mod=128;
+		}
 	}
 #endif
 	END_FUNC
@@ -329,13 +332,13 @@ struct xkeyboard *xkeyboard_new()
 	XkbKeyActionsMask|XkbModifierMapMask, XkbUseCoreKbd);
 	/* get modifiers state */
 	XkbGetState((Display *)gdk_x11_get_default_xdisplay(), XkbUseCoreKbd, &(xkeyboard->xkb_state));
-#else
-	flo_warn(_("XKB not compiled: startup keyboard sync is disabled. You should make sure all locker keys are released."));
-#endif
 	if (!xkeyboard->groups) {
 	       flo_warn(_("No xkb group found. Using default us group"));
 	       xkeyboard_list_append("us", &(xkeyboard->groups));
 	}
+#else
+	flo_warn(_("XKB not compiled: startup keyboard sync is disabled. You should make sure all locker keys are released."));
+#endif
 	END_FUNC
 	return xkeyboard;
 }

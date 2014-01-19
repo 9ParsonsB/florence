@@ -42,7 +42,9 @@ static const gchar service_introspection[]=
 	"    </method>"
 	"    <method name='hide'/>"
 	"    <method name='terminate'/>"
-	"    <method name='menu'/>"
+	"    <method name='menu'>"
+	"      <arg type='u' name='time' direction='in'/>"
+	"    </method>"
 	"    <signal name='terminate'/>"
 	"    <signal name='show'/>"
 	"    <signal name='hide'/>"
@@ -55,7 +57,7 @@ static void service_method_call (GDBusConnection *connection, const gchar *sende
 	GVariant *parameters, GDBusMethodInvocation *invocation, gpointer user_data)
 {
 	START_FUNC
-	guint x, y, w, h;
+	guint x, y, w, h, time;
 	gint screen_width, screen_height;
 	gint win_width, win_height;
 	GdkRectangle win_rect;
@@ -97,9 +99,10 @@ static void service_method_call (GDBusConnection *connection, const gchar *sende
 		settings_set_int(SETTINGS_YPOS, y);
 	} else if (!g_strcmp0(method_name, "hide")) view_hide(service->view);
 	else if (!g_strcmp0(method_name, "terminate")) service->quit(service->user_data);
-	else if (!g_strcmp0(method_name, "menu"))
-		menu_show(NULL, 3, (GCallback)service->quit, NULL, service->user_data);
-	else flo_error(_("Unknown dbus method called: <%s>"), method_name);
+	else if (!g_strcmp0(method_name, "menu")) {
+		g_variant_get(parameters, "(u)", &time);
+		menu_show(NULL, 3, (GCallback)service->quit, NULL, service->user_data, time);
+	} else flo_error(_("Unknown dbus method called: <%s>"), method_name);
 	g_dbus_method_invocation_return_value(invocation, NULL);
 	END_FUNC
 }

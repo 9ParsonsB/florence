@@ -48,7 +48,7 @@ florence_error florence_move_to(unsigned int x, unsigned int y, unsigned int w, 
 florence_error florence_terminate();
 
 /* Open florence menu */
-florence_error florence_menu();
+florence_error florence_menu(unsigned int time);
 
 /* Register for signal */
 unsigned int florence_register(florence_signal signal, florence_signal_cb signalcb, void *user_data);

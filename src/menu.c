@@ -80,7 +80,7 @@ void menu_help(void)
 /* Called when the icon is right->clicked
  * Displays the menu. */
 void menu_show(GObject *parent, guint button, GCallback quit_func,
-	GtkMenuPositionFunc pos_func, gpointer user_data)
+	GtkMenuPositionFunc pos_func, gpointer user_data, guint time)
 {
 	START_FUNC
 	GtkWidget *menu, *about, *config, *quit;
@@ -121,6 +121,6 @@ void menu_show(GObject *parent, guint button, GCallback quit_func,
 	gtk_widget_show_all(menu);
  
 	gtk_menu_popup(GTK_MENU(menu), NULL, NULL, pos_func,
-		parent, button, gtk_get_current_event_time());
+		parent, button, time);
 	END_FUNC
 }

@@ -21,7 +21,7 @@
 
 #ifndef FLO_XKEYBOARD
 #define FLO_XKEYBOARD
-
+ 
 #ifdef ENABLE_XKB
 #include <X11/XKBlib.h>
 #endif
