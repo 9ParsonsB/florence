@@ -60,6 +60,7 @@ static void service_method_call (GDBusConnection *connection, const gchar *sende
 	gint win_width, win_height;
 	GdkRectangle win_rect;
 	struct service *service=(struct service *)user_data;
+	flo_debug(TRACE_DEBUG, _("Executing method %s"), method_name);
 	if (!g_strcmp0(method_name, "show")) {
 #ifdef AT_SPI
 		view_show(service->view, NULL);
