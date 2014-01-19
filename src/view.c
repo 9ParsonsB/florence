@@ -51,7 +51,7 @@ void view_show (struct view *view)
 	gtk_window_set_keep_above(view->window, TRUE);
 	/* reposition the window */
 	gtk_window_move(view->window, settings_get_int(SETTINGS_XPOS), settings_get_int(SETTINGS_YPOS));
-#ifdef ENABLE_AT_SPI
+#ifdef AT_SPI
 	/* positionnement intelligent */
 	if (settings_get_bool(SETTINGS_AUTO_HIDE) && 
 		settings_get_bool(SETTINGS_MOVE_TO_WIDGET) && object) {

@@ -38,6 +38,13 @@
 #include "tools.h"
 #include "settings-window.h"
 
+#ifdef ENABLE_AT_SPI2
+#define AT_SPI
+#endif
+#ifdef ENABLE_AT_SPI
+#define AT_SPI
+#endif
+
 static struct settings_window *settings_window=NULL;
 void settings_window_extension(GtkToggleButton *button, gchar *name);
 
@@ -660,7 +667,7 @@ void settings_window_new(gboolean exit)
 	settings_window_layouts_populate();
 	settings_window_input_method_populate();
 
-#ifndef ENABLE_AT_SPI
+#ifndef AT_SPI
 	gtk_widget_set_sensitive(GTK_WIDGET(gtk_builder_get_object(settings_window->gtkbuilder,
 		"flo_auto_hide")), FALSE);
 	gtk_widget_set_tooltip_text(GTK_WIDGET(gtk_builder_get_object(settings_window->gtkbuilder,
