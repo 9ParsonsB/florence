@@ -31,6 +31,7 @@ struct service {
 	GDBusNodeInfo *introspection_data;
 	struct view *view;
 	service_cb quit; /* Callback called to quit the applications (when the terminate method is called) */
+	service_cb ready; /* Callback called when the service is ready. */
 	gpointer user_data;
 };
 
@@ -38,7 +39,7 @@ struct service {
 void service_terminate(struct service *service);
 
 /* Create a service object */
-struct service *service_new(struct view *view, service_cb quit, gpointer user_data);
+struct service *service_new(struct view *view, service_cb quit, service_cb ready, gpointer user_data);
 /* Destroy a service object */
 void service_free(struct service *service);
 

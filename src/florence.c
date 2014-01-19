@@ -374,7 +374,7 @@ void flo_layout_reload(GSettings *settings, gchar *key, gpointer user_data)
 }
 
 /* create a new instance of florence. */
-struct florence *flo_new(gboolean gnome, const gchar *focus_back)
+struct florence *flo_new(gboolean gnome, const gchar *focus_back, void (*ready)(void *))
 {
 	START_FUNC
 	struct florence *florence=(struct florence *)g_malloc(sizeof(struct florence));
@@ -413,7 +413,7 @@ struct florence *flo_new(gboolean gnome, const gchar *focus_back)
 	settings_changecb_register(SETTINGS_STYLE_ITEM, flo_layout_reload, florence);
 	settings_changecb_register(SETTINGS_FILE, flo_layout_reload, florence);
 
-	florence->service=service_new(florence->view, (service_cb)flo_terminate, (gpointer)florence);
+	florence->service=service_new(florence->view, (service_cb)flo_terminate, (service_cb)ready, (gpointer)florence);
 	END_FUNC
 	return florence;
 }

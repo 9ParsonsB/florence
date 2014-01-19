@@ -1,7 +1,7 @@
 /* 
    Florence - Florence is a simple virtual keyboard for Gnome.
 
-   Copyright (C) 2012 François Agrech
+   Copyright (C) 2014 François Agrech
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -45,6 +45,12 @@ char *argument=NULL;
 char *focus=NULL;
 /* debug level */
 enum trace_level debug_level=TRACE_WARNING;
+/* inter process communication pipe */
+int pipefd[2];
+/* expected signal from parent */
+char expected='K';
+/* child pid */
+int child;
 
 /* florence structure */
 struct florence *florence=NULL;
@@ -69,23 +75,27 @@ void terminate();
 
 void sig_handler(int signo)
 {
+	kill(child, SIGTERM);
 	flo_terminate(florence);
+}
+
+void ready(void *unused) {
+	/* Tell child we are ready. */
+	write(pipefd[1], &expected, 1);
+	close(pipefd[1]); 
 }
 
 int main (int argc, char **argv)
 {
 	int ret=EXIT_FAILURE;
 	int config;
-	char *auto_command=NULL;
-	int i, auto_command_len=0;
+	struct controller *controller;
+	char buf;
 
 	setlocale (LC_ALL, "");
 	bindtextdomain (GETTEXT_PACKAGE, FLORENCELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
-
-	gtk_init(&argc, &argv);
-	g_type_init();
 
 	program_name=argv[0];
 	config=decode_switches (argc, argv);
@@ -99,46 +109,69 @@ int main (int argc, char **argv)
 #endif
 
 	if (command) {
+		gtk_init(&argc, &argv);
+		g_type_init();
 		exec_command();
 	} else if (config&1) {
+		gtk_init(&argc, &argv);
+		g_type_init();
 		settings_init(TRUE, config_file);
 		settings();
 		gtk_main();
 		settings_exit();
 	} else {
-		settings_init(FALSE, config_file);
-		gst_init(&argc, &argv);
-
-		if (signal(SIGINT, sig_handler)==SIG_ERR)
-			flo_error(_("Failed to register SIGINT signal handler."));
-		if (signal(SIGTERM, sig_handler)==SIG_ERR)
-			flo_error(_("Failed to register SIGTERM signal handler."));
-		florence=flo_new(!(config&4), focus);
-
-		/* launch controller process */
-		auto_command_len=10;
-		for (i=0; i<argc; i++) {
-			auto_command_len+=strlen(1+argv[i]);
+		if (pipe(pipefd) == -1) {
+			flo_fatal(_("Pipe intanciation failed"));
 		}
-		auto_command=malloc(sizeof(char)*auto_command_len);
-		auto_command[0]='\0';
-		for (i=0; i<argc; i++) {
-			strcat(auto_command, " ");
-			strcat(auto_command, argv[i]);
-		}
-		strcat(auto_command, " auto &");
-		system(auto_command);
-		free(auto_command);
 
-		gtk_main();
+		if ((child=fork())) {
+			close(pipefd[0]);
+			gtk_init(&argc, &argv);
+			g_type_init();
+			settings_init(FALSE, config_file);
+			gst_init(&argc, &argv);
 
-		service_terminate(florence->service);
-		flo_free(florence);
+			if (signal(SIGINT, sig_handler)==SIG_ERR)
+				flo_error(_("Failed to register SIGINT signal handler."));
+			if (signal(SIGTERM, sig_handler)==SIG_ERR)
+				flo_error(_("Failed to register SIGTERM signal handler."));
+			florence=flo_new(!(config&4), focus, ready);
+
+			gtk_main();
+			kill(child, SIGTERM);
+
+			service_terminate(florence->service);
+			flo_free(florence);
 #ifdef ENABLE_AT_SPI2
-		putenv("AT_BRIDGE_SHUTDOWN=1");
+			putenv("AT_BRIDGE_SHUTDOWN=1");
 #endif
-		ret=EXIT_SUCCESS;
-		settings_exit();
+			ret=EXIT_SUCCESS;
+			settings_exit();
+		} else {
+			close(pipefd[1]);
+			/* wait for parent to be ready */
+			if (read(pipefd[0], &buf, 1) > 0) {
+				close(pipefd[0]);
+				if (buf != expected)
+					flo_fatal(_("Bad signal received from parent process."));
+				if (FLORENCE_SUCCESS!=florence_init()) {
+					flo_fatal(_("Florence does not seem to be running."));
+				}
+				if (FLORENCE_FAIL==florence_register(FLORENCE_TERMINATE, terminate, NULL)) {
+					flo_fatal(_("Failed to register for terminate signal."));
+				}
+				gtk_init(&argc, &argv);
+				g_type_init();
+				settings_init(FALSE, config_file);
+				controller=controller_new();
+				gtk_main();
+				controller_free(controller);
+				settings_exit();
+			} else {
+				flo_fatal(_("No signal received from parent process. We assume it's dead."));
+			}
+			_exit(EXIT_SUCCESS);
+		}
 	}
 	if (config_file) g_free(config_file);
 	if (focus) g_free(focus);
@@ -158,7 +191,6 @@ void terminate()
 void exec_command()
 {
 	unsigned int x, y;
-	struct controller *controller;
 
 	if (FLORENCE_SUCCESS!=florence_init()) {
 		flo_fatal(_("Florence does not seem to be running."));
@@ -183,12 +215,6 @@ void exec_command()
 		if (FLORENCE_SUCCESS!=florence_move(x, y)) {
 			flo_fatal(_("Move command failed. Probably Florence exited."));
 		}
-	} else if (!strcmp(command, "auto")) {
-		settings_init(FALSE, config_file);
-		controller=controller_new();
-		gtk_main();
-		controller_free(controller);
-		settings_exit();
 	} else usage(EXIT_FAILURE);
 
 	if (FLORENCE_SUCCESS!=florence_exit()) {

@@ -123,7 +123,9 @@ static void service_on_bus_acquired (GDBusConnection *connection, const gchar *n
 static void service_on_name_acquired (GDBusConnection *connection, const gchar *name, gpointer user_data)
 {
 	START_FUNC
+	struct service *service=(struct service *)user_data;
 	flo_info(_("DBus name aquired: %s"), name);
+	service->ready(service->user_data);
 	END_FUNC
 }
 
@@ -158,7 +160,7 @@ void service_on_hide(GtkWidget *widget, gpointer data)
 }
 
 /* Create a service object */
-struct service *service_new(struct view *view, service_cb quit, gpointer user_data)
+struct service *service_new(struct view *view, service_cb quit, service_cb ready, gpointer user_data)
 {
 	START_FUNC
 	struct service *service=(struct service *)g_malloc(sizeof(struct service));
@@ -174,6 +176,7 @@ struct service *service_new(struct view *view, service_cb quit, gpointer user_da
 	g_signal_connect(G_OBJECT(view_window_get(view)), "hide",
 		G_CALLBACK(service_on_hide), service);
 	service->quit=quit;
+	service->ready=ready;
 	service->user_data=user_data;
 	END_FUNC
 	return service;
