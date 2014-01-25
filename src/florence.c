@@ -373,6 +373,24 @@ void flo_layout_reload(GSettings *settings, gchar *key, gpointer user_data)
 	END_FUNC
 }
 
+/* Activate or deactivate trayicon (depending on settings) */
+void flo_trayicon(GSettings *settings, gchar *key, gpointer user_data)
+{
+	START_FUNC
+	struct florence *florence=(struct florence *)user_data;
+	if (settings_get_bool(SETTINGS_CONTROLLER_TRAYICON)) {
+		if (!florence->trayicon)
+			florence->trayicon=trayicon_new(florence->view, G_CALLBACK(flo_destroy),
+					(gpointer)florence);
+	} else {
+		if (florence->trayicon) {
+			trayicon_free(florence->trayicon);
+			florence->trayicon=NULL;
+		}
+	}
+	END_FUNC
+}
+
 /* create a new instance of florence. */
 struct florence *flo_new(gboolean gnome, const gchar *focus_back, void (*ready)(void *))
 {
@@ -407,7 +425,10 @@ struct florence *flo_new(gboolean gnome, const gchar *focus_back, void (*ready)(
 		G_CALLBACK(flo_button_press_event), florence);
 	g_signal_connect(G_OBJECT(view_window_get(florence->view)), "button-release-event",
 		G_CALLBACK(flo_button_release_event), florence);
-	florence->trayicon=trayicon_new(florence->view, G_CALLBACK(flo_destroy), (gpointer)florence);
+	if (settings_get_bool(SETTINGS_CONTROLLER_TRAYICON)) {
+		florence->trayicon=trayicon_new(florence->view, G_CALLBACK(flo_destroy), (gpointer)florence);
+	}
+	settings_changecb_register(SETTINGS_CONTROLLER_TRAYICON, flo_trayicon, florence);
 	settings_changecb_register(SETTINGS_KEEP_ON_TOP, flo_set_keep_on_top, florence);
 	/* TODO: just reload the style, no need to reload the whole layout */
 	settings_changecb_register(SETTINGS_STYLE_ITEM, flo_layout_reload, florence);
@@ -423,8 +444,10 @@ void flo_free(struct florence *florence)
 {
 	START_FUNC
 	flo_info(_("Terminating."));
-	trayicon_free(florence->trayicon);
-	florence->trayicon=NULL;
+	if (florence->trayicon) {
+		trayicon_free(florence->trayicon);
+		florence->trayicon=NULL;
+	}
 	flo_layout_unload(florence);
 	if (florence->view) view_free(florence->view);
 	florence->view=NULL;

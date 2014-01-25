@@ -574,6 +574,7 @@ static gboolean style_sound_bus_call(GstBus *bus, GstMessage *msg, void *user_da
 			gst_message_parse_error(msg, &err, NULL);
 			flo_error(_("An error occured while playing sound: %s"), err->message);
 			g_error_free(err);
+			/* no break */
 		case GST_MESSAGE_EOS:
 			style_sound_pipeline_free((GstElement *)user_data);
 			break;

@@ -141,7 +141,6 @@
                             <property name="n_columns">3</property>
                             <child>
                               <object class="GtkColorButton" id="flo_keys">
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -152,13 +151,12 @@
                                 <signal name="color-set" handler="settings_window_change_color" swapped="no"/>
                               </object>
                               <packing>
-                                <property name="x_options"></property>
-                                <property name="y_options"></property>
+                                <property name="x_options"/>
+                                <property name="y_options"/>
                               </packing>
                             </child>
                             <child>
                               <object class="GtkColorButton" id="flo_activated">
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -171,13 +169,12 @@
                               <packing>
                                 <property name="top_attach">1</property>
                                 <property name="bottom_attach">2</property>
-                                <property name="x_options"></property>
-                                <property name="y_options"></property>
+                                <property name="x_options"/>
+                                <property name="y_options"/>
                               </packing>
                             </child>
                             <child>
                               <object class="GtkColorButton" id="flo_labels">
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -190,13 +187,12 @@
                               <packing>
                                 <property name="left_attach">1</property>
                                 <property name="right_attach">2</property>
-                                <property name="x_options"></property>
-                                <property name="y_options"></property>
+                                <property name="x_options"/>
+                                <property name="y_options"/>
                               </packing>
                             </child>
                             <child>
                               <object class="GtkColorButton" id="flo_label_outline">
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -209,13 +205,12 @@
                               <packing>
                                 <property name="left_attach">2</property>
                                 <property name="right_attach">3</property>
-                                <property name="x_options"></property>
-                                <property name="y_options"></property>
+                                <property name="x_options"/>
+                                <property name="y_options"/>
                               </packing>
                             </child>
                             <child>
                               <object class="GtkColorButton" id="flo_latched">
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -230,13 +225,12 @@
                                 <property name="right_attach">2</property>
                                 <property name="top_attach">1</property>
                                 <property name="bottom_attach">2</property>
-                                <property name="x_options"></property>
-                                <property name="y_options"></property>
+                                <property name="x_options"/>
+                                <property name="y_options"/>
                               </packing>
                             </child>
                             <child>
                               <object class="GtkColorButton" id="flo_mouseover">
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -251,8 +245,8 @@
                                 <property name="right_attach">3</property>
                                 <property name="top_attach">1</property>
                                 <property name="bottom_attach">2</property>
-                                <property name="x_options"></property>
-                                <property name="y_options"></property>
+                                <property name="x_options"/>
+                                <property name="y_options"/>
                               </packing>
                             </child>
                           </object>
@@ -323,7 +317,6 @@
                         <child>
                           <object class="GtkCheckButton" id="flo_sounds">
                             <property name="label" translatable="yes">Enable sound feedback	</property>
-                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">False</property>
@@ -365,7 +358,6 @@
                             <child>
                               <object class="GtkCheckButton" id="flo_system_font">
                                 <property name="label" translatable="yes">Use system font</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -396,7 +388,6 @@
                                 </child>
                                 <child>
                                   <object class="GtkFontButton" id="flo_font">
-                                    <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">True</property>
@@ -468,7 +459,6 @@
                             <child>
                               <object class="GtkCheckButton" id="flo_decorated">
                                 <property name="label" translatable="yes">Decorated</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -486,7 +476,6 @@
                             <child>
                               <object class="GtkCheckButton" id="flo_transparent">
                                 <property name="label" translatable="yes">Transparent</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -504,7 +493,6 @@
                             <child>
                               <object class="GtkCheckButton" id="flo_resizable">
                                 <property name="label" translatable="yes">Resizable</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -522,7 +510,6 @@
                             <child>
                               <object class="GtkCheckButton" id="flo_keep_ratio">
                                 <property name="label" translatable="yes">Keep ratio</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -540,7 +527,6 @@
                             <child>
                               <object class="GtkCheckButton" id="flo_task_bar">
                                 <property name="label" translatable="yes">Task bar</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -558,7 +544,6 @@
                             <child>
                               <object class="GtkCheckButton" id="flo_always_on_top">
                                 <property name="label" translatable="yes">Always on top</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -571,6 +556,36 @@
                                 <property name="expand">False</property>
                                 <property name="fill">False</property>
                                 <property name="position">5</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkCheckButton" id="flo_trayicon">
+                                <property name="label" translatable="yes">System tray icon</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">False</property>
+                                <property name="draw_indicator">True</property>
+                                <signal name="toggled" handler="settings_window_set_bool" swapped="no"/>
+                              </object>
+                              <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
+                                <property name="position">6</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <object class="GtkCheckButton" id="flo_float_icon">
+                                <property name="label" translatable="yes">Floating icon</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="receives_default">False</property>
+                                <property name="draw_indicator">True</property>
+                                <signal name="toggled" handler="settings_window_set_bool" swapped="no"/>
+                              </object>
+                              <packing>
+                                <property name="expand">True</property>
+                                <property name="fill">True</property>
+                                <property name="position">7</property>
                               </packing>
                             </child>
                           </object>
@@ -698,7 +713,6 @@
                                 <child>
                                   <object class="GtkCheckButton" id="ramble_button">
                                     <property name="label" translatable="yes">Activate ramble on button press</property>
-                                    <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
@@ -715,7 +729,6 @@
                                 <child>
                                   <object class="GtkRadioButton" id="ramble_distance">
                                     <property name="label" translatable="yes">Distance based</property>
-                                    <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
@@ -732,7 +745,6 @@
                                 <child>
                                   <object class="GtkRadioButton" id="ramble_time">
                                     <property name="label" translatable="yes">Time based</property>
-                                    <property name="use_action_appearance">False</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="receives_default">False</property>
@@ -833,7 +845,6 @@
                             <child>
                               <object class="GtkCheckButton" id="flo_auto_hide">
                                 <property name="label" translatable="yes">Auto hide</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="receives_default">False</property>
@@ -851,7 +862,6 @@
                             <child>
                               <object class="GtkCheckButton" id="flo_move_to_widget">
                                 <property name="label" translatable="yes">Move to near selected widget</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="sensitive">False</property>
                                 <property name="can_focus">True</property>
@@ -869,7 +879,6 @@
                             <child>
                               <object class="GtkCheckButton" id="flo_intermediate_icon">
                                 <property name="label" translatable="yes">Intermediate icon</property>
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">False</property>
@@ -999,7 +1008,6 @@
             <child>
               <object class="GtkButton" id="flo_close">
                 <property name="label">gtk-close</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="receives_default">False</property>
@@ -1016,7 +1024,6 @@
             <child>
               <object class="GtkButton" id="flo_config_rollback">
                 <property name="label">gtk-cancel</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="receives_default">False</property>
@@ -1033,7 +1040,6 @@
             <child>
               <object class="GtkButton" id="flo_config_commit">
                 <property name="label">gtk-apply</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="receives_default">False</property>

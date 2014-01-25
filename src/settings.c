@@ -65,7 +65,8 @@ static const gchar *settings_cat_names[]={
 /* settings defaults. { "gtk builder name", "settings name", "type", "default value" } */
 /* C99 */
 static const struct settings_param settings_defaults[] = {
-	{ SETTINGS_CONTROLLER, SETTINGS_NONE, "icon", SETTINGS_BOOL, { .vbool = TRUE } },
+	{ SETTINGS_CONTROLLER, "flo_trayicon", "trayicon", SETTINGS_BOOL, { .vbool = TRUE } },
+	{ SETTINGS_CONTROLLER, "flo_float_icon", "floaticon", SETTINGS_BOOL, { .vbool = TRUE } },
 	{ SETTINGS_CONTROLLER, SETTINGS_NONE, "icon-xpos", SETTINGS_INTEGER, { .vinteger = 0 } },
 	{ SETTINGS_CONTROLLER, SETTINGS_NONE, "icon-ypos", SETTINGS_INTEGER, { .vinteger = 0 } },
 	{ SETTINGS_WINDOW, "flo_resizable", "resizable", SETTINGS_BOOL, { .vbool = TRUE } },
@@ -484,6 +485,8 @@ gboolean settings_get_bool(enum settings_item item)
 }
 
 /* set a gsettings boolean */
+/* TODO: float icon bool is not applied until commit,
+ * because it is registered in another process. */
 void settings_set_bool(enum settings_item item, gboolean value)
 {
 	START_FUNC

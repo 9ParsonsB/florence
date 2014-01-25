@@ -151,7 +151,7 @@ AC_CONFIG_FILES([Makefile
                  docs/florence.1
                  docs/florence_applet.1
                  src/Makefile
-		 src/florence-1.0.pc
-		 po/Makefile.in])
+                 src/florence-1.0.pc
+                 po/Makefile.in])
 AC_OUTPUT
 

@@ -246,6 +246,7 @@ static int decode_switches (int argc, char **argv)
 				exit (0);
 				break;
 			case 'h':usage (0);
+			/* no break */
 			case 'c':ret|=1; break;
 			case 'd':ret|=2;
 				if (optarg) debug_level=trace_parse_level(optarg);

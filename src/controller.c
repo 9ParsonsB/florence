@@ -1,7 +1,7 @@
 /* 
  * florence - Florence is a simple virtual keyboard for Gnome.
 
- * Copyright (C) 2007-2013 François Agrech
+ * Copyright (C) 2014 François Agrech
 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -306,6 +306,7 @@ void controller_icon_on_move (GtkWidget *window, GdkEventButton *event, gpointer
 				dy > MOVING_THRESHOLD || dy < -MOVING_THRESHOLD)
 				controller->icon_moving=CONTROLLER_MOVING;
 			else break;
+			/* no break */
 		case CONTROLLER_MOVING:
 			dx=x-controller->xpos;
 			dy=y-controller->ypos;
@@ -331,7 +332,13 @@ void controller_set_mode (struct controller *controller)
 		controller_deregister_events(controller);
 	}
 #endif
-	if (settings_get_bool(SETTINGS_CONTROLLER_ICON)) {
+	END_FUNC
+}
+
+/* Activate or deactivate floating icon (depending on settings) */
+void controller_float_icon (struct controller *controller)
+{
+	if (settings_get_bool(SETTINGS_CONTROLLER_FLOATICON)) {
 		GtkWindow *icon=controller->controller_icon;
 		controller_icon_create(controller, &(controller->controller_icon), 4.0);
 		if (!icon) {
@@ -348,7 +355,18 @@ void controller_set_mode (struct controller *controller)
 		gtk_window_move(GTK_WINDOW(controller->controller_icon),
 			settings_get_int(SETTINGS_CONTROLLER_ICON_XPOS),
 			settings_get_int(SETTINGS_CONTROLLER_ICON_YPOS));
+	} else {
+		if (controller->controller_icon) gtk_widget_destroy(GTK_WIDGET(controller->controller_icon));
+		controller->controller_icon=NULL;
 	}
+}
+
+/* Triggered by conf when the "floaticon" parameter is changed. */
+void controller_on_float_icon_change(GSettings *settings, gchar *key, gpointer user_data)
+{
+	START_FUNC
+	struct controller *controller=(struct controller *)user_data;
+	controller_float_icon(controller);
 	END_FUNC
 }
 
@@ -401,6 +419,8 @@ struct controller *controller_new()
 	controller->visible=!settings_get_bool(SETTINGS_HIDE_ON_START);
 	controller_set_mode(controller);
 #endif
+	settings_changecb_register(SETTINGS_CONTROLLER_FLOATICON, controller_on_float_icon_change, controller);
+	controller_float_icon(controller);
 	florence_register(FLORENCE_TERMINATE, controller_terminate, controller);
 	florence_register(FLORENCE_SHOW, controller_follow_show, controller);
 	florence_register(FLORENCE_HIDE, controller_follow_hide, controller);

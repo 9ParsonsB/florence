@@ -8,10 +8,15 @@
     <child name="controller" schema="org.florence.controller"/>
   </schema>
   <schema id="org.florence.controller" path="/apps/florence/controller/">
-    <key name="icon" type="b">
+    <key name="trayicon" type="b">
+      <default>true</default>
+      <_summary>Display an icon in the system tray.</_summary>
+      <_description>The system tray icon can be used to control the keyboard (show/hide, configure, quit)</_description>
+    </key>
+    <key name="floaticon" type="b">
       <default>true</default>
       <_summary>Show a floating icon.</_summary>
-      <_description>The floating icon can be used to control the keyboard (show/hide, congigure, quit)</_description>
+      <_description>The floating icon can be used to control the keyboard (show/hide, configure, quit)</_description>
     </key>
     <key name="icon-xpos" type="i">
       <default>0</default>
