@@ -62,7 +62,6 @@ static struct option const long_options[] =
 	{"version", no_argument, 0, 'V'},
 	{"config", no_argument, 0, 'c'},
 	{"debug", optional_argument, 0, 'd'},
-	{"no-gnome", no_argument, 0, 'n'},
 	{"focus", optional_argument, 0, 'f'},
 	{"use-config", required_argument, 0, 'u'},
 	{NULL, 0, NULL, 0}
@@ -135,7 +134,7 @@ int main (int argc, char **argv)
 				flo_error(_("Failed to register SIGINT signal handler."));
 			if (signal(SIGTERM, sig_handler)==SIG_ERR)
 				flo_error(_("Failed to register SIGTERM signal handler."));
-			florence=flo_new(!(config&4), focus, ready);
+			florence=flo_new(focus, ready);
 
 			gtk_main();
 			kill(child, SIGTERM);
@@ -234,7 +233,6 @@ static int decode_switches (int argc, char **argv)
 		"V"  /* version */
 		"c"  /* configuration */
 		"d"  /* debug */
-		"n"  /* no gnome */
 		"r"  /* restore focus */
 		"t"  /* keep bringing back to front */
 		"u", /* use config file */
@@ -252,7 +250,6 @@ static int decode_switches (int argc, char **argv)
 				if (optarg) debug_level=trace_parse_level(optarg);
 				else debug_level=TRACE_DEBUG;
 				break;
-			case 'n':ret|=4; break;
 			case 'f':if (optarg) focus=g_strdup(optarg);
 				else focus=g_strdup("");
 				break;
@@ -280,7 +277,6 @@ Options:\n\
   -V, --version	            output version information and exit\n\
   -c, --config              open configuration window\n\
   -d, --debug [level]       print debug information to stdout\n\
-  -n, --no-gnome            use this flag if you are not using GNOME\n\
   -f, --focus [window]      give the focus to the window\n\
   -u, --use-config file     use the given config file instead of gsettings\n\n\
 Available commands are:\n\

@@ -51,7 +51,7 @@ struct florence {
 };
 
 /* create a new instance of florence. */
-struct florence *flo_new(gboolean gnome, const gchar *focus_back, void (*ready)(void *));
+struct florence *flo_new(const gchar *focus_back, void (*ready)(void *));
 /* liberate all the memory used by florence */
 void flo_free(struct florence *florence);
 /* stop florence. */

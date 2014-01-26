@@ -392,7 +392,7 @@ void flo_trayicon(GSettings *settings, gchar *key, gpointer user_data)
 }
 
 /* create a new instance of florence. */
-struct florence *flo_new(gboolean gnome, const gchar *focus_back, void (*ready)(void *))
+struct florence *flo_new(const gchar *focus_back, void (*ready)(void *))
 {
 	START_FUNC
 	struct florence *florence=(struct florence *)g_malloc(sizeof(struct florence));
