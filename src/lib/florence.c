@@ -133,6 +133,12 @@ florence_error florence_hide()
 	return florence_send("hide", NULL);
 }
 
+/* Toggle the keyboard (show/hide) */
+florence_error florence_toggle()
+{
+	return florence_send("toggle", NULL);
+}
+
 /* Move the keyboard */
 florence_error florence_move(unsigned int x, unsigned int y)
 {

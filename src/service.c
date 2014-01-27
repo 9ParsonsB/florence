@@ -41,6 +41,7 @@ static const gchar service_introspection[]=
 	"      <arg type='u' name='h' direction='in'/>"
 	"    </method>"
 	"    <method name='hide'/>"
+	"    <method name='toggle'/>"
 	"    <method name='terminate'/>"
 	"    <method name='menu'>"
 	"      <arg type='u' name='time' direction='in'/>"
@@ -98,7 +99,16 @@ static void service_method_call (GDBusConnection *connection, const gchar *sende
 		settings_set_int(SETTINGS_XPOS, x);
 		settings_set_int(SETTINGS_YPOS, y);
 	} else if (!g_strcmp0(method_name, "hide")) view_hide(service->view);
-	else if (!g_strcmp0(method_name, "terminate")) service->quit(service->user_data);
+	else if (!g_strcmp0(method_name, "toggle")) {
+		if (gtk_widget_get_visible(GTK_WIDGET(service->view->window)))
+			view_hide(service->view);
+		else
+#ifdef AT_SPI
+			view_show(service->view, NULL);
+#else
+			view_show(service->view);
+#endif
+	} else if (!g_strcmp0(method_name, "terminate")) service->quit(service->user_data);
 	else if (!g_strcmp0(method_name, "menu")) {
 		g_variant_get(parameters, "(u)", &time);
 		menu_show(NULL, 3, (GCallback)service->quit, NULL, service->user_data, time);

@@ -282,8 +282,7 @@ void controller_icon_on_release (GtkWidget *window, GdkEventButton *event, gpoin
 	struct controller *controller=(struct controller *)user_data;
 	if (controller->icon_moving==CONTROLLER_PRESSED) {
 		if (event->button==3) florence_menu(event->time);
-		else if (controller->visible) florence_hide();
-		else florence_show();
+		else florence_toggle();
 	}
 	controller->icon_moving=CONTROLLER_IMMOBILE;
 	END_FUNC
@@ -370,22 +369,6 @@ void controller_on_float_icon_change(GSettings *settings, gchar *key, gpointer u
 	END_FUNC
 }
 
-void controller_follow_hide (gpointer user_data)
-{
-	START_FUNC
-	struct controller *controller=(struct controller *)user_data;
-	controller->visible=FALSE;
-	END_FUNC
-}
-
-void controller_follow_show (gpointer user_data)
-{
-	START_FUNC
-	struct controller *controller=(struct controller *)user_data;
-	controller->visible=TRUE;
-	END_FUNC
-}
-
 void controller_terminate (gpointer user_data)
 {
 	START_FUNC
@@ -409,10 +392,8 @@ struct controller *controller_new()
 	}
 	settings_changecb_register(SETTINGS_AUTO_HIDE, controller_set_auto_hide, controller);
 
-	controller->visible=TRUE;
 	if (settings_get_bool(SETTINGS_HIDE_ON_START) && (!settings_get_bool(SETTINGS_AUTO_HIDE))) {
 		florence_hide();
-		controller->visible=FALSE;
 	} else controller_set_mode(controller);
 #else
 	flo_warn(_("AT-SPI has been disabled at compile time: auto-hide mode is disabled."));
@@ -422,8 +403,6 @@ struct controller *controller_new()
 	settings_changecb_register(SETTINGS_CONTROLLER_FLOATICON, controller_on_float_icon_change, controller);
 	controller_float_icon(controller);
 	florence_register(FLORENCE_TERMINATE, controller_terminate, controller);
-	florence_register(FLORENCE_SHOW, controller_follow_show, controller);
-	florence_register(FLORENCE_HIDE, controller_follow_hide, controller);
 
 	END_FUNC
 	return controller;
