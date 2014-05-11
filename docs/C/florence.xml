@@ -124,7 +124,7 @@ A Timer-based auto-click input method is available to help disabled people havin
 		<screen>
 <prompt>$</prompt> <userinput>florence</userinput>
 		</screen>
-		<para>From a ulink url="http://mate-desktop.org/">MATE desktop</ulink>, you can launch Florence from the menu <guimenu>Applications</guimenu>-&gt;<guisubmenu>Accessibility</guisubmenu>-&gt;<guimenuitem>Florence Virtual keyboard</guimenuitem>.
+		<para>From a <ulink url="http://mate-desktop.org/">MATE desktop</ulink>, you can launch Florence from the menu <guimenu>Applications</guimenu>-&gt;<guisubmenu>Accessibility</guisubmenu>-&gt;<guimenuitem>Florence Virtual keyboard</guimenuitem>.
 		If you prefer that Florence is launched at MATE startup, choose the menu item <guimenu>System</guimenu>-&gt;<guisubmenu>Preferences</guisubmenu>-&gt;<guimenuitem>Sessions</guimenuitem>, click on the <guibutton>Startup programs</guibutton> tab, then click <guibutton>Add</guibutton> and enter <command>/usr/bin/florence</command> so Florence is launched with GNOME at next boot.
 	</para>
 	<para>When Florence is running, an icon should appear in your notification area, usually at the top right corner of the screen. Clicking of the icon makes Florence appear or disappear from the screen. Right clicking on it makes a menu appear. On this menu, you can use the <guimenuitem>quit</guimenuitem> item to stop Florence.</para>
