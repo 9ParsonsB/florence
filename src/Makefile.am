@@ -1,3 +1,5 @@
+AUTOMAKE_OPTIONS = subdir-objects
+
 bin_PROGRAMS = florence
 lib_LTLIBRARIES = libflorence-1.0.la
 

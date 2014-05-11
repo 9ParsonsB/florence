@@ -1,11 +1,14 @@
 
 styledir = $(datadir)/florence/styles/default
-style_in_files = symbols.xml.in
-style_DATA = florence.style florence.defs $(style_in_files:.xml.in=.xml)
+symbol_in_files = symbols.xml.in
+style_in_files = florence.style
+style_DATA = $(style_in_files) florence.defs $(symbol_in_files:.xml.in=.xml)
 @INTLTOOL_XML_RULE@
-$(style_in_files): $(style_in_files:.xml.in=.xml.in.in)
+$(symbol_in_files): $(symbol_in_files:.xml.in=.xml.in.in)
 	sed -e "s|\@ICONDIR\@|$(ICONDIR)|" $< > $@
+$(style_in_files): $(style_in_files:.style=.style.in)
+	sed -e "s|\@BASEDIR\@|$(styledir)|" $< > $@
 
-EXTRA_DIST = $(style_DATA) $(style_in_files:.xml.in=.xml.in.in)
-DISTCLEANFILES = $(style_in_files:.xml.in=.xml) $(style_in_files)
+EXTRA_DIST = $(style_DATA) $(symbol_in_files:.xml.in=.xml.in.in) $(style_in_files:.style=.style.in)
+DISTCLEANFILES = $(symbol_in_files:.xml.in=.xml) $(style_in_files)
 
