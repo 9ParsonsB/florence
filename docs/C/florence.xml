@@ -49,7 +49,7 @@ A Timer-based auto-click input method is available to help disabled people havin
 			<listitem><para><ulink url="http://ftp.gnome.org/pub/GNOME/sources/librsvg/">librsvg</ulink></para></listitem>
 			<listitem><para><ulink url="http://www.gnu.org/software/gettext/">gettext</ulink></para></listitem>
 			<listitem><para><ulink url="http://ftp.gnome.org/pub/GNOME/sources/intltool">intltool</ulink> (version &gt;= 0.23)</para></listitem>
-			<listitem><para><ulink url="http://gstreamer.freedesktop.org">gstreamer</ulink> (version &gt; 0.10)</para></listitem>
+			<listitem><para><ulink url="http://gstreamer.freedesktop.org">gstreamer</ulink> (version &gt; 1.0)</para></listitem>
 			<listitem><para>(Optional: --with-docs configure option) <ulink url="http://ftp.gnome.org/pub/GNOME/sources/gnome-doc-utils">gnome-doc-utils</ulink></para></listitem>
 			<listitem><para>(Optional: --with-libnotify configure option) <ulink url="http://www.galago-project.org/files/releases/source/libnotify">libnotify</ulink></para></listitem>
 			<listitem><para>(Optional: --with-xtst configure option) <ulink url="http://xorg.freedesktop.org/releases/individual/lib/">libxtst</ulink></para></listitem>
@@ -84,7 +84,7 @@ A Timer-based auto-click input method is available to help disabled people havin
 				</screen></para>
 			</listitem>
 			<listitem>
-				<para><ulink url="http://www.mandriva.com/">Mandriva</ulink>
+				<para><ulink url="http://openmandriva.org/">OpenMandriva</ulink>/<ulink url="https://www.mageia.org/">Mageia</ulink>
 				<screen>
 <prompt>$</prompt> <userinput>su - root</userinput>
 <prompt>#</prompt> <userinput>urpmi florence</userinput>
@@ -109,7 +109,7 @@ A Timer-based auto-click input method is available to help disabled people havin
 		</orderedlist>
 	</sect2>
 	<sect2>
-		<title>Uninstall</title>
+		<title>Uninstall (from source)</title>
 		<para>Uninstalling is as easy as installing. If you installed from source, you can uninstall with the following commands:</para>
 		<screen>
 <prompt>$</prompt> <userinput>cd florence-&version;</userinput>
@@ -124,7 +124,7 @@ A Timer-based auto-click input method is available to help disabled people havin
 		<screen>
 <prompt>$</prompt> <userinput>florence</userinput>
 		</screen>
-		<para>From a MATE desktop, you can launch Florence from the menu <guimenu>Applications</guimenu>-&gt;<guisubmenu>Accessibility</guisubmenu>-&gt;<guimenuitem>Florence Virtual keyboard</guimenuitem>.
+		<para>From a ulink url="http://mate-desktop.org/">MATE desktop</ulink>, you can launch Florence from the menu <guimenu>Applications</guimenu>-&gt;<guisubmenu>Accessibility</guisubmenu>-&gt;<guimenuitem>Florence Virtual keyboard</guimenuitem>.
 		If you prefer that Florence is launched at MATE startup, choose the menu item <guimenu>System</guimenu>-&gt;<guisubmenu>Preferences</guisubmenu>-&gt;<guimenuitem>Sessions</guimenuitem>, click on the <guibutton>Startup programs</guibutton> tab, then click <guibutton>Add</guibutton> and enter <command>/usr/bin/florence</command> so Florence is launched with GNOME at next boot.
 	</para>
 	<para>When Florence is running, an icon should appear in your notification area, usually at the top right corner of the screen. Clicking of the icon makes Florence appear or disappear from the screen. Right clicking on it makes a menu appear. On this menu, you can use the <guimenuitem>quit</guimenuitem> item to stop Florence.</para>
@@ -133,7 +133,7 @@ A Timer-based auto-click input method is available to help disabled people havin
 		<para>Florence can be used with 4 different input methods. Each method has advantages and drawbacks. It is up to you to select the right one for your usage pattern.</para>
 		<orderedlist>
 			<listitem>
-				<para>The default input method is the "mouse" method. This is adapted for mouse/trackpad input. It is pretty straightforward. Just click on the key with a mouse button to activate it. Release the mouse button to deavticate the key. The advantage of this method is its simplicity. It does not require learning. The drawback is that is requires a pointing device with a button and that the user is able to use it.</para>
+				<para>The default input method is the "mouse" method. This is adapted for mouse/trackpad input. It is pretty straightforward. Just click on the key with a mouse button to press it. Release the mouse button to release the key. The advantage of this method is its simplicity. It does not require learning. The drawback is that is requires a pointing device with a button and that the user is able to use it.</para>
 			</listitem>
 			<listitem>
 				<para>The second input method is the "touch" method. This is adapted for touch screen input. The difference with the mouse input method is that it not possible to touch the keyboard without clicking. In this mode, the keys are pressed on touch end.</para>
@@ -169,7 +169,7 @@ A Timer-based auto-click input method is available to help disabled people havin
 			</screenshot>
 		</figure>
 		<para>The above figure shows the different parts of the default layout. There are other layouts that can be selected in the settings dialog (layout tab).</para>
-		<para>The default keyboard layout can be extended with 4 extensions to the core keyboard. The Florence key pad is an extension to the left of the main keyboard which contains keys to access to special Florence functions: see below for a complete list of the Florence functions. The arrows keypad is an extension added to the right of the core keyboard and contains the arrow keys along with navigation keys. The numpad extension contains the numeric keys and the function keys extension contains the function keys. Each extension can be activated and deactivated independantly. The extensions are relative to the selected layout.</para>
+		<para>The default keyboard layout can be extended with 4 extensions to the core keyboard. The Florence key pad is an extension to the left of the main keyboard which contains keys to access special Florence functions: see below for a complete list of Florence functions. The arrows keypad is an extension added to the right of the core keyboard and contains the arrow keys along with navigation keys. The numpad extension contains the numeric keys and the function keys extension contains the function keys. Each extension can be activated and deactivated independantly. The extensions are relative to the selected layout.</para>
 	</sect2>
 	<sect2 id="florencekeys">
 		<title>Florence keys</title>
@@ -232,7 +232,7 @@ A Timer-based auto-click input method is available to help disabled people havin
 	</sect2>
 	<sect2 id="config">
 		<title>Configuration</title>
-		<para>The configuration dialog is accessible via the system tray and floating icons (right click on it and select <guimenuitem>Preferences</guimenuitem>) or via the command line with the -c or --config switch: <command>florence --config</command> or via the configuration button on the keyboard if present. Hacking configuration is possible via dconf (see the hacking section)</para>
+		<para>The configuration dialog is accessible via the system tray and floating icon (right click on it and select <guimenuitem>Preferences</guimenuitem>) or via the command line with the -c or --config switch: <command>florence --config</command> or via the configuration button on the keyboard if present. Hacking configuration is possible via dconf (see the hacking section)</para>
 		<para>Some selected options are not applied until you click the 'Apply' button. Some other options are taken into account immediately but can be cancelled with the 'Cancel' button while they have not been applied.</para>
 		<para>The settings options have been divided into 4 groups in order to ease understanding and searching for them.</para>
 		<sect3><title>Style configuration</title>
@@ -324,8 +324,7 @@ A Timer-based auto-click input method is available to help disabled people havin
 			<listitem><para>-c (--config): open configuration dialog.</para></listitem>
 			<listitem><para>-d (--debug): launch Florence in verbose mode.</para></listitem>
 			<listitem><para>-f (--focus) [window]: with this option, any florence input will go to the selected window. The window argument is the name of the window (the one that most window managers put in the title bar). if the window argument is not provided, florence will select the last focused window. This option is useful for window managers that don't support the 'not focusable' hint and focus the keyboard window instead of the output one. It can also be useful if you want to input text to a window that is not focused. This option must be used for the keyboard to work in GDM.</para></listitem>
-			<listitem><para>-u (--use-config) file: use the configuration file provided instead of gconf. The configuration file is a key-value pair file with sections. An example of configuration file is provided at /usr/share/florence/florence.conf (the path may be changed with the --prefix configure option).</para></listitem>
-			<listitem><para></para></listitem>
+			<listitem><para>-u (--use-config) file: use the configuration file provided instead of dconf. The configuration file is a key-value pair file with sections. An example of configuration file is provided at /usr/share/florence/florence.conf (the path may be changed with the --prefix configure option).</para></listitem>
 		</orderedlist>
 		<para>The following commands are available to control the keyboard from a script:</para>
 		<orderedlist>
@@ -347,18 +346,18 @@ A Timer-based auto-click input method is available to help disabled people havin
 <prompt>$</prompt> <userinput>find /usr -name at-spi-registryd</userinput>
 		</screen>
 		<para>When the at-spi registry daemon is started, you need to tell applications to use it.</para>
-		<para>For gtk3 applications, you can set on the gsettings property org.gnome.desktop.interface.toolkit-accessibility with <command>dconf-editor</command> or you can set the environment variable GTK_MODULES to gail:atk-bridge in /etc/environment or /etc/profile.d or wherever your distro will pick it at startup.</para>
+		<para>For gtk3 applications, you can set on the dconf property org.gnome.desktop.interface.toolkit-accessibility with <command>dconf-editor</command> or you can set the environment variable GTK_MODULES to gail:atk-bridge in /etc/environment or /etc/profile.d or wherever your distro will pick it at startup.</para>
 <prompt>$</prompt> <userinput>export GTK_MODULES=gail:atk-bridge</userinput>
 		<para>For java applications, you need to install the java access bridge. On Debian, you can do that with this command:</para>
 <prompt>$</prompt> <userinput>sudo apt-get install libaccess-bridge-java</userinput>
 		<para>Other distributions should have a similar package available. Please check with your distribution support.</para>
 		<para>For QT4 applications, you need to install the <ulink url="https://projects.kde.org/projects/playground/accessibility/qtatspi">qt-at-spi</ulink> package. On debian, use this command:</para>
 <prompt>$</prompt> <userinput>sudo apt-get install qt-at-spi</userinput>
-		<para>QT5 applications should work out of the box as the at-spi bridge has been perged into QtBase.</para>
+		<para>QT5 applications should work out of the box as the at-spi bridge has been merged into QtBase.</para>
 		<para>For other toolkits, please check the available documentation and support.</para>
 		<para><ulink url="http://mate-desktop.org/">MATE</ulink> starts the daemon automatically if it is configured with the <command>mate-at-property</command> dialog.</para>
 		<para>Other desktop environments may setup at-spi automatically for you. Check your desktop documentation for more information.</para>
-		<para>When at-spi is properly configures in your desktop environment, you can tell Florence to use the auto-hide mode.</para>
+		<para>When at-spi is properly configured in your desktop environment, you can tell Florence to use the auto-hide mode.</para>
 		<screen>
 <prompt>$</prompt> <userinput>florence --config</userinput>
 		</screen>
@@ -381,7 +380,7 @@ GtkModulesList=gail:atk-bridge:/usr/lib/gtk-2.0/modules/libkeymouselistener:/usr
 &lt;Mouse3&gt; 1 2000 10000 /usr/bin/florence --focus --no-gnome --use-config /usr/share/florence/florence.conf
 		</programlisting>
 		<para>You should delete any other line starting with &lt;mouse1&gt;, &lt;mouse2&gt; or &lt;mouse3&gt; in order to prevent any other keyboard from starting instead of florence (like gok).</para>
-		<para>When you have edited those two files, you should be able to start florence at next boot at gdm login. Press any mouse button for more than 2 seconds on the login window to do so.</para>
+		<para>When you have edited those two files, you should be able to start florence at next boot at gdm login. Press any mouse button for more than 2 seconds at the login window to do so.</para>
 		<para>You can modify the keyboard settings for GDM as root with this command:</para>
 		<screen>
 <prompt>#</prompt> <userinput>florence -c --use-config /usr/share/florence/florence.conf</userinput>
@@ -391,7 +390,7 @@ GtkModulesList=gail:atk-bridge:/usr/lib/gtk-2.0/modules/libkeymouselistener:/usr
 		<title>Using Florence at login with GDM3</title>
 		<para>With GDM3, it is very simple to use Florence at login screen. On Debian, you can use this command:</para>
 <prompt>#</prompt> <userinput>cp /usr/share/applications/florence.desktop /usr/share/gdm/autostart/LoginWindow/</userinput>
-		<para>This should work on other distributions aswell, although the pathes may be slightly different.</para>
+		<para>This should work on other distributions as well, although the pathes may be slightly different.</para>
 	</sect2>
 </sect1>
 <sect1 id="faq">

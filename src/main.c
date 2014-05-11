@@ -278,7 +278,7 @@ Options:\n\
   -c, --config              open configuration window\n\
   -d, --debug [level]       print debug information to stdout\n\
   -f, --focus [window]      give the focus to the window\n\
-  -u, --use-config file     use the given config file instead of gsettings\n\n\
+  -u, --use-config file     use the given config file instead of dconf\n\n\
 Available commands are:\n\
   show                      show the keyboard.\n\
   hide                      hide the keyboard.\n\
