@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: florence\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-26 16:16+0100\n"
+"POT-Creation-Date: 2014-05-12 09:26+0200\n"
 "PO-Revision-Date: 2010-11-06 00:15+0000\n"
 "Last-Translator: Alone197711 <gwoger@sibmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -893,67 +893,67 @@ msgstr "Версия Florence %s"
 msgid "XRECORD has been disabled at compile time."
 msgstr "XRECORD был отключен во время компиляции."
 
-#: ../src/main.c:123
+#: ../src/main.c:121
 #, fuzzy
 msgid "Pipe intanciation failed"
 msgstr "Уведомление неудачно"
 
-#: ../src/main.c:134
+#: ../src/main.c:131
 msgid "Failed to register SIGINT signal handler."
 msgstr ""
 
-#: ../src/main.c:136
+#: ../src/main.c:133
 msgid "Failed to register SIGTERM signal handler."
 msgstr ""
 
-#: ../src/main.c:155
+#: ../src/main.c:152
 msgid "Bad signal received from parent process."
 msgstr ""
 
-#: ../src/main.c:157 ../src/main.c:195
+#: ../src/main.c:154 ../src/main.c:191
 #, fuzzy
 msgid "Florence does not seem to be running."
 msgstr "Florence запущена"
 
-#: ../src/main.c:160 ../src/main.c:198
+#: ../src/main.c:157 ../src/main.c:194
 msgid "Failed to register for terminate signal."
 msgstr ""
 
-#: ../src/main.c:170
+#: ../src/main.c:166
 msgid "No signal received from parent process. We assume it's dead."
 msgstr ""
 
-#: ../src/main.c:204
+#: ../src/main.c:200
 msgid "Show command failed. Probably Florence exited."
 msgstr ""
 
-#: ../src/main.c:209
+#: ../src/main.c:205
 msgid "Hide command failed. Probably Florence exited."
 msgstr ""
 
-#: ../src/main.c:215
+#: ../src/main.c:211
 msgid "Move command failed. Probably Florence exited."
 msgstr ""
 
-#: ../src/main.c:220
+#: ../src/main.c:216
 msgid "libflorence failed at exit."
 msgstr ""
 
-#: ../src/main.c:271
+#: ../src/main.c:267
 #, fuzzy, c-format
 msgid ""
-"%s - Florence is a simple virtual keyboard for Gnome.\n"
+"%s - Florence is a simple virtual keyboard for X.\n"
 "\n"
 msgstr "%s - Florence - это простая виртуальная клавиатура для Gnome.\n"
 
-#: ../src/main.c:273
+#: ../src/main.c:269
 #, fuzzy, c-format
 msgid ""
 "Usage: %s [OPTION] ... [COMMAND] [ARG]\n"
 "\n"
 msgstr "Использование: %s [ОПЦИЯ]...\n"
 
-#: ../src/main.c:274
+#: ../src/main.c:270
 #, fuzzy, c-format
 msgid ""
 "Options:\n"
@@ -962,7 +962,7 @@ msgid ""
 "  -c, --config              open configuration window\n"
 "  -d, --debug [level]       print debug information to stdout\n"
 "  -f, --focus [window]      give the focus to the window\n"
-"  -u, --use-config file     use the given config file instead of gsettings\n"
+"  -u, --use-config file     use the given config file instead of dconf\n"
 "\n"
 "Available commands are:\n"
 "  show                      show the keyboard.\n"
@@ -1502,49 +1502,49 @@ msgstr "Событие %d получено :тип %d. Переход из со�
 msgid "FSM state errorr: state=%d"
 msgstr "FSM ошибка состояния. событие =%d ; состояние=%d"
 
-#: ../src/service.c:65
+#: ../src/service.c:66
 #, fuzzy, c-format
 msgid "Executing method %s"
 msgstr "Выбрать метод ввода"
 
-#: ../src/service.c:105
+#: ../src/service.c:115
 #, c-format
 msgid "Unknown dbus method called: <%s>"
 msgstr ""
 
-#: ../src/service.c:127
+#: ../src/service.c:137
 #, c-format
 msgid "DBus name aquired: %s"
 msgstr ""
 
-#: ../src/service.c:136
+#: ../src/service.c:146
 msgid "Service name lost."
 msgstr ""
 
-#: ../src/service.c:147
+#: ../src/service.c:157
 #, fuzzy, c-format
 msgid "Error emitting show signal: %s"
 msgstr "Ошибка загрузки значка florence: %s"
 
-#: ../src/service.c:148
+#: ../src/service.c:158
 msgid "DBus signal <show> sent"
 msgstr ""
 
-#: ../src/service.c:158
+#: ../src/service.c:168
 #, fuzzy, c-format
 msgid "Error emitting hide signal: %s"
 msgstr "Ошибка загрузки значка florence: %s"
 
-#: ../src/service.c:159
+#: ../src/service.c:169
 msgid "DBus signal <hide> sent"
 msgstr ""
 
-#: ../src/service.c:167
+#: ../src/service.c:177
 #, fuzzy
 msgid "Unable to allocate memory for dbus service"
 msgstr "Не удалось выделить память для просмотра"
 
-#: ../src/service.c:201
+#: ../src/service.c:211
 #, fuzzy, c-format
 msgid "Error emitting terminate signal: %s"
 msgstr "Ошибка загрузки значка florence: %s"

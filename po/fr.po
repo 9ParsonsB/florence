@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Florence Gnome virtual keyboard 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-26 16:16+0100\n"
+"POT-Creation-Date: 2014-05-12 09:26+0200\n"
 "PO-Revision-Date: 2012-10-06 12:03+0200\n"
 "Last-Translator: François Agrech <f.agrech@gmail.com>\n"
 "Language-Team: French <f.agrech@gmail.com>\n"
@@ -157,11 +157,11 @@ msgstr "Garder le clavier au dessus."
 
 #: ../data/florence.glade.h:34
 msgid "System tray icon"
-msgstr ""
+msgstr "Icône de la barre d'état système"
 
 #: ../data/florence.glade.h:35
 msgid "Floating icon"
-msgstr ""
+msgstr "Icône flottante"
 
 #: ../data/florence.glade.h:36
 msgid "Features"
@@ -277,43 +277,43 @@ msgstr "Appliquer les changements"
 
 #: ../data/org.florence.gschema.xml.in.h:1
 msgid "Display an icon in the system tray."
-msgstr ""
+msgstr "Affiche une icône dans la barre d'état du système."
 
 #: ../data/org.florence.gschema.xml.in.h:2
 msgid ""
 "The system tray icon can be used to control the keyboard (show/hide, "
 "configure, quit)"
 msgstr ""
+"L'icône de la barre d'état du système peut être utilisée pour contrôler le "
+"clavier (afficher/cacher, configurer, quitter)"
 
 #: ../data/org.florence.gschema.xml.in.h:3
 msgid "Show a floating icon."
-msgstr ""
+msgstr "Affiche une icône flottante."
 
 #: ../data/org.florence.gschema.xml.in.h:4
 msgid ""
 "The floating icon can be used to control the keyboard (show/hide, configure, "
 "quit)"
 msgstr ""
+"L'icône flottante peut être utilisée pour controller le clavier (afficher/"
+"cacher, configurer, quitter)"
 
 #: ../data/org.florence.gschema.xml.in.h:5
-#, fuzzy
 msgid "Position of the icon along the X axis"
-msgstr "Position sur l'axe X"
+msgstr "Position de l'icône sur l'axe X"
 
 #: ../data/org.florence.gschema.xml.in.h:6
-#, fuzzy
 msgid "Horizontal position of the icon window on the screen (in pixel)."
-msgstr "Position horizontale de la fenêtre du clavier à l'écran (en pixels)."
+msgstr "Position horizontale de la fenêtre de l'icône à l'écran (en pixels)."
 
 #: ../data/org.florence.gschema.xml.in.h:7
-#, fuzzy
 msgid "Position of the icon along the Y axis"
-msgstr "Position sur l'axe Y"
+msgstr "Position de l'icône sur l'axe Y"
 
 #: ../data/org.florence.gschema.xml.in.h:8
-#, fuzzy
 msgid "Vertical position of the icon window on the screen (in pixel)."
-msgstr "Position verticale de la fenêtre du clavier à l'écran (en pixel)."
+msgstr "Position verticale de la fenêtre de l'icône à l'écran (en pixel)."
 
 #: ../data/org.florence.gschema.xml.in.h:9
 msgid "Hide the keyboard automatically when not needed"
@@ -814,7 +814,7 @@ msgstr "ABC"
 
 #: ../src/florence.c:42
 msgid "NULL status detected."
-msgstr ""
+msgstr "Statut nul détecté."
 
 #: ../src/florence.c:348
 #, c-format
@@ -833,7 +833,7 @@ msgstr "Echec d'allocation de mémoire pour florence"
 
 #: ../src/florence.c:446
 msgid "Terminating."
-msgstr ""
+msgstr "Fermeture du programme."
 
 #. onhide trigger
 #: ../src/keyboard.c:51
@@ -909,68 +909,69 @@ msgstr "Florence version %s"
 msgid "XRECORD has been disabled at compile time."
 msgstr "XRECORD a été désactivé au moment de la compilation."
 
-#: ../src/main.c:123
-#, fuzzy
+#: ../src/main.c:121
 msgid "Pipe intanciation failed"
-msgstr "Echec de notification"
+msgstr "Echec de l'intantiation du canal de communication."
 
-#: ../src/main.c:134
+#: ../src/main.c:131
 msgid "Failed to register SIGINT signal handler."
-msgstr ""
+msgstr "Echec d'enregistrement du gestionnaire de signal SIGINT."
 
-#: ../src/main.c:136
+#: ../src/main.c:133
 msgid "Failed to register SIGTERM signal handler."
-msgstr ""
+msgstr "Echec d'enregistrement du gestionnaire de signal SIGTERM."
 
-#: ../src/main.c:155
+#: ../src/main.c:152
 msgid "Bad signal received from parent process."
-msgstr ""
+msgstr "Mauvais signal reçu du processus parent."
 
-#: ../src/main.c:157 ../src/main.c:195
-#, fuzzy
+#: ../src/main.c:154 ../src/main.c:191
 msgid "Florence does not seem to be running."
-msgstr "Florence est lancée"
+msgstr "Florence semble s'être arrétée."
 
-#: ../src/main.c:160 ../src/main.c:198
+#: ../src/main.c:157 ../src/main.c:194
 msgid "Failed to register for terminate signal."
-msgstr ""
+msgstr "Echec d'enregistrement pour le signal terminer (terminate)"
 
-#: ../src/main.c:170
+#: ../src/main.c:166
 msgid "No signal received from parent process. We assume it's dead."
-msgstr ""
+msgstr "Pas de signal reçu du processus parent. Nous le considérons mort."
 
-#: ../src/main.c:204
+#: ../src/main.c:200
 msgid "Show command failed. Probably Florence exited."
 msgstr ""
+"La commande afficher (show) a échouée. Florence s'est probablement terminée."
 
-#: ../src/main.c:209
+#: ../src/main.c:205
 msgid "Hide command failed. Probably Florence exited."
 msgstr ""
+"La commande cacher (hide) a échouée. Florence s'est probablement terminée."
 
-#: ../src/main.c:215
+#: ../src/main.c:211
 msgid "Move command failed. Probably Florence exited."
 msgstr ""
+"La commande déplacer (move) a échouée. Florence s'est probablement terminée."
 
-#: ../src/main.c:220
+#: ../src/main.c:216
 msgid "libflorence failed at exit."
-msgstr ""
+msgstr "libflorence a échouée à la sortie."
 
-#: ../src/main.c:271
-#, fuzzy, c-format
+#: ../src/main.c:267
+#, c-format
 msgid ""
-"%s - Florence is a simple virtual keyboard for Gnome.\n"
+"%s - Florence is a simple virtual keyboard for X.\n"
 "\n"
-msgstr "%s - Florence est un clavier virtuel simple pour Gnome.\n"
+msgstr "%s - Florence est un clavier virtuel simple pour X.\n"
 
-#: ../src/main.c:273
-#, fuzzy, c-format
+#: ../src/main.c:269
+#, c-format
 msgid ""
 "Usage: %s [OPTION] ... [COMMAND] [ARG]\n"
 "\n"
-msgstr "Utilisation: %s [OPTION|...\n"
+msgstr "Utilisation: %s [OPTION| ... [COMMAND] [ARG]\n"
 
-#: ../src/main.c:274
-#, fuzzy, c-format
+#: ../src/main.c:270
+#, c-format
 msgid ""
 "Options:\n"
 "  -h, --help                display this help and exit\n"
@@ -978,7 +979,7 @@ msgid ""
 "  -c, --config              open configuration window\n"
 "  -d, --debug [level]       print debug information to stdout\n"
 "  -f, --focus [window]      give the focus to the window\n"
-"  -u, --use-config file     use the given config file instead of gsettings\n"
+"  -u, --use-config file     use the given config file instead of dconf\n"
 "\n"
 "Available commands are:\n"
 "  show                      show the keyboard.\n"
@@ -996,11 +997,14 @@ msgstr ""
 "  -c, --config              ouvrir la fenêtre de configuration\n"
 "  -d, --debug [niveau]      donner des informations pour le déboggage dans "
 "stdout\n"
-"  -n, --no-gnome            utilisez cette option si vous n'utilisez pas "
-"GNOME\n"
 "  -f, --focus [fenêtre]     sélectionne la fenêtre\n"
 "  -u, --use-config fichier  utilise le fichier de configuration donné en "
-"argument à la place de gsettings\n"
+"argument à la place de dconf\n"
+"\n"
+"Les commandes disponibles sont:\n"
+"  show                      affiche le clavier.\n"
+"  hide                      cache le clavier.\n"
+"  move x,y                  déplace le clavier à la position x,y à l'écran.\n"
 "\n"
 "Envoyez vos bugs à <f.agrech@gmail.com>\n"
 "Plus d'informations à <http://florence.sourceforge.net>.\n"
@@ -1338,15 +1342,15 @@ msgstr "Type de touche action inconnu: %s"
 #: ../src/key.c:165
 #, c-format
 msgid "Send event %s on key [%d]"
-msgstr ""
+msgstr "Envoi de l'évènement %s pour la touche [%d]"
 
 #: ../src/key.c:165
 msgid "press"
-msgstr ""
+msgstr "presser"
 
 #: ../src/key.c:165
 msgid "release"
-msgstr ""
+msgstr "relacher"
 
 #: ../src/key.c:170
 msgid "ATSPI doesn't work. Using Xtst instead."
@@ -1450,11 +1454,10 @@ msgid "Couldn't load builder file: %s"
 msgstr "Impossible d'ouvrir le fichier builder: %s"
 
 #: ../src/settings-window.c:674
-#, fuzzy
 msgid "AT-SPI has been disabled at compile time, this option is not available."
 msgstr ""
-"AT-SPI a été désactivé au moment de la compilation: le mode 'cacher "
-"automatiquement est désactivé."
+"AT-SPI a été désactivé au moment de la compilation: cette option n'est pas "
+"disponible."
 
 #: ../src/xkeyboard.c:60
 #, c-format
@@ -1535,48 +1538,48 @@ msgstr ""
 msgid "FSM state errorr: state=%d"
 msgstr "Erreur d'état de la FSM: état=%d"
 
-#: ../src/service.c:65
-#, fuzzy, c-format
+#: ../src/service.c:66
+#, c-format
 msgid "Executing method %s"
-msgstr "Sélectionnez une méthode de saisie"
+msgstr "Execution de la méthode %s"
 
-#: ../src/service.c:105
+#: ../src/service.c:115
 #, c-format
 msgid "Unknown dbus method called: <%s>"
 msgstr "Méthode dbus inconnue: <%s>"
 
-#: ../src/service.c:127
+#: ../src/service.c:137
 #, c-format
 msgid "DBus name aquired: %s"
 msgstr "Nom DBus acquis: %s"
 
-#: ../src/service.c:136
+#: ../src/service.c:146
 msgid "Service name lost."
 msgstr "Nom de service perdu."
 
-#: ../src/service.c:147
-#, fuzzy, c-format
+#: ../src/service.c:157
+#, c-format
 msgid "Error emitting show signal: %s"
-msgstr "Erreur en émettant le signal terminer: %s"
-
-#: ../src/service.c:148
-msgid "DBus signal <show> sent"
-msgstr ""
+msgstr "Erreur en émettant le signal afficher (show): %s"
 
 #: ../src/service.c:158
-#, fuzzy, c-format
+msgid "DBus signal <show> sent"
+msgstr "Signal DBus <show> envoyé"
+
+#: ../src/service.c:168
+#, c-format
 msgid "Error emitting hide signal: %s"
-msgstr "Erreur en émettant le signal terminer: %s"
+msgstr "Erreur en émettant le signal cacher (hide): %s"
 
-#: ../src/service.c:159
+#: ../src/service.c:169
 msgid "DBus signal <hide> sent"
-msgstr ""
+msgstr "Signal DBUS <hide> envoyé"
 
-#: ../src/service.c:167
+#: ../src/service.c:177
 msgid "Unable to allocate memory for dbus service"
 msgstr "Echec d'allocation de la mémoire pour le service dbus"
 
-#: ../src/service.c:201
+#: ../src/service.c:211
 #, c-format
 msgid "Error emitting terminate signal: %s"
 msgstr "Erreur en émettant le signal terminer: %s"

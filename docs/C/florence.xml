@@ -125,7 +125,7 @@ A Timer-based auto-click input method is available to help disabled people havin
 <prompt>$</prompt> <userinput>florence</userinput>
 		</screen>
 		<para>From a <ulink url="http://mate-desktop.org/">MATE desktop</ulink>, you can launch Florence from the menu <guimenu>Applications</guimenu>-&gt;<guisubmenu>Accessibility</guisubmenu>-&gt;<guimenuitem>Florence Virtual keyboard</guimenuitem>.
-		If you prefer that Florence is launched at MATE startup, choose the menu item <guimenu>System</guimenu>-&gt;<guisubmenu>Preferences</guisubmenu>-&gt;<guimenuitem>Sessions</guimenuitem>, click on the <guibutton>Startup programs</guibutton> tab, then click <guibutton>Add</guibutton> and enter <command>/usr/bin/florence</command> so Florence is launched with GNOME at next boot.
+		If you prefer that Florence is launched at MATE startup, choose the menu item <guimenu>System</guimenu>-&gt;<guisubmenu>Preferences</guisubmenu>-&gt;<guimenuitem>Sessions</guimenuitem>, click on the <guibutton>Startup programs</guibutton> tab, then click <guibutton>Add</guibutton> and enter <command>/usr/bin/florence</command> so Florence is launched with MATE at next boot.
 	</para>
 	<para>When Florence is running, an icon should appear in your notification area, usually at the top right corner of the screen. Clicking of the icon makes Florence appear or disappear from the screen. Right clicking on it makes a menu appear. On this menu, you can use the <guimenuitem>quit</guimenuitem> item to stop Florence.</para>
 	<sect2 id="input_methods">
@@ -346,7 +346,7 @@ A Timer-based auto-click input method is available to help disabled people havin
 <prompt>$</prompt> <userinput>find /usr -name at-spi-registryd</userinput>
 		</screen>
 		<para>When the at-spi registry daemon is started, you need to tell applications to use it.</para>
-		<para>For gtk3 applications, you can set on the dconf property org.gnome.desktop.interface.toolkit-accessibility with <command>dconf-editor</command> or you can set the environment variable GTK_MODULES to gail:atk-bridge in /etc/environment or /etc/profile.d or wherever your distro will pick it at startup.</para>
+		<para>For gtk3 applications, you can set on the dconf property org.gnome.desktop.interface.toolkit-accessibility with <command>dconf-editor</command> or you can set the environment variable GTK_MODULES to gail:atk-bridge in /etc/environment, /etc/profile.d or wherever your distro will interpret it at startup.</para>
 <prompt>$</prompt> <userinput>export GTK_MODULES=gail:atk-bridge</userinput>
 		<para>For java applications, you need to install the java access bridge. On Debian, you can do that with this command:</para>
 <prompt>$</prompt> <userinput>sudo apt-get install libaccess-bridge-java</userinput>

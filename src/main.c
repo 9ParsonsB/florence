@@ -109,11 +109,9 @@ int main (int argc, char **argv)
 
 	if (command) {
 		gtk_init(&argc, &argv);
-		g_type_init();
 		exec_command();
 	} else if (config&1) {
 		gtk_init(&argc, &argv);
-		g_type_init();
 		settings_init(TRUE, config_file);
 		settings();
 		gtk_main();
@@ -126,7 +124,6 @@ int main (int argc, char **argv)
 		if ((child=fork())) {
 			close(pipefd[0]);
 			gtk_init(&argc, &argv);
-			g_type_init();
 			settings_init(FALSE, config_file);
 			gst_init(&argc, &argv);
 
@@ -160,7 +157,6 @@ int main (int argc, char **argv)
 					flo_fatal(_("Failed to register for terminate signal."));
 				}
 				gtk_init(&argc, &argv);
-				g_type_init();
 				settings_init(FALSE, config_file);
 				controller=controller_new();
 				gtk_main();
@@ -269,7 +265,7 @@ static int decode_switches (int argc, char **argv)
 static void usage (int status)
 {
 	printf (_("%s - \
-Florence is a simple virtual keyboard for Gnome.\n\n"), program_name);
+Florence is a simple virtual keyboard for X.\n\n"), program_name);
 	printf (_("Usage: %s [OPTION] ... [COMMAND] [ARG]\n\n"), program_name);
 	printf (_("\
 Options:\n\
