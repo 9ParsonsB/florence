@@ -222,3 +222,11 @@
 	* Migrate from gconf to gsettings.
 	* Editor improvements.
 
+2014-05-12 François Agrech <f.agrech@gmail.com>
+	* Version 0.6.1
+	* A lot of bug fixes.
+	* Add commands to the dbus interface.
+	* Add command line options to control the keyboard.
+	* Move at-spi2 handling to a new process in order to avoid deadlocks.
+	* Implement a floating icon for desktops with no systray.
+
