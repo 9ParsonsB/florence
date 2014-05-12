@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Florence Gnome virtual keyboard 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 09:26+0200\n"
+"POT-Creation-Date: 2014-05-12 20:33+0200\n"
 "PO-Revision-Date: 2012-10-06 12:03+0200\n"
 "Last-Translator: François Agrech <f.agrech@gmail.com>\n"
 "Language-Team: French <f.agrech@gmail.com>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: ../data/florence.desktop.in.in.h:1 ../src/florence.server.in.in.h:1
-#: ../src/trayicon.c:137
+#: ../src/trayicon.c:137 ../src/menu.c:38
 msgid "Florence Virtual Keyboard"
 msgstr "Clavier virtuel Florence"
 
@@ -1584,85 +1584,120 @@ msgstr "Echec d'allocation de la mémoire pour le service dbus"
 msgid "Error emitting terminate signal: %s"
 msgstr "Erreur en émettant le signal terminer: %s"
 
-#~ msgid "Error loading florence icon: %s"
-#~ msgstr "Erreur de chargement du fichier icone: %s"
+#: ../src/controller.c:47
+#, c-format
+msgid "Error loading florence icon: %s"
+msgstr "Erreur de chargement du fichier icone: %s"
 
-#~ msgid "Event error: %s"
-#~ msgstr "Erreur d'évènement: %s"
+#: ../src/controller.c:194
+#, c-format
+msgid "Event error: %s"
+msgstr "Erreur d'évènement: %s"
 
-#~ msgid "SPI is disabled: Unable to switch auto-hide mode on."
-#~ msgstr ""
-#~ "SPI est désactivé: Impossible d'activer le mode 'cacher automatiquement'"
+#: ../src/controller.c:195
+#, c-format
+msgid "ATSPI focus event received. Object role=%d"
+msgstr "ATSPI a reçu un évènement de sélection. Role de l'objet=%d"
 
-#~ msgid "ATSPI listener register failed"
-#~ msgstr "Enregistrement de l'écouteur ATSPI échoué"
+#: ../src/controller.c:224
+msgid "SPI is disabled: Unable to switch auto-hide mode on."
+msgstr ""
+"SPI est désactivé: Impossible d'activer le mode 'cacher automatiquement'"
 
-#~ msgid "AT SPI: problem deregistering focus listener"
-#~ msgstr "AT SPI: problème de désenregistrement de l'auditeur du point focal"
+#: ../src/controller.c:228 ../src/controller.c:230
+msgid "ATSPI listener register failed"
+msgstr "Enregistrement de l'écouteur ATSPI échoué"
 
-#~ msgid "AT SPI: problem deregistering window listener"
-#~ msgstr "AT SPI: problème de désenregistrement de l'auditeur de fenêtre"
+#: ../src/controller.c:240
+msgid "AT SPI: problem deregistering focus listener"
+msgstr "AT SPI: problème de désenregistrement de l'auditeur du point focal"
 
-#~ msgid "AT-SPI has been disabled at run time: auto-hide mode is disabled."
-#~ msgstr ""
-#~ "AT-SPI a été désactivé pendant l'exécution: le mode 'cacher "
-#~ "automatiquement' est désactivé."
+#: ../src/controller.c:243
+msgid "AT SPI: problem deregistering window listener"
+msgstr "AT SPI: problème de désenregistrement de l'auditeur de fenêtre"
 
-#~ msgid "Copyright (C) 2012 François Agrech"
-#~ msgstr "Copyright (C) 2012 François Agrech"
+#: ../src/controller.c:317
+msgid "Controller: unknown moving state."
+msgstr "Contrôleur: état de mouvement inconnu."
 
-#~ msgid ""
-#~ "Copyright (C) 2012 François Agrech\n"
-#~ "\n"
-#~ "This program is free software; you can redistribute it and/or modify\n"
-#~ "it under the terms of the GNU General Public License as published by\n"
-#~ "the Free Software Foundation; either version 2, or (at your option)\n"
-#~ "any later version.\n"
-#~ "\n"
-#~ "This program is distributed in the hope that it will be useful,\n"
-#~ "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-#~ "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
-#~ "GNU General Public License for more details.\n"
-#~ "\n"
-#~ "You should have received a copy of the GNU General Public License\n"
-#~ "along with this program; if not, write to the Free Software Foundation,\n"
-#~ "Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
-#~ msgstr ""
-#~ "Copyright (C) 2012 François Agrech\n"
-#~ "\n"
-#~ "Ce programme est un logiciel libre; vous pouvez le redistribuer et/ou\n"
-#~ "le modifier dans les conditions de la License Générale Publique GNU,\n"
-#~ "comme publiée par la Free Software Foundation; soit en version 2, ou\n"
-#~ "(selon votre choix) n'importe quelle version ultérieure.\n"
-#~ "\n"
-#~ "Ce programme est distribué dans l'espoir qu'il sera utile, mais\n"
-#~ "SANS AUCUNE GARANTIE; même pas la guarantie implicite de\n"
-#~ "CONVENIR A UNE UTILISATION QUELCONQUE. Consultez la Licence Publique\n"
-#~ "Générale GNU (en anglais) pour plus de détails.\n"
-#~ "\n"
-#~ "Vous devriez avoir reçu une copie de la Licence Publique Générale GNU\n"
-#~ "(en anglais) avec ce programme; sinon, écrivez à la Free Software\n"
-#~ "Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111 1307, "
-#~ "USA.\n"
-#~ "\n"
-#~ "Seule la version complète en anglais de la Licence Publique Générale GNU\n"
-#~ "(GNU General Public Licence), que vous devriez avoir reçu avec ce\n"
-#~ "programme a une valeur légale et s'applique à ce programme."
+#: ../src/controller.c:384
+msgid "Unable to allocate memory for the controller"
+msgstr "Echec d'allocation de la mémoire pour le contrôleur"
 
-#~ msgid "Unable to open %s"
-#~ msgstr "Impossible d'ouvrir %s"
+#: ../src/controller.c:391
+msgid "AT-SPI has been disabled at run time: auto-hide mode is disabled."
+msgstr ""
+"AT-SPI a été désactivé pendant l'exécution: le mode 'cacher automatiquement' "
+"est désactivé."
 
-#~ msgid "_Quit"
-#~ msgstr "_Quitter"
+#: ../src/controller.c:399
+msgid "AT-SPI has been disabled at compile time: auto-hide mode is disabled."
+msgstr ""
+"AT-SPI a été désactivé à la compilation: le mode 'cacher automatiquement' "
+"est désactivé."
 
-#~ msgid "_Help"
-#~ msgstr "_Aide"
+#: ../src/menu.c:39
+msgid "Copyright (C) 2012 François Agrech"
+msgstr "Copyright (C) 2012 François Agrech"
 
-#~ msgid "_About"
-#~ msgstr "A p_ropos"
+#: ../src/menu.c:43
+msgid ""
+"Copyright (C) 2012 François Agrech\n"
+"\n"
+"This program is free software; you can redistribute it and/or modify\n"
+"it under the terms of the GNU General Public License as published by\n"
+"the Free Software Foundation; either version 2, or (at your option)\n"
+"any later version.\n"
+"\n"
+"This program is distributed in the hope that it will be useful,\n"
+"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"GNU General Public License for more details.\n"
+"\n"
+"You should have received a copy of the GNU General Public License\n"
+"along with this program; if not, write to the Free Software Foundation,\n"
+"Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
+msgstr ""
+"Copyright (C) 2012 François Agrech\n"
+"\n"
+"Ce programme est un logiciel libre; vous pouvez le redistribuer et/ou\n"
+"le modifier dans les conditions de la License Générale Publique GNU,\n"
+"comme publiée par la Free Software Foundation; soit en version 2, ou\n"
+"(selon votre choix) n'importe quelle version ultérieure.\n"
+"\n"
+"Ce programme est distribué dans l'espoir qu'il sera utile, mais\n"
+"SANS AUCUNE GARANTIE; même pas la guarantie implicite de\n"
+"CONVENIR A UNE UTILISATION QUELCONQUE. Consultez la Licence Publique\n"
+"Générale GNU (en anglais) pour plus de détails.\n"
+"\n"
+"Vous devriez avoir reçu une copie de la Licence Publique Générale GNU\n"
+"(en anglais) avec ce programme; sinon, écrivez à la Free Software\n"
+"Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111 1307, USA.\n"
+"\n"
+"Seule la version complète en anglais de la Licence Publique Générale GNU\n"
+"(GNU General Public Licence), que vous devriez avoir reçu avec ce\n"
+"programme a une valeur légale et s'applique à ce programme."
 
-#~ msgid "_Preferences"
-#~ msgstr "_Préférences"
+#: ../src/menu.c:70 ../src/menu.c:73
+#, c-format
+msgid "Unable to open %s"
+msgstr "Impossible d'ouvrir %s"
+
+#: ../src/menu.c:92
+msgid "_Quit"
+msgstr "_Quitter"
+
+#: ../src/menu.c:98
+msgid "_Help"
+msgstr "_Aide"
+
+#: ../src/menu.c:104
+msgid "_About"
+msgstr "A p_ropos"
+
+#: ../src/menu.c:109
+msgid "_Preferences"
+msgstr "_Préférences"
 
 #~ msgid "_Preferences..."
 #~ msgstr "_Préférences..."

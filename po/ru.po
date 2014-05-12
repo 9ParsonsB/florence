@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: florence\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 09:26+0200\n"
+"POT-Creation-Date: 2014-05-12 20:33+0200\n"
 "PO-Revision-Date: 2010-11-06 00:15+0000\n"
 "Last-Translator: Alone197711 <gwoger@sibmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Launchpad (build 13830)\n"
 
 #: ../data/florence.desktop.in.in.h:1 ../src/florence.server.in.in.h:1
-#: ../src/trayicon.c:137
+#: ../src/trayicon.c:137 ../src/menu.c:38
 msgid "Florence Virtual Keyboard"
 msgstr "Виртуальная Клавиатура Florence"
 
@@ -1549,72 +1549,120 @@ msgstr "Не удалось выделить память для просмот�
 msgid "Error emitting terminate signal: %s"
 msgstr "Ошибка загрузки значка florence: %s"
 
-#~ msgid "Error loading florence icon: %s"
-#~ msgstr "Ошибка загрузки значка florence: %s"
+#: ../src/controller.c:47
+#, c-format
+msgid "Error loading florence icon: %s"
+msgstr "Ошибка загрузки значка florence: %s"
 
-#~ msgid "SPI is disabled: Unable to switch auto-hide mode on."
-#~ msgstr "SPI выключен: невозможно включить автоскрытие."
+#: ../src/controller.c:194
+#, c-format
+msgid "Event error: %s"
+msgstr ""
 
+#: ../src/controller.c:195
+#, c-format
+msgid "ATSPI focus event received. Object role=%d"
+msgstr ""
+
+#: ../src/controller.c:224
+msgid "SPI is disabled: Unable to switch auto-hide mode on."
+msgstr "SPI выключен: невозможно включить автоскрытие."
+
+#: ../src/controller.c:228 ../src/controller.c:230
+msgid "ATSPI listener register failed"
+msgstr ""
+
+#: ../src/controller.c:240
+msgid "AT SPI: problem deregistering focus listener"
+msgstr ""
+
+#: ../src/controller.c:243
+msgid "AT SPI: problem deregistering window listener"
+msgstr ""
+
+#: ../src/controller.c:317
+msgid "Controller: unknown moving state."
+msgstr ""
+
+#: ../src/controller.c:384
 #, fuzzy
-#~ msgid "AT-SPI has been disabled at run time: auto-hide mode is disabled."
-#~ msgstr ""
-#~ "AT-SPI было отключено во время компилирования: автоскрытие не работает."
+msgid "Unable to allocate memory for the controller"
+msgstr "Невозможно выделить память на переход"
 
+#: ../src/controller.c:391
 #, fuzzy
-#~ msgid "Copyright (C) 2012 François Agrech"
-#~ msgstr "Копирайт (C) 2008, 2009, 2010 François Agrech"
+msgid "AT-SPI has been disabled at run time: auto-hide mode is disabled."
+msgstr ""
+"AT-SPI было отключено во время компилирования: автоскрытие не работает."
 
+#: ../src/controller.c:399
 #, fuzzy
-#~ msgid ""
-#~ "Copyright (C) 2012 François Agrech\n"
-#~ "\n"
-#~ "This program is free software; you can redistribute it and/or modify\n"
-#~ "it under the terms of the GNU General Public License as published by\n"
-#~ "the Free Software Foundation; either version 2, or (at your option)\n"
-#~ "any later version.\n"
-#~ "\n"
-#~ "This program is distributed in the hope that it will be useful,\n"
-#~ "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-#~ "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
-#~ "GNU General Public License for more details.\n"
-#~ "\n"
-#~ "You should have received a copy of the GNU General Public License\n"
-#~ "along with this program; if not, write to the Free Software Foundation,\n"
-#~ "Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
-#~ msgstr ""
-#~ "Copyright (C) 2008, 2009, 2010 François Agrech\n"
-#~ "\n"
-#~ "Эта программа является свободным программным обеспечением; вы можете "
-#~ "распространять её и / или изменять\n"
-#~ "её в соответствии с условиями лицензии GNU General Public License, "
-#~ "опубликованной \n"
-#~ "Free Software Foundation; либо версии 2, либо (по вашему выбору) \n"
-#~ "любой более поздней версии.\n"
-#~ "\n"
-#~ "Эта программа распространяется в надежде, что она будет полезной,\n"
-#~ "но БЕЗ КАКИХ-ЛИБО ГАРАНТИЙ, даже без подразумеваемых гарантий\n"
-#~ "КОММЕРЧЕСКОЙ ЦЕННОСТИ или ПРИГОДНОСТИ ДЛЯ ОПРЕДЕЛЕННОЙ ЦЕЛИ. См.\n"
-#~ "GNU General Public License для более подробной информации.\n"
-#~ "\n"
-#~ "Вы должны были получить копию GNU General Public License\n"
-#~ "вместе с этой программой, а если нет, напишите в Free Software "
-#~ "Foundation,\n"
-#~ "Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
+msgid "AT-SPI has been disabled at compile time: auto-hide mode is disabled."
+msgstr ""
+"AT-SPI было отключено во время компилирования: автоскрытие не работает."
 
-#~ msgid "Unable to open %s"
-#~ msgstr "Невозможно открыть %s"
+#: ../src/menu.c:39
+#, fuzzy
+msgid "Copyright (C) 2012 François Agrech"
+msgstr "Копирайт (C) 2008, 2009, 2010 François Agrech"
 
-#~ msgid "_Quit"
-#~ msgstr "_Выход"
+#: ../src/menu.c:43
+#, fuzzy
+msgid ""
+"Copyright (C) 2012 François Agrech\n"
+"\n"
+"This program is free software; you can redistribute it and/or modify\n"
+"it under the terms of the GNU General Public License as published by\n"
+"the Free Software Foundation; either version 2, or (at your option)\n"
+"any later version.\n"
+"\n"
+"This program is distributed in the hope that it will be useful,\n"
+"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"GNU General Public License for more details.\n"
+"\n"
+"You should have received a copy of the GNU General Public License\n"
+"along with this program; if not, write to the Free Software Foundation,\n"
+"Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
+msgstr ""
+"Copyright (C) 2008, 2009, 2010 François Agrech\n"
+"\n"
+"Эта программа является свободным программным обеспечением; вы можете "
+"распространять её и / или изменять\n"
+"её в соответствии с условиями лицензии GNU General Public License, "
+"опубликованной \n"
+"Free Software Foundation; либо версии 2, либо (по вашему выбору) \n"
+"любой более поздней версии.\n"
+"\n"
+"Эта программа распространяется в надежде, что она будет полезной,\n"
+"но БЕЗ КАКИХ-ЛИБО ГАРАНТИЙ, даже без подразумеваемых гарантий\n"
+"КОММЕРЧЕСКОЙ ЦЕННОСТИ или ПРИГОДНОСТИ ДЛЯ ОПРЕДЕЛЕННОЙ ЦЕЛИ. См.\n"
+"GNU General Public License для более подробной информации.\n"
+"\n"
+"Вы должны были получить копию GNU General Public License\n"
+"вместе с этой программой, а если нет, напишите в Free Software Foundation,\n"
+"Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
 
-#~ msgid "_Help"
-#~ msgstr "_Помощь"
+#: ../src/menu.c:70 ../src/menu.c:73
+#, c-format
+msgid "Unable to open %s"
+msgstr "Невозможно открыть %s"
 
-#~ msgid "_About"
-#~ msgstr "_О программе"
+#: ../src/menu.c:92
+msgid "_Quit"
+msgstr "_Выход"
 
-#~ msgid "_Preferences"
-#~ msgstr "_Параметры"
+#: ../src/menu.c:98
+msgid "_Help"
+msgstr "_Помощь"
+
+#: ../src/menu.c:104
+msgid "_About"
+msgstr "_О программе"
+
+#: ../src/menu.c:109
+msgid "_Preferences"
+msgstr "_Параметры"
 
 #~ msgid "_Preferences..."
 #~ msgstr "_Параметры..."

@@ -340,19 +340,27 @@ A Timer-based auto-click input method is available to help disabled people havin
 	<sect2 id="auto-hide">
 		<title>Activating auto-hide mode</title>
 		<para>For auto-hide mode to work, you need to start the at-spi registry daemon at session startup. Usually, the daemon executable us located at <filename class='directory'>/usr/libexec</filename>. Start at-spi registry daemon (at session startup):</para>
+		<screen>
 <prompt>$</prompt> <userinput>/usr/libexec/at-spi-registryd &amp;</userinput>
+		</screen>
 		<para>Some distros may put the at-spi-registryd command elsewhere. Use the find command to find out where your distro put at-spi-registryd:</para>
 		<screen>
 <prompt>$</prompt> <userinput>find /usr -name at-spi-registryd</userinput>
 		</screen>
 		<para>When the at-spi registry daemon is started, you need to tell applications to use it.</para>
 		<para>For gtk3 applications, you can set on the dconf property org.gnome.desktop.interface.toolkit-accessibility with <command>dconf-editor</command> or you can set the environment variable GTK_MODULES to gail:atk-bridge in /etc/environment, /etc/profile.d or wherever your distro will interpret it at startup.</para>
+		<screen>
 <prompt>$</prompt> <userinput>export GTK_MODULES=gail:atk-bridge</userinput>
+		</screen>
 		<para>For java applications, you need to install the java access bridge. On Debian, you can do that with this command:</para>
+		<screen>
 <prompt>$</prompt> <userinput>sudo apt-get install libaccess-bridge-java</userinput>
+		</screen>
 		<para>Other distributions should have a similar package available. Please check with your distribution support.</para>
 		<para>For QT4 applications, you need to install the <ulink url="https://projects.kde.org/projects/playground/accessibility/qtatspi">qt-at-spi</ulink> package. On debian, use this command:</para>
+		<screen>
 <prompt>$</prompt> <userinput>sudo apt-get install qt-at-spi</userinput>
+		</screen>
 		<para>QT5 applications should work out of the box as the at-spi bridge has been merged into QtBase.</para>
 		<para>For other toolkits, please check the available documentation and support.</para>
 		<para><ulink url="http://mate-desktop.org/">MATE</ulink> starts the daemon automatically if it is configured with the <command>mate-at-property</command> dialog.</para>
@@ -389,7 +397,9 @@ GtkModulesList=gail:atk-bridge:/usr/lib/gtk-2.0/modules/libkeymouselistener:/usr
 	<sect2 id="login-gdm3">
 		<title>Using Florence at login with GDM3</title>
 		<para>With GDM3, it is very simple to use Florence at login screen. On Debian, you can use this command:</para>
+		<screen>
 <prompt>#</prompt> <userinput>cp /usr/share/applications/florence.desktop /usr/share/gdm/autostart/LoginWindow/</userinput>
+		</screen>
 		<para>This should work on other distributions as well, although the pathes may be slightly different.</para>
 	</sect2>
 </sect1>
@@ -427,9 +437,13 @@ GtkModulesList=gail:atk-bridge:/usr/lib/gtk-2.0/modules/libkeymouselistener:/usr
 		<title>Create your own layout</title>
 		<para>It is possible to create your own keyboard layout if those available by default are not suitable for your needs.</para>
 		<para>An editor is available in the git repository of Florence, although it is not suitable for release yet. It is not very stable and not documented yet but you can still try it. Fetch it with this command:</para>
+		<screen>
 <prompt>$</prompt> <userinput>git clone git://git.code.sf.net/p/florence/code/editor florence-editor</userinput>
+		</screen>
 		<para>Then you can launch the editor with this command:</para>
+		<screen>
 <prompt>$</prompt> <userinput>python florence-editor/editor.py</userinput>
+		</screen>
 	</sect2>
 </sect1>
 <sect1 id="alternatives">

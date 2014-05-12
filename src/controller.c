@@ -192,7 +192,7 @@ void controller_focus_event (const AtspiEvent *event, void *user_data)
 	AtspiStateSet *state_set=atspi_accessible_get_state_set(event->source);
 	AtspiRole role=atspi_accessible_get_role(event->source, &error);
 	if (error) flo_error(_("Event error: %s"), error->message);
-	flo_debug(TRACE_DEBUG, _("Receives atspi focus event. Object role=%d"), role);
+	flo_debug(TRACE_DEBUG, _("ATSPI focus event received. Object role=%d"), role);
 	if (role==ATSPI_ROLE_TERMINAL ||
 		(((role==ATSPI_ROLE_TEXT) || (role==ATSPI_ROLE_PASSWORD_TEXT)) &&
 		 state_set && atspi_state_set_contains(state_set, ATSPI_STATE_EDITABLE))) {

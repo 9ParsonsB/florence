@@ -24,4 +24,6 @@ src/xkeyboard.c
 src/ramble.c
 src/fsm.c
 src/service.c
+src/controller.c
+src/menu.c
 

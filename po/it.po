@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Florence Gnome virtual keyboard 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 09:26+0200\n"
+"POT-Creation-Date: 2014-05-12 20:33+0200\n"
 "PO-Revision-Date: 2010-04-07 18:45+0100\n"
 "Last-Translator: Pietro Pilolli\n"
 "Language-Team: Italian\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: ../data/florence.desktop.in.in.h:1 ../src/florence.server.in.in.h:1
-#: ../src/trayicon.c:137
+#: ../src/trayicon.c:137 ../src/menu.c:38
 msgid "Florence Virtual Keyboard"
 msgstr "TastieraVirtuale Florence"
 
@@ -1569,74 +1569,123 @@ msgstr "Impossibile allocare la memoria per la vista"
 msgid "Error emitting terminate signal: %s"
 msgstr "Errore nel caricamento delle icone di florence: %s"
 
-#~ msgid "Error loading florence icon: %s"
-#~ msgstr "Errore nel caricamento delle icone di florence: %s"
+#: ../src/controller.c:47
+#, c-format
+msgid "Error loading florence icon: %s"
+msgstr "Errore nel caricamento delle icone di florence: %s"
 
-#~ msgid "SPI is disabled: Unable to switch auto-hide mode on."
-#~ msgstr ""
-#~ "SPI non è attivo: Impossibile attivare la modalità a scomparsa "
-#~ "automatica.'"
+#: ../src/controller.c:194
+#, c-format
+msgid "Event error: %s"
+msgstr ""
 
+#: ../src/controller.c:195
+#, c-format
+msgid "ATSPI focus event received. Object role=%d"
+msgstr ""
+
+#: ../src/controller.c:224
+msgid "SPI is disabled: Unable to switch auto-hide mode on."
+msgstr ""
+"SPI non è attivo: Impossibile attivare la modalità a scomparsa automatica.'"
+
+#: ../src/controller.c:228 ../src/controller.c:230
+msgid "ATSPI listener register failed"
+msgstr ""
+
+#: ../src/controller.c:240
+msgid "AT SPI: problem deregistering focus listener"
+msgstr ""
+
+#: ../src/controller.c:243
+msgid "AT SPI: problem deregistering window listener"
+msgstr ""
+
+#: ../src/controller.c:317
+msgid "Controller: unknown moving state."
+msgstr ""
+
+#: ../src/controller.c:384
 #, fuzzy
-#~ msgid "AT-SPI has been disabled at run time: auto-hide mode is disabled."
-#~ msgstr ""
-#~ "AT-SPI è stato disabilitato durante la compilazione; la modalità a "
-#~ "scomparsa automatica è disabilitata"
+msgid "Unable to allocate memory for the controller"
+msgstr "Impossibile allocare la memoria per il ramble"
 
+#: ../src/controller.c:391
 #, fuzzy
-#~ msgid "Copyright (C) 2012 François Agrech"
-#~ msgstr "Copyright (C) 2008, 2009, 2010 François Agrech"
+msgid "AT-SPI has been disabled at run time: auto-hide mode is disabled."
+msgstr ""
+"AT-SPI è stato disabilitato durante la compilazione; la modalità a scomparsa "
+"automatica è disabilitata"
 
+#: ../src/controller.c:399
 #, fuzzy
-#~ msgid ""
-#~ "Copyright (C) 2012 François Agrech\n"
-#~ "\n"
-#~ "This program is free software; you can redistribute it and/or modify\n"
-#~ "it under the terms of the GNU General Public License as published by\n"
-#~ "the Free Software Foundation; either version 2, or (at your option)\n"
-#~ "any later version.\n"
-#~ "\n"
-#~ "This program is distributed in the hope that it will be useful,\n"
-#~ "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-#~ "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
-#~ "GNU General Public License for more details.\n"
-#~ "\n"
-#~ "You should have received a copy of the GNU General Public License\n"
-#~ "along with this program; if not, write to the Free Software Foundation,\n"
-#~ "Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
-#~ msgstr ""
-#~ "Copyright (C) 2008, 2009, 2010 François Agrech\n"
-#~ "\n"
-#~ "This program is free software; you can redistribute it and/or modify\n"
-#~ "it under the terms of the GNU General Public License as published by\n"
-#~ "the Free Software Foundation; either version 2, or (at your option)\n"
-#~ "any later version.\n"
-#~ "\n"
-#~ "This program is distributed in the hope that it will be useful,\n"
-#~ "but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
-#~ "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
-#~ "GNU General Public License for more details.\n"
-#~ "\n"
-#~ "You should have received a copy of the GNU General Public License\n"
-#~ "along with this program; if not, write to the Free Software Foundation,\n"
-#~ "Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.Copyright "
-#~ "(C) 2008, 2009 François Agrech\n"
-#~ "\n"
+msgid "AT-SPI has been disabled at compile time: auto-hide mode is disabled."
+msgstr ""
+"AT-SPI è stato disabilitato durante la compilazione; la modalità a scomparsa "
+"automatica è disabilitata"
 
-#~ msgid "Unable to open %s"
-#~ msgstr "Impossibile aprire %s"
+#: ../src/menu.c:39
+#, fuzzy
+msgid "Copyright (C) 2012 François Agrech"
+msgstr "Copyright (C) 2008, 2009, 2010 François Agrech"
 
-#~ msgid "_Quit"
-#~ msgstr "_Esci"
+#: ../src/menu.c:43
+#, fuzzy
+msgid ""
+"Copyright (C) 2012 François Agrech\n"
+"\n"
+"This program is free software; you can redistribute it and/or modify\n"
+"it under the terms of the GNU General Public License as published by\n"
+"the Free Software Foundation; either version 2, or (at your option)\n"
+"any later version.\n"
+"\n"
+"This program is distributed in the hope that it will be useful,\n"
+"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"GNU General Public License for more details.\n"
+"\n"
+"You should have received a copy of the GNU General Public License\n"
+"along with this program; if not, write to the Free Software Foundation,\n"
+"Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA."
+msgstr ""
+"Copyright (C) 2008, 2009, 2010 François Agrech\n"
+"\n"
+"This program is free software; you can redistribute it and/or modify\n"
+"it under the terms of the GNU General Public License as published by\n"
+"the Free Software Foundation; either version 2, or (at your option)\n"
+"any later version.\n"
+"\n"
+"This program is distributed in the hope that it will be useful,\n"
+"but WITHOUT ANY WARRANTY; without even the implied warranty of\n"
+"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n"
+"GNU General Public License for more details.\n"
+"\n"
+"You should have received a copy of the GNU General Public License\n"
+"along with this program; if not, write to the Free Software Foundation,\n"
+"Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.Copyright (C) "
+"2008, 2009 François Agrech\n"
+"\n"
 
-#~ msgid "_Help"
-#~ msgstr "_Aiuto"
+#: ../src/menu.c:70 ../src/menu.c:73
+#, c-format
+msgid "Unable to open %s"
+msgstr "Impossibile aprire %s"
 
-#~ msgid "_About"
-#~ msgstr "_Info"
+#: ../src/menu.c:92
+msgid "_Quit"
+msgstr "_Esci"
 
-#~ msgid "_Preferences"
-#~ msgstr "_Preferenze"
+#: ../src/menu.c:98
+msgid "_Help"
+msgstr "_Aiuto"
+
+#: ../src/menu.c:104
+msgid "_About"
+msgstr "_Info"
+
+#: ../src/menu.c:109
+msgid "_Preferences"
+msgstr "_Preferenze"
 
 #, fuzzy
 #~ msgid "_Preferences..."

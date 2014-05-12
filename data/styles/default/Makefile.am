@@ -10,5 +10,5 @@ $(style_in_files): $(style_in_files:.style=.style.in)
 	sed -e "s|\@BASEDIR\@|$(styledir)|" $< > $@
 
 EXTRA_DIST = $(style_DATA) $(symbol_in_files:.xml.in=.xml.in.in) $(style_in_files:.style=.style.in)
-DISTCLEANFILES = $(symbol_in_files:.xml.in=.xml) $(style_in_files)
+DISTCLEANFILES = $(symbol_in_files:.xml.in=.xml) $(symbol_in_files) $(style_in_files)
 
