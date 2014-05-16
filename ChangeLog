@@ -230,3 +230,8 @@
 	* Move at-spi2 handling to a new process in order to avoid deadlocks.
 	* Implement a floating icon for desktops with no systray.
 
+2014-05-16 François Agrech <f.agrech@gmail.com>
+	* Version 0.6.2
+	* Fix gradients.
+	* remove deprecated GTK3 functions.
+
