@@ -79,7 +79,6 @@ void florence_done (GObject *source_object, GAsyncResult *res, gpointer user_dat
 florence_error florence_init()
 {
 	guint source_id;
-	g_type_init();
 	florence=(struct florence *)g_malloc(sizeof(struct florence));
 	if (!florence) return FLORENCE_FAIL;
 	memset(florence, 0, sizeof(struct florence));
