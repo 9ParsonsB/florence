@@ -610,7 +610,7 @@ void settings_window_close(GtkWidget *window, GtkWidget *button)
 	closed=TRUE;
 	if (settings_dirty()) {
 		if (GTK_RESPONSE_ACCEPT==tools_dialog(_("Confirm"), GTK_WINDOW(window),
-			GTK_STOCK_APPLY, GTK_STOCK_DISCARD, _("Discard changes?")))
+			_("Apply"), _("Cancel"), _("Discard changes?")))
 			settings_window_commit(NULL, NULL);
 		else settings_window_rollback(NULL, NULL);
 	}

@@ -550,7 +550,6 @@ void view_configure (GtkWidget *window, GdkEventConfigure* pConfig, struct view 
 		gdk_window_process_updates(gtk_widget_get_window(GTK_WIDGET(view->window)), FALSE);
 	}
 
-	gdk_window_configure_finished(gtk_widget_get_window(GTK_WIDGET(view->window)));
 	END_FUNC
 }
 

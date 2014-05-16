@@ -89,26 +89,18 @@ void menu_show(GObject *parent, guint button, GCallback quit_func,
 #endif
 	menu=gtk_menu_new();
 
-	quit=gtk_image_menu_item_new_with_mnemonic(_("_Quit"));
-	gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(quit),
-		gtk_image_new_from_stock(GTK_STOCK_QUIT, GTK_ICON_SIZE_MENU));
+	quit=gtk_menu_item_new_with_mnemonic(_("_Quit"));
 	g_signal_connect_swapped(quit, "activate", quit_func, user_data);
 
 #ifdef ENABLE_HELP
-	help=gtk_image_menu_item_new_with_mnemonic(_("_Help"));
-	gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(help),
-		gtk_image_new_from_stock(GTK_STOCK_HELP, GTK_ICON_SIZE_MENU));
+	help=gtk_menu_item_new_with_mnemonic(_("_Help"));
 	g_signal_connect(help, "activate", G_CALLBACK(menu_help), NULL);
 #endif
 
-	about=gtk_image_menu_item_new_with_mnemonic(_("_About"));
-	gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(about),
-		gtk_image_new_from_stock(GTK_STOCK_ABOUT, GTK_ICON_SIZE_MENU));
+	about=gtk_menu_item_new_with_mnemonic(_("_About"));
 	g_signal_connect(about, "activate", G_CALLBACK(menu_about), NULL);
 
-	config=gtk_image_menu_item_new_with_mnemonic(_("_Preferences"));
-	gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(config),
-		gtk_image_new_from_stock(GTK_STOCK_PREFERENCES, GTK_ICON_SIZE_MENU));
+	config=gtk_menu_item_new_with_mnemonic(_("_Preferences"));
 	g_signal_connect(config, "activate", G_CALLBACK(settings), NULL);
 
 	gtk_menu_shell_append(GTK_MENU_SHELL(menu), config);
