@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Florence 0.4.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-06 13:22+0200\n"
+"POT-Creation-Date: 2014-05-16 21:13+0200\n"
 "PO-Revision-Date: 2012-10-06 13:23+0200\n"
 "Last-Translator: François Agrech <f.agrech@gmail.com>\n"
 "Language-Team: French <f.agrech@gmail.com>\n"
@@ -19,9 +19,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: home.php:9
-msgid "Florence is an extensible scalable virtual keyboard for GNOME."
+msgid "Florence is an extensible scalable virtual keyboard for X11."
 msgstr ""
-"Florence est un clavier virtuel pour GNOME extensible et redimensionnable."
+"Florence est un clavier virtuel pour X11 extensible et redimensionnable."
 
 #: home.php:10
 msgid ""
@@ -31,7 +31,7 @@ msgstr ""
 "clavier virtuel, clavier à l'écran, clavier logiciel, clavier gnome, clavier "
 "florence, clavier linux"
 
-#: home.php:11 home.php:31 tools.php:35
+#: home.php:11 home.php:28 tools.php:35
 msgid "Florence Virtual Keyboard"
 msgstr "Clavier virtuel Florence"
 
@@ -94,15 +94,15 @@ msgstr "A propos"
 
 #: home.php:23
 msgid ""
-"Florence is an extensible scalable virtual keyboard for GNOME. You need it "
-"if you can't use a real hardware keyboard, for example because you are "
-"disabled, your keyboard is broken or because you use a tablet PC, but you "
-"must be able to use a pointing device (as a mouse, a trackball, a "
-"touchscreen or <a href=\"http://www.inference.phy.cam.ac.uk/opengazer"
-"\">opengazer</a>); If you can't use a pointing device, there is gok, which "
-"can be used with just simple switches."
+"Florence is an extensible scalable virtual keyboard for <a href=\"http://en."
+"wikipedia.org/wiki/X_Window_System\">X11</a>. You need it if you can't use a "
+"real hardware keyboard, for example because you are disabled, your keyboard "
+"is broken or because you use a tablet PC, but you must be able to use a "
+"pointing device (as a mouse, a trackball, a touchscreen or <a href=\"http://"
+"www.inference.phy.cam.ac.uk/opengazer\">opengazer</a>); If you can't use a "
+"pointing device, there is gok, which can be used with just simple switches."
 msgstr ""
-"Florence est un clavier virtuel pour GNOME extensible et redimensionnable. "
+"Florence est un clavier virtuel pour <a href=\"http://fr.wikipedia.org/wiki/X_Window_System\">X11</a> extensible et redimensionnable. "
 "Vous avez besoin de Florence si vous ne pouvez pas utiliser un vrai clavier "
 "matériel, par exemple à cause d'un handicap, parce que votre clavier est "
 "cassé ou parce que vous utilisez un PC tablette. Cependant, vous devez être "
@@ -125,52 +125,34 @@ msgstr ""
 "personnes handicapées qui ont des difficultés à cliquer. Vous pouvez aussi "
 "utiliser la nouvelle méthode balade pour une saisie efficace."
 
-#: home.php:27
-msgid ""
-"Florence is primarily intended to be used with the GNOME desktop, although "
-"it can be used on any desktop environment."
-msgstr ""
-"Florence est principalement conçu pour être utilisé avec le bureau GNOME, "
-"mais peut être utilisé avec n'importe quel environnement de bureau."
-
 #: home.php:28
-msgid ""
-"Florence is available for GNOME 2 and GNOME 3. Download florence-gtk2 if you "
-"are using GNOME 2. The master version of Florence uses some features of "
-"GNOME 3 that are not available on GNOME 2."
-msgstr ""
-"Florence est disponible pour GNOME 2 et GNOME 3. Téléchargez florence-gtk2 "
-"si vous utilisez GNOME 2. La version maître de Florence utilise des "
-"fonctions de GNOME 3 qui ne sont pas disponible dans GNOME 2."
-
-#: home.php:31
 msgid "florence-us"
 msgstr "florence-fr"
 
-#: home.php:34
+#: home.php:31
 msgid "You can browse the full documentation for more informations."
 msgstr ""
 "Vous pouvez consulter la documentation complète pour plus d'informations."
 
-#: home.php:37
+#: home.php:34
 msgid "Alternatives"
 msgstr "Alternatives"
 
-#: home.php:39
+#: home.php:36
 msgid ""
-"If you are looking for an input method for your GNOME desktop, Florence may "
+"If you are looking for an input method for your X11 desktop, Florence may "
 "suit your needs or you may check the <a href=\"english/alternatives.html"
 "\">alternatives</a> section of the documentation."
 msgstr ""
-"Si vous cherchez une méthode de saisie pour votre bureau GNOME, Florence "
+"Si vous cherchez une méthode de saisie pour votre bureau X11, Florence "
 "peut convenir, ou vous pouvez regarder la section <a href=\"francais/"
 "alternatives.html\">alternatives</a> de la documentation."
 
-#: home.php:42
+#: home.php:39
 msgid "License"
 msgstr "Licence"
 
-#: home.php:45
+#: home.php:42
 msgid ""
 "Florence is free software. You are free do use it for any purpose, to modify "
 "it or to hire someone to modify it for you. You are also free to distribute "
@@ -189,11 +171,11 @@ msgstr ""
 "disponible à l'adresse <a href=\"http://fsffrance.org/gpl/gpl-fr.fr.html"
 "\">http://fsffrance.org/gpl/gpl-fr.fr.html</a>."
 
-#: home.php:48
+#: home.php:45
 msgid "Credits"
 msgstr "Remerciements"
 
-#: home.php:50
+#: home.php:47
 msgid ""
 "Florence is integrated in the <a href=\"http://code.google.com/p/ardesia/"
 "\">Ardesia project</a>"
@@ -201,7 +183,7 @@ msgstr ""
 "Florence est intégrée dans <a href=\"http://code.google.com/p/ardesia/\">le "
 "projet Ardesia</a>"
 
-#: home.php:54
+#: home.php:51
 msgid ""
 "Ardesia is the free digital sketchpad software that help you to make colored "
 "free-hand annotations with digital ink everywhere, record it and share on "
@@ -216,7 +198,7 @@ msgstr ""
 "bureau ou importer des images et les annoter et distribuer votre travail au "
 "monde entier. Créez des croquis et des œuvres d'art rapidement."
 
-#: home.php:58
+#: home.php:55
 msgid ""
 "Pietro Pilolli &lt;alpha@paranoici.org&gt; of the Ardesia project has "
 "contributed back a significant amount of code to the Florence project, "
@@ -228,7 +210,7 @@ msgstr ""
 "l'implémentation originale de la méthode de saisue balade, des corrections "
 "de bogue et d'autres patches qui doivent encore être fusionés."
 
-#: home.php:62
+#: home.php:59
 msgid ""
 "Arnaud Andoval &lt;arnaudsandoval@gmail.com&gt;, Stéphane Ancelot &lt;"
 "sancelot@free.fr&gt; and Laurent Bessard &lt;laurent.bessard@gmail.com&gt; "
@@ -241,7 +223,7 @@ msgstr ""
 "l'applet du tableau de bord de GNOME, des corrections de bogue et d'autres "
 "patches qui doivent encore être fusionés."
 
-#: home.php:66
+#: home.php:63
 msgid ""
 "Sourceforge.net is hosting the git repository, this web site, the bug "
 "tracker, the forum, the releases and other useful services at no charge."
@@ -249,17 +231,17 @@ msgstr ""
 "Souceforge.net héberge le référentiel git, ce site web, le tracker de "
 "bogues, le forum, les releases et d'autre services utiles gratuitement."
 
-#: home.php:69
+#: home.php:66
 msgid "SourceForge.net Logo"
 msgstr "Logo SourceForge.net"
 
-#: home.php:75
+#: home.php:72
 msgid "Author:"
 msgstr "Auteur:"
 
-#: home.php:76
-msgid "Last update: 6th of October, 2012"
-msgstr "Dernière mise à jour: 6 octobre 2012"
+#: home.php:73
+msgid "Last update: 16th of May, 2014"
+msgstr "Dernière mise à jour: 16 mai 2014"
 
 #: tools.php:51 tools.php:53
 msgid "Home"
@@ -305,6 +287,21 @@ msgstr "Pavé numérique"
 msgid "Main keyboard"
 msgstr "Clavier principal"
 
-#: svg/switch.php:17
-msgid "us"
-msgstr "fr"
+#~ msgid ""
+#~ "Florence is primarily intended to be used with the GNOME desktop, "
+#~ "although it can be used on any desktop environment."
+#~ msgstr ""
+#~ "Florence est principalement conçu pour être utilisé avec le bureau GNOME, "
+#~ "mais peut être utilisé avec n'importe quel environnement de bureau."
+
+#~ msgid ""
+#~ "Florence is available for GNOME 2 and GNOME 3. Download florence-gtk2 if "
+#~ "you are using GNOME 2. The master version of Florence uses some features "
+#~ "of GNOME 3 that are not available on GNOME 2."
+#~ msgstr ""
+#~ "Florence est disponible pour GNOME 2 et GNOME 3. Téléchargez florence-"
+#~ "gtk2 si vous utilisez GNOME 2. La version maître de Florence utilise des "
+#~ "fonctions de GNOME 3 qui ne sont pas disponible dans GNOME 2."
+
+#~ msgid "us"
+#~ msgstr "fr"

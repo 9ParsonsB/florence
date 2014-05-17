@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: florence\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-06 13:22+0200\n"
+"POT-Creation-Date: 2014-05-16 21:13+0200\n"
 "PO-Revision-Date: 2011-01-03 11:31+0000\n"
 "Last-Translator: elzadj <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -19,7 +19,8 @@ msgstr ""
 "X-Generator: Launchpad (build 13830)\n"
 
 #: home.php:9
-msgid "Florence is an extensible scalable virtual keyboard for GNOME."
+#, fuzzy
+msgid "Florence is an extensible scalable virtual keyboard for X11."
 msgstr ""
 "Florence - это расширяемая и масштабируемая виртуальная клавиатура для GNOME."
 
@@ -31,7 +32,7 @@ msgstr ""
 "виртуальная клавиатура, экранная клавиатура, виртуальная клавиатура, "
 "клавиатура GNOME, Флоренция клавиатуры, клавиатуры Linux"
 
-#: home.php:11 home.php:31 tools.php:35
+#: home.php:11 home.php:28 tools.php:35
 msgid "Florence Virtual Keyboard"
 msgstr "Виртуальная клавиатура Florence"
 
@@ -94,14 +95,15 @@ msgid "About"
 msgstr "О программе"
 
 #: home.php:23
+#, fuzzy
 msgid ""
-"Florence is an extensible scalable virtual keyboard for GNOME. You need it "
-"if you can't use a real hardware keyboard, for example because you are "
-"disabled, your keyboard is broken or because you use a tablet PC, but you "
-"must be able to use a pointing device (as a mouse, a trackball, a "
-"touchscreen or <a href=\"http://www.inference.phy.cam.ac.uk/opengazer"
-"\">opengazer</a>); If you can't use a pointing device, there is gok, which "
-"can be used with just simple switches."
+"Florence is an extensible scalable virtual keyboard for <a href=\"http://en."
+"wikipedia.org/wiki/X_Window_System\">X11</a>. You need it if you can't use a "
+"real hardware keyboard, for example because you are disabled, your keyboard "
+"is broken or because you use a tablet PC, but you must be able to use a "
+"pointing device (as a mouse, a trackball, a touchscreen or <a href=\"http://"
+"www.inference.phy.cam.ac.uk/opengazer\">opengazer</a>); If you can't use a "
+"pointing device, there is gok, which can be used with just simple switches."
 msgstr ""
 "Флоренция является расширяемым масштабируемые виртуальные клавиатуры для "
 "GNOME. Вам это нужно, если вы не можете использовать реальной аппаратной "
@@ -124,39 +126,24 @@ msgstr ""
 "ввод метод доступен, чтобы помочь инвалидам с трудностями на кнопку мыши. Вы "
 "также можете проверить новый эффективный метод прогулки."
 
-#: home.php:27
-msgid ""
-"Florence is primarily intended to be used with the GNOME desktop, although "
-"it can be used on any desktop environment."
-msgstr ""
-"Флоренция в первую очередь предназначен для использования с рабочего стола "
-"GNOME, хотя она может быть использована на любом рабочем столе окружающей "
-"среды."
-
 #: home.php:28
-msgid ""
-"Florence is available for GNOME 2 and GNOME 3. Download florence-gtk2 if you "
-"are using GNOME 2. The master version of Florence uses some features of "
-"GNOME 3 that are not available on GNOME 2."
-msgstr ""
-
-#: home.php:31
 msgid "florence-us"
 msgstr "florence-ru"
 
-#: home.php:34
+#: home.php:31
 msgid "You can browse the full documentation for more informations."
 msgstr ""
 "Вы можете просмотреть полную документацию для получения дополнительной "
 "информации."
 
-#: home.php:37
+#: home.php:34
 msgid "Alternatives"
 msgstr "Альтернативы"
 
-#: home.php:39
+#: home.php:36
+#, fuzzy
 msgid ""
-"If you are looking for an input method for your GNOME desktop, Florence may "
+"If you are looking for an input method for your X11 desktop, Florence may "
 "suit your needs or you may check the <a href=\"english/alternatives.html"
 "\">alternatives</a> section of the documentation."
 msgstr ""
@@ -164,11 +151,11 @@ msgstr ""
 "подойти вашим потребностям или вы можете проверить <a href=\"russian/"
 "alternatives.html\"> альтернативы</a> разделе документации."
 
-#: home.php:42
+#: home.php:39
 msgid "License"
 msgstr "Лицензия"
 
-#: home.php:45
+#: home.php:42
 msgid ""
 "Florence is free software. You are free do use it for any purpose, to modify "
 "it or to hire someone to modify it for you. You are also free to distribute "
@@ -187,11 +174,11 @@ msgstr ""
 "доступна по адресу <a href=\"http://www.gnu.org/licenses/old-licenses/"
 "gpl-2.0.html\">http://www.gnu.org/licenses/old-licenses/ GPL-2.0.html</a>"
 
-#: home.php:48
+#: home.php:45
 msgid "Credits"
 msgstr "Благодарности"
 
-#: home.php:50
+#: home.php:47
 msgid ""
 "Florence is integrated in the <a href=\"http://code.google.com/p/ardesia/"
 "\">Ardesia project</a>"
@@ -199,7 +186,7 @@ msgstr ""
 "Флоренция интегрирована в <a href=\"http://code.google.com/p/ardesia/\"> "
 "проекта Ardesia</a>"
 
-#: home.php:54
+#: home.php:51
 msgid ""
 "Ardesia is the free digital sketchpad software that help you to make colored "
 "free-hand annotations with digital ink everywhere, record it and share on "
@@ -214,7 +201,7 @@ msgstr ""
 "импортировать изображения и комментировать ее и распространять вашу работу в "
 "мире. Давайте создадим быстрый набросок и произведений искусства."
 
-#: home.php:58
+#: home.php:55
 msgid ""
 "Pietro Pilolli &lt;alpha@paranoici.org&gt; of the Ardesia project has "
 "contributed back a significant amount of code to the Florence project, "
@@ -226,7 +213,7 @@ msgstr ""
 "оригинальные прогулки метод ввода осуществления, исправляет ошибку и другие "
 "обновления, которые еще не объединены"
 
-#: home.php:62
+#: home.php:59
 msgid ""
 "Arnaud Andoval &lt;arnaudsandoval@gmail.com&gt;, Stéphane Ancelot &lt;"
 "sancelot@free.fr&gt; and Laurent Bessard &lt;laurent.bessard@gmail.com&gt; "
@@ -239,7 +226,7 @@ msgstr ""
 "осуществления, исправляет ошибку и больше патчей, которые еще предстоит "
 "слияние"
 
-#: home.php:66
+#: home.php:63
 msgid ""
 "Sourceforge.net is hosting the git repository, this web site, the bug "
 "tracker, the forum, the releases and other useful services at no charge."
@@ -247,17 +234,17 @@ msgstr ""
 "Sourceforge.net имеет Git репозиторий, этот веб-сайт,  трекер ошибок, форум, "
 "релизы и другие полезные услуги на безвозмездной основе"
 
-#: home.php:69
+#: home.php:66
 msgid "SourceForge.net Logo"
 msgstr "Логотип SourceForge.net"
 
-#: home.php:75
+#: home.php:72
 msgid "Author:"
 msgstr "Автор:"
 
-#: home.php:76
+#: home.php:73
 #, fuzzy
-msgid "Last update: 6th of October, 2012"
+msgid "Last update: 16th of May, 2014"
 msgstr "Последнее обновление: 5 ноября 2010"
 
 #: tools.php:51 tools.php:53
@@ -304,6 +291,13 @@ msgstr ""
 msgid "Main keyboard"
 msgstr "основной клавиатуре"
 
-#: svg/switch.php:17
-msgid "us"
-msgstr "ru"
+#~ msgid ""
+#~ "Florence is primarily intended to be used with the GNOME desktop, "
+#~ "although it can be used on any desktop environment."
+#~ msgstr ""
+#~ "Флоренция в первую очередь предназначен для использования с рабочего "
+#~ "стола GNOME, хотя она может быть использована на любом рабочем столе "
+#~ "окружающей среды."
+
+#~ msgid "us"
+#~ msgstr "ru"

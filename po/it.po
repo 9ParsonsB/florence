@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Florence Gnome virtual keyboard 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 20:33+0200\n"
+"POT-Creation-Date: 2014-05-17 10:47+0200\n"
 "PO-Revision-Date: 2010-04-07 18:45+0100\n"
 "Last-Translator: Pietro Pilolli\n"
 "Language-Team: Italian\n"
@@ -263,7 +263,7 @@ msgstr "layout"
 msgid "Quit preferences"
 msgstr "Esci dalle preferenze"
 
-#: ../data/florence.glade.h:60
+#: ../data/florence.glade.h:60 ../src/settings-window.c:613
 msgid "Cancel"
 msgstr "Cancella"
 
@@ -1296,12 +1296,12 @@ msgstr ""
 msgid "Window size out of range :%d, %d"
 msgstr "La dimensione della finestra è fuori dal dominio :%d"
 
-#: ../src/view.c:630
+#: ../src/view.c:629
 #, c-format
 msgid "Window opacity out of range (1.0 to 100.0): %f"
 msgstr "Opacità della finestra non è compresa tra 1.0 e 100.0: %f"
 
-#: ../src/view.c:792
+#: ../src/view.c:791
 msgid "Unable to allocate memory for view"
 msgstr "Impossibile allocare la memoria per la vista"
 
@@ -1429,6 +1429,10 @@ msgstr "Impossibile aprire %s: %s"
 #: ../src/settings-window.c:612
 msgid "Confirm"
 msgstr "Conferma"
+
+#: ../src/settings-window.c:613
+msgid "Apply"
+msgstr ""
 
 #: ../src/settings-window.c:613
 msgid "Discard changes?"
@@ -1675,15 +1679,15 @@ msgstr "Impossibile aprire %s"
 msgid "_Quit"
 msgstr "_Esci"
 
-#: ../src/menu.c:98
+#: ../src/menu.c:96
 msgid "_Help"
 msgstr "_Aiuto"
 
-#: ../src/menu.c:104
+#: ../src/menu.c:100
 msgid "_About"
 msgstr "_Info"
 
-#: ../src/menu.c:109
+#: ../src/menu.c:103
 msgid "_Preferences"
 msgstr "_Preferenze"
 

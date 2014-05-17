@@ -6,7 +6,7 @@ echo '<?xml version="1.0" encoding="utf-8" standalone="no"?>'."\n";
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta name="description" content="<?php echo _("Florence is an extensible scalable virtual keyboard for GNOME."); ?>"/>
+<meta name="description" content="<?php echo _("Florence is an extensible scalable virtual keyboard for X11."); ?>"/>
 <meta name="keywords" content="<?php echo _("virtual keyboard, onscreen keyboard, software keyboard, gnome keyboard, florence keyboard, linux keyboard"); ?>"/>
 <meta content="text/html; charset=utf-8" http-equiv="content-type"/><title><?php echo _("Florence Virtual Keyboard"); ?></title>
 <link rel="stylesheet" type="text/css" href="style.css"/>
@@ -20,12 +20,9 @@ echo '<?xml version="1.0" encoding="utf-8" standalone="no"?>'."\n";
 </center>
 <h2><?php echo _("About"); ?></h2>
 <div class="corps">
-<?php echo _("Florence is an extensible scalable virtual keyboard for GNOME. You need it if you can't use a real hardware keyboard, for example because you are disabled, your keyboard is broken or because you use a tablet PC, but you must be able to use a pointing device (as a mouse, a trackball, a touchscreen or <a href=\"http://www.inference.phy.cam.ac.uk/opengazer\">opengazer</a>); If you can't use a pointing device, there is gok, which can be used with just simple switches."); ?>
+<?php echo _("Florence is an extensible scalable virtual keyboard for <a href=\"http://en.wikipedia.org/wiki/X_Window_System\">X11</a>. You need it if you can't use a real hardware keyboard, for example because you are disabled, your keyboard is broken or because you use a tablet PC, but you must be able to use a pointing device (as a mouse, a trackball, a touchscreen or <a href=\"http://www.inference.phy.cam.ac.uk/opengazer\">opengazer</a>); If you can't use a pointing device, there is gok, which can be used with just simple switches."); ?>
    <br/><br/>
 <?php echo _("Florence stays out of your way when you don't need it: it appears on the screen only when you need it. A timer-based auto-click input method is available to help disabled people having difficulties to click. You may also check the new efficient ramble method."); ?>
-   <br/><br/>
-<?php echo _("Florence is primarily intended to be used with the GNOME desktop, although it can be used on any desktop environment."); ?>  
-<?php echo _("Florence is available for GNOME 2 and GNOME 3. Download florence-gtk2 if you are using GNOME 2. The master version of Florence uses some features of GNOME 3 that are not available on GNOME 2."); ?>  
 </div>
 <br/>
 	<center><img src="images/<?php echo _("florence-us"); ?>.png" alt="<?php echo _("Florence Virtual Keyboard"); ?>"/></center>
@@ -36,7 +33,7 @@ echo '<?xml version="1.0" encoding="utf-8" standalone="no"?>'."\n";
 <div class="corps">
 <h2><?php echo _("Alternatives"); ?></h2>
 <?php
-echo _("If you are looking for an input method for your GNOME desktop, Florence may suit your needs or you may check the <a href=\"english/alternatives.html\">alternatives</a> section of the documentation."); 
+echo _("If you are looking for an input method for your X11 desktop, Florence may suit your needs or you may check the <a href=\"english/alternatives.html\">alternatives</a> section of the documentation."); 
 ?>
 </div>
 <h2><?php echo _("License"); ?></h2>
@@ -73,7 +70,7 @@ echo _("Sourceforge.net is hosting the git repository, this web site, the bug tr
 <hr>
 <center>
 <?php echo _("Author:"); ?> <a href="mailto:f.agrech@gmail.com">François Agrech</a><br>
-<?php echo _("Last update: 6th of October, 2012"); ?>
+<?php echo _("Last update: 16th of May, 2014"); ?>
 </center>
 </body>
 </html>

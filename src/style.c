@@ -377,7 +377,7 @@ void style_shape_new(struct style *style, char *name, char *svg)
 	START_FUNC
 	struct shape *shape=g_malloc(sizeof(struct shape));
 	GError *error=NULL;
-	gchar *default_uri, *source;
+	gchar *default_uri, *source=NULL;
 	memset(shape, 0, sizeof(struct shape));
 	if (name) shape->name=g_strdup(name);
 	if (svg) {

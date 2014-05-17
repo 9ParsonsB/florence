@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-05-16 19:13+0200\n"
+"POT-Creation-Date: 2014-05-17 10:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12,49 +12,49 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:166(None)
-msgid "@@image: 'figures/florence.png'; md5=a946c1b9b8b3908e0224d6dfc543dec5"
+msgid "@@image: 'figures/florence.png'; md5=d41d8cd98f00b204e9800998ecf8427e"
 msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:180(None)
-msgid "@@image: 'figures/minimize.png'; md5=cfb045dc8103c2d1c42be11f4bce6620"
+msgid "@@image: 'figures/minimize.png'; md5=1263721d2ad27561b0ea722e91673943"
 msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:187(None)
-msgid "@@image: 'figures/configuration.png'; md5=136d611a5d262b19c4c50f1e41a0cb92"
+msgid "@@image: 'figures/configuration.png'; md5=a1161344a062b53cab9694be62ef92b4"
 msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:194(None)
-msgid "@@image: 'figures/move.png'; md5=05a7b87398d77c963624c6ce151901f7"
+msgid "@@image: 'figures/move.png'; md5=ff8513c6b8a6dda21dcdb186698494e9"
 msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:201(None)
-msgid "@@image: 'figures/bigger.png'; md5=05734f9dc42ce905cb2d1ea5d292922e"
+msgid "@@image: 'figures/bigger.png'; md5=dc05f2e5e29bcd4f3d7daebdbe8f19c6"
 msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:208(None)
-msgid "@@image: 'figures/smaller.png'; md5=06d9806f7deba61bbf8c46561abcad8d"
+msgid "@@image: 'figures/smaller.png'; md5=824f5876171931996d8238a10c0eca34"
 msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:215(None)
-msgid "@@image: 'figures/close.png'; md5=2c33cb8805596b8d74c1097867c67eec"
+msgid "@@image: 'figures/close.png'; md5=d41d8cd98f00b204e9800998ecf8427e"
 msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:222(None)
-msgid "@@image: 'figures/switch.png'; md5=b55b9e66547c89be560f652b6585a509"
+msgid "@@image: 'figures/switch.png'; md5=4100c29cbedeef4c343329c673a3a2b5"
 msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.

@@ -150,7 +150,7 @@ struct settings_registration *settings_registration_get(enum settings_item key)
 GSettings *settings_new_object(gchar *file, const gchar *cat)
 {
 	GSettingsBackend *backend;
-	GSettings *ret;
+	GSettings *ret=NULL;
 	if (file) {
 		backend=g_keyfile_settings_backend_new(file, "/apps/florence/", "toplevel");
 		if (!backend) {
@@ -340,7 +340,7 @@ gboolean settings_dirty()
 GVariant *settings_value_get(enum settings_item item)
 {
 	START_FUNC
-	GVariant *ret;
+	GVariant *ret=NULL;
 	gchar *str=NULL;
 	gchar *name=settings_defaults[item].settings_name;
 

@@ -195,8 +195,8 @@ void view_keyboards_set_pos(struct view *view, struct keyboard *over)
 	START_FUNC
 	GSList *list=view->keyboards;
 	struct keyboard *keyboard;
-	gdouble width, height, xoffset, yoffset;
-	gdouble x, y;
+	gdouble width=0.0, height=0.0, xoffset=0.0, yoffset=0.0;
+	gdouble x=0.0, y=0.0;
 
 	/* browse the keyboards */
 	while (list)
@@ -208,7 +208,7 @@ void view_keyboards_set_pos(struct view *view, struct keyboard *over)
 				case LAYOUT_VOID:
 					width=keyboard_get_width(keyboard);
 					height=keyboard_get_height(keyboard);
-					xoffset=yoffset=0;
+					xoffset=yoffset=0.0;
 					x=y=0.0;
 					if (over) keyboard_set_under(keyboard); else keyboard_set_over(keyboard);
 					break;
@@ -301,9 +301,9 @@ struct key *view_hit_get (struct view *view, gint x, gint y)
 {
 	START_FUNC
 	GSList *list=view->keyboards;
-	struct keyboard *keyboard;
+	struct keyboard *keyboard=NULL;
 	struct key *key;
-	gint kx, ky, kw, kh;
+	gint kx=0.0, ky=0.0, kw=0.0, kh=0.0;
 
 	/* find the hit keyboard */
 	while (list)

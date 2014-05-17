@@ -311,7 +311,7 @@ struct key *keyboard_hit_get(struct keyboard *keyboard, gint x, gint y, gdouble 
 	START_FUNC
 	GSList *list=keyboard->keys;
 #ifdef ENABLE_RAMBLE
-	enum key_hit kh;
+	enum key_hit kh=0;
 #endif
 	if (keyboard->under) return NULL;
 	while (list &&

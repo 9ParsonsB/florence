@@ -28,8 +28,9 @@ function make_docs_svg {
 	rsvg-convert svg/bigger.svg -o $1/bigger.png
 	php svg/key.php smaller > svg/smaller.svg
 	rsvg-convert svg/smaller.svg -o $1/smaller.png
-	php svg/switch.php > svg/switch-$2.svg
+	php svg/key.php switch > svg/switch-$2.svg
 	rsvg-convert svg/switch-$2.svg -o $1/switch.png
+	php svg/key.php close > svg/close-$2.svg
 	rsvg-convert svg/close.svg -o $1/close.png
 }
 
