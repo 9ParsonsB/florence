@@ -74,6 +74,7 @@ void view_on_destroy(gpointer user_data)
 	START_FUNC
 	struct view *view=(struct view *)user_data;
 	view->window=NULL;
+	END_FUNC
 }
 
 /* destroy the view */
