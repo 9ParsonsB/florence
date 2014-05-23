@@ -1,4 +1,4 @@
-QT += svg xml
+QT += svg xml widgets
 TARGET = helloworld
 TEMPLATE = app
 SOURCES += main.cpp lineedit.cpp

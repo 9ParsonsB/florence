@@ -144,7 +144,7 @@ void Florence::mouseDoubleClickEvent( QMouseEvent *event )
 void Florence::mouseMoveEvent( QMouseEvent *event )
 {
     if ( event->buttons() > Qt::NoButton )  {
-        Key *k = static_cast<Key *>( this->scene()->itemAt( this->mapToScene( event->pos() ) ) );
+        Key *k = static_cast<Key *>( this->scene()->itemAt( this->mapToScene( event->pos() ), QGraphicsView::transform() ) );
         if ( k != this->focusKey ) {
             this->autoRepeatTimer->stop();
             if ( this->focusKey ) this->focusKey->hoverLeaveEvent();

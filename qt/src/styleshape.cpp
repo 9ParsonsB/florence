@@ -19,9 +19,9 @@
 StyleShape::StyleShape( QDomElement el, QString colors[], QDomElement defs )
         : StyleItem ( el, colors, defs )
 {
-    this->activeRenderer = new QSvgRenderer( this->makeSvg( colors, STYLE_MOUSE_OVER_COLOR ).toAscii() );
-    this->pressedRenderer = new QSvgRenderer( this->makeSvg( colors, STYLE_ACTIVATED_COLOR ).toAscii() );
-    this->latchedRenderer = new QSvgRenderer( this->makeSvg( colors, STYLE_LATCHED_COLOR ).toAscii() );
+    this->activeRenderer = new QSvgRenderer( this->makeSvg( colors, STYLE_MOUSE_OVER_COLOR ).toLatin1() );
+    this->pressedRenderer = new QSvgRenderer( this->makeSvg( colors, STYLE_ACTIVATED_COLOR ).toLatin1() );
+    this->latchedRenderer = new QSvgRenderer( this->makeSvg( colors, STYLE_LATCHED_COLOR ).toLatin1() );
 }
 
 StyleShape::~StyleShape()
@@ -50,13 +50,13 @@ void StyleShape::setColors( QString colors[], enum style_colours key_color )
 {
     switch( key_color ) {
         case STYLE_MOUSE_OVER_COLOR:
-            this->activeRenderer->load( this->makeSvg( colors, STYLE_MOUSE_OVER_COLOR ).toAscii() );
+            this->activeRenderer->load( this->makeSvg( colors, STYLE_MOUSE_OVER_COLOR ).toLatin1() );
             break;
         case STYLE_ACTIVATED_COLOR:
-            this->pressedRenderer->load( this->makeSvg( colors, STYLE_ACTIVATED_COLOR ).toAscii() );
+            this->pressedRenderer->load( this->makeSvg( colors, STYLE_ACTIVATED_COLOR ).toLatin1() );
             break;
         case STYLE_LATCHED_COLOR:
-            this->latchedRenderer->load( this->makeSvg( colors, STYLE_LATCHED_COLOR ).toAscii() );
+            this->latchedRenderer->load( this->makeSvg( colors, STYLE_LATCHED_COLOR ).toLatin1() );
             break;
         case STYLE_KEY_COLOR:
             StyleItem::setColors( colors, STYLE_KEY_COLOR );

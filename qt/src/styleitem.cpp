@@ -47,7 +47,7 @@ StyleItem::StyleItem( QDomElement el, QString colors[], QDomElement defs )
         svg.insertBefore( doc, QDomNode() );
         QTextStream stream(&(this->svg));
         svg.save(stream, 0);
-        this->renderer = new QSvgRenderer( this->makeSvg( colors, STYLE_KEY_COLOR ).toAscii() );
+        this->renderer = new QSvgRenderer( this->makeSvg( colors, STYLE_KEY_COLOR ).toLatin1() );
     }
 }
 
@@ -68,7 +68,7 @@ QString StyleItem::makeSvg( QString colors[], enum style_colours key_color )
 
 void StyleItem::setColors( QString colors[], enum style_colours key_color )
 {
-    if (this->renderer) this->renderer->load( this->makeSvg( colors, key_color ).toAscii() );
+    if (this->renderer) this->renderer->load( this->makeSvg( colors, key_color ).toLatin1() );
 }
 
 QString StyleItem::getName()

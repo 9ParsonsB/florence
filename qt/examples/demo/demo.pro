@@ -1,4 +1,4 @@
-QT += svg xml
+QT += svg xml widgets
 TARGET = demo
 TEMPLATE = app
 SOURCES += main.cpp mainwindow.cpp lineedit.cpp

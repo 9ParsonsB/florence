@@ -2,8 +2,9 @@
 # Project created by QtCreator 2011-02-24T17:48:47
 # -------------------------------------------------
 QT += svg \
-    webkit \
-    xml
+    webkitwidgets \
+    xml \
+    widgets
 TARGET = qtwebkit
 TEMPLATE = app
 SOURCES += main.cpp \
