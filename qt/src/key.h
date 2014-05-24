@@ -136,15 +136,37 @@ public:
       */
     void press();
 
-signals:
-    /*! \fn void keyPressed( enum Symbol::symbol_role role, QString text )
-      * \brief Key pressed signal.
+    /*! \fn getCode
+      * \brief Get the hardware key code of this key
       *
-      * This signal is emitted when a non modifier key is pressed.
+      * \returns the hardware key code of the key.
+      */
+    quint8 getCode();
+
+signals:
+    /*! \fn void inputText( enum Symbol::symbol_role role, QString text )
+      * \brief input text signal.
+      *
+      * This signal is emitted when a non modifier key is activated.
       * \param role Role of the key
       * \param text Text to input in the target widget for keys with SYMBOL_TEXT role or the name of the symbol.
       */
-    void keyPressed( enum Symbol::symbol_role role, QString text );
+    void inputText( enum Symbol::symbol_role role, QString text );
+
+    /*! \fn void keyPressed()
+      * \brief key pressed signal.
+      *
+      * This signal is emitted when a key is pressed.
+      * \param code hardware key code of the key pressed.
+      */
+    void keyPressed( quint8 code );
+    /*! \fn void keyReleased()
+      * \brief key released signal.
+      *
+      * This signal is emitted when a non key is released.
+      * \param code hardware key code of the key pressed.
+      */
+    void keyReleased( quint8 code );
 
     /*! \fn latchKey( Key *k )
       * \brief Key latched.

@@ -197,6 +197,25 @@ signals:
       */
     void leftTab();
 
+    /*! \fn keyPressed()
+      * \brief key pressed signal.
+      *
+      * This signal is emitted when a key is pressed.
+      * Use this signal if you want to control directly the actions of the keys.
+      * The inputText signal can be used instead if you just want to input text.
+      * \param code hardware key code of the key pressed.
+      */
+    void keyPressed( quint8 code );
+    /*! \fn keyReleased()
+      * \brief key released signal.
+      *
+      * This signal is emitted when a key is released.
+      * Use this signal if you want to control directly the actions of the keys.
+      * The inputText signal can be used instead if you just want to input text.
+      * \param code hardware key code of the key pressed.
+      */
+    void keyReleased( quint8 code );
+
 protected:
     void resizeEvent( QResizeEvent *event );
     void mousePressEvent( QMouseEvent *event );
@@ -214,7 +233,7 @@ private:
     QTimer *autoRepeatTimer;
 
 private slots:
-    void keyPressed( enum Symbol::symbol_role role, QString text );
+    void inputText( enum Symbol::symbol_role role, QString text );
 
     void repeat();
 

@@ -86,11 +86,13 @@ bool Florence::setLayout( QString file )
     while ( !key.isNull() ) {
         Key *k = new Key( key, this->settings );
         k->setStyle( this->settings->getStyle() );
-        this->connect( k, SIGNAL(keyPressed(Symbol::symbol_role,QString)),
-                       SLOT(keyPressed(Symbol::symbol_role, QString)) );
+        this->connect( k, SIGNAL(inputText(Symbol::symbol_role,QString)),
+                       SLOT(inputText(Symbol::symbol_role, QString)) );
         this->connect( k, SIGNAL(latchKey(Key*)), SLOT(latchKey(Key*)) );
         this->connect( k, SIGNAL(unlatchKey(Key*)), SLOT(unlatchKey(Key*)) );
         this->connect( k, SIGNAL(unlatchAll()), SLOT(unlatchAll()) );
+        this->connect( k, SIGNAL(keyPressed(quint8)), SIGNAL(keyPressed(quint8)) );
+        this->connect( k, SIGNAL(keyReleased(quint8)), SIGNAL(keyReleased(quint8)) );
         this->scene()->addItem(k);
         key = key.nextSiblingElement("key");
     }
@@ -207,7 +209,7 @@ void Florence::unlatchAll()
     this->latchedKeys.clear();
 }
 
-void Florence::keyPressed( enum Symbol::symbol_role role, QString text )
+void Florence::inputText( enum Symbol::symbol_role role, QString text )
 {
     switch ( role ) {
         case Symbol::SYMBOL_TEXT:

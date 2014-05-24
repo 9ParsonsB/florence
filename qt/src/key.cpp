@@ -189,7 +189,7 @@ void Key::mouseReleaseEvent ()
                 this->update();
                 break;
             case KEY_LOCKED:
-	    case KEY_PRESSED: // Should not happen
+            case KEY_PRESSED: // Should not happen
                 this->settings->getKeymap()->removeModifier( mod );
                 this->status = KEY_RELEASED;
                 update = true;
@@ -224,9 +224,10 @@ bool Key::unlatch()
 
 void Key::press()
 {
+    emit keyPressed( this->code );
     if ( this->settings->getKeymap()->getKeyModifier( this->code ) == 0 ) {
         Symbol *s = this->settings->getKeymap()->getSymbol( this->code );
-        emit keyPressed( s->getRole(), s->getName() );
+        emit inputText( s->getRole(), s->getName() );
         this->hovered = true;
         this->setZValue(1);
         this->status = KEY_PRESSED;
@@ -238,6 +239,7 @@ void Key::press()
 
 void Key::release()
 {
+    emit keyReleased( this->code );
     if ( releaseTimer.isActive() ) releaseTimer.stop();
     this->hovered = false;
     this->setZValue(0);
