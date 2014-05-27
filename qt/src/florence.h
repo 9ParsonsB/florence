@@ -230,6 +230,7 @@ private:
     Settings *settings;
     Key *focusKey;
     QVector<Key *> latchedKeys;
+    QVector<Key *> lockedKeys;
     QTimer *autoRepeatTimer;
 
 private slots:
@@ -237,8 +238,13 @@ private slots:
 
     void repeat();
 
+    void keyPressedSlot( quint8 code );
+    void keyReleasedSlot( quint8 code );
+
     void latchKey( Key *key );
     void unlatchKey( Key *key );
+    void lockKey( Key *key );
+    void unlockKey( Key *key );
     void unlatchAll();
 };
 

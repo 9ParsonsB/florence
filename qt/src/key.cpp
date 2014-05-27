@@ -177,6 +177,7 @@ void Key::mouseReleaseEvent ()
                 this->settings->getKeymap()->addModifier( mod );
                 if ( this->settings->getKeymap()->isLocker( this ->code ) ) {
                     this->status = KEY_LOCKED;
+                    emit lockKey( this );
                 } else {
                     this->status = KEY_LATCHED;
                     emit latchKey( this );
@@ -186,9 +187,11 @@ void Key::mouseReleaseEvent ()
             case KEY_LATCHED:
                 this->status = KEY_LOCKED;
                 emit unlatchKey( this );
+                emit lockKey( this );
                 this->update();
                 break;
             case KEY_LOCKED:
+                emit unlockKey( this );
             case KEY_PRESSED: // Should not happen
                 this->settings->getKeymap()->removeModifier( mod );
                 this->status = KEY_RELEASED;
@@ -224,8 +227,8 @@ bool Key::unlatch()
 
 void Key::press()
 {
-    emit keyPressed( this->code );
     if ( this->settings->getKeymap()->getKeyModifier( this->code ) == 0 ) {
+        emit keyPressed( this->code );
         Symbol *s = this->settings->getKeymap()->getSymbol( this->code );
         emit inputText( s->getRole(), s->getName() );
         this->hovered = true;
@@ -245,4 +248,14 @@ void Key::release()
     this->setZValue(0);
     this->status = KEY_RELEASED;
     this->update();
+}
+
+quint8 Key::getCode()
+{
+    return this->code;
+}
+
+bool Key::isLocker()
+{
+    return this->settings->getKeymap()->isLocker( this ->code );
 }

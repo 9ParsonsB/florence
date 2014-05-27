@@ -90,9 +90,11 @@ bool Florence::setLayout( QString file )
                        SLOT(inputText(Symbol::symbol_role, QString)) );
         this->connect( k, SIGNAL(latchKey(Key*)), SLOT(latchKey(Key*)) );
         this->connect( k, SIGNAL(unlatchKey(Key*)), SLOT(unlatchKey(Key*)) );
+        this->connect( k, SIGNAL(lockKey(Key*)), SLOT(lockKey(Key*)) );
+        this->connect( k, SIGNAL(unlockKey(Key*)), SLOT(unlockKey(Key*)) );
         this->connect( k, SIGNAL(unlatchAll()), SLOT(unlatchAll()) );
-        this->connect( k, SIGNAL(keyPressed(quint8)), SIGNAL(keyPressed(quint8)) );
-        this->connect( k, SIGNAL(keyReleased(quint8)), SIGNAL(keyReleased(quint8)) );
+        this->connect( k, SIGNAL(keyPressed(quint8)), SLOT(keyPressedSlot(quint8)) );
+        this->connect( k, SIGNAL(keyReleased(quint8)), SLOT(keyReleasedSlot(quint8)) );
         this->scene()->addItem(k);
         key = key.nextSiblingElement("key");
     }
@@ -194,11 +196,30 @@ void Florence::unlatchKey( Key *key )
     this->latchedKeys.remove( this->latchedKeys.indexOf( key ) );
 }
 
+void Florence::lockKey( Key *key )
+{
+    this->lockedKeys.append( key );
+    if ( key->isLocker() ) {
+        emit keyPressed( key->getCode() );
+        emit keyReleased( key->getCode() );
+    }
+}
+
+void Florence::unlockKey( Key *key )
+{
+    this->lockedKeys.remove( this->lockedKeys.indexOf( key ) );
+    if ( key->isLocker() ) {
+        emit keyPressed( key->getCode() );
+        emit keyReleased( key->getCode() );
+    }
+}
+
 void Florence::unlatchAll()
 {
     bool unlatched = false;
     foreach ( Key *k, this->latchedKeys ) {
         unlatched = k->unlatch() || unlatched;
+        emit keyReleased( k->getCode() );
     }
 
     if ( unlatched ) foreach ( QGraphicsItem *it, this->scene()->items() ) {
@@ -229,5 +250,27 @@ void Florence::inputText( enum Symbol::symbol_role role, QString text )
             break;
         default:
             break;
+    }
+}
+
+void Florence::keyPressedSlot( quint8 code )
+{
+    foreach ( Key *k, this->latchedKeys ) {
+        emit keyPressed( k->getCode() );
+    }
+    foreach ( Key *k, this->lockedKeys ) {
+        if ( !k->isLocker() ) emit keyPressed( k->getCode() );
+    }
+    emit keyPressed( code );
+}
+
+void Florence::keyReleasedSlot( quint8 code )
+{
+    emit keyReleased(code);
+    foreach ( Key *k, this->latchedKeys ) {
+        emit keyReleased( k->getCode() );
+    }
+    foreach ( Key *k, this->lockedKeys ) {
+        if ( !k->isLocker() ) emit keyReleased( k->getCode() );
     }
 }

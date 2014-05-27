@@ -15,30 +15,13 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "florenceexception.h"
-#include "simulator.h"
-#include <QX11Info>
-#include <X11/extensions/XTest.h>
 
-Simulator::Simulator ()
+FlorenceException::FlorenceException( QString message )
 {
-    int event_base, error_base, major, minor;
-    if ( !XTestQueryExtension(
-             QX11Info::display(),
-             &event_base, &error_base, &major, &minor) ) {
-        throw new FlorenceException(tr("Failed to initialize XTST."));
-    }
+    this->message = message;
 }
 
-void Simulator::keyPress( quint8 code )
+const char* FlorenceException::what () const throw()
 {
-    XTestFakeKeyEvent(
-                QX11Info::display(),
-                code, true, 0);
-}
-
-void Simulator::keyRelease( quint8 code )
-{
-    XTestFakeKeyEvent(
-                QX11Info::display(),
-                code, false, 0);
+    return this->message.toLatin1();
 }

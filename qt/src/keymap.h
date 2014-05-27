@@ -60,10 +60,10 @@ public:
     /*! \fn getSymbol( quint8 mod )
       * \brief Returns the Symbol associated with this key and the provided modifier.
       * \param mod Modifier applied to this key.
-      * \returns A pointer to the ModifiedSymbol associated with this key code and the provided modifier.
-      * \see ModifiedSymbol
+      * \returns A pointer to the Symbol associated with this key code and the provided modifier.
+      * \see Symbol
       */
-    ModifiedSymbol *getSymbol( quint8 mod );
+    Symbol *getSymbol( quint8 mod );
     /*! \fn getModifier()
       * \brief Returns the modifier value of this key.
       * \returns 0 for non modifier keys, or the value of the modifier for modifier keys.

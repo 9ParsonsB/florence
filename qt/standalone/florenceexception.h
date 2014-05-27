@@ -14,43 +14,33 @@
 //    You should have received a copy of the GNU General Public License
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef SILUMATOR_H
-#define SIMULATOR_H
+#ifndef FLORENCEEXCEPTION_H
+#define FLORENCEEXCEPTION_H
 
-#include <QObject>
+#include <QString>
+#include <exception>
 
-/*! \class Simulator
-  * \brief This class simulates key events
-  *
-  * This class uses XTST to simulate keyboard events in X11.
+/*! \exception FlorenceException
+  * \brief Exception raised by Florence objects.
   */
-class Simulator : public QObject
+class FlorenceException : public std::exception
 {
-    Q_OBJECT
-
 public:
-    /*! \fn Simulator()
+    /*! \fn FlorenceException()
       * \brief Constuctor.
       *
-      * Instantiates a Simulator object.
+      * Instantiates a FlorenceException object.
       */
-    Simulator();
+    FlorenceException( QString message );
 
-public slots:
-    /*! \fn keyPress()
-      * \brief Simulate a key press event.
-      *
-      * Sends a key press event to X11, using XTST.
-      * \param code hardware key code of the key.
+    /*! \fn what()
+      * \brief Provides text information about the exception.
       */
-    void keyPress( quint8 code );
-    /*! \fn keyRelease()
-      * \brief Simulate a key press event.
-      *
-      * Sends a key release event to X11, using XTST.
-      * \param code hardware key code of the key.
-      */
-    void keyRelease( quint8 code );
+    virtual const char* what() const throw();
+
+private:
+    QString message;
 };
 
-#endif
+
+#endif // FLORENCEEXCEPTION_H

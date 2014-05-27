@@ -36,7 +36,7 @@ void xkeyboard_groups_free(struct xkeyboard *xkeyboard) {
 
 #ifdef ENABLE_XKB
 
-/* resurns TRUE is the symbol is a layout name */
+/* returns TRUE is the symbol is a layout name */
 gboolean xkeyboard_is_sym(gchar *symbol)
 {
 	START_FUNC

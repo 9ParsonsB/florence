@@ -138,10 +138,14 @@ public:
 
     /*! \fn getCode
       * \brief Get the hardware key code of this key
-      *
       * \returns the hardware key code of the key.
       */
     quint8 getCode();
+    /*! \fn isLocker()
+      * \brief Returns true if the key is a locker key.
+      * \returns true if the key is a locker key.
+      */
+    bool isLocker();
 
 signals:
     /*! \fn void inputText( enum Symbol::symbol_role role, QString text )
@@ -189,6 +193,20 @@ signals:
       * It notifies the keyboard that all latched keys should be unlatched.
       */
     void unlatchAll();
+    /*! \fn lockKey( Key *k )
+      * \brief Key latched.
+      *
+      * This signal is emitted on modifier keys when the state has been switched to locked.
+      * It should be used to update all the other keys with a modified symbol.
+      */
+    void lockKey( Key *k );
+    /*! \fn unlockKey( Key *k )
+      * \brief Key unlatched.
+      *
+      * This signal is emitted when a previously locked key is released.
+      * It should be used to update the keyboard with non modified symbols.
+      */
+    void unlockKey( Key *k );
 
 public slots:
     /*! \fn setStyle( Style *style )

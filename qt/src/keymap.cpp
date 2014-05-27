@@ -119,7 +119,7 @@ KeymapKey::~KeymapKey()
     }
 }
 
-ModifiedSymbol *KeymapKey::getSymbol( quint8 mod )
+Symbol *KeymapKey::getSymbol( quint8 mod )
 {
     int score = -1;
     ModifiedSymbol *ret = NULL;
