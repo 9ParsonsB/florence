@@ -397,8 +397,9 @@ struct controller *controller_new()
 	} else controller_set_mode(controller);
 #else
 	flo_warn(_("AT-SPI has been disabled at compile time: auto-hide mode is disabled."));
-	controller->visible=!settings_get_bool(SETTINGS_HIDE_ON_START);
-	controller_set_mode(controller);
+	if (settings_get_bool(SETTINGS_HIDE_ON_START)) {
+		florence_hide();
+	} else controller_set_mode(controller);
 #endif
 	settings_changecb_register(SETTINGS_CONTROLLER_FLOATICON, controller_on_float_icon_change, controller);
 	controller_float_icon(controller);
