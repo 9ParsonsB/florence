@@ -65,6 +65,15 @@ public:
       * \brief Constuctor.
       *
       * Instantiates a Symbol object.
+      * \param name text of the symbol
+      * \param settings Pointer to the settings object of the Keyboard.
+      */
+    Symbol( QString name, Settings *settings );
+
+    /*! \fn Symbol( QDomElement el, Settings *settings )
+      * \brief Constuctor.
+      *
+      * Instantiates a Symbol object.
       * \param el Pointer to the parsed XML document containing the symbol description.
       * \param settings Pointer to the settings object of the Keyboard.
       */
@@ -106,6 +115,16 @@ private:
 class ModifiedSymbol : public Symbol
 {
 public:
+    /*! \fn ModifiedSymbol( QString name, quint8 modifier, Settings *settings )
+      * \brief Constuctor.
+      *
+      * Instantiates a ModifiedSymbol object.
+      * \param name text of the symbol
+      * \param modifier
+      * \param settings Pointer to the settings object of the Keyboard.
+      */
+    ModifiedSymbol( QString name, quint8 modifier, Settings *settings );
+
     /*! \fn ModifiedSymbol( QDomElement el, Settings *settings )
       * \brief Constuctor.
       *

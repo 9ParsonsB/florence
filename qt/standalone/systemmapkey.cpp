@@ -16,14 +16,14 @@
 
 #include "systemmapkey.h"
 
-SystemMapKey::SystemMapKey(SystemMap *map, quint8 code, QObject *parent) :
-    QObject(parent)
+SystemMapKey::SystemMapKey(SystemMap *map, quint8 code)
 {
+    this->code = code;
     this->map = map;
     this->locker = false;
     this->modifier = this->map->getDesc()->map->modmap[code];
 
-    if ( XkbKeyAction( this->map->getDesc(), code, 0 ) ) {
+    if ( XkbKeyAction( this->map->getDesc(), (KeyCode)code, 0 ) ) {
         switch (XkbKeyAction(this->map->getDesc(), code, 0)->type) {
         case XkbSA_LockMods: this->locker = true; break;
         case XkbSA_SetMods: this->modifier = XkbKeyAction( this->map->getDesc(), code, 0 )->mods.mask;
@@ -44,41 +44,53 @@ bool SystemMapKey::isLocker()
 
 Symbol *SystemMapKey::getSymbol( quint8 mod )
 {
-    unsigned char info = XkbKeyGroupInfo(this->map->getDesc(), code);
-    unsigned int num_groups = XkbKeyNumGroups(this->map->getDesc(), code);
+    ModifiedSymbol *ret = NULL;
 
-    unsigned int group = 0x00;
-    switch (XkbOutOfRangeGroupAction(info)) {
-    case XkbRedirectIntoRange:
-        group = XkbOutOfRangeGroupInfo(info);
-        if (group >= num_groups) {
-            group = 0;
-        }
-        break;
-    case XkbClampIntoRange:
-        group = num_groups - 1;
-        break;
-    case XkbWrapIntoRange:
-    default:
-        if (num_groups != 0) {
-            group %= num_groups;
-        }
-        break;
-    }
-
-    XkbKeyTypePtr key_type = XkbKeyKeyType(this->map->getDesc(), code, group);
-    unsigned int active_mods = mod & key_type->mods.mask;
-
-    int i, level = 0;
-    for (i = 0; i < key_type->map_count; i++) {
-        if (key_type->map[i].active && key_type->map[i].mods.mask == active_mods) {
-            level = key_type->map[i].level;
+    foreach( ModifiedSymbol *s, this->symbols ) {
+        if ( mod == s->getModifier() ) {
+            ret = s;
         }
     }
 
-    KeySym sym = XkbKeycodeToKeysym( this->map->getDisplay(), code, group, level );
+    if (!ret) {
+        unsigned char info = XkbKeyGroupInfo(this->map->getDesc(), code);
+        unsigned int num_groups = XkbKeyNumGroups(this->map->getDesc(), code);
 
-    return NULL;
-    //return XKeysymToString( sym );
-    //return QString(QChar( (int)sym ));
+        unsigned int group = 0x00;
+        switch (XkbOutOfRangeGroupAction(info)) {
+        case XkbRedirectIntoRange:
+            group = XkbOutOfRangeGroupInfo(info);
+            if (group >= num_groups) {
+                group = 0;
+            }
+            break;
+        case XkbClampIntoRange:
+            group = num_groups - 1;
+            break;
+        case XkbWrapIntoRange:
+        default:
+            if (num_groups != 0) {
+                group %= num_groups;
+            }
+            break;
+        }
+
+        XkbKeyTypePtr key_type = XkbKeyKeyType(this->map->getDesc(), code, group);
+        unsigned int active_mods = mod & key_type->mods.mask;
+
+        int i, level = 0;
+        for (i = 0; i < key_type->map_count; i++) {
+            if (key_type->map[i].active && key_type->map[i].mods.mask == active_mods) {
+                level = key_type->map[i].level;
+            }
+        }
+
+        KeySym sym = XkbKeycodeToKeysym( this->map->getDisplay(), code, group, level );
+
+        ModifiedSymbol *symbol = new ModifiedSymbol(XKeysymToString( sym ), mod, this->map->getSettings());
+        this->symbols.append(symbol);
+        ret = symbol;
+    }
+
+    return ret;
 }

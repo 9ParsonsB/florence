@@ -27,11 +27,11 @@
   * The key properties are fetched from XKB.
   * \see Keymap
   */
-class SystemMapKey : public QObject
+class SystemMapKey : public KeymapKey
 {
     Q_OBJECT
 public:
-    SystemMapKey(SystemMap *map, quint8 code, QObject *parent = 0);
+    SystemMapKey(SystemMap *map, quint8 code);
 
     /*! \fn getSymbol( quint8 mod )
       * \brief Returns the Symbol associated with this key and the provided modifier.
@@ -53,8 +53,7 @@ public:
 
 private:
     SystemMap *map;
-    quint8 modifier;
-    bool locker;
+    QVector<ModifiedSymbol *> symbols;
     quint8 code;
 };
 

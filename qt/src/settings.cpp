@@ -108,3 +108,9 @@ bool Settings::setKeymap( QString file )
         return true;
     } else return false;
 }
+
+void Settings::setKeymap( Keymap *map )
+{
+    this-> keymap = map;
+    emit keymapChanged( this->keymap );
+}

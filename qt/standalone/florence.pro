@@ -1,3 +1,4 @@
+CONFIG += qt debug
 QT += svg xml widgets x11extras
 TARGET = florence
 TEMPLATE = app

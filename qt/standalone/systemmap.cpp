@@ -16,9 +16,9 @@
 
 #include "florenceexception.h"
 #include "systemmap.h"
+#include "systemmapkey.h"
 
-SystemMap::SystemMap(QObject *parent) :
-    QObject(parent)
+SystemMap::SystemMap() : Keymap()
 {
     int rc=0;
     int maj=XkbMajorVersion;
@@ -44,11 +44,28 @@ SystemMap::SystemMap(QObject *parent) :
                                          " ; rc = " + QString::number(rc)).toLatin1() ));
     }
 
-    this->keyboardMap = XkbGetMap(display, XkbAllClientInfoMask, XkbUseCoreKbd);
+    this->keyboardMap = XkbGetMap(display, XkbAllClientInfoMask|XkbKeyActionsMask|XkbModifierMapMask, XkbUseCoreKbd);
 }
 
-SystemMap::~SystemMap(){
+SystemMap::~SystemMap()
+{
     XkbFreeClientMap(this->keyboardMap, XkbAllClientInfoMask, True);
+}
+
+bool SystemMap::load(Settings *settings)
+{
+    this->settings = settings;
+    for ( int i = 0 ; i < 256 ; i++ ) {
+        if ( this->keys[i] ) {
+            delete this->keys[i];
+        }
+        if (i >= this->getDesc()->min_key_code && i <= this->getDesc()->max_key_code)
+            this->keys[i] = new SystemMapKey(this, i);
+        else
+            this->keys[i] = NULL;
+    }
+
+    return true;
 }
 
 QString SystemMap::getKeySym( quint8 code, quint8 modifierMask )
@@ -98,4 +115,16 @@ XkbDescPtr SystemMap::getDesc()
 Display *SystemMap::getDisplay()
 {
     return this->display;
+}
+
+Settings *SystemMap::getSettings()
+{
+    return this->settings;
+}
+
+Symbol *SystemMap::getSymbol( quint8 code )
+{
+    if ( this->keys[code] ) {
+        return static_cast<SystemMapKey *>(this->keys[code])->getSymbol( this->modifier );
+    } else return NULL;
 }

@@ -17,6 +17,7 @@
 #include <QApplication>
 #include "simulator.h"
 #include "florence.h"
+#include "systemmap.h"
 
 int main(int argc, char *argv[])
 {
@@ -24,6 +25,9 @@ int main(int argc, char *argv[])
 
     Simulator *simulator = new Simulator();
     Florence *keyboard = new Florence();
+    SystemMap *map = new SystemMap();
+    map->load(keyboard->getSettings());
+    keyboard->setKeymap(map);
 
     QObject::connect( keyboard, SIGNAL(keyPressed(quint8)), simulator, SLOT(keyPress(quint8)) );
     QObject::connect( keyboard, SIGNAL(keyReleased(quint8)), simulator, SLOT(keyRelease(quint8)) );

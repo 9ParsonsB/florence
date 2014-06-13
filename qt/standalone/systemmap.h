@@ -17,17 +17,20 @@
 #ifndef SYSTEMLAYOUT_H
 #define SYSTEMLAYOUT_H
 
-#include <QObject>
+#include "keymap.h"
 #include <QX11Info>
-#include <X11/X.h>
-#include <X11/XKBlib.h>
+
+extern "C" {
+    #include <X11/X.h>
+    #include <X11/XKBlib.h>
+}
 
 /*! \class SystemMap
   * \brief This class provides information about the system keyboad map layout
   *
   * This class uses XKB to find keyboard layout information
   */
-class SystemMap : public QObject
+class SystemMap : public Keymap
 {
     Q_OBJECT
 public:
@@ -36,7 +39,7 @@ public:
       *
       * Instantiates a SystemLayout object.
       */
-    SystemMap(QObject *parent = 0);
+    SystemMap();
 
     /*! \fn ~SystemMap()
       * \brief Destructor.
@@ -45,11 +48,24 @@ public:
       */
     ~SystemMap();
 
+    /*! \fn load( Settings *settings )
+      * \brief Loads the Keymap from XKB.
+      * \param settings The settings object used to instantiate the symbols.
+      * \returns true for success, false for failure.
+      */
+    bool load( Settings *settings );
+
     /*! \fn getKeySym()
       * \brief Get symbol from hardware key code.
       * \param code the hardware key code
       */
     QString getKeySym( quint8 code, quint8 modifierMask );
+
+    /*! \fn getSymbol()
+      * \brief Get symbol from hardware key code.
+      * \param code the hardware key code
+      */
+    Symbol *getSymbol( quint8 code );
 
     /*! \fn getDesc()
       * \brief Get XKB description map.
@@ -61,9 +77,15 @@ public:
       */
     Display *getDisplay();
 
+    /*! \fn getDisplay()
+      * \brief Get Settings object.
+      */
+    Settings *getSettings();
+
 private:
     Display *display;
     XkbDescPtr keyboardMap;
+    Settings *settings;
 };
 
 #endif // SYSTEMLAYOUT_H

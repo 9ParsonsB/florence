@@ -1,3 +1,4 @@
+CONFIG += qt debug
 QT += svg xml
 TARGET = florence_qt
 TEMPLATE = lib

@@ -96,6 +96,7 @@ public:
       * \param parent the parent widget
       */
     Florence( QWidget *parent = 0 );
+
     /*! \fn ~Florence
       * \brief Destructor.
       *
@@ -111,6 +112,7 @@ public:
       * \returns true on success and false on failure.
       */
     bool setLayout( QString file );
+
     /*! \fn setStyle( QString file )
       * \brief Sets the style of the keyboard.
       *
@@ -119,6 +121,14 @@ public:
       * \returns true on success and false on failure.
       */
     bool setStyle( QString file );
+
+    /*! \fn setKeymap( Keymap *map )
+      * \brief Sets the keymap of the keyboard.
+      *
+      * \param map The keymap to use.
+      */
+    void setKeymap( Keymap *map );
+
     /*! \fn setKeymap( QString file )
       * \brief Sets the keymap of the keyboard.
       *
@@ -127,6 +137,7 @@ public:
       * \returns true on success and false on failure.
       */
     bool setKeymap( QString file );
+
     /*! \fn setColor( enum StyleItem::style_colours color, QString value )
       * \brief Changes a style color.
       *
@@ -143,6 +154,7 @@ public:
       * \param value The string representation of the color to set the style element to.
       */
     void setColor( enum StyleItem::style_colours color, QString value );
+
     /*! \fn setOpacity( qreal opacity )
       * \brief Sets the keyboard opacity.
       *
@@ -151,6 +163,7 @@ public:
       * \param opacity A number from 0.0 (transparent) to 1.0 (opaque)
       */
     void setOpacity( qreal opacity );
+
     /*! \fn setFont( QString font )
       * \brief Sets the font of the symbols.
       *
@@ -158,6 +171,11 @@ public:
       * \param font The name of the font.
       */
     void setFont( QString font );
+
+    /*! \fn getSettings()
+      * \brief Get the settings object.
+      */
+    Settings *getSettings();
 
 signals:
     /*! \fn inputText( QString text )

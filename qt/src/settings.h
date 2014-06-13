@@ -104,6 +104,11 @@ public:
       * \see Style
       */
     bool setStyle( QString file );
+    /*! \fn setKeymap( Keymap *map )
+      * \param map The new Keymap object.
+      * \see Keymap
+      */
+    void setKeymap( Keymap *map );
     /*! \fn setKeymap( QString file )
       * \param file The new Keymap file name.
       * \see Keymap

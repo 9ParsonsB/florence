@@ -42,6 +42,13 @@ class KeymapKey : public QObject
     Q_OBJECT
 
 public:
+    /*! \fn KeymapKey()
+      * \brief Constructor
+      *
+      * Instantiates a KeymapKey element.
+      */
+    KeymapKey();
+
     /*! \fn KeymapKey( QDomElement el, Settings *settings )
       * \brief Constructor
       *
@@ -50,12 +57,13 @@ public:
       * \param settings The settings object used to instantiate the symbols.
       */
     KeymapKey( QDomElement el, Settings *settings );
+
     /*! \fn ~KeymapKey()
       * \brief Destructor
       *
       * Destroys a KeymapKey object
       */
-    ~KeymapKey();
+    virtual ~KeymapKey();
 
     /*! \fn getSymbol( quint8 mod )
       * \brief Returns the Symbol associated with this key and the provided modifier.
@@ -63,22 +71,24 @@ public:
       * \returns A pointer to the Symbol associated with this key code and the provided modifier.
       * \see Symbol
       */
-    Symbol *getSymbol( quint8 mod );
+    virtual Symbol *getSymbol( quint8 mod );
     /*! \fn getModifier()
       * \brief Returns the modifier value of this key.
       * \returns 0 for non modifier keys, or the value of the modifier for modifier keys.
       */
-    quint8 getModifier();
+    virtual quint8 getModifier();
     /*! \fn isLocker()
       * \brief Returns true if the key is a locker key.
       * \returns true if the key is a locker key.
       */
-    bool isLocker();
+    virtual bool isLocker();
+
+protected:
+    quint8 modifier;
+    bool locker;
 
 private:
     QVector<ModifiedSymbol *> symbols;
-    quint8 modifier;
-    bool locker;
 };
 
 /*! \class Keymap
@@ -116,7 +126,7 @@ public:
       *
       * Destroys a Keymap
       */
-    ~Keymap();
+    virtual ~Keymap();
 
     /*! \fn load( QString file, Settings *settings )
       * \brief Loads the Keymap from a XML description file.
@@ -131,7 +141,7 @@ public:
       * \param code Key code to query
       * \returns The Symbol associated with the key code
       */
-    Symbol *getSymbol( quint8 code );
+    virtual Symbol *getSymbol( quint8 code );
     /*! \fn getKeyModifier( quint8 code )
       * \brief Returns the modifier value of the key code.
       *
@@ -142,13 +152,13 @@ public:
       * \see Keymap::addModifier
       * \see Keymap::removeModifier
       */
-    quint8 getKeyModifier( quint8 code );
+    virtual quint8 getKeyModifier( quint8 code );
     /*! \fn isLocker( quint8 code )
       * \brief Returns true if the code is associated with a locker key.
       * \param code The key code to query
       * \returns true if the key is a locker key, false otherwise.
       */
-    bool isLocker( quint8 code );
+    virtual bool isLocker( quint8 code );
 
     /*! \fn addModifier( quint8 mod )
       * \brief Adds a modifier to the global modifier state.
@@ -170,9 +180,9 @@ public:
       */
     void removeModifier( quint8 mod );
 
-private:
-    KeymapKey *keys[256];
+protected:
     quint8 modifier;
+    KeymapKey *keys[256];
 };
 
 #endif // KEYMAP_H

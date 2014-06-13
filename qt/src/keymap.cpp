@@ -95,6 +95,11 @@ void Keymap::removeModifier( quint8 mod )
     this->modifier -= mod;
 }
 
+KeymapKey::KeymapKey()
+{
+    this->modifier = 0;
+}
+
 KeymapKey::KeymapKey( QDomElement el, Settings *settings )
 {
     if ( el.attribute("mod").isNull() ) {

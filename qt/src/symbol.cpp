@@ -19,6 +19,25 @@
 #include "style.h"
 #include "settings.h"
 
+Symbol::Symbol( QString name, Settings *settings )
+{
+    this->name = name;
+    this->role = SYMBOL_TEXT;
+    if ( this->name == "BackSpace" ) {
+        this->role = SYMBOL_BACKSPACE;
+    } else if ( this->name == "Return" ) {
+        this->role = SYMBOL_RETURN;
+    } else if ( this->name == "Tab" ) {
+        this->role = SYMBOL_TAB;
+    } else if ( this->name == "ISO_Left_Tab" ) {
+        this->role = SYMBOL_LEFTTAB;
+    }
+
+    this->renderer = NULL;
+    this->settings = settings;
+    this->connect( this->settings, SIGNAL(styleChanged(Style*)), SLOT(setStyle(Style*)) );
+}
+
 Symbol::Symbol( QDomElement el, Settings *settings )
 {
     QDomElement name = el.firstChildElement("name");
@@ -90,6 +109,12 @@ ModifiedSymbol::ModifiedSymbol( QDomElement el, Settings *settings )
     : Symbol( el, settings )
 {
     this->modifier = el.attribute("mod").toInt();
+}
+
+ModifiedSymbol::ModifiedSymbol( QString name, quint8 modifier, Settings *settings )
+    : Symbol( name, settings )
+{
+    this->modifier = modifier;
 }
 
 quint8 ModifiedSymbol::getModifier()

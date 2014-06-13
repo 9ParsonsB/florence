@@ -122,6 +122,11 @@ void Florence::setFont( QString font )
     this->settings->setFont( font );
 }
 
+void Florence::setKeymap( Keymap *map )
+{
+    this->settings->setKeymap( map );
+}
+
 bool Florence::setKeymap( QString file )
 {
     return this->settings->setKeymap( file );
@@ -273,4 +278,9 @@ void Florence::keyReleasedSlot( quint8 code )
     foreach ( Key *k, this->lockedKeys ) {
         if ( !k->isLocker() ) emit keyReleased( k->getCode() );
     }
+}
+
+Settings *Florence::getSettings()
+{
+    return this->settings;
 }
