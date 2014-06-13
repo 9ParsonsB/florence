@@ -25,6 +25,10 @@ int main(int argc, char *argv[])
 
     Simulator *simulator = new Simulator();
     Florence *keyboard = new Florence();
+
+    keyboard->setFont("URW Gothic L");
+    keyboard->setFontSize(16);
+
     SystemMap *map = new SystemMap();
     map->load(keyboard->getSettings());
     keyboard->setKeymap(map);

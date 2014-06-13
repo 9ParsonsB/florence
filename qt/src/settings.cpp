@@ -27,6 +27,7 @@ Settings::Settings()
     this->colors[StyleItem::STYLE_TEXT_OUTLINE_COLOR] = "#000000";
 
     this->font = "Sans";
+    this->fontSize = 10;
 
     this->opacity = 1.0;
 
@@ -50,6 +51,11 @@ qreal Settings::getOpacity()
 QString Settings::getFont()
 {
     return this->font;
+}
+
+quint8 Settings::getFontSize()
+{
+    return this->fontSize;
 }
 
 QString Settings::getColor( enum StyleItem::style_colours color )
@@ -84,6 +90,11 @@ void Settings::setFont( QString font )
 {
     this->font = font;
     emit fontChanged( this->font );
+}
+
+void Settings::setFontSize( quint8 size )
+{
+    this->fontSize = size;
 }
 
 void Settings::setColor( enum StyleItem::style_colours color, QString value )

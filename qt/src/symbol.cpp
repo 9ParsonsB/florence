@@ -18,6 +18,7 @@
 #include "styleshape.h"
 #include "style.h"
 #include "settings.h"
+#include <QDebug>
 
 Symbol::Symbol( QString name, Settings *settings )
 {
@@ -94,11 +95,18 @@ void Symbol::paint( QPainter *painter, QRectF &bounds, bool hovered )
         if ( hovered ) z = 1.2;
 
         QPainterPath textPath;
-        QFont font( this->settings->getFont(), 10 );
+        QFont font( this->settings->getFont(), this->settings->getFontSize() );
         textPath.addText(0, 0, font, text);
-        painter->translate( bounds.x() + ( ( bounds.width() - ( textPath.boundingRect().width()*0.05*z ) ) / 2.0  ),
-                            bounds.y() + ( bounds.height() * 0.6 ));
+
+        QFontMetrics fm(font);
+        qreal height = fm.descent() * 0.1 * z;
+        qreal yoffset = ( bounds.height() + height ) * 0.5;
+        qreal width = fm.width(text) * 0.05 * z;
+        qreal xoffset = ( bounds.width() - width ) * 0.5;
+        painter->translate( bounds.x() + xoffset,
+                            bounds.y() + yoffset );
         painter->scale( z*0.05, z*0.05 );
+
         painter->setRenderHint( QPainter::Antialiasing );
         QPen p( QColor( this->settings->getColor( StyleItem::STYLE_TEXT_OUTLINE_COLOR ) ) );
         p.setWidth( 2 );

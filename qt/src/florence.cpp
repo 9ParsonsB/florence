@@ -122,6 +122,11 @@ void Florence::setFont( QString font )
     this->settings->setFont( font );
 }
 
+void Florence::setFontSize( quint8 size )
+{
+    this->settings->setFontSize( size );
+}
+
 void Florence::setKeymap( Keymap *map )
 {
     this->settings->setKeymap( map );
