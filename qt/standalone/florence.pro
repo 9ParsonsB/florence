@@ -6,11 +6,13 @@ SOURCES += main.cpp \
     simulator.cpp \
     florenceexception.cpp \
     systemmap.cpp \
-    systemmapkey.cpp
+    systemmapkey.cpp \
+    keysym2ucs.c
 HEADERS += \
     simulator.h \
     florenceexception.h \
     systemmap.h \
-    systemmapkey.h
+    systemmapkey.h \
+    keysym2ucs.h
 INCLUDEPATH += ../src
 LIBS += -lflorence_qt -lXtst -lX11

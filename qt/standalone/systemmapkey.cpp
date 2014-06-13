@@ -14,7 +14,12 @@
 //    You should have received a copy of the GNU General Public License
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#include "settings.h"
 #include "systemmapkey.h"
+
+extern "C" {
+    #include "keysym2ucs.h"
+}
 
 SystemMapKey::SystemMapKey(SystemMap *map, quint8 code)
 {
@@ -86,9 +91,16 @@ Symbol *SystemMapKey::getSymbol( quint8 mod )
         }
 
         KeySym sym = XkbKeycodeToKeysym( this->map->getDisplay(), code, group, level );
+        QString name = XKeysymToString( sym );
 
-        ModifiedSymbol *symbol = new ModifiedSymbol(XKeysymToString( sym ), mod, this->map->getSettings());
-        this->symbols.append(symbol);
+        Settings *settings = this->map->getSettings();
+        Style *style = settings->getStyle();
+        ModifiedSymbol *symbol = NULL;
+        if ( style->getSymbol( name ) )
+            symbol = new ModifiedSymbol( name, mod, settings );
+        else
+            symbol = new ModifiedSymbol( QString( QChar( (uint)keysym2ucs( sym ) ) ), mod, settings );
+        this->symbols.append( symbol );
         ret = symbol;
     }
 
