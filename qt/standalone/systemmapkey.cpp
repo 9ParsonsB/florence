@@ -96,10 +96,15 @@ Symbol *SystemMapKey::getSymbol( quint8 mod )
         Settings *settings = this->map->getSettings();
         Style *style = settings->getStyle();
         ModifiedSymbol *symbol = NULL;
-        if ( style->getSymbol( name ) )
+        if ( style->getSymbol( name ) ) {
             symbol = new ModifiedSymbol( name, mod, settings );
-        else
-            symbol = new ModifiedSymbol( QString( QChar( (uint)keysym2ucs( sym ) ) ), mod, settings );
+        } else {
+            uint unicode = (uint)keysym2ucs( sym );
+            if (unicode)
+                symbol = new ModifiedSymbol( QString( QChar( unicode ) ), mod, settings );
+            else
+                symbol = new ModifiedSymbol( name, mod, settings );
+        }
         this->symbols.append( symbol );
         ret = symbol;
     }
