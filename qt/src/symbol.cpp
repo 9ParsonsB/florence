@@ -35,6 +35,8 @@ Symbol::Symbol( QString name, Settings *settings )
 
     this->renderer = NULL;
     this->settings = settings;
+    if (this->settings && this->settings->getStyle())
+        this->renderer = this->settings->getStyle()->getSymbol( this->name );;
     this->connect( this->settings, SIGNAL(styleChanged(Style*)), SLOT(setStyle(Style*)) );
 }
 
