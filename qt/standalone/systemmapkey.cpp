@@ -93,16 +93,6 @@ ModifiedSymbol *SystemMapKey::generateSymbol( quint8 mod, quint8 group, quint8 l
     return symbol;
 }
 
-quint8 SystemMapKey::getModifier()
-{
-    return this->modifier;
-}
-
-bool SystemMapKey::isLocker()
-{
-    return this->locker;
-}
-
 Symbol *SystemMapKey::getSymbol( quint8 mod )
 {
     quint8 mask = mod & this->modsMask;

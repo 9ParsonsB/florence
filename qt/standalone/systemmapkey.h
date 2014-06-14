@@ -45,16 +45,6 @@ public:
       * \see Symbol
       */
     Symbol *getSymbol( quint8 mod );
-    /*! \fn getModifier()
-      * \brief Returns the modifier value of this key.
-      * \returns 0 for non modifier keys, or the value of the modifier for modifier keys.
-      */
-    quint8 getModifier();
-    /*! \fn isLocker()
-      * \brief Returns true if the key is a locker key.
-      * \returns true if the key is a locker key.
-      */
-    bool isLocker();
 
 private:
     SystemMap *map;
