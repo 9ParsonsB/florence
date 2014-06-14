@@ -68,45 +68,6 @@ bool SystemMap::load(Settings *settings)
     return true;
 }
 
-QString SystemMap::getKeySym( quint8 code, quint8 modifierMask )
-{
-    unsigned char info = XkbKeyGroupInfo(this->keyboardMap, code);
-    unsigned int num_groups = XkbKeyNumGroups(this->keyboardMap, code);
-
-    unsigned int group = 0x00;
-    switch (XkbOutOfRangeGroupAction(info)) {
-    case XkbRedirectIntoRange:
-        group = XkbOutOfRangeGroupInfo(info);
-        if (group >= num_groups) {
-            group = 0;
-        }
-        break;
-    case XkbClampIntoRange:
-        group = num_groups - 1;
-        break;
-    case XkbWrapIntoRange:
-    default:
-        if (num_groups != 0) {
-            group %= num_groups;
-        }
-        break;
-    }
-
-    XkbKeyTypePtr key_type = XkbKeyKeyType(this->keyboardMap, code, group);
-    unsigned int active_mods = modifierMask & key_type->mods.mask;
-
-    int i, level = 0;
-    for (i = 0; i < key_type->map_count; i++) {
-        if (key_type->map[i].active && key_type->map[i].mods.mask == active_mods) {
-            level = key_type->map[i].level;
-        }
-    }
-
-    KeySym sym = XkbKeycodeToKeysym( display, code, group, level );
-    //XKeysymToString( sym );
-    return QString(QChar( (int)sym ));
-}
-
 XkbDescPtr SystemMap::getDesc()
 {
     return this->keyboardMap;

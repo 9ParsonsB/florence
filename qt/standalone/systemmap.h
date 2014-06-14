@@ -37,7 +37,7 @@ public:
     /*! \fn SystemMap()
       * \brief Constuctor.
       *
-      * Instantiates a SystemLayout object.
+      * Instantiates a SystemMap object.
       */
     SystemMap();
 
@@ -54,12 +54,6 @@ public:
       * \returns true for success, false for failure.
       */
     bool load( Settings *settings );
-
-    /*! \fn getKeySym()
-      * \brief Get symbol from hardware key code.
-      * \param code the hardware key code
-      */
-    QString getKeySym( quint8 code, quint8 modifierMask );
 
     /*! \fn getSymbol()
       * \brief Get symbol from hardware key code.

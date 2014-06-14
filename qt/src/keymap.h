@@ -86,8 +86,6 @@ public:
 protected:
     quint8 modifier;
     bool locker;
-
-private:
     QVector<ModifiedSymbol *> symbols;
 };
 

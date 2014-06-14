@@ -31,6 +31,11 @@ class SystemMapKey : public KeymapKey
 {
     Q_OBJECT
 public:
+    /*! \fn SystemMapKey()
+      * \brief Constuctor.
+      *
+      * Instantiates a SystemMapKey object.
+      */
     SystemMapKey(SystemMap *map, quint8 code);
 
     /*! \fn getSymbol( quint8 mod )
@@ -53,8 +58,10 @@ public:
 
 private:
     SystemMap *map;
-    QVector<ModifiedSymbol *> symbols;
     quint8 code;
+    quint8 modsMask;
+
+    ModifiedSymbol *generateSymbol( quint8 mod, quint8 group, quint8 level );
 };
 
 #endif // SYSTEMMAPKEY_H

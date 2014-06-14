@@ -35,6 +35,62 @@ SystemMapKey::SystemMapKey(SystemMap *map, quint8 code)
             break;
         }
     }
+
+    quint8 info = XkbKeyGroupInfo(this->map->getDesc(), code);
+    unsigned int num_groups = XkbKeyNumGroups(this->map->getDesc(), code);
+
+    quint8 group = 0x00;
+    switch (XkbOutOfRangeGroupAction(info)) {
+    case XkbRedirectIntoRange:
+        group = XkbOutOfRangeGroupInfo(info);
+        if (group >= num_groups) {
+            group = 0;
+        }
+        break;
+    case XkbClampIntoRange:
+        group = num_groups - 1;
+        break;
+    case XkbWrapIntoRange:
+    default:
+        if (num_groups != 0) {
+            group %= num_groups;
+        }
+        break;
+    }
+
+    XkbKeyTypePtr key_type = XkbKeyKeyType(this->map->getDesc(), code, group);
+    this->modsMask = key_type->mods.mask;
+
+    quint8 i, level = 0;
+    this->symbols.append( this->generateSymbol( 0, group, level ) );
+    for (i = 0; i < key_type->map_count; i++) {
+        if ( key_type->map[i].active &&
+             ( key_type->map[i].mods.mask & this->modsMask ) ) {
+            level = key_type->map[i].level;
+            this->symbols.append(
+                        this->generateSymbol( key_type->map[i].mods.mask, group, level ) );
+        }
+    }
+}
+
+ModifiedSymbol *SystemMapKey::generateSymbol( quint8 mod, quint8 group, quint8 level )
+{
+    KeySym sym = XkbKeycodeToKeysym( this->map->getDisplay(), code, group, level );
+    QString name = XKeysymToString( sym );
+
+    Settings *settings = this->map->getSettings();
+    Style *style = settings->getStyle();
+    ModifiedSymbol *symbol = NULL;
+    if ( style->getSymbol( name ) ) {
+        symbol = new ModifiedSymbol( name, mod, settings );
+    } else {
+        uint unicode = (uint)keysym2ucs( sym );
+        if (unicode)
+            symbol = new ModifiedSymbol( QString( QChar( unicode ) ), mod, settings );
+        else
+            symbol = new ModifiedSymbol( name, mod, settings );
+    }
+    return symbol;
 }
 
 quint8 SystemMapKey::getModifier()
@@ -49,65 +105,6 @@ bool SystemMapKey::isLocker()
 
 Symbol *SystemMapKey::getSymbol( quint8 mod )
 {
-    ModifiedSymbol *ret = NULL;
-
-    foreach( ModifiedSymbol *s, this->symbols ) {
-        if ( mod == s->getModifier() ) {
-            ret = s;
-        }
-    }
-
-    if (!ret) {
-        unsigned char info = XkbKeyGroupInfo(this->map->getDesc(), code);
-        unsigned int num_groups = XkbKeyNumGroups(this->map->getDesc(), code);
-
-        unsigned int group = 0x00;
-        switch (XkbOutOfRangeGroupAction(info)) {
-        case XkbRedirectIntoRange:
-            group = XkbOutOfRangeGroupInfo(info);
-            if (group >= num_groups) {
-                group = 0;
-            }
-            break;
-        case XkbClampIntoRange:
-            group = num_groups - 1;
-            break;
-        case XkbWrapIntoRange:
-        default:
-            if (num_groups != 0) {
-                group %= num_groups;
-            }
-            break;
-        }
-
-        XkbKeyTypePtr key_type = XkbKeyKeyType(this->map->getDesc(), code, group);
-        unsigned int active_mods = mod & key_type->mods.mask;
-
-        int i, level = 0;
-        for (i = 0; i < key_type->map_count; i++) {
-            if (key_type->map[i].active && key_type->map[i].mods.mask == active_mods) {
-                level = key_type->map[i].level;
-            }
-        }
-
-        KeySym sym = XkbKeycodeToKeysym( this->map->getDisplay(), code, group, level );
-        QString name = XKeysymToString( sym );
-
-        Settings *settings = this->map->getSettings();
-        Style *style = settings->getStyle();
-        ModifiedSymbol *symbol = NULL;
-        if ( style->getSymbol( name ) ) {
-            symbol = new ModifiedSymbol( name, mod, settings );
-        } else {
-            uint unicode = (uint)keysym2ucs( sym );
-            if (unicode)
-                symbol = new ModifiedSymbol( QString( QChar( unicode ) ), mod, settings );
-            else
-                symbol = new ModifiedSymbol( name, mod, settings );
-        }
-        this->symbols.append( symbol );
-        ret = symbol;
-    }
-
-    return ret;
+    quint8 mask = mod & this->modsMask;
+    return KeymapKey::getSymbol( mask );
 }
