@@ -122,6 +122,7 @@ bool Settings::setKeymap( QString file )
 
 void Settings::setKeymap( Keymap *map )
 {
+    if ( this->keymap ) delete this->keymap;
     this-> keymap = map;
     emit keymapChanged( this->keymap );
 }
