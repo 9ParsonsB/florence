@@ -140,8 +140,9 @@ void controller_show (struct controller *controller)
 {
 	START_FUNC
 	GtkWindow *icon=controller->autohide_icon;
-	florence_hide();
+
 	if (settings_get_bool(SETTINGS_INTERMEDIATE_ICON)) {
+		florence_hide();
 		controller_icon_create(controller, &(controller->autohide_icon), 2.0);
 		if (!icon) {
 			g_signal_connect(G_OBJECT(controller->autohide_icon), "button-press-event",
@@ -180,17 +181,15 @@ void controller_icon_show (gpointer user_data)
 	END_FUNC
 }
 
-/* Called when a widget is focused.
- * Check if the widget is editable and show the keyboard or hide if not. */
-void controller_focus_event (const AtspiEvent *event, void *user_data)
+/* debounce focus event timeout function */
+static gboolean debounced_focus_event (gpointer user_data)
 {
 	START_FUNC
 	struct controller *controller=(struct controller *)user_data;
 
-	flo_debug(TRACE_DEBUG, _("ATSPI focus event received."));
-	if (atspi_accessible_get_editable_text (event->source)) {
+	if (controller->next_obj) {
 		if (controller->obj) g_object_unref(controller->obj);
-		controller->obj = event->source;
+		controller->obj = controller->next_obj;
 		g_object_ref(controller->obj);
 		controller_show(controller);
 	} else {
@@ -199,6 +198,27 @@ void controller_focus_event (const AtspiEvent *event, void *user_data)
 		if (controller->obj) g_object_unref(controller->obj);
 		controller->obj=NULL;
 	}
+	END_FUNC
+	return FALSE;
+}
+
+/* Called when a widget is focused.
+ * Check if the widget is editable and show the keyboard or hide if not. */
+void controller_focus_event (const AtspiEvent *event, void *user_data)
+{
+	START_FUNC
+	struct controller *controller=(struct controller *)user_data;
+	flo_debug(TRACE_DEBUG, _("ATSPI focus event received."));
+
+	if (atspi_accessible_get_editable_text (event->source))
+		controller->next_obj=event->source;
+	else
+		controller->next_obj=NULL;
+	
+	if (controller->debounce_id)
+		g_source_remove (controller->debounce_id);
+	controller->debounce_id=g_timeout_add (controller->debounce,
+		debounced_focus_event, user_data);
 	END_FUNC
 }
 
@@ -363,12 +383,13 @@ void controller_terminate (gpointer user_data)
 }
 
 /* create a new instance of controller. */
-struct controller *controller_new()
+struct controller *controller_new(guint debounce)
 {
 	START_FUNC
 	struct controller *controller=(struct controller *)g_malloc(sizeof(struct controller));
 	if (!controller) flo_fatal(_("Unable to allocate memory for the controller"));
 	memset(controller, 0, sizeof(struct controller));
+	controller->debounce=debounce;
 
 #ifdef ENABLE_AT_SPI2
 	controller->atspi_enabled=TRUE;

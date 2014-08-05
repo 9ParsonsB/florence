@@ -43,15 +43,18 @@ struct controller {
 	enum controller_moving_status icon_moving; /* icon moving status */
 	gint xpos; /* moving position along the x axis. */
 	gint ypos; /* moving position along the y axis. */
+	guint debounce; /* event debounce time */
+	guint debounce_id; /* event debounce timer id */
 #ifdef ENABLE_AT_SPI2
 	GtkWindow *autohide_icon; /* intermediate icon */
 	AtspiAccessible *obj; /* editable object being selected */
 	gboolean atspi_enabled; /* Set to false to disable atspi. */
+	AtspiAccessible *next_obj; /* status after debouncing focus events */
 #endif
 };
 
 /* create a new instance of controller. */
-struct controller *controller_new();
+struct controller *controller_new(guint debounce);
 /* liberate all the memory used by the controller */
 void controller_free(struct controller *controller);
 

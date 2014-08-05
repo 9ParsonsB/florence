@@ -51,6 +51,8 @@ int pipefd[2];
 char expected='K';
 /* child pid */
 int child;
+/* focus event debounce time (ms) */
+guint debounce = 10;
 
 /* florence structure */
 struct florence *florence=NULL;
@@ -61,6 +63,7 @@ static struct option const long_options[] =
 	{"help", no_argument, 0, 'h'},
 	{"version", no_argument, 0, 'V'},
 	{"config", no_argument, 0, 'c'},
+	{"debounce", required_argument, 0, 'D'},
 	{"debug", optional_argument, 0, 'd'},
 	{"focus", optional_argument, 0, 'f'},
 	{"use-config", required_argument, 0, 'u'},
@@ -158,7 +161,7 @@ int main (int argc, char **argv)
 				}
 				gtk_init(&argc, &argv);
 				settings_init(FALSE, config_file);
-				controller=controller_new();
+				controller=controller_new(debounce);
 				gtk_main();
 				controller_free(controller);
 				settings_exit();
@@ -223,15 +226,17 @@ static int decode_switches (int argc, char **argv)
 {
 	int c;
 	int ret=0;
+	guint d;
 
 	while ((c = getopt_long (argc, argv, 
-		"h"  /* help */
-		"V"  /* version */
-		"c"  /* configuration */
+		"h"    /* help */
+		"V"    /* version */
+		"c"    /* configuration */
 		"d::"  /* debug */
+		"D:"   /* debounce */
 		"f::"  /* restore focus */
-		"t"  /* keep bringing back to front */
-		"u:", /* use config file */
+		"t"    /* keep bringing back to front */
+		"u:",  /* use config file */
 		long_options, (int *) 0)) != EOF)
 	{
 		switch (c)
@@ -242,6 +247,12 @@ static int decode_switches (int argc, char **argv)
 			case 'h':usage (0);
 			/* no break */
 			case 'c':ret|=1; break;
+			case 'D':d=strtoul(optarg, NULL, 0);
+				if (d!=ULONG_MAX)
+					debounce=d;
+				else
+					flo_warn("invalid debounce value ignored.");
+				break;
 			case 'd':ret|=2;
 				if (optarg) debug_level=trace_parse_level(optarg);
 				else debug_level=TRACE_DEBUG;
@@ -273,6 +284,7 @@ Options:\n\
   -V, --version	            output version information and exit\n\
   -c, --config              open configuration window\n\
   -d, --debug [level]       print debug information to stdout\n\
+  -D, --debounce time       prevent bounce with some applications\n\
   -f, --focus [window]      give the focus to the window\n\
   -u, --use-config file     use the given config file instead of dconf\n\n\
 Available commands are:\n\
