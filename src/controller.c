@@ -186,28 +186,14 @@ void controller_focus_event (const AtspiEvent *event, void *user_data)
 {
 	START_FUNC
 	struct controller *controller=(struct controller *)user_data;
-	gboolean hide=FALSE;
-	GError *error=NULL;
 
-	AtspiStateSet *state_set=atspi_accessible_get_state_set(event->source);
-	AtspiRole role=atspi_accessible_get_role(event->source, &error);
-	if (error) flo_error(_("Event error: %s"), error->message);
-	flo_debug(TRACE_DEBUG, _("ATSPI focus event received. Object role=%d"), role);
-	if (role==ATSPI_ROLE_TERMINAL ||
-		(((role==ATSPI_ROLE_TEXT) || (role==ATSPI_ROLE_PASSWORD_TEXT)) &&
-		 state_set && atspi_state_set_contains(state_set, ATSPI_STATE_EDITABLE))) {
-		if (event->detail1) {
-			if (controller->obj) g_object_unref(controller->obj);
-			controller->obj = event->source;
-			g_object_ref(controller->obj);
-			controller_show(controller);
-		} else {
-			hide=TRUE;
-		}
+	flo_debug(TRACE_DEBUG, _("ATSPI focus event received."));
+	if (atspi_accessible_get_editable_text (event->source)) {
+		if (controller->obj) g_object_unref(controller->obj);
+		controller->obj = event->source;
+		g_object_ref(controller->obj);
+		controller_show(controller);
 	} else {
-		hide=TRUE;
-	}
-	if (hide) {
 		florence_hide();
 		controller_icon_hide((gpointer)controller);
 		if (controller->obj) g_object_unref(controller->obj);
