@@ -49,6 +49,7 @@ void view_show (struct view *view)
 	gtk_widget_show(GTK_WIDGET(view->window));
 	/* Some winwow managers forget it */
 	gtk_window_set_keep_above(view->window, TRUE);
+	gtk_window_set_urgency_hint(view->window, TRUE);
 	/* reposition the window */
 	gtk_window_move(view->window, settings_get_int(SETTINGS_XPOS), settings_get_int(SETTINGS_YPOS));
 #ifdef AT_SPI
