@@ -1,0 +1,17 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@ --with autoreconf
+
+override_dh_auto_configure:
+	dh_auto_configure -- --without-panelapplet
+
+override_dh_installexamples:
+	dh_installexamples -a
+	rm -f $(CURDIR)/debian/florence/usr/share/florence/florence.conf
+
+override_dh_auto_test:
+	echo "Skipping test suite due to scrollkeeper breakage."
+
+override_dh_auto_clean:
+	dh_auto_clean

@@ -1,0 +1,12 @@
+--- trace.c.orig	2012-01-05 22:38:51.205231443 +0100
++++ florence-0.5.1/src/trace.c	2012-01-05 22:39:29.405086439 +0100
+@@ -22,9 +22,7 @@
+ #include "trace.h"
+ #include "system.h"
+ #include <glib/gprintf.h>
+-#include <glib/gutils.h>
+-#include <glib/gslist.h>
+-#include <glib/gstrfuncs.h>
++#include <glib.h>
+ #include <stdio.h>
+ #include <stdarg.h>

@@ -1,0 +1,36 @@
+Source: florence
+Section: x11
+Priority: optional
+Maintainer: Jérémy Bobbio <lunar@debian.org>
+Build-Depends:
+ debhelper (>= 9),
+ dh-autoreconf,
+ gettext,
+ gnome-doc-utils,
+ intltool,
+ libatspi2.0-dev,
+ libcairo2-dev,
+ libgstreamer0.10-dev,
+ libgtk-3-dev,
+ libnotify-dev,
+ librsvg2-dev,
+ libxml2-dev,
+ libxtst-dev,
+ scrollkeeper
+Standards-Version: 3.9.4
+Homepage: http://florence.sourceforge.net/
+Vcs-Git: git://git.debian.org/git/collab-maint/florence.git
+Vcs-Browser: http://git.debian.org/?p=collab-maint/florence.git
+
+Package: florence
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: extensible and scalable virtual keyboard for GNOME
+ Florence is an extensible scalable virtual keyboard for GNOME.
+ .
+ It is useful when a real keyboard is unusable either because of a handicap,
+ disease, broken keyboard or tablet PC; but when a pointing device is usable.
+ .
+ Florence stays out of your way: it appears on the screen only when needed.
+ An auto-click functionality also help people having difficulties to click
+ buttons.

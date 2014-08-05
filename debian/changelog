@@ -1,0 +1,66 @@
+florence (0.6.0-2) unstable; urgency=low
+
+  * Upload to unstable.
+  * Bump Standards-Version to 3.9.4, no changes required.
+  * Import improved debian/watch file written by Bart Martens.
+
+ -- Jérémy Bobbio <lunar@debian.org>  Tue, 07 May 2013 10:28:22 +0200
+
+florence (0.6.0-1) experimental; urgency=low
+
+  * New upstream release: (Closes: #692255)
+    - Do not #include individual glib headers. (Closes: #665525)
+    - Refresh 0001-Add-nonet-option-to-xmllint-and-xsltproc-calls.patch.
+    - Drop 0003-Explicitly-link-libX11-to-florence_applet.patch.
+    - Update Build-Dependencies.
+  * Use upstream manpages.
+  * Update debian/copyright.
+  * Add debian/watch file.
+  * Use wrap-and-sort for debian/control.
+  * Update Build-Depends.
+  * Switch to debhelper compat 9.
+  * Leave hardening to debhelper and remove hardening-wrapper.
+  * Bump Standards-Version to 3.9.3, no further changes required.
+
+ -- Jérémy Bobbio <lunar@debian.org>  Sun, 04 Nov 2012 11:36:03 +0100
+
+florence (0.5.1-1) unstable; urgency=low
+
+  * Acknowledge Michael Biebl's NMU.
+  * New upstream release:
+    - Support at-spi2 (Closes: #637221)
+    - Drop 0002-Fix-build-bug-that-make-all-layouts-the-same.patch:
+      fixed upstream.
+    - Refresh 0003-Explicitly-link-libX11-to-florence_applet.patch.
+    - Drop 0004-Implement-behaviour-hide_on_start-setting.patch:
+      implemented a little bit differently by upstream.
+  * Now Build-Depends on libatspi2.0-dev.
+  * Bump Standards-Version to 3.9.2, no changes required.
+
+ -- Jérémy Bobbio <lunar@debian.org>  Sat, 05 Nov 2011 12:33:47 +0100
+
+florence (0.5.0-3.1) unstable; urgency=low
+
+  * Non-maintainer upload, for the GNOME 3 transition.
+  * Disable GNOME panel applet. (Closes: #638079)
+
+ -- Michael Biebl <biebl@debian.org>  Fri, 21 Oct 2011 13:38:03 +0200
+
+florence (0.5.0-3) unstable; urgency=low
+
+  * Implement behaviour/hide_on_start setting. (Closes: #628124)
+
+ -- Jérémy Bobbio <lunar@debian.org>  Mon, 13 Jun 2011 17:10:37 +0200
+
+florence (0.5.0-2) unstable; urgency=low
+
+  [ Jérémy Bobbio ]
+  * Explicitly link libX11 to florence_applet. (Closes: #620267)
+
+ -- Jérémy Bobbio <lunar@debian.org>  Fri, 01 Apr 2011 07:54:04 +0200
+
+florence (0.5.0-1) unstable; urgency=low
+
+  * Initial release. (Closes: #612158)
+
+ -- Jérémy Bobbio <lunar@debian.org>  Sun, 06 Feb 2011 15:26:04 +0100
