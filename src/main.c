@@ -228,10 +228,10 @@ static int decode_switches (int argc, char **argv)
 		"h"  /* help */
 		"V"  /* version */
 		"c"  /* configuration */
-		"d"  /* debug */
-		"r"  /* restore focus */
+		"d::"  /* debug */
+		"f::"  /* restore focus */
 		"t"  /* keep bringing back to front */
-		"u", /* use config file */
+		"u:", /* use config file */
 		long_options, (int *) 0)) != EOF)
 	{
 		switch (c)
