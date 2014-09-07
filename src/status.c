@@ -180,6 +180,7 @@ void status_focus_set(struct status *status, struct key *focus)
 	status->focus=focus;
 	view_update(status->view, old, FALSE);
 	view_update(status->view, status->focus, FALSE);
+	if(!status->moving) status_pressed_set(status, NULL);
 	END_FUNC
 }
 
