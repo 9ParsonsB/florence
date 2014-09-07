@@ -559,6 +559,23 @@
                               </packing>
                             </child>
                             <child>
+				<object class="GtkCheckButton" id="flo_keep_on_top">
+					<property name="label" translatable="yes">Keep on top (use when "Always on top" fails)</property>
+					<property name="visible">True</property>
+					<property name="can_focus">True</property>
+					<property name="receives_default">False</property>
+					<property name="has_tooltip">True</property>
+					<property name="tooltip_text" translatable="yes">Bring keyboard to top every second.</property>
+					<property name="draw_indicator">True</property>
+					<signal name="toggled" handler="settings_window_set_bool" swapped="no"/>
+				</object>
+				<packing>
+					<property name="expand">False</property>
+					<property name="fill">False</property>
+					<property name="position">6</property>
+				</packing>
+			    </child>
+                            <child>
                               <object class="GtkCheckButton" id="flo_trayicon">
                                 <property name="label" translatable="yes">System tray icon</property>
                                 <property name="visible">True</property>
@@ -570,7 +587,7 @@
                               <packing>
                                 <property name="expand">True</property>
                                 <property name="fill">True</property>
-                                <property name="position">6</property>
+                                <property name="position">7</property>
                               </packing>
                             </child>
                             <child>
@@ -585,7 +602,7 @@
                               <packing>
                                 <property name="expand">True</property>
                                 <property name="fill">True</property>
-                                <property name="position">7</property>
+                                <property name="position">8</property>
                               </packing>
                             </child>
                           </object>
