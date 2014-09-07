@@ -857,6 +857,7 @@ void view_update_layout(struct view *view, struct style *style, GSList *keyboard
 	START_FUNC
 	view->style=style;
 	view->keyboards=keyboards;
+	xkeyboard_register_events(view->status->xkeyboard, view_on_keys_changed, (gpointer)view);
 	view_update_extensions(NULL, NULL, (gpointer)view);
 	END_FUNC
 }

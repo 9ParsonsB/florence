@@ -641,6 +641,7 @@ void status_reset(struct status *status)
 	status->focus=NULL;
 	status->pressed=NULL;
 	if (status->timer) g_timer_destroy(status->timer);
+	if (status->xkeyboard) xkeyboard_free(status->xkeyboard);
 	status->timer=NULL;
 	if (status->latched_keys) g_list_free(status->latched_keys);
 	if (status->locked_keys) g_list_free(status->locked_keys);
