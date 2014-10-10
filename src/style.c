@@ -36,6 +36,7 @@
 
 /* Constants */
 static gchar *style_css_file_source=DATADIR "/florence.css";
+#define FALLBACK_FONT "sans"
 
 /* a symbol is drawn over the shape to identify the effect of key.
  * the symbol is either text (label) or svg. Either one is NULL */
@@ -264,6 +265,7 @@ void style_draw_text(struct style *style, cairo_t *cairoctx, gchar *text, gdoubl
 	PangoFontDescription *fontdesc;
 	gchar *fontname;
 	const gchar *fontfamilly;
+	gchar *fontfamilly_with_fallback;
 	GtkSettings *settings=NULL;
 	cairo_font_slant_t slant;
 	gint size=0.0;
@@ -274,7 +276,7 @@ void style_draw_text(struct style *style, cairo_t *cairoctx, gchar *text, gdoubl
 		settings=gtk_settings_get_default();
 		g_object_get(settings, "gtk-font-name", &fontname, NULL);
 	} else fontname=settings_get_string(SETTINGS_FONT);
-	fontdesc=pango_font_description_from_string(fontname?fontname:"sans 10");
+	fontdesc=pango_font_description_from_string(fontname?fontname:FALLBACK_FONT " 10");
 	if (fontname) g_free(fontname);
 	fontfamilly=pango_font_description_get_family(fontdesc);
 	switch(pango_font_description_get_style(fontdesc)) {
@@ -284,10 +286,11 @@ void style_draw_text(struct style *style, cairo_t *cairoctx, gchar *text, gdoubl
 		default: flo_warn(_("unknown slant for font %s: %d"), fontfamilly, pango_font_description_get_style(fontdesc));
 			slant=CAIRO_FONT_SLANT_NORMAL; break;
 	}
+	fontfamilly_with_fallback = g_strconcat(fontfamilly, "," FALLBACK_FONT, NULL);
 
 	cairo_save(cairoctx);
 	style_cairo_set_color(cairoctx, STYLE_TEXT_OUTLINE_COLOR);
-	cairo_select_font_face(cairoctx, fontfamilly, slant, 
+	cairo_select_font_face(cairoctx, fontfamilly_with_fallback, slant, 
 		pango_font_description_get_weight(fontdesc)<=500?CAIRO_FONT_WEIGHT_NORMAL:CAIRO_FONT_WEIGHT_BOLD);
 	size=pango_font_description_get_size(fontdesc);
 	if (pango_font_description_get_size_is_absolute(fontdesc)) {
@@ -317,6 +320,7 @@ void style_draw_text(struct style *style, cairo_t *cairoctx, gchar *text, gdoubl
 	cairo_fill(cairoctx);
 	cairo_restore(cairoctx);
 
+	g_free(fontfamilly_with_fallback);
 	pango_font_description_free(fontdesc);
 	END_FUNC
 }
