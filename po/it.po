@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Florence Gnome virtual keyboard 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-17 10:47+0200\n"
+"POT-Creation-Date: 2014-11-02 20:18+0100\n"
 "PO-Revision-Date: 2010-04-07 18:45+0100\n"
 "Last-Translator: Pietro Pilolli\n"
 "Language-Team: Italian\n"
@@ -156,118 +156,127 @@ msgid "Keep the keyboard on top."
 msgstr "Lascia la tastiera sempre in primo piano."
 
 #: ../data/florence.glade.h:34
-msgid "System tray icon"
+msgid "Keep on top (use when \"Always on top\" fails)"
 msgstr ""
 
 #: ../data/florence.glade.h:35
+#, fuzzy
+msgid "Bring keyboard to top every second."
+msgstr "Riporta la tastiera in primo piano."
+
+#: ../data/florence.glade.h:36
+msgid "System tray icon"
+msgstr ""
+
+#: ../data/florence.glade.h:37
 msgid "Floating icon"
 msgstr ""
 
-#: ../data/florence.glade.h:36
+#: ../data/florence.glade.h:38
 msgid "Features"
 msgstr "Proprietà"
 
-#: ../data/florence.glade.h:37
+#: ../data/florence.glade.h:39
 msgid "Opacity"
 msgstr "Opacità"
 
-#: ../data/florence.glade.h:38
+#: ../data/florence.glade.h:40
 msgid "window"
 msgstr "finestra"
 
-#: ../data/florence.glade.h:39
+#: ../data/florence.glade.h:41
 msgid "Select input method"
 msgstr ""
 
-#: ../data/florence.glade.h:40 ../data/org.florence.gschema.xml.in.h:19
+#: ../data/florence.glade.h:42 ../data/org.florence.gschema.xml.in.h:19
 msgid "Auto click timeout"
 msgstr "Temporizzazione del click automatico"
 
-#: ../data/florence.glade.h:41
+#: ../data/florence.glade.h:43
 msgid "Activate ramble on button press"
 msgstr ""
 
-#: ../data/florence.glade.h:42
+#: ../data/florence.glade.h:44
 msgid ""
 "Rambling will start when the mouse button is pressed. Always activated "
 "otherwise."
 msgstr ""
 
-#: ../data/florence.glade.h:43
+#: ../data/florence.glade.h:45
 msgid "Distance based"
 msgstr ""
 
-#: ../data/florence.glade.h:44
+#: ../data/florence.glade.h:46
 msgid "Time based"
 msgstr ""
 
-#: ../data/florence.glade.h:45
+#: ../data/florence.glade.h:47
 msgid "Ramble distance theshold for simple press"
 msgstr ""
 
-#: ../data/florence.glade.h:46
+#: ../data/florence.glade.h:48
 msgid "Ramble distance theshold for multiple press"
 msgstr ""
 
-#: ../data/florence.glade.h:47
+#: ../data/florence.glade.h:49
 msgid "Time threshold for time based ramble mode."
 msgstr ""
 
-#: ../data/florence.glade.h:48 ../data/org.florence.gschema.xml.in.h:17
+#: ../data/florence.glade.h:50 ../data/org.florence.gschema.xml.in.h:17
 msgid "Input method"
 msgstr ""
 
-#: ../data/florence.glade.h:49
+#: ../data/florence.glade.h:51
 msgid "Auto hide"
 msgstr "Sparizione automatica"
 
-#: ../data/florence.glade.h:50
+#: ../data/florence.glade.h:52
 msgid "Auto hide (only show when an editable widget is selected)."
 msgstr ""
 "Sparizione automatica (appare solo quando un oggetto editabile è selezionato)"
 
-#: ../data/florence.glade.h:51
+#: ../data/florence.glade.h:53
 msgid "Move to near selected widget"
 msgstr "Sposta la tastiera vicino all'oggetto selezionato"
 
-#: ../data/florence.glade.h:52
+#: ../data/florence.glade.h:54
 msgid ""
 "Move the keyboard to near the selected editable widget in auto-hide mode"
 msgstr "Sposta la tastiera vicino all'oggetto editabile"
 
-#: ../data/florence.glade.h:53
+#: ../data/florence.glade.h:55
 msgid "Intermediate icon"
 msgstr "Icone intermedie"
 
-#: ../data/florence.glade.h:54
+#: ../data/florence.glade.h:56
 msgid "Put an intermediate icon before showing the actual keyboard"
 msgstr "Visualizza una icona intermedia prima di mostrare la tastiera"
 
-#: ../data/florence.glade.h:55
+#: ../data/florence.glade.h:57
 msgid "behaviour"
 msgstr "comportamento"
 
-#: ../data/florence.glade.h:56
+#: ../data/florence.glade.h:58
 msgid "Select Florence layout"
 msgstr "Seleziona il layout di Florence"
 
-#: ../data/florence.glade.h:57
+#: ../data/florence.glade.h:59
 msgid "Extensions"
 msgstr "Estensioni"
 
-#: ../data/florence.glade.h:58
+#: ../data/florence.glade.h:60
 msgid "layout"
 msgstr "layout"
 
-#: ../data/florence.glade.h:59
+#: ../data/florence.glade.h:61
 msgid "Quit preferences"
 msgstr "Esci dalle preferenze"
 
-#: ../data/florence.glade.h:60 ../src/settings-window.c:613
+#: ../data/florence.glade.h:62 ../src/settings-window.c:613
 msgid "Cancel"
 msgstr "Cancella"
 
-#: ../data/florence.glade.h:61
+#: ../data/florence.glade.h:63
 msgid "Apply changes"
 msgstr "Applica i cambiamenti"
 
@@ -890,76 +899,76 @@ msgstr "Utilizzo il file %s"
 msgid "File %s does not contain xml data"
 msgstr "Il file%s non contiene dati xml"
 
-#: ../src/main.c:105
+#: ../src/main.c:108
 #, c-format
 msgid "Florence version %s"
 msgstr "Florence version %s"
 
-#: ../src/main.c:107
+#: ../src/main.c:110
 msgid "XRECORD has been disabled at compile time."
 msgstr "XRECORD è stato disabilitato durante la compilazione."
 
-#: ../src/main.c:121
+#: ../src/main.c:124
 #, fuzzy
 msgid "Pipe intanciation failed"
 msgstr "Notifica fallita"
 
-#: ../src/main.c:131
+#: ../src/main.c:134
 msgid "Failed to register SIGINT signal handler."
 msgstr ""
 
-#: ../src/main.c:133
+#: ../src/main.c:136
 msgid "Failed to register SIGTERM signal handler."
 msgstr ""
 
-#: ../src/main.c:152
+#: ../src/main.c:155
 msgid "Bad signal received from parent process."
 msgstr ""
 
-#: ../src/main.c:154 ../src/main.c:191
+#: ../src/main.c:157 ../src/main.c:194
 #, fuzzy
 msgid "Florence does not seem to be running."
 msgstr "Florence sta girando"
 
-#: ../src/main.c:157 ../src/main.c:194
+#: ../src/main.c:160 ../src/main.c:197
 msgid "Failed to register for terminate signal."
 msgstr ""
 
-#: ../src/main.c:166
+#: ../src/main.c:169
 msgid "No signal received from parent process. We assume it's dead."
 msgstr ""
 
-#: ../src/main.c:200
+#: ../src/main.c:203
 msgid "Show command failed. Probably Florence exited."
 msgstr ""
 
-#: ../src/main.c:205
+#: ../src/main.c:208
 msgid "Hide command failed. Probably Florence exited."
 msgstr ""
 
-#: ../src/main.c:211
+#: ../src/main.c:214
 msgid "Move command failed. Probably Florence exited."
 msgstr ""
 
-#: ../src/main.c:216
+#: ../src/main.c:219
 msgid "libflorence failed at exit."
 msgstr ""
 
-#: ../src/main.c:267
+#: ../src/main.c:278
 #, fuzzy, c-format
 msgid ""
 "%s - Florence is a simple virtual keyboard for X.\n"
 "\n"
 msgstr "%s - Florence è una semplice tastiera virtuale per Gnome.\n"
 
-#: ../src/main.c:269
+#: ../src/main.c:280
 #, fuzzy, c-format
 msgid ""
 "Usage: %s [OPTION] ... [COMMAND] [ARG]\n"
 "\n"
 msgstr "Utilizzo: %s [OPTION|...\n"
 
-#: ../src/main.c:270
+#: ../src/main.c:281
 #, fuzzy, c-format
 msgid ""
 "Options:\n"
@@ -967,6 +976,7 @@ msgid ""
 "  -V, --version\t            output version information and exit\n"
 "  -c, --config              open configuration window\n"
 "  -d, --debug [level]       print debug information to stdout\n"
+"  -D, --debounce time       prevent bounce with some applications\n"
 "  -f, --focus [window]      give the focus to the window\n"
 "  -u, --use-config file     use the given config file instead of dconf\n"
 "\n"
@@ -1047,58 +1057,58 @@ msgstr "L'estensione XRecord non è stata trovata"
 msgid "Keyboard synchronization is disabled."
 msgstr "La sincronizzazione della tastiera è disabilitata"
 
-#: ../src/status.c:270
+#: ../src/status.c:271
 #, fuzzy
 msgid "sending press event"
 msgstr "invio l'evento %d per il tasto %d"
 
-#: ../src/status.c:287
+#: ../src/status.c:288
 #, fuzzy
 msgid "sending release event"
 msgstr "invio l'evento %d per il tasto %d"
 
-#: ../src/status.c:519 ../src/status.c:547
+#: ../src/status.c:520 ../src/status.c:548
 msgid "Unable to allocate memory for status focus"
 msgstr "Impossible allocare memoria per lo stato del focus"
 
-#: ../src/status.c:522
+#: ../src/status.c:523
 #, c-format
 msgid "Found window %s (ID=%ld)"
 msgstr "Trovata finestra %s (ID=%ld)"
 
-#: ../src/status.c:529
+#: ../src/status.c:530
 msgid "XQueryTree failed."
 msgstr "Fallimento della funzione XQueryTree"
 
-#: ../src/status.c:552
+#: ../src/status.c:553
 #, c-format
 msgid "Window not found: %s, using last focused window: %s (ID=%d)"
 msgstr ""
 "Finestra non trovata: %s, utilizzo l'ultima finestra selezionata: %s (ID=%ld)"
 
-#: ../src/status.c:555
+#: ../src/status.c:556
 #, c-format
 msgid "Focussing window %s (ID=%d)"
 msgstr "Selezione della finestra %s (ID=%ld)"
 
-#: ../src/status.c:575
+#: ../src/status.c:576
 #, c-format
 msgid "Unknown input method: %s ; using button input method"
 msgstr ""
 
-#: ../src/status.c:603
+#: ../src/status.c:604
 msgid "Unable to allocate memory for status"
 msgstr "Impossibile allocare memoria per lo stato"
 
-#: ../src/status.c:671
+#: ../src/status.c:673
 msgid "Neither at-spi nor XTest could be initialized."
 msgstr "Nè At-spi nè XTest possono essere inizializzati."
 
-#: ../src/status.c:672 ../src/status.c:680
+#: ../src/status.c:674 ../src/status.c:682
 msgid "There is no way we can send keyboard events."
 msgstr "Non c'è alcun modo di inviare gli eventi della tastiera."
 
-#: ../src/status.c:674
+#: ../src/status.c:676
 #, c-format
 msgid ""
 "At-spi registry daemon is not running. XTest extension found: version=%d.%d; "
@@ -1107,16 +1117,16 @@ msgstr ""
 "Il demone At-spi non sta girando. Ho trovato la versione %d:%d di XTest;sarà "
 "utilizzata al posto di at-spi"
 
-#: ../src/status.c:679
+#: ../src/status.c:681
 msgid "Xtest extension not compiled in and at-spi not working"
 msgstr "l'estensione Xtest non è stata compilata e at-spi non funziona"
 
-#: ../src/style.c:69
+#: ../src/style.c:70
 #, c-format
 msgid "Unknown style color: %d"
 msgstr "Colore dello stile sconosciuto: %d"
 
-#: ../src/style.c:70
+#: ../src/style.c:71
 msgid ""
 "You probably installed Florence in a location that is not in the gconf path. "
 "Please read the FAQ in Florence documentation to learn more about how to "
@@ -1126,74 +1136,74 @@ msgstr ""
 "path.per favore leggi la FAQ nella documentazione di Florence e impara come "
 "configurare correttamente gconf."
 
-#: ../src/style.c:87
+#: ../src/style.c:88
 #, c-format
 msgid "can't parse color %s"
 msgstr "Non posso parsificare il colore %s"
 
-#: ../src/style.c:109
+#: ../src/style.c:110
 msgid "Unable to allocate memory for css read buffer"
 msgstr "Impossibile allocare memoria per il buffer in lettura del css"
 
-#: ../src/style.c:142
+#: ../src/style.c:143
 #, fuzzy
 msgid "Can not parse style file."
 msgstr "Persorso del file dello stile del layout"
 
-#: ../src/style.c:163
+#: ../src/style.c:164
 msgid "Out of memory. Some symbols may not be displayed correctly."
 msgstr ""
 "Manca memoria. Alcuni simboli potrebbero essere visualizzati non "
 "correttamente"
 
-#: ../src/style.c:165
+#: ../src/style.c:166
 #, c-format
 msgid "A cairo error occured: %d"
 msgstr "E' capitato un errore di cairo: %d"
 
-#: ../src/style.c:222 ../src/style.c:505
+#: ../src/style.c:223 ../src/style.c:509
 #, c-format
 msgid "Unable to parse svg from layout file: %s"
 msgstr "Impossibile parsificare il file svg specificato nel file di layout: %s"
 
-#: ../src/style.c:223
+#: ../src/style.c:224
 #, c-format
 msgid "Bad symbol: should have either svg or label :%s"
 msgstr "Simbolo errato: non dovresti avere assieme svg e etichette: %s"
 
-#: ../src/style.c:284
+#: ../src/style.c:286
 #, c-format
 msgid "unknown slant for font %s: %d"
 msgstr "Inclinazione del font  %s sconosciuta: %d"
 
-#: ../src/style.c:370
+#: ../src/style.c:374
 #, c-format
 msgid "No style symbol for action key %d"
 msgstr "Nessun simbolo trovato per il tasto d'azione %d"
 
-#: ../src/style.c:393
+#: ../src/style.c:397
 #, c-format
 msgid "Unable to parse svg from layout file: svg=\"%s\" error=\"%s\""
 msgstr ""
 "Impossibile parsificare il file svg dal file di layout svg=\"%s\" errore=\"%s"
 "\""
 
-#: ../src/style.c:397
+#: ../src/style.c:401
 #, c-format
 msgid "[new shape] name=%s svg=\"%s\""
 msgstr "[nuova forma] nome=%s svg=\"%s\""
 
-#: ../src/style.c:427
+#: ../src/style.c:431
 #, c-format
 msgid "Shape %s doesn't exist for selected style."
 msgstr "La forma %s per lo stile selezionato non esiste."
 
-#: ../src/style.c:575
+#: ../src/style.c:579
 #, c-format
 msgid "An error occured while playing sound: %s"
 msgstr ""
 
-#: ../src/style.c:668
+#: ../src/style.c:672
 #, fuzzy, c-format
 msgid "Unknown sound type: %d"
 msgstr "Valore inserito sconosciuto: %s"
@@ -1281,27 +1291,27 @@ msgstr "Non mostrare più"
 msgid "Notification failed"
 msgstr "Notifica fallita"
 
-#: ../src/view.c:497
+#: ../src/view.c:499
 msgid "X11 composite extension detected. Semi-transparency is enabled."
 msgstr ""
 
-#: ../src/view.c:503
+#: ../src/view.c:505
 msgid ""
 "Your screen does not support alpha channel. Semi-transparency is disabled"
 msgstr ""
 "Il tuo schermo non supporta il canale alfa. La trasparenza è disabilitata"
 
-#: ../src/view.c:535
+#: ../src/view.c:537
 #, fuzzy, c-format
 msgid "Window size out of range :%d, %d"
 msgstr "La dimensione della finestra è fuori dal dominio :%d"
 
-#: ../src/view.c:629
+#: ../src/view.c:631
 #, c-format
 msgid "Window opacity out of range (1.0 to 100.0): %f"
 msgstr "Opacità della finestra non è compresa tra 1.0 e 100.0: %f"
 
-#: ../src/view.c:791
+#: ../src/view.c:793
 msgid "Unable to allocate memory for view"
 msgstr "Impossibile allocare la memoria per la vista"
 
@@ -1573,10 +1583,9 @@ msgstr "Impossibile allocare la memoria per la vista"
 msgid "Error emitting terminate signal: %s"
 msgstr "Errore nel caricamento delle icone di florence: %s"
 
-#: ../src/controller.c:47
-#, c-format
-msgid "Error loading florence icon: %s"
-msgstr "Errore nel caricamento delle icone di florence: %s"
+#: ../src/controller.c:190
+msgid "ATSPI focus event received."
+msgstr ""
 
 #: ../src/controller.c:194
 #, c-format
@@ -1588,40 +1597,45 @@ msgstr ""
 msgid "ATSPI focus event received. Object role=%d"
 msgstr ""
 
-#: ../src/controller.c:224
+#: ../src/controller.c:217
 msgid "SPI is disabled: Unable to switch auto-hide mode on."
 msgstr ""
 "SPI non è attivo: Impossibile attivare la modalità a scomparsa automatica.'"
 
-#: ../src/controller.c:228 ../src/controller.c:230
+#: ../src/controller.c:221 ../src/controller.c:223
 msgid "ATSPI listener register failed"
 msgstr ""
 
-#: ../src/controller.c:240
+#: ../src/controller.c:233
 msgid "AT SPI: problem deregistering focus listener"
 msgstr ""
 
-#: ../src/controller.c:243
+#: ../src/controller.c:236
 msgid "AT SPI: problem deregistering window listener"
 msgstr ""
 
-#: ../src/controller.c:317
+#: ../src/controller.c:310
 msgid "Controller: unknown moving state."
 msgstr ""
 
-#: ../src/controller.c:384
+#: ../src/controller.c:378
 #, fuzzy
 msgid "Unable to allocate memory for the controller"
 msgstr "Impossibile allocare la memoria per il ramble"
 
-#: ../src/controller.c:391
+#: ../src/controller.c:383
+#, c-format
+msgid "Error loading florence icon: %s"
+msgstr "Errore nel caricamento delle icone di florence: %s"
+
+#: ../src/controller.c:389
 #, fuzzy
 msgid "AT-SPI has been disabled at run time: auto-hide mode is disabled."
 msgstr ""
 "AT-SPI è stato disabilitato durante la compilazione; la modalità a scomparsa "
 "automatica è disabilitata"
 
-#: ../src/controller.c:399
+#: ../src/controller.c:397
 #, fuzzy
 msgid "AT-SPI has been disabled at compile time: auto-hide mode is disabled."
 msgstr ""

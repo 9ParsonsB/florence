@@ -1,9 +1,8 @@
-This release fixes some minor problems found on 0.6.1
+Bug fix release
 
 Changelog:
 
-2014-05-16 François Agrech <f.agrech@gmail.com>
-	* Version 0.6.2
-	* Fix gradients.
-	* remove deprecated GTK3 functions.
-
+2014-11-02 François Agrech <f.agrech@gmail.com>
+	* Version 0.6.3
+	* Many bug fixes (patches provided by Jeremy Bobbio, Jonathan David
+	and Benedikt Spranger)
