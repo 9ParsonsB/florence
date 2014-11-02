@@ -11,3 +11,12 @@
 	stroke-width: 2px;
 }
 
+.symbol-fill {
+	fill: @SYM_COLOR@;
+}
+
+.symbol-outline {
+	fill: @SYM_OUTLINE_COLOR@;
+	stroke: @SYM_COLOR@;
+	stroke-width: 3px;
+}
