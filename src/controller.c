@@ -31,44 +31,22 @@
 
 #define MOVING_THRESHOLD 15
 
+RsvgHandle *handle;
+
 /* on expose event: display florence icon */
 void controller_icon_expose (GtkWidget *window, cairo_t* context, void *userdata)
 {
 	START_FUNC
-	cairo_t *mask_context;
-	RsvgHandle *handle;
-	GError *error=NULL;
 	gdouble w, h;
-	cairo_surface_t *mask=NULL;
-	Pixmap shape;
-	Display *disp=(Display *)gdk_x11_get_default_xdisplay();
-	cairo_set_operator(context, CAIRO_OPERATOR_SOURCE);
-	handle=rsvg_handle_new_from_file(ICONDIR "/florence.svg", &error);
-	if (error) flo_error(_("Error loading florence icon: %s"), error->message);
-	else {
-		w=gtk_widget_get_allocated_width(window);
-		h=gtk_widget_get_allocated_height(window);
-		shape=XCreatePixmap(disp, GDK_WINDOW_XID(gtk_widget_get_window(window)), w, h, 1);
-		mask=cairo_xlib_surface_create_for_bitmap(disp, shape,
-			DefaultScreenOfDisplay(disp), w, h);
-		mask_context=cairo_create(mask);
-		cairo_set_source_rgba(mask_context, 0.0, 0.0, 0.0, 0.0);
-		cairo_set_operator(mask_context, CAIRO_OPERATOR_SOURCE);
-		cairo_paint(mask_context);
-		cairo_set_operator(mask_context, CAIRO_OPERATOR_OVER);
-		style_render_svg(mask_context, handle, w, h, TRUE, NULL);
-		XShapeCombineMask(disp, GDK_WINDOW_XID(gtk_widget_get_window(window)),
-			ShapeBounding, 0, 0, cairo_xlib_surface_get_drawable(mask), ShapeSet);
+	w=gtk_widget_get_allocated_width(window);
+	h=gtk_widget_get_allocated_height(window);
 
-		cairo_set_source_rgba(context, 0.0, 0.0, 0.0, 100.0);
-		cairo_set_operator(context, CAIRO_OPERATOR_DEST_OUT);
-		cairo_paint(context);
-		cairo_set_operator(context, CAIRO_OPERATOR_OVER);
-		style_render_svg(context, handle, w, h, TRUE, NULL);
-		cairo_destroy(mask_context);
-		cairo_surface_destroy(mask);
-		g_object_unref(G_OBJECT(handle));
-	}
+	cairo_set_source_rgba(context, 0.0, 0.0, 0.0, 0.0);
+	cairo_set_operator(context, CAIRO_OPERATOR_SOURCE);
+	cairo_paint(context);
+	cairo_set_operator(context, CAIRO_OPERATOR_SOURCE);
+	style_render_svg(context, handle, w, h, FALSE, NULL);
+	wait();
 	END_FUNC
 }
 
@@ -76,13 +54,13 @@ void controller_icon_expose (GtkWidget *window, cairo_t* context, void *userdata
 void controller_icon_create (struct controller *controller, GtkWindow **icon, gdouble scale)
 {
 	START_FUNC
+	RsvgDimensionData dim;
 	if (!*icon) {
 		*icon=GTK_WINDOW(gtk_window_new(GTK_WINDOW_TOPLEVEL));
 		gtk_window_set_keep_above(*icon, TRUE);
 		gtk_window_set_skip_taskbar_hint(*icon, TRUE);
-		gtk_widget_set_size_request(GTK_WIDGET(*icon),
-			settings_get_double(SETTINGS_SCALEX)*scale,
-			settings_get_double(SETTINGS_SCALEY)*scale);
+		rsvg_handle_get_dimensions(handle, &dim);
+		gtk_widget_set_size_request(GTK_WIDGET(*icon), dim.width, dim.height);
 		gtk_container_set_border_width(GTK_CONTAINER(*icon), 0);
 		gtk_window_set_decorated(*icon, FALSE);
 		gtk_window_set_position(*icon, GTK_WIN_POS_MOUSE);
@@ -395,10 +373,14 @@ void controller_terminate (gpointer user_data)
 struct controller *controller_new(guint debounce)
 {
 	START_FUNC
+	GError *error=NULL;
 	struct controller *controller=(struct controller *)g_malloc(sizeof(struct controller));
 	if (!controller) flo_fatal(_("Unable to allocate memory for the controller"));
 	memset(controller, 0, sizeof(struct controller));
 	controller->debounce=debounce;
+
+	handle=rsvg_handle_new_from_file(ICONDIR "/florence.svg", &error);
+	if (error) flo_fatal(_("Error loading florence icon: %s"), error->message);
 
 #ifdef ENABLE_AT_SPI2
 	controller->atspi_enabled=TRUE;
