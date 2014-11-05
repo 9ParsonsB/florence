@@ -260,15 +260,12 @@ gboolean style_symbol_matches(struct symbol *symbol, gchar *name)
 void style_draw_text(struct style *style, cairo_t *cairoctx, gchar *text, gdouble w, gdouble h)
 {
 	START_FUNC
-	cairo_font_extents_t fe;
-	cairo_text_extents_t te;
 	PangoFontDescription *fontdesc;
 	gchar *fontname;
-	const gchar *fontfamilly;
-	gchar *fontfamilly_with_fallback;
 	GtkSettings *settings=NULL;
-	cairo_font_slant_t slant;
-	gint size=0.0;
+	PangoLayout *layout;
+	int width, height;
+	double xoffset, yoffset, sc, scale=0.07;
 
 	style_cairo_status_check(cairoctx);
 
@@ -278,49 +275,37 @@ void style_draw_text(struct style *style, cairo_t *cairoctx, gchar *text, gdoubl
 	} else fontname=settings_get_string(SETTINGS_FONT);
 	fontdesc=pango_font_description_from_string(fontname?fontname:FALLBACK_FONT " 10");
 	if (fontname) g_free(fontname);
-	fontfamilly=pango_font_description_get_family(fontdesc);
-	switch(pango_font_description_get_style(fontdesc)) {
-		case PANGO_STYLE_NORMAL: slant=CAIRO_FONT_SLANT_NORMAL; break;
-		case PANGO_STYLE_OBLIQUE: slant=CAIRO_FONT_SLANT_OBLIQUE; break;
-		case PANGO_STYLE_ITALIC: slant=CAIRO_FONT_SLANT_ITALIC; break;
-		default: flo_warn(_("unknown slant for font %s: %d"), fontfamilly, pango_font_description_get_style(fontdesc));
-			slant=CAIRO_FONT_SLANT_NORMAL; break;
-	}
-	fontfamilly_with_fallback = g_strconcat(fontfamilly, "," FALLBACK_FONT, NULL);
+	layout=pango_cairo_create_layout(cairoctx);
+	pango_layout_set_font_description(layout,fontdesc);
+	pango_layout_set_text(layout, text, -1);
 
 	cairo_save(cairoctx);
+	cairo_scale(cairoctx, scale, scale);
+	pango_layout_get_size(layout, &width, &height);
+	xoffset=(scale*100.*w)-(((double)width)/PANGO_SCALE/2.);
+	yoffset=(scale*100.*h)-(((double)height)/PANGO_SCALE/2.);
+	if ( (((double)width)/PANGO_SCALE) > scale*200.*w ) {
+		sc=scale*200.*w/(((double)width/PANGO_SCALE));
+		cairo_scale(cairoctx, sc, 1.0);
+		xoffset=0;
+	}
+	if ( (((double)height)/PANGO_SCALE) > (scale*200.*h) ) {
+		sc=scale*200.*h/(((double)height)/PANGO_SCALE);
+		cairo_scale(cairoctx, 1.0, sc);
+		yoffset=0;
+	}
+	cairo_move_to(cairoctx, xoffset, yoffset);
+	pango_cairo_layout_path(cairoctx, layout);
+	cairo_set_line_width(cairoctx, 1);
 	style_cairo_set_color(cairoctx, STYLE_TEXT_OUTLINE_COLOR);
-	cairo_select_font_face(cairoctx, fontfamilly_with_fallback, slant, 
-		pango_font_description_get_weight(fontdesc)<=500?CAIRO_FONT_WEIGHT_NORMAL:CAIRO_FONT_WEIGHT_BOLD);
-	size=pango_font_description_get_size(fontdesc);
-	if (pango_font_description_get_size_is_absolute(fontdesc)) {
-		size=pango_units_to_double(size);
-	}
-	cairo_set_font_size(cairoctx, (gdouble)(size)/12800.);
-	cairo_text_extents(cairoctx, text, &te);
-	cairo_font_extents(cairoctx, &fe);
-	if (te.width > w) {
-		size=size*w/te.width;
-		cairo_set_font_size(cairoctx, (gdouble)(size)/12800.);
-		cairo_text_extents(cairoctx, text, &te);
-		cairo_font_extents(cairoctx, &fe);
-	} 
-	if (fe.height > h) {
-		cairo_set_font_size(cairoctx, (gdouble)(size*h/fe.height)/12800.);
-		cairo_text_extents(cairoctx, text, &te);
-		cairo_font_extents(cairoctx, &fe);
-	}
-	cairo_move_to(cairoctx, (w-te.width)/2.-te.x_bearing, ((h+fe.height)/2.)-fe.descent);
-	cairo_set_line_width(cairoctx, 0.1);
-	cairo_text_path(cairoctx, text);
 	cairo_stroke(cairoctx);
+	cairo_move_to(cairoctx, xoffset, yoffset);
+	pango_cairo_layout_path(cairoctx, layout);
 	style_cairo_set_color(cairoctx, STYLE_TEXT_COLOR);
-	cairo_move_to(cairoctx, (w-te.width)/2.-te.x_bearing, ((h+fe.height)/2.)-fe.descent);
-	cairo_text_path(cairoctx, text);
 	cairo_fill(cairoctx);
 	cairo_restore(cairoctx);
 
-	g_free(fontfamilly_with_fallback);
+	g_object_unref(layout);
 	pango_font_description_free(fontdesc);
 	END_FUNC
 }

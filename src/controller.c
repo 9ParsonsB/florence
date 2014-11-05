@@ -28,6 +28,7 @@
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/extensions/shape.h>
+#include <sys/wait.h>
 
 #define MOVING_THRESHOLD 15
 
@@ -46,7 +47,7 @@ void controller_icon_expose (GtkWidget *window, cairo_t* context, void *userdata
 	cairo_paint(context);
 	cairo_set_operator(context, CAIRO_OPERATOR_SOURCE);
 	style_render_svg(context, handle, w, h, FALSE, NULL);
-	wait();
+	wait(NULL);
 	END_FUNC
 }
 
