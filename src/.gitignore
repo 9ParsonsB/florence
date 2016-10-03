@@ -8,3 +8,5 @@ libflorence-1.0.la
 libflorence_1_0_la-florence.lo
 .libs
 .deps
+.dirstamp
+
