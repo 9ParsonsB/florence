@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: florence\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-02 20:18+0100\n"
+"POT-Creation-Date: 2016-10-03 18:27+0200\n"
 "PO-Revision-Date: 2010-11-06 00:15+0000\n"
 "Last-Translator: Alone197711 <gwoger@sibmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -1151,7 +1151,7 @@ msgstr "Не хватает памяти. Некоторые символы мо
 msgid "A cairo error occured: %d"
 msgstr "Произошла ошибка cairo: %d"
 
-#: ../src/style.c:223 ../src/style.c:509
+#: ../src/style.c:223 ../src/style.c:494
 #, c-format
 msgid "Unable to parse svg from layout file: %s"
 msgstr "Невозможно проанализировать svg из файла: %s"
@@ -1161,37 +1161,32 @@ msgstr "Невозможно проанализировать svg из файл�
 msgid "Bad symbol: should have either svg or label :%s"
 msgstr "Плохой символ: должен иметь svg или метку :%s"
 
-#: ../src/style.c:286
-#, c-format
-msgid "unknown slant for font %s: %d"
-msgstr "Неизвестен наклон для шрифта %s: %d"
-
-#: ../src/style.c:374
+#: ../src/style.c:359
 #, c-format
 msgid "No style symbol for action key %d"
 msgstr "Нет стиля символа для дейсткия клавиши %d"
 
-#: ../src/style.c:397
+#: ../src/style.c:382
 #, c-format
 msgid "Unable to parse svg from layout file: svg=\"%s\" error=\"%s\""
 msgstr "Невозможно проанализировать svg из файла: svg=\"%s\" ошибка=\"%s\""
 
-#: ../src/style.c:401
+#: ../src/style.c:386
 #, c-format
 msgid "[new shape] name=%s svg=\"%s\""
 msgstr "[новая форма] имя=%s svg=\"%s\""
 
-#: ../src/style.c:431
+#: ../src/style.c:416
 #, c-format
 msgid "Shape %s doesn't exist for selected style."
 msgstr "Форма %s не существует для выбранного стиля."
 
-#: ../src/style.c:579
+#: ../src/style.c:564
 #, c-format
 msgid "An error occured while playing sound: %s"
 msgstr ""
 
-#: ../src/style.c:672
+#: ../src/style.c:657
 #, fuzzy, c-format
 msgid "Unknown sound type: %d"
 msgstr "Неизвестный тип значения : %d"
@@ -1362,24 +1357,24 @@ msgstr "нажата клавиша неизвестного типа."
 msgid "pressed key has no action associated."
 msgstr "нажатая клавиша не связана с каким-либо действием."
 
-#: ../src/key.c:368
+#: ../src/key.c:371
 #, c-format
 msgid "unknown action key type released = %d"
 msgstr "освобождена клавиша неизвестного типа = %d"
 
-#: ../src/key.c:371
+#: ../src/key.c:374
 msgid "unknown key type released."
 msgstr "освобождена клавиша неизвестного типа."
 
-#: ../src/key.c:373
+#: ../src/key.c:376
 msgid "released key has no action associated."
 msgstr "освобождённая клавиша не связана с каким-либо действием."
 
-#: ../src/key.c:441
+#: ../src/key.c:445
 msgid "unknown key type to draw."
 msgstr "неизвестный тип клавиши для отрисовки"
 
-#: ../src/key.c:473
+#: ../src/key.c:477
 #, c-format
 msgid "unknown key type: %d"
 msgstr "неизвестный тип клавиш: %d"
@@ -1505,13 +1500,13 @@ msgstr "Выбран неверный алгоритм перехода. Исп�
 msgid "Unable to allocate memory for ramble"
 msgstr "Невозможно выделить память на переход"
 
-#: ../src/fsm.c:191
+#: ../src/fsm.c:193
 #, fuzzy, c-format
 msgid ""
 "Key %p (type %d): Event %d received : Switching from state %d to %d (fsm %d)"
 msgstr "Событие %d получено :тип %d. Переход из состояния %d в %d"
 
-#: ../src/fsm.c:206
+#: ../src/fsm.c:208
 #, fuzzy, c-format
 msgid "FSM state errorr: state=%d"
 msgstr "FSM ошибка состояния. событие =%d ; состояние=%d"
@@ -1563,57 +1558,57 @@ msgstr "Не удалось выделить память для просмот�
 msgid "Error emitting terminate signal: %s"
 msgstr "Ошибка загрузки значка florence: %s"
 
-#: ../src/controller.c:190
+#: ../src/controller.c:191
 msgid "ATSPI focus event received."
-msgstr ""
-
-#: ../src/controller.c:194
-#, c-format
-msgid "Event error: %s"
 msgstr ""
 
 #: ../src/controller.c:195
 #, c-format
+msgid "Event error: %s"
+msgstr ""
+
+#: ../src/controller.c:196
+#, c-format
 msgid "ATSPI focus event received. Object role=%d"
 msgstr ""
 
-#: ../src/controller.c:217
+#: ../src/controller.c:218
 msgid "SPI is disabled: Unable to switch auto-hide mode on."
 msgstr "SPI выключен: невозможно включить автоскрытие."
 
-#: ../src/controller.c:221 ../src/controller.c:223
+#: ../src/controller.c:222 ../src/controller.c:224
 msgid "ATSPI listener register failed"
 msgstr ""
 
-#: ../src/controller.c:233
+#: ../src/controller.c:234
 msgid "AT SPI: problem deregistering focus listener"
 msgstr ""
 
-#: ../src/controller.c:236
+#: ../src/controller.c:237
 msgid "AT SPI: problem deregistering window listener"
 msgstr ""
 
-#: ../src/controller.c:310
+#: ../src/controller.c:311
 msgid "Controller: unknown moving state."
 msgstr ""
 
-#: ../src/controller.c:378
+#: ../src/controller.c:379
 #, fuzzy
 msgid "Unable to allocate memory for the controller"
 msgstr "Невозможно выделить память на переход"
 
-#: ../src/controller.c:383
+#: ../src/controller.c:384
 #, c-format
 msgid "Error loading florence icon: %s"
 msgstr "Ошибка загрузки значка florence: %s"
 
-#: ../src/controller.c:389
+#: ../src/controller.c:390
 #, fuzzy
 msgid "AT-SPI has been disabled at run time: auto-hide mode is disabled."
 msgstr ""
 "AT-SPI было отключено во время компилирования: автоскрытие не работает."
 
-#: ../src/controller.c:397
+#: ../src/controller.c:398
 #, fuzzy
 msgid "AT-SPI has been disabled at compile time: auto-hide mode is disabled."
 msgstr ""
@@ -1681,6 +1676,9 @@ msgstr "_О программе"
 #: ../src/menu.c:103
 msgid "_Preferences"
 msgstr "_Параметры"
+
+#~ msgid "unknown slant for font %s: %d"
+#~ msgstr "Неизвестен наклон для шрифта %s: %d"
 
 #~ msgid "_Preferences..."
 #~ msgstr "_Параметры..."

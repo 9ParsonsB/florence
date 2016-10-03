@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Florence Gnome virtual keyboard 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-30 13:30+0100\n"
+"POT-Creation-Date: 2016-10-03 18:27+0200\n"
 "PO-Revision-Date: 2014-12-29 19:28+0100\n"
 "Last-Translator: Tails developers <tails@boum.org>\n"
 "Language-Team: French <f.agrech@gmail.com>\n"
@@ -1174,7 +1174,7 @@ msgstr ""
 msgid "A cairo error occured: %d"
 msgstr "Ein Cairo-Fehler ist aufgetreten: %d"
 
-#: ../src/style.c:223 ../src/style.c:509
+#: ../src/style.c:223 ../src/style.c:494
 #, c-format
 msgid "Unable to parse svg from layout file: %s"
 msgstr "Konnte die SVG-Datei nicht aus der Layoutdatei parsen: %s"
@@ -1184,39 +1184,34 @@ msgstr "Konnte die SVG-Datei nicht aus der Layoutdatei parsen: %s"
 msgid "Bad symbol: should have either svg or label :%s"
 msgstr "Defektes Symbol: es soll entweder ein SVG oder Label sein: %s"
 
-#: ../src/style.c:286
-#, c-format
-msgid "unknown slant for font %s: %d"
-msgstr "Unbekannte Schräge für Schriftart: %s : %d"
-
-#: ../src/style.c:374
+#: ../src/style.c:359
 #, c-format
 msgid "No style symbol for action key %d"
 msgstr "Kein Layoutsymbol für die Aktionstaste %d verfügbar"
 
-#: ../src/style.c:397
+#: ../src/style.c:382
 #, c-format
 msgid "Unable to parse svg from layout file: svg=\"%s\" error=\"%s\""
 msgstr ""
 "Konnte die SVG-Datei nicht aus der Layoutdatei parsen: svg=\"%s\" Fehler=\"%s"
 "\""
 
-#: ../src/style.c:401
+#: ../src/style.c:386
 #, c-format
 msgid "[new shape] name=%s svg=\"%s\""
 msgstr "[Neue Form] Name=%s svg=\"%s\""
 
-#: ../src/style.c:431
+#: ../src/style.c:416
 #, c-format
 msgid "Shape %s doesn't exist for selected style."
 msgstr "Die Form %s existiert nicht für den ausgewählten Stil."
 
-#: ../src/style.c:579
+#: ../src/style.c:564
 #, c-format
 msgid "An error occured while playing sound: %s"
 msgstr "Ein Fehler ist beim Abspielen des Sounds aufgetreten: %s"
 
-#: ../src/style.c:672
+#: ../src/style.c:657
 #, c-format
 msgid "Unknown sound type: %d"
 msgstr "Unbekannter Soundtyp: %d"
@@ -1389,24 +1384,24 @@ msgstr "Gedrückter Tastentyp ist unbekannt."
 msgid "pressed key has no action associated."
 msgstr "Gedrückte Taste ist mit keiner Aktion verknüpft."
 
-#: ../src/key.c:368
+#: ../src/key.c:371
 #, c-format
 msgid "unknown action key type released = %d"
 msgstr "Unbekannte Aktionstaste losgelassen: %d"
 
-#: ../src/key.c:371
+#: ../src/key.c:374
 msgid "unknown key type released."
 msgstr "Unbekannten Tastentyp losgelassen."
 
-#: ../src/key.c:373
+#: ../src/key.c:376
 msgid "released key has no action associated."
 msgstr "Die losgelassene Taste besitzt keine verknüpfte Aktion."
 
-#: ../src/key.c:441
+#: ../src/key.c:445
 msgid "unknown key type to draw."
 msgstr "Unbekannter Tastentyp zum Zeichnen."
 
-#: ../src/key.c:473
+#: ../src/key.c:477
 #, c-format
 msgid "unknown key type: %d"
 msgstr "Unbekannter Tastentyp: %d"
@@ -1535,7 +1530,7 @@ msgstr "Ungültigen Herumziehen-Modus Algorithmus ausgewählt. Benutze Standard.
 msgid "Unable to allocate memory for ramble"
 msgstr "Nicht möglich Speicher für Herumziehen-Modus zuzuweisen"
 
-#: ../src/fsm.c:191
+#: ../src/fsm.c:193
 #, c-format
 msgid ""
 "Key %p (type %d): Event %d received : Switching from state %d to %d (fsm %d)"
@@ -1543,7 +1538,7 @@ msgstr ""
 "Taste %p (typ %d): Ereignis %d empfangen : Wechsle vom Status %d zu %d (fsm "
 "%d)"
 
-#: ../src/fsm.c:206
+#: ../src/fsm.c:208
 #, c-format
 msgid "FSM state errorr: state=%d"
 msgstr "FSM Statusfehler: status=%d"
@@ -1705,6 +1700,9 @@ msgstr "_Über"
 #: ../src/menu.c:103
 msgid "_Preferences"
 msgstr "_Einstellungen"
+
+#~ msgid "unknown slant for font %s: %d"
+#~ msgstr "Unbekannte Schräge für Schriftart: %s : %d"
 
 #~ msgid "_Preferences..."
 #~ msgstr "_Préférences..."
