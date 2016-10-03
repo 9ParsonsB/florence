@@ -133,7 +133,7 @@ AC_CHECK_FUNCS([setlocale memset memchr sscanf strcmp strrchr strchr strstr strc
 # Files generated
 ICONDIR=${prefix}/share/icons/hicolor/scalable/apps
 if test "x$prefix" = "xNONE"; then
-	ICONDIR=/usr/share/icons/hicolor/scalable/apps
+	ICONDIR=/usr/local/share/icons/hicolor/scalable/apps
 fi
 AC_SUBST(ICONDIR)
 AC_CONFIG_FILES([Makefile
