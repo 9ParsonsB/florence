@@ -9,6 +9,7 @@ config.log
 config.status
 config.guess
 config.sub
+compile
 configure
 gnome-doc-utils.make
 intltool-extract.in
