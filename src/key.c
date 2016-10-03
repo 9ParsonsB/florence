@@ -327,6 +327,9 @@ void key_release(struct key *key, struct status *status)
 	START_FUNC
 	struct key_mod *mod=key_mod_find(key, status_globalmod_get(status));
 	struct key_action *action;
+	static gboolean prevent_recursion= FALSE;
+	if (!prevent_recursion) { // KEY_BIGGER and KEY_SMALLER somehow recurse into this function, 
+	prevent_recursion= TRUE;  // at least on Linux Mint 18 Cinnamon. prevent this here!
 	if (mod) {
 		switch (mod->type) {
 			case KEY_CODE:
@@ -371,6 +374,7 @@ void key_release(struct key *key, struct status *status)
 			default: flo_warn(_("unknown key type released."));
 		}
 	} else flo_warn(_("released key has no action associated."));
+	prevent_recursion= FALSE; }
 	END_FUNC
 }
 
