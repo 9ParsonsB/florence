@@ -38,9 +38,11 @@ static fsm_action fsm_release[]={ status_release, NULL };
 static fsm_action fsm_press_update[]={ status_press, status_update_key, NULL };
 static fsm_action fsm_release_update[]={ status_release, status_update_key, NULL };
 static fsm_action fsm_latch[]={ status_latch, status_update_view, NULL };
+static fsm_action fsm_unlatch[]={ status_unlatch, status_update_view, NULL };
 static fsm_action fsm_unlatch_lock[]={ status_unlatch, status_lock, status_update_view, NULL };
 static fsm_action fsm_lock[]={ status_lock, status_update_view, NULL };
 static fsm_action fsm_unlock[]={ status_unlock, status_update_view, NULL };
+static fsm_action fsm_unlock_latch[]={ status_unlock, status_latch, status_update_view, NULL };
 static fsm_action fsm_press_latched[]={ status_press_latched, status_press, NULL };
 static fsm_action fsm_release_latched[]={ status_release, status_release_latched, status_unlatch_all, status_update_view, NULL };
 static fsm_action fsm_update[]={ status_update_view, NULL };
@@ -56,9 +58,9 @@ static struct fsm_change fsm_mouse[FSM_EVENT_NUM][FSM_KEY_TYPE_NUM][KEY_STATE_NU
 			{ KEY_RELEASED, fsm_press_latched }, /* RELEASED state */
 		}, { /* MODIFIER key */
 			{ KEY_RELEASED, fsm_display_error }, /* PRESSED state */
-			{ KEY_LATCHED, fsm_latch }, /* RELEASED state */
-			{ KEY_RELEASED, fsm_unlock }, /* LOCKED state */
-			{ KEY_LOCKED, fsm_unlatch_lock } /* LATHCED state */
+			{ KEY_LOCKED, fsm_lock }, /* RELEASED state */
+			{ KEY_LATCHED, fsm_unlock_latch }, /* LOCKED state */
+			{ KEY_RELEASED, fsm_unlatch } /* LATHCED state */
 		}, { /* LOCKER key */
 			{ KEY_RELEASED, fsm_display_error }, /* PRESSED state */
 			{ KEY_RELEASED, fsm_press }, /* RELEASED state */
