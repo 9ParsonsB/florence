@@ -13,7 +13,7 @@ desktop_DATA=$(desktop_in_files:.desktop.in=.desktop)
 $(desktop_in_files): $(desktop_in_files:.desktop.in=.desktop.in.in)
 	sed -e "s|\@ICONDIR\@|$(ICONDIR)|" $< > $@
 
-iconsdir=$(datadir)/pixmaps
+iconsdir=$(datadir)/icons/hicolor/scalable/apps
 icons_DATA=florence.svg
 
 gtkbuilderdir=$(datadir)/florence

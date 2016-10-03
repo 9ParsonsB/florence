@@ -43,7 +43,7 @@ rm -rf xhtml/*
 cp style.css xhtml
 cp index.php xhtml
 mkdir xhtml/images
-cp $DATADIR/pixmaps/florence.svg xhtml/images
+cp $DATADIR/icons/hicolor/scalable/apps/florence.svg xhtml/images
 setxkbmap -print >/tmp/xkbmap.tmp
 doc C english C us
 doc ru russian ru_RU.UTF8 ru

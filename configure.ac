@@ -131,9 +131,9 @@ AC_FUNC_LSTAT_FOLLOWS_SLASHED_SYMLINK
 AC_CHECK_FUNCS([setlocale memset memchr sscanf strcmp strrchr strchr strstr strcpy strncpy strcat atoi putenv fopen fclose fgets fputs lstat opendir readdir closedir])
 
 # Files generated
-ICONDIR=${prefix}/share/pixmaps
+ICONDIR=${prefix}/share/icons/hicolor/scalable/apps
 if test "x$prefix" = "xNONE"; then
-	ICONDIR=/usr/local/share/pixmaps
+	ICONDIR=/usr/share/icons/hicolor/scalable/apps
 fi
 AC_SUBST(ICONDIR)
 AC_CONFIG_FILES([Makefile
