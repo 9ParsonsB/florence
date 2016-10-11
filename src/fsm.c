@@ -58,9 +58,9 @@ static struct fsm_change fsm_mouse[FSM_EVENT_NUM][FSM_KEY_TYPE_NUM][KEY_STATE_NU
 			{ KEY_RELEASED, fsm_press_latched }, /* RELEASED state */
 		}, { /* MODIFIER key */
 			{ KEY_RELEASED, fsm_display_error }, /* PRESSED state */
-			{ KEY_LOCKED, fsm_lock }, /* RELEASED state */
-			{ KEY_LATCHED, fsm_unlock_latch }, /* LOCKED state */
-			{ KEY_RELEASED, fsm_unlatch } /* LATHCED state */
+			{ KEY_LATCHED, fsm_latch }, /* RELEASED state */
+			{ KEY_RELEASED, fsm_unlock }, /* LOCKED state */
+			{ KEY_LOCKED, fsm_unlatch_lock } /* LATHCED state */
 		}, { /* LOCKER key */
 			{ KEY_RELEASED, fsm_display_error }, /* PRESSED state */
 			{ KEY_RELEASED, fsm_press }, /* RELEASED state */
