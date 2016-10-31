@@ -3,7 +3,8 @@
 # Copyright (C) 2012 François Agrech
 # This file is distributed under the same license as the Florence Gnome virtual keyboard package.
 # François Agrech <f.agrech@gmail.com>, 2012.
-#msgid ""
+#
+msgid ""
 msgstr ""
 "Project-Id-Version: 0.6.3\n"
 "POT-Creation-Date: 2016-10-08 15:23+0200\n"
@@ -18,365 +19,365 @@ msgstr ""
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:166(None)
 msgid "@@image: 'figures/florence.png'; md5=a946c1b9b8b3908e0224d6dfc543dec5"
-msgstr ""
+msgstr "ok"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:180(None)
 msgid "@@image: 'figures/minimize.png'; md5=1263721d2ad27561b0ea722e91673943"
-msgstr ""
+msgstr "ok"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:187(None)
 msgid "@@image: 'figures/configuration.png'; md5=a1161344a062b53cab9694be62ef92b4"
-msgstr ""
+msgstr "ok"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:194(None)
 msgid "@@image: 'figures/move.png'; md5=ff8513c6b8a6dda21dcdb186698494e9"
-msgstr ""
+msgstr "ok"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:201(None)
 msgid "@@image: 'figures/bigger.png'; md5=dc05f2e5e29bcd4f3d7daebdbe8f19c6"
-msgstr ""
+msgstr "ok"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:208(None)
 msgid "@@image: 'figures/smaller.png'; md5=824f5876171931996d8238a10c0eca34"
-msgstr ""
+msgstr "ok"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:215(None)
 msgid "@@image: 'figures/close.png'; md5=2c33cb8805596b8d74c1097867c67eec"
-msgstr ""
+msgstr "ok"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:222(None)
 msgid "@@image: 'figures/switch.png'; md5=b55b9e66547c89be560f652b6585a509"
-msgstr ""
+msgstr "ok"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:243(None)
 msgid "@@image: 'figures/style.png'; md5=60d656cd8b05ee1ab015f4216e2d9089"
-msgstr ""
+msgstr "ok"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:267(None)
 msgid "@@image: 'figures/window.png'; md5=841142e8f864bc5547e268d316203f9b"
-msgstr ""
+msgstr "ok"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:287(None)
 msgid "@@image: 'figures/behaviour.png'; md5=4c0f50e09a6b03a0a482147ab1b35b7e"
-msgstr ""
+msgstr "ok"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:303(None)
 msgid "@@image: 'figures/layout.png'; md5=caaa70f3613da29e77195996fc5ac1b4"
-msgstr ""
+msgstr "ok"
 
 #: C/florence.xml:10(title)
 msgid "Florence documentation"
-msgstr ""
+msgstr "Florence Benutzerhandbuch"
 
 #: C/florence.xml:11(para)
 msgid "This document describes how to install, configure and use Florence virtual keyboard."
-msgstr ""
+msgstr "Dieses Dokument beschreibt, wie Florence Bildschirmtastatur installiert, konfiguriert und benutzt wird."
 
 #: C/florence.xml:14(firstname)
 msgid "François"
-msgstr ""
+msgstr "François"
 
 #: C/florence.xml:15(surname)
 msgid "Agrech"
-msgstr ""
+msgstr "Agrech"
 
 #: C/florence.xml:16(email)
 msgid "f.agrech@gmail.com"
-msgstr ""
+msgstr "f.agrech@gmail.com"
 
 #: C/florence.xml:25(year)
 msgid "2014"
-msgstr ""
+msgstr "2014"
 
 #: C/florence.xml:25(holder)
 msgid "François Agrech"
-msgstr ""
+msgstr "François Agrech"
 
 #: C/florence.xml:27(para)
 msgid "Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License, Version 1.2 or any later version published by the Free Software Foundation; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. A copy of the license is included in the section entitled \"GNU Free Documentation License\"."
-msgstr ""
+msgstr "Dieses Dokument darf kopiert, weitergegeben und/oder verändert werden entsprechend den Bestimmungen der GNU-Lizenz für freie Dokumentation, Version 1.2 oder neuer, herausgegeben durch die Free Software Foundation; ohne unveränderliche Sektionen und ohne Umschlagstexte (Vorderseitentexte, Rückseitentexte). Eine Kopie der Lizenz befindet sich im Abschnitt \"GNU-Lizenz für freie Dokumentationen\"."
 
 #: C/florence.xml:30(primary) C/florence.xml:125(userinput)
 msgid "florence"
-msgstr ""
+msgstr "florence"
 
 #: C/florence.xml:31(primary)
 msgid "virtual keyboard"
-msgstr ""
+msgstr "Bildschirmtastatur"
 
 #: C/florence.xml:33(title)
 msgid "Introduction"
-msgstr ""
+msgstr "Einführung"
 
 #: C/florence.xml:34(para)
 msgid "Florence is an extensible scalable virtual keyboard for <ulink url=\"http://en.wikipedia.org/wiki/X_Window_System_core_protocol\">X</ulink>. You need it if you can't use a real hardware keyboard, for example because of injury, handicap, your keyboard is broken or because you use a tablet PC, but you must be able to use a pointing device (as a mouse, a trackball, a touchscreen or <ulink url=\"http://www.inference.phy.cam.ac.uk/opengazer\">opengazer</ulink>); If you can't use a pointing device, there is <ulink url=\"http://www.gok.ca/gok\">gok</ulink>, which can be used with just simple switches."
-msgstr ""
+msgstr "Florence ist eine erweiterbare und skalierbare Bildschirmtastatur für <ulink url=\"http://en.wikipedia.org/wiki/X_Window_System_core_protocol\">X</ulink>. Sie ist nicht nur nützlich auf einem Tablet PC, sondern auch, falls Sie aufgrund einer Verletzung oder Behinderung keine Hardware Tastatur bedienen können. Zur Benutzung von Florence ist es jedoch notwendig ein Zeigegerät wie eine Maus, einen Trackball, einen Touchscreen oder beispielsweise <ulink url=\"http://www.inference.phy.cam.ac.uk/opengazer\">opengazer</ulink> bedienen zu können. Wenn Ihnen dies nicht möglich ist, gibt es außerdem <ulink url=\"http://www.gok.ca/gok\">gok</ulink>, das mit einfachen Knöpfen bedient werden kann."
 
 #: C/florence.xml:35(para)
 msgid "Florence stays out of your way when you don't need it: it appears on the screen only when you need it. A Timer-based auto-click input method is available to help disabled people having difficulties to click. The ramble mode is another efficient input method that can help."
-msgstr ""
+msgstr "Florence hält sich im Hintergrund, wenn Sie es nicht benötigen: die Bildschirmtastatur wird nur eingeblendet, wenn es nötig ist. Für Menschen mit Klick-Schwäche ist eine Timer-basierte Auto-Klick Eingabemethode verfügbar. Der effiziente \"Herumziehen-Modus\" kann außerdem helfen. "
 
 #: C/florence.xml:37(para)
 msgid "Florence can be used on any desktop environment."
-msgstr ""
+msgstr "Florence kann auf jeder Desktop Umgebung verwendet werden."
 
 #: C/florence.xml:40(title)
 msgid "Install"
-msgstr ""
+msgstr "Installation"
 
 #: C/florence.xml:41(para)
 msgid "Make sure you have the latest version of Florence (0.6.3 as of November, the 2nd of 2014). You can get it at <ulink url=\"http://sourceforge.net/project/platformdownload.php?group_id=217749\">Sourceforge</ulink>"
-msgstr ""
+msgstr "Stellen Sie sicher, dass Sie die aktuellste Version von Florence besitzen (0.6.3 zum 2. November 2014). Sie können diese hier herunterladen: <ulink url=\"http://sourceforge.net/project/platformdownload.php?group_id=217749\">Sourceforge</ulink>"
 
 #: C/florence.xml:43(title)
 msgid "Preparing the dependencies"
-msgstr ""
+msgstr "Vorbereiten der Abhängigkeiten"
 
 #: C/florence.xml:44(para)
 msgid "In order to build Florence, you need a build environment with the following commands: make, scrollkeeper and a C compiler (gcc recommended), along with the following package dependencies:"
-msgstr ""
+msgstr "Um Florence bauen zu können, brauchen Sie eine Build Umgebung mit den folgenden Befehlen: make, scrollkeeper und einen C Compiler (empfohlen: gcc). Außerdem werden folgende Pakete benötigt:"
 
 #: C/florence.xml:46(para)
 msgid "<ulink url=\"http://www.gtk.org/download-linux.html\">gtk+</ulink> (version &gt;= 3.0)"
-msgstr ""
+msgstr "<ulink url=\"http://www.gtk.org/download-linux.html\">gtk+</ulink> (version &gt;= 3.0)"
 
 #: C/florence.xml:47(para)
 msgid "(Optional: --with-at-spi configure option) <ulink url=\"http://ftp.gnome.org/pub/gnome/sources/at-spi/\">cspi</ulink> (version &gt;= 2.0)"
-msgstr ""
+msgstr "(Optional: --with-at-spi configure Option) <ulink url=\"http://ftp.gnome.org/pub/gnome/sources/at-spi/\">cspi</ulink> (version &gt;= 2.0)"
 
 #: C/florence.xml:48(para)
 msgid "<ulink url=\"http://ftp.gnome.org/pub/gnome/sources/libxml2/\">libxml</ulink> (version &gt;= 2.0)"
-msgstr ""
+msgstr "<ulink url=\"http://ftp.gnome.org/pub/gnome/sources/libxml2/\">libxml</ulink> (version &gt;= 2.0)"
 
 #: C/florence.xml:49(ulink)
 msgid "librsvg"
-msgstr ""
+msgstr "librsvg"
 
 #: C/florence.xml:50(ulink)
 msgid "gettext"
-msgstr ""
+msgstr "gettext"
 
 #: C/florence.xml:51(para)
 msgid "<ulink url=\"http://ftp.gnome.org/pub/GNOME/sources/intltool\">intltool</ulink> (version &gt;= 0.23)"
-msgstr ""
+msgstr "<ulink url=\"http://ftp.gnome.org/pub/GNOME/sources/intltool\">intltool</ulink> (version &gt;= 0.23)"
 
 #: C/florence.xml:52(para)
 msgid "<ulink url=\"http://gstreamer.freedesktop.org\">gstreamer</ulink> (version &gt; 1.0)"
-msgstr ""
+msgstr "<ulink url=\"http://gstreamer.freedesktop.org\">gstreamer</ulink> (version &gt; 1.0)"
 
 #: C/florence.xml:53(para)
 msgid "(Optional: --with-docs configure option) <ulink url=\"http://ftp.gnome.org/pub/GNOME/sources/gnome-doc-utils\">gnome-doc-utils</ulink>"
-msgstr ""
+msgstr "(Optional: --with-docs configure Option) <ulink url=\"http://ftp.gnome.org/pub/GNOME/sources/gnome-doc-utils\">gnome-doc-utils</ulink>"
 
 #: C/florence.xml:54(para)
 msgid "(Optional: --with-libnotify configure option) <ulink url=\"http://www.galago-project.org/files/releases/source/libnotify\">libnotify</ulink>"
-msgstr ""
+msgstr "(Optional: --with-libnotify configure Option) <ulink url=\"http://www.galago-project.org/files/releases/source/libnotify\">libnotify</ulink>"
 
 #: C/florence.xml:55(para)
 msgid "(Optional: --with-xtst configure option) <ulink url=\"http://xorg.freedesktop.org/releases/individual/lib/\">libxtst</ulink>"
-msgstr ""
+msgstr "(Optional: --with-xtst configure Option) <ulink url=\"http://xorg.freedesktop.org/releases/individual/lib/\">libxtst</ulink>"
 
 #: C/florence.xml:57(para)
 msgid "How to install those dependencies is dependant on your distribution. If you don't know how to install them, please check with your distribution support."
-msgstr ""
+msgstr "Wie Sie diese Pakete installieren, hängt von Ihrer Distribution ab. Wenn Sie nicht wissen, wie das geht, fragen Sie bitte beim Support Ihrer Distribution nach."
 
 #: C/florence.xml:60(title)
 msgid "From source"
-msgstr ""
+msgstr "Vom Quelltext"
 
 #: C/florence.xml:61(para)
 msgid "Installing Florence from source is like installing any program that uses the GNU autotools. Open a terminal and type the following commands:"
-msgstr ""
+msgstr "Die Installation von Florence aus dem Quelltext heraus wird über die GNU Autotools Sammlung bewerkstelligt. Öffnen Sie ein Terminal und geben Sie folgende Befehle ein:"
 
 #: C/florence.xml:63(prompt) C/florence.xml:64(prompt) C/florence.xml:65(prompt) C/florence.xml:66(prompt) C/florence.xml:67(prompt) C/florence.xml:69(prompt) C/florence.xml:72(prompt) C/florence.xml:96(prompt) C/florence.xml:103(prompt) C/florence.xml:115(prompt) C/florence.xml:116(prompt) C/florence.xml:118(prompt) C/florence.xml:125(prompt) C/florence.xml:344(prompt) C/florence.xml:348(prompt) C/florence.xml:353(prompt) C/florence.xml:357(prompt) C/florence.xml:362(prompt) C/florence.xml:370(prompt) C/florence.xml:416(prompt) C/florence.xml:441(prompt) C/florence.xml:445(prompt)
 msgid "$"
-msgstr ""
+msgstr "$"
 
 #: C/florence.xml:63(userinput)
 #, no-wrap
 msgid "tar -xjvf florence-0.6.3.tar.bz2"
-msgstr ""
+msgstr "tar -xjvf florence-0.6.3.tar.bz2"
 
 #: C/florence.xml:64(userinput) C/florence.xml:115(userinput)
 #, no-wrap
 msgid "cd florence-0.6.3"
-msgstr ""
+msgstr "cd florence-0.6.3"
 
 #: C/florence.xml:65(userinput)
 #, no-wrap
 msgid "./configure --prefix=/usr"
-msgstr ""
+msgstr "./configure --prefix=/usr"
 
 #: C/florence.xml:66(userinput)
 #, no-wrap
 msgid "make"
-msgstr ""
+msgstr "make"
 
 #: C/florence.xml:67(userinput)
 #, no-wrap
 msgid "su -c \"make install\""
-msgstr ""
+msgstr "su -c \"make install\""
 
 #: C/florence.xml:69(para)
 msgid "For Ubuntu, replace the last command with:"
-msgstr ""
+msgstr "Auf Ubuntu ersetzen Sie bitte den letzten Befehl durch:"
 
 #: C/florence.xml:69(userinput)
 #, no-wrap
 msgid "sudo make install"
-msgstr ""
+msgstr "sudo make install"
 
 #: C/florence.xml:70(para)
 msgid "Check the list of other configure options available with:"
-msgstr ""
+msgstr "Die Liste mit zusätzlichen configure Optionen können Sie sich mit folgendem Befehl anzeigen lassen:"
 
 #: C/florence.xml:72(userinput)
 #, no-wrap
 msgid "./configure --help"
-msgstr ""
+msgstr "./configure --help"
 
 #: C/florence.xml:76(title)
 msgid "From distribution package"
-msgstr ""
+msgstr "Vom Distributionspaket"
 
 #: C/florence.xml:77(para)
 msgid "Your distribution may already have a recent binary package of Florence. In this case, you don't have to build it from source."
-msgstr ""
+msgstr "Ihre Distribution bringt eventuell bereits ein aktuelles Binärpaket von Florence mit sich. Dann ist es nicht notwendig, aus dem Quelltext heraus zu bauen, stattdessen können Sie das Binärpaket einfach direkt installieren:"
 
 #: C/florence.xml:80(para)
 msgid "<ulink url=\"http://www.redhat.com\">Red Hat</ulink>/<ulink url=\"http://www.centos.org\">CentOS</ulink>/<ulink url=\"http://fedoraproject.org/\">Fedora</ulink><screen>\n<prompt>$</prompt> <userinput>su - root</userinput>\n<prompt>#</prompt> <userinput>yum install florence</userinput>\n\t\t\t\t</screen>"
-msgstr ""
+msgstr "<ulink url=\"http://www.redhat.com\">Red Hat</ulink>/<ulink url=\"http://www.centos.org\">CentOS</ulink>/<ulink url=\"http://fedoraproject.org/\">Fedora</ulink><screen>\n<prompt>$</prompt> <userinput>su - root</userinput>\n<prompt>#</prompt> <userinput>yum install florence</userinput>\n\t\t\t\t</screen>"
 
 #: C/florence.xml:87(para)
 msgid "<ulink url=\"http://openmandriva.org/\">OpenMandriva</ulink>/<ulink url=\"https://www.mageia.org/\">Mageia</ulink><screen>\n<prompt>$</prompt> <userinput>su - root</userinput>\n<prompt>#</prompt> <userinput>urpmi florence</userinput>\n\t\t\t\t</screen>"
-msgstr ""
+msgstr "<ulink url=\"http://openmandriva.org/\">OpenMandriva</ulink>/<ulink url=\"https://www.mageia.org/\">Mageia</ulink><screen>\n<prompt>$</prompt> <userinput>su - root</userinput>\n<prompt>#</prompt> <userinput>urpmi florence</userinput>\n\t\t\t\t</screen>"
 
 #: C/florence.xml:94(ulink)
 msgid "Debian"
-msgstr ""
+msgstr "Debian"
 
 #: C/florence.xml:96(userinput)
 #, no-wrap
 msgid "su - root"
-msgstr ""
+msgstr "su - root"
 
 #: C/florence.xml:97(prompt) C/florence.xml:394(prompt) C/florence.xml:401(prompt)
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: C/florence.xml:97(userinput)
 #, no-wrap
 msgid "apt-get install florence"
-msgstr ""
+msgstr "apt-get install florence"
 
 #: C/florence.xml:101(ulink)
 msgid "Ubuntu"
-msgstr ""
+msgstr "Ubuntu"
 
 #: C/florence.xml:103(userinput)
 #, no-wrap
 msgid "sudo apt-get install florence"
-msgstr ""
+msgstr "sudo apt-get install florence"
 
 #: C/florence.xml:107(para)
 msgid "Other distributions : check with your distribution support."
-msgstr ""
+msgstr "Andere Distributionen : fragen Sie beim Support nach. "
 
 #: C/florence.xml:112(title)
 msgid "Uninstall (from source)"
-msgstr ""
+msgstr "Deinstallation (vom Quelltext)"
 
 #: C/florence.xml:113(para)
 msgid "Uninstalling is as easy as installing. If you installed from source, you can uninstall with the following commands:"
-msgstr ""
+msgstr "Die Deinstallation ist genauso einfach wie die Installation. Falls Sie aus dem Quelltext heraus installiert haben, führen Sie die Deinstallation mit folgenden Befehlen aus:"
 
 #: C/florence.xml:116(userinput)
 #, no-wrap
 msgid "su -c \"make uninstall\""
-msgstr ""
+msgstr "su -c \"make uninstall\""
 
 #: C/florence.xml:118(para)
 msgid "For Ubuntu:"
-msgstr ""
+msgstr "Auf Ubuntu:"
 
 #: C/florence.xml:118(userinput)
 #, no-wrap
 msgid "sudo make uninstall"
-msgstr ""
+msgstr "sudo make uninstall"
 
 #: C/florence.xml:122(title)
 msgid "Usage"
-msgstr ""
+msgstr "Benutzung"
 
 #: C/florence.xml:123(para)
 msgid "Florence aims at being easy. To launch Florence from the command line, type:"
-msgstr ""
+msgstr "Das Ziel von Florence ist eine möglichst einfache Handhabung. Um Florence von der Kommandozeile aus zu starten, geben Sie ein:"
 
 #: C/florence.xml:127(para)
 msgid "From a <ulink url=\"http://mate-desktop.org/\">MATE desktop</ulink>, you can launch Florence from the menu <guimenu>Applications</guimenu>-&gt;<guisubmenu>Accessibility</guisubmenu>-&gt;<guimenuitem>Florence Virtual keyboard</guimenuitem>. If you prefer that Florence is launched at MATE startup, choose the menu item <guimenu>System</guimenu>-&gt;<guisubmenu>Preferences</guisubmenu>-&gt;<guimenuitem>Sessions</guimenuitem>, click on the <guibutton>Startup programs</guibutton> tab, then click <guibutton>Add</guibutton> and enter <command>/usr/bin/florence</command> so Florence is launched with MATE at next boot."
-msgstr ""
+msgstr "Auf einem <ulink url=\"http://mate-desktop.org/\">MATE desktop</ulink> können Sie Florence über das Menü <guimenu>Anwendungen</guimenu>-&gt;<guisubmenu>Barrierefreiheit</guisubmenu>-&gt;<guimenuitem>Florence Bildschirmtastatur</guimenuitem> starten. Wenn Sie Florence beim Start von MATE automatisch starten möchten, wählen Sie im Menü <guimenu>System</guimenu>-&gt;<guisubmenu>Einstellungen</guisubmenu>-&gt;<guimenuitem>Sitzungen</guimenuitem>. Klicken Sie dort auf den <guibutton>Startprogramme</guibutton> Tab, dann <guibutton>Hinzufügen</guibutton> und geben Sie <command>/usr/bin/florence</command> ein, damit Florence beim nächsten Start von MATE mitgestartet wird."
 
 #: C/florence.xml:130(para)
 msgid "When Florence is running, an icon should appear in your notification area, usually at the top right corner of the screen. Clicking of the icon makes Florence appear or disappear from the screen. Right clicking on it makes a menu appear. On this menu, you can use the <guimenuitem>quit</guimenuitem> item to stop Florence."
-msgstr ""
+msgstr "Solange Florence läuft, sollte ein Symbol im Benachrichtigungsfeld erscheinen. Es befindet sich typischerweise rechts unten auf dem Bildschirm. Durch Anklicken des Symbols können Sie Florence ein- oder ausblenden. Ein Rechtsklick darauf öffnet das Menü. Dort finden Sie auch den Menüpunkt <guimenuitem>Beenden</guimenuitem>, um Florence zu beenden."
 
 #: C/florence.xml:132(title)
 msgid "Input methods"
-msgstr ""
+msgstr "Eingabemethoden"
 
 #: C/florence.xml:133(para)
 msgid "Florence can be used with 4 different input methods. Each method has advantages and drawbacks. It is up to you to select the right one for your usage pattern."
-msgstr ""
+msgstr "Florence kann mit 4 verschiedenen Eingabemethoden verwendet werden. Jede Methode hat ihr Vor- und Nachteile. Es ist Ihnen überlassen die richtige für Ihren Anwendungszweck auszuwählen."
 
 #: C/florence.xml:136(para)
 msgid "The default input method is the \"mouse\" method. This is adapted for mouse/trackpad input. It is pretty straightforward. Just click on the key with a mouse button to press it. Release the mouse button to release the key. The advantage of this method is its simplicity. It does not require learning. The drawback is that is requires a pointing device with a button and that the user is able to use it."
-msgstr ""
+msgstr "Die Standard-Eingabemethode ist die \"Maus\" Methode. Diese ist für eine Maus oder ein Trackpad angepasst und ist selbsterklärend. Klicken Sie einfach mit einem Mausknopf auf eine Taste, um diese zu drücken und lassen Sie den Mausknopf wieder los, um auch die Taste wieder loszulassen. Der Vorteil dieser Eingabemethode liegt in ihrer Einfachheit. Man muss sie nicht erlernen. Der Nachteil besteht darin, dass es eines Zeigegeräts mit einem Knopf bedarf und dass Sie in der Lage sein müssen, diesen zu betätigen."
 
 #: C/florence.xml:139(para)
 msgid "The second input method is the \"touch\" method. This is adapted for touch screen input. The difference with the mouse input method is that it not possible to touch the keyboard without clicking. In this mode, the keys are pressed on touch end."
-msgstr ""
+msgstr "Die zweite Eingabemethode ist die \"Touchscreen\" Methode. Der Unterschied zur Maus Eingabemethode besteht darin, dass es hier nicht möglich ist die Tasten der Tastatur durch Anklicken auszulösen. Bei dieser Methode werden die Tasten daher bei Berührungsende ausgelöst."
 
 #: C/florence.xml:142(para)
 msgid "The next method is the \"timer\" method. Use this method if you are unable to use a button. Point a key with the pointer and a timer is triggered. When the timer expires, the key is pressed and immediately released. The timer is cancelled if the pointer leaves the key. Note you can still press a mouse button to activate the key if you have one available. The advantage of this method is that it does not require a button. The drawbacks are that it is slower than the button method and that you can not hold a key pressed."
-msgstr ""
+msgstr "Die nächste Eingabemethode ist die \"Timer\" Methode. Entscheiden Sie sich für diese Methode, wenn Sie keinen Knopf bedienen können. Zeigen Sie mit dem Zeiger auf eine Taste, läuft ein Timer los. Wenn dieser abgelaufen ist, wird die entsprechende Taste gedrückt und sofort wieder losgelassen. Der Timer wird abgebrochen, sobald der Zeiger den Bereich der Taste verlässt. Zusätzlich ist es jederzeit möglich den Tastendruck per Mausknopf auszulösen. Der Vorteil dieser Methode ist, dass es keines Mausknopfes bedarf, diese Art der Eingabe ist jedoch langsamer. Ein weiterer Nachteil ist, dass es nicht möglich ist eine Taste gedrückt zu halten."
 
 #: C/florence.xml:145(para)
 msgid "The last method is the \"ramble\" method. Like the timer method, the ramble method does not require a button. This method can be faster than the timer method but requires dexterity and training to be used efficiently. The ramble method can be passive: no button necessary, or active: deaf while the pointer button is not pressed. There are two sub-methods for rambling."
-msgstr ""
+msgstr "Die letzte Eingabemethode ist der \"Herumziehen-Modus\". Genau wie bei der \"Timer\" Methode ist kein Knopf erforderlich. Diese Art der Eingabe kann schneller sein als die \"Timer\" Methode, für eine effiziente Nutzung ist aber Geschicklichkeit und Übung notwendig. Der \"Herumziehen-Modus\" kann passiv genutzt werden: ohne Knopf, oder aktiv: der Knopf am Zeigegerät muss gedrückt gehalten werden. Es gibt zwei Varianten des Herumziehens:" 
 
 #: C/florence.xml:148(para)
 msgid "The time-based ramble method requires good timing. While you move the pointer, Florence will detect keys that are to be activated based on the time the pointer stays over them. With this method, you can press the same key multiple times by moving the pointer to near the border of the key and back to the center. This method can be pretty fast with good training."
-msgstr ""
+msgstr "Die zeitbasierte Variante erfordert gutes Timing. Während Sie den Zeiger bewegen, bestimmt Florence die zu drückenden Tasten anhand der Zeit, die der Zeiger über ihnen bleibt. Auf diese Art ist es möglich eine Taste mehrfach zu drücken, indem man den Zeiger zwischen Rand und Mitte einer Taste hin und her bewegt. Diese Art der Eingabe kann mit etwas Übung recht schnell sein."
 
 #: C/florence.xml:151(para)
 msgid "The distance-based ramble method requires some dexterity to be used efficiently. The distance the pointer moves over the key is measured and the key is activated when it reaches a threshold. The key can be pressed multiple times by moving the pointer over the key repeatedly. A second threshold is there to detect multiple occurences. To use this method efficiently, apply quick gestures over the keys you want to activate."
-msgstr ""
+msgstr "Die distanzbasierte Variante erfordert etwas Geschicklichkeit. Die Entfernung, die der Zeiger über einer Taste zurücklegt, wird gemessen und die Taste wird ausgelöst, sobald diese einen bestimmten Schwellwert überschreitet. Die Taste kann dabei mehrfach gedrückt werden, indem man den Zeiger weiter über der Taste bewegt. Hierfür gibt es einen zweiten Schwellwert. Die Tasten können bei dieser Eingabemethode sehr effizient durch schnelle Gesten ausgelöst werden."
 
 #: C/florence.xml:158(title)
 msgid "Florence modes"
-msgstr ""
+msgstr "Verhalten"
 
 #: C/florence.xml:159(para)
 msgid "Florence has several states affecting how it functions and how it interacts with the user."
