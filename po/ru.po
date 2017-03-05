@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: florence\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-10 01:11+0200\n"
+"POT-Creation-Date: 2017-03-05 14:55+0100\n"
 "PO-Revision-Date: 2010-11-06 00:15+0000\n"
 "Last-Translator: Alone197711 <gwoger@sibmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -1500,13 +1500,13 @@ msgstr "Выбран неверный алгоритм перехода. Исп�
 msgid "Unable to allocate memory for ramble"
 msgstr "Невозможно выделить память на переход"
 
-#: ../src/fsm.c:193
+#: ../src/fsm.c:191
 #, fuzzy, c-format
 msgid ""
 "Key %p (type %d): Event %d received : Switching from state %d to %d (fsm %d)"
 msgstr "Событие %d получено :тип %d. Переход из состояния %d в %d"
 
-#: ../src/fsm.c:208
+#: ../src/fsm.c:206
 #, fuzzy, c-format
 msgid "FSM state errorr: state=%d"
 msgstr "FSM ошибка состояния. событие =%d ; состояние=%d"

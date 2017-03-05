@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: florence\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2016-10-10 01:11+0200\n"
+"POT-Creation-Date: 2017-03-05 14:55+0100\n"
 "PO-Revision-Date: 2011-08-10 17:10+0000\n"
 "Last-Translator: SomeOneBrick <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -33,7 +33,8 @@ msgstr "ok"
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:187(None)
-msgid "@@image: 'figures/configuration.png'; md5=a1161344a062b53cab9694be62ef92b4"
+msgid ""
+"@@image: 'figures/configuration.png'; md5=a1161344a062b53cab9694be62ef92b4"
 msgstr "ok"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -200,10 +201,9 @@ msgid ""
 "5th of 2017). You can get it at <ulink url=\"http://sourceforge.net/project/"
 "platformdownload.php?group_id=217749\">Sourceforge</ulink>"
 msgstr ""
-"Проверьте, насколько новую версию Florence Вы используете (версия 0.6.4)."
-"Вы можете скачать её на <ulink url=\"http://"
-"sourceforge.net/project/platformdownload.php?group_id=217749\">Sourceforge</"
-"ulink>"
+"Проверьте, насколько новую версию Florence Вы используете (версия 0.6.4).Вы "
+"можете скачать её на <ulink url=\"http://sourceforge.net/project/"
+"platformdownload.php?group_id=217749\">Sourceforge</ulink>"
 
 #: C/florence.xml:43(title)
 msgid "Preparing the dependencies"

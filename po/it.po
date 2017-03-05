@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Florence Gnome virtual keyboard 0.6.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-10 01:11+0200\n"
+"POT-Creation-Date: 2017-03-05 14:55+0100\n"
 "PO-Revision-Date: 2010-04-07 18:45+0100\n"
 "Last-Translator: Pietro Pilolli\n"
 "Language-Team: Italian\n"
@@ -1520,13 +1520,13 @@ msgstr "Nessun valore gconf %s. Utilizzo il default"
 msgid "Unable to allocate memory for ramble"
 msgstr "Impossibile allocare la memoria per il ramble"
 
-#: ../src/fsm.c:193
+#: ../src/fsm.c:191
 #, fuzzy, c-format
 msgid ""
 "Key %p (type %d): Event %d received : Switching from state %d to %d (fsm %d)"
 msgstr "Ricevuto evento %d  %d (type %d). Passo dallo stato %d a %d"
 
-#: ../src/fsm.c:208
+#: ../src/fsm.c:206
 #, fuzzy, c-format
 msgid "FSM state errorr: state=%d"
 msgstr "Errore nella FSM. codice del tasto=%d ; evento=%d ; stato=%d"
