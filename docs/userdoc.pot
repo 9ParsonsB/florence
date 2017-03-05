@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2016-10-03 18:27+0200\n"
+"POT-Creation-Date: 2016-10-10 01:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12,7 +12,7 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:166(None)
-msgid "@@image: 'figures/florence.png'; md5=d41d8cd98f00b204e9800998ecf8427e"
+msgid "@@image: 'figures/florence.png'; md5=a946c1b9b8b3908e0224d6dfc543dec5"
 msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
@@ -48,13 +48,13 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:215(None)
-msgid "@@image: 'figures/close.png'; md5=d41d8cd98f00b204e9800998ecf8427e"
+msgid "@@image: 'figures/close.png'; md5=2c33cb8805596b8d74c1097867c67eec"
 msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:222(None)
-msgid "@@image: 'figures/switch.png'; md5=4100c29cbedeef4c343329c673a3a2b5"
+msgid "@@image: 'figures/switch.png'; md5=b55b9e66547c89be560f652b6585a509"
 msgstr ""
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.

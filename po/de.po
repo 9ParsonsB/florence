@@ -1,5 +1,4 @@
-# French translations for Florence Gnome virtual keyboard package
-# Traductions françaises du paquet Florence Gnome virtual keyboard.
+# Deutsche Übersetzung für das Paket Florence Bildschirmtastatur
 # Copyright (C) 2012 François Agrech
 # This file is distributed under the same license as the Florence Gnome virtual keyboard package.
 # François Agrech <f.agrech@gmail.com>, 2012.
@@ -8,11 +7,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Florence Gnome virtual keyboard 0.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-03 18:27+0200\n"
+"POT-Creation-Date: 2016-10-10 01:11+0200\n"
 "PO-Revision-Date: 2014-12-29 19:28+0100\n"
 "Last-Translator: Tails developers <tails@boum.org>\n"
 "Language-Team: French <f.agrech@gmail.com>\n"
-"Language: fr\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -151,20 +150,19 @@ msgstr "In der Taskleiste erscheinen"
 
 #: ../data/florence.glade.h:32
 msgid "Always on top"
-msgstr "Immer im Vordergrund"
+msgstr "Im Vordergrund"
 
 #: ../data/florence.glade.h:33 ../data/org.florence.gschema.xml.in.h:51
 msgid "Keep the keyboard on top."
-msgstr "Die Tastatur im Vordergrund halten"
+msgstr "Die Tastatur im Vordergrund anzeigen"
 
 #: ../data/florence.glade.h:34
 msgid "Keep on top (use when \"Always on top\" fails)"
-msgstr ""
+msgstr "Vorne halten (wenn \"Im Vordergrund\" fehlschlägt)"
 
 #: ../data/florence.glade.h:35
-#, fuzzy
 msgid "Bring keyboard to top every second."
-msgstr "Die Tastatur zurück in den Vordergrund bringen."
+msgstr "Die Tastatur jede Sekunde zurück in den Vordergrund bringen."
 
 #: ../data/florence.glade.h:36
 msgid "System tray icon"
@@ -1590,9 +1588,8 @@ msgid "Error emitting terminate signal: %s"
 msgstr "Fehler beim Senden des Terminierungssignals: %s"
 
 #: ../src/controller.c:191
-#, fuzzy
 msgid "ATSPI focus event received."
-msgstr "ATSPI hat ein Fokusereignis empfangen. Objektrolle=%d"
+msgstr "ATSPI hat ein Fokusereignis empfangen."
 
 #: ../src/controller.c:195
 #, c-format
