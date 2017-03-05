@@ -72,7 +72,7 @@ run intltool-update -r
 run intltool-update -p
 
 cd ../docs
-LINGUAS="fr ru"
+LINGUAS="de fr it ru"
 for lang in $LINGUAS
 do
 	run xml2po -u $lang/$lang.po C/florence.xml
