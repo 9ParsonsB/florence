@@ -2,6 +2,11 @@ Bug fix release
 
 Changelog:
 
+2017-03-05 Stefan Sichler <stsichler@web.de>
+	* Version 0.6.4
+	* Added full german documentation
+	* Minor bug fixes 
+
 2014-11-02 François Agrech <f.agrech@gmail.com>
 	* Version 0.6.3
 	* Many bug fixes (patches provided by Jeremy Bobbio, Jonathan David

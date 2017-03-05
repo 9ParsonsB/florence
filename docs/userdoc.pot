@@ -142,7 +142,7 @@ msgid "Install"
 msgstr ""
 
 #: C/florence.xml:41(para)
-msgid "Make sure you have the latest version of Florence (0.6.3 as of November, the 2nd of 2014). You can get it at <ulink url=\"http://sourceforge.net/project/platformdownload.php?group_id=217749\">Sourceforge</ulink>"
+msgid "Make sure you have the latest version of Florence (0.6.4 as of March, the 5th of 2017). You can get it at <ulink url=\"http://sourceforge.net/project/platformdownload.php?group_id=217749\">Sourceforge</ulink>"
 msgstr ""
 
 #: C/florence.xml:43(title)
@@ -211,12 +211,12 @@ msgstr ""
 
 #: C/florence.xml:63(userinput)
 #, no-wrap
-msgid "tar -xjvf florence-0.6.3.tar.bz2"
+msgid "tar -xjvf florence-0.6.4.tar.bz2"
 msgstr ""
 
 #: C/florence.xml:64(userinput) C/florence.xml:115(userinput)
 #, no-wrap
-msgid "cd florence-0.6.3"
+msgid "cd florence-0.6.4"
 msgstr ""
 
 #: C/florence.xml:65(userinput)
