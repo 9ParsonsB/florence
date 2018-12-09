@@ -20,6 +20,7 @@
 #include "florence.h"
 #include "systemmap.h"
 #include "service.h"
+#include "settingservice.h"
 
 int main(int argc, char *argv[])
 {
@@ -27,10 +28,10 @@ int main(int argc, char *argv[])
 
     Simulator *simulator = new Simulator();
     Florence *keyboard = new Florence();
-    Service *service = new Service(keyboard);
+    SettingsService *settings = new SettingsService(keyboard);
+    Service *service = new Service(keyboard, settings);
 
-    keyboard->setFont("URW Gothic L");
-    keyboard->setFontSize(16);
+    settings->load();
 
     SystemMap *map = new SystemMap();
     map->load(keyboard->getSettings());

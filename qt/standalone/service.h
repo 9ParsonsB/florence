@@ -19,6 +19,7 @@
 
 #include <QObject>
 #include "florence.h"
+#include "settingservice.h"
 
 #define SERVICE_NAME "org.florence.Keyboard"
 
@@ -35,16 +36,24 @@ class Service : public QObject
 {
     Q_OBJECT
 public:
-    /*! \fn Simulator()
+    /*! \fn Service()
       * \brief Constuctor.
       *
       * Instantiates a Service object.
       *
       * \param keyboard the Florence keyboard widget to modify.
+      * \param settings the Settings object to register with DBus.
       */
-    explicit Service(Florence *keyboard, QObject *parent = 0);
+    explicit Service(Florence *keyboard, SettingsService *settings, QObject *parent = 0);
 
-    /*! \fn Simulator()
+    /*! \fn ~Service()
+      * \brief Destructor.
+      *
+      * Destroys a Service object.
+      */
+    ~Service();
+
+    /*! \fn listen()
       * \brief Listens to DBus at org.florence.Keyboard.
       */
     void listen();
@@ -55,6 +64,7 @@ public slots:
 
 private:
     Florence *keyboard;
+    SettingsService *settings;
 };
 
 #endif // SERVICE_H

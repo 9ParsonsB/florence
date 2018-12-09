@@ -19,11 +19,17 @@
 #include "service.h"
 #include "florenceexception.h"
 
-Service::Service(Florence *keyboard, QObject *parent) : QObject(parent)
+Service::Service(Florence *keyboard, SettingsService *settings, QObject *parent) : QObject(parent)
 {
     this->keyboard = keyboard;
+    this->settings = settings;
 }
 
+Service::~Service() {
+    QDBusConnection::sessionBus().unregisterObject("/settings");
+    QDBusConnection::sessionBus().unregisterObject("/");
+    QDBusConnection::sessionBus().unregisterService(SERVICE_NAME);
+}
 
 void Service::listen() {
     if (!QDBusConnection::sessionBus().isConnected()) {
@@ -35,6 +41,7 @@ void Service::listen() {
     }
 
     QDBusConnection::sessionBus().registerObject("/", this, QDBusConnection::ExportAllSlots);
+    QDBusConnection::sessionBus().registerObject("/settings", settings, QDBusConnection::ExportAllSlots);
 }
 
 void Service::show() {
@@ -44,3 +51,4 @@ void Service::show() {
 void Service::hide() {
     keyboard->hide();
 }
+
