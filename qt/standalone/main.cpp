@@ -15,9 +15,11 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QApplication>
+#include "qtextstream.h"
 #include "simulator.h"
 #include "florence.h"
 #include "systemmap.h"
+#include "service.h"
 
 int main(int argc, char *argv[])
 {
@@ -25,6 +27,7 @@ int main(int argc, char *argv[])
 
     Simulator *simulator = new Simulator();
     Florence *keyboard = new Florence();
+    Service *service = new Service(keyboard);
 
     keyboard->setFont("URW Gothic L");
     keyboard->setFontSize(16);
@@ -35,6 +38,7 @@ int main(int argc, char *argv[])
 
     QObject::connect( keyboard, SIGNAL(keyPressed(quint8)), simulator, SLOT(keyPress(quint8)) );
     QObject::connect( keyboard, SIGNAL(keyReleased(quint8)), simulator, SLOT(keyRelease(quint8)) );
+    service->listen();
 
     keyboard->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::WindowDoesNotAcceptFocus);
 
