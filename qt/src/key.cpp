@@ -25,7 +25,7 @@ Key::Key( QDomElement el, Settings *settings )
 {
     bool ok;
     QDomElement code = el.firstChildElement("code");
-    this->code = code.text().toInt(&ok);
+    this->code = static_cast<quint8>(code.text().toInt(&ok));
     QDomElement xpos = el.firstChildElement("xpos");
     qreal x = xpos.text().toDouble(&ok);
     QDomElement ypos = el.firstChildElement("ypos");
@@ -64,9 +64,9 @@ Key::Key( QDomElement el, Settings *settings )
     this->setAcceptHoverEvents( true );
     this->hovered = false;
 
-    this->activeRenderer = NULL;
-    this->pressedRenderer = NULL;
-    this->latchedRenderer = NULL;
+    this->activeRenderer = nullptr;
+    this->pressedRenderer = nullptr;
+    this->latchedRenderer = nullptr;
 
     this->status = KEY_RELEASED;
     this->connect( &(this->releaseTimer), SIGNAL(timeout()), this, SLOT(release()) );
@@ -118,28 +118,31 @@ void Key::paint( QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     painter->scale( this->bounds.width()/viewbox.width(), this->bounds.height()/viewbox.height() );
 
     switch ( this->status ) {
-        case KEY_RELEASED:
-            if ( hovered ) {
-                if ( !this->activeRenderer ) return;
-                this->activeRenderer->render( painter, viewbox );
-            } else {
-                if ( !this->renderer() ) return;
-                QGraphicsSvgItem::paint( painter, option, widget );
-            }
-            break;
-        case KEY_PRESSED:
-        case KEY_LOCKED:
-            if ( !this->pressedRenderer ) return;
-            this->pressedRenderer->render( painter, viewbox );
-            break;
-        case KEY_LATCHED:
-            if ( !this->latchedRenderer ) return;
-            this->latchedRenderer->render( painter, viewbox );
-            break;
+    case KEY_RELEASED:
+        if ( hovered ) {
+            if ( !this->activeRenderer ) return;
+            this->activeRenderer->render( painter, viewbox );
+        } else {
+            if ( !this->renderer() ) return;
+            QGraphicsSvgItem::paint( painter, option, widget );
+        }
+        break;
+    case KEY_PRESSED:
+    case KEY_LOCKED:
+        if ( !this->pressedRenderer ) return;
+        this->pressedRenderer->render( painter, viewbox );
+        break;
+    case KEY_LATCHED:
+        if ( !this->latchedRenderer ) return;
+        this->latchedRenderer->render( painter, viewbox );
+        break;
     }
 
     painter->setCompositionMode( QPainter::CompositionMode_DestinationOut );
-    painter->fillRect( -3, -3, viewbox.width() + 6, viewbox.height() + 6, QColor( 0, 0, 0, (1.0-this->settings->getOpacity()) * 255.0 ) );
+    painter->fillRect( -3, -3,
+                       static_cast<int>(viewbox.width()) + 6,
+                       static_cast<int>(viewbox.height()) + 6,
+                       QColor( 0, 0, 0, static_cast<int>((1.0-this->settings->getOpacity()) * 255.0 )) );
 
     painter->restore();
     Symbol *s;
@@ -173,30 +176,31 @@ void Key::mouseReleaseEvent ()
     if ( mod > 0 ) {
         bool update = false;
         switch ( this->status ) {
-            case KEY_RELEASED:
-                this->settings->getKeymap()->addModifier( mod );
-                if ( this->settings->getKeymap()->isLocker( this ->code ) ) {
-                    this->status = KEY_LOCKED;
-                    emit lockKey( this );
-                } else {
-                    this->status = KEY_LATCHED;
-                    emit latchKey( this );
-                }
-                update = true;
-                break;
-            case KEY_LATCHED:
+        case KEY_RELEASED:
+            this->settings->getKeymap()->addModifier( mod );
+            if ( this->settings->getKeymap()->isLocker( this ->code ) ) {
                 this->status = KEY_LOCKED;
-                emit unlatchKey( this );
                 emit lockKey( this );
-                this->update();
-                break;
-            case KEY_LOCKED:
-                emit unlockKey( this );
-            case KEY_PRESSED: // Should not happen
-                this->settings->getKeymap()->removeModifier( mod );
-                this->status = KEY_RELEASED;
-                update = true;
-                break;
+            } else {
+                this->status = KEY_LATCHED;
+                emit latchKey( this );
+            }
+            update = true;
+            break;
+        case KEY_LATCHED:
+            this->status = KEY_LOCKED;
+            emit unlatchKey( this );
+            emit lockKey( this );
+            this->update();
+            break;
+        case KEY_LOCKED:
+            emit unlockKey( this );
+            [[clang::fallthrough]];
+        case KEY_PRESSED: // Should not happen
+            this->settings->getKeymap()->removeModifier( mod );
+            this->status = KEY_RELEASED;
+            update = true;
+            break;
         }
 
         if ( update ) {

@@ -19,10 +19,6 @@ HEADERS += key.h \
     symbol.h \
     stylesymbol.h \
     styleshape.h \
-    style.h \
-    keymap.h \
-    key.h \
-    florence.h \
     styleitem.h \
     settings.h
 OTHER_FILES += COPYING
