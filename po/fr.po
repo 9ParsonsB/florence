@@ -6,9 +6,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Florence Gnome virtual keyboard 0.6.0\n"
+"Project-Id-Version: Florence Gnome virtual keyboard 0.6.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-02 20:18+0100\n"
+"POT-Creation-Date: 2017-03-05 14:55+0100\n"
 "PO-Revision-Date: 2012-10-06 12:03+0200\n"
 "Last-Translator: François Agrech <f.agrech@gmail.com>\n"
 "Language-Team: French <f.agrech@gmail.com>\n"
@@ -1176,7 +1176,7 @@ msgstr ""
 msgid "A cairo error occured: %d"
 msgstr "Une erreur de cairo est survenue: %d"
 
-#: ../src/style.c:223 ../src/style.c:509
+#: ../src/style.c:223 ../src/style.c:494
 #, c-format
 msgid "Unable to parse svg from layout file: %s"
 msgstr "Echec d'analyse du SVG depuis le ficher d'agencement: %s"
@@ -1186,39 +1186,34 @@ msgstr "Echec d'analyse du SVG depuis le ficher d'agencement: %s"
 msgid "Bad symbol: should have either svg or label :%s"
 msgstr "Mauvais symbole: il devrait avoir soit un svg, soit un label: %s"
 
-#: ../src/style.c:286
-#, c-format
-msgid "unknown slant for font %s: %d"
-msgstr "dérivation de la police %s inconnu: %d"
-
-#: ../src/style.c:374
+#: ../src/style.c:359
 #, c-format
 msgid "No style symbol for action key %d"
 msgstr "Aucun symbole trouvé pour la touche d'acion %d dans le style"
 
-#: ../src/style.c:397
+#: ../src/style.c:382
 #, c-format
 msgid "Unable to parse svg from layout file: svg=\"%s\" error=\"%s\""
 msgstr ""
 "Echec de l'analyse du svg depuis le ficher d'agencement: svg=\"%s\" erreur="
 "\"%s\""
 
-#: ../src/style.c:401
+#: ../src/style.c:386
 #, c-format
 msgid "[new shape] name=%s svg=\"%s\""
 msgstr "[nouvelle forme] nom=%s svg=\"%s\""
 
-#: ../src/style.c:431
+#: ../src/style.c:416
 #, c-format
 msgid "Shape %s doesn't exist for selected style."
 msgstr "La forme %s n'existe pas pour le style sélectionné."
 
-#: ../src/style.c:579
+#: ../src/style.c:564
 #, c-format
 msgid "An error occured while playing sound: %s"
 msgstr "Erreur en jouant le son: %s"
 
-#: ../src/style.c:672
+#: ../src/style.c:657
 #, c-format
 msgid "Unknown sound type: %d"
 msgstr "type de son inconnu: %s"
@@ -1392,24 +1387,24 @@ msgstr "type de touche pressée inconnu."
 msgid "pressed key has no action associated."
 msgstr "la touche pressée n'a pas d'action associée."
 
-#: ../src/key.c:368
+#: ../src/key.c:371
 #, c-format
 msgid "unknown action key type released = %d"
 msgstr "un type de touche action inconnu a été libéré: %d"
 
-#: ../src/key.c:371
+#: ../src/key.c:374
 msgid "unknown key type released."
 msgstr "un type de touche inconnu a été libéré."
 
-#: ../src/key.c:373
+#: ../src/key.c:376
 msgid "released key has no action associated."
 msgstr "la touche libérée n'a pas d'action associée."
 
-#: ../src/key.c:441
+#: ../src/key.c:445
 msgid "unknown key type to draw."
 msgstr "type de touche à dessiner inconnu."
 
-#: ../src/key.c:473
+#: ../src/key.c:477
 #, c-format
 msgid "unknown key type: %d"
 msgstr "type de touche inconnu: %d"
@@ -1598,58 +1593,58 @@ msgstr "Echec d'allocation de la mémoire pour le service dbus"
 msgid "Error emitting terminate signal: %s"
 msgstr "Erreur en émettant le signal terminer: %s"
 
-#: ../src/controller.c:190
+#: ../src/controller.c:191
 #, fuzzy
 msgid "ATSPI focus event received."
 msgstr "ATSPI a reçu un évènement de sélection. Role de l'objet=%d"
 
-#: ../src/controller.c:194
+#: ../src/controller.c:195
 #, c-format
 msgid "Event error: %s"
 msgstr "Erreur d'évènement: %s"
 
-#: ../src/controller.c:195
+#: ../src/controller.c:196
 #, c-format
 msgid "ATSPI focus event received. Object role=%d"
 msgstr "ATSPI a reçu un évènement de sélection. Role de l'objet=%d"
 
-#: ../src/controller.c:217
+#: ../src/controller.c:218
 msgid "SPI is disabled: Unable to switch auto-hide mode on."
 msgstr ""
 "SPI est désactivé: Impossible d'activer le mode 'cacher automatiquement'"
 
-#: ../src/controller.c:221 ../src/controller.c:223
+#: ../src/controller.c:222 ../src/controller.c:224
 msgid "ATSPI listener register failed"
 msgstr "Enregistrement de l'écouteur ATSPI échoué"
 
-#: ../src/controller.c:233
+#: ../src/controller.c:234
 msgid "AT SPI: problem deregistering focus listener"
 msgstr "AT SPI: problème de désenregistrement de l'auditeur du point focal"
 
-#: ../src/controller.c:236
+#: ../src/controller.c:237
 msgid "AT SPI: problem deregistering window listener"
 msgstr "AT SPI: problème de désenregistrement de l'auditeur de fenêtre"
 
-#: ../src/controller.c:310
+#: ../src/controller.c:311
 msgid "Controller: unknown moving state."
 msgstr "Contrôleur: état de mouvement inconnu."
 
-#: ../src/controller.c:378
+#: ../src/controller.c:379
 msgid "Unable to allocate memory for the controller"
 msgstr "Echec d'allocation de la mémoire pour le contrôleur"
 
-#: ../src/controller.c:383
+#: ../src/controller.c:384
 #, c-format
 msgid "Error loading florence icon: %s"
 msgstr "Erreur de chargement du fichier icone: %s"
 
-#: ../src/controller.c:389
+#: ../src/controller.c:390
 msgid "AT-SPI has been disabled at run time: auto-hide mode is disabled."
 msgstr ""
 "AT-SPI a été désactivé pendant l'exécution: le mode 'cacher automatiquement' "
 "est désactivé."
 
-#: ../src/controller.c:397
+#: ../src/controller.c:398
 msgid "AT-SPI has been disabled at compile time: auto-hide mode is disabled."
 msgstr ""
 "AT-SPI a été désactivé à la compilation: le mode 'cacher automatiquement' "
@@ -1717,6 +1712,9 @@ msgstr "A p_ropos"
 #: ../src/menu.c:103
 msgid "_Preferences"
 msgstr "_Préférences"
+
+#~ msgid "unknown slant for font %s: %d"
+#~ msgstr "dérivation de la police %s inconnu: %d"
 
 #~ msgid "_Preferences..."
 #~ msgstr "_Préférences..."

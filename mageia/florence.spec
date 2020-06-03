@@ -74,10 +74,10 @@ desktop-file-install \
         --dir=%{buildroot}%{_datadir}/applications \
         %{buildroot}/%{_datadir}/applications/%{name}.desktop
 
-mkdir -p %{buildroot}%{_datadir}/pixmaps/ 
+mkdir -p %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/ 
 
 install -p -m 0644 data/%{name}.svg \
-    %{buildroot}%{_datadir}/pixmaps/%{name}.svg
+    %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
 
 %find_lang %{name}
 
@@ -88,7 +88,7 @@ install -p -m 0644 data/%{name}.svg \
 %{_datadir}/applications/%{name}.*
 %{_datadir}/gnome/help/%{name}/
 %{_datadir}/omf/%{name}/
-%{_datadir}/pixmaps/%{name}.svg
+%{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
 %{_datadir}/glib-2.0/schemas/org.florence.gschema.xml
 %{_mandir}/man1/florence.1.*
 %{_mandir}/man1/florence_applet.1.*

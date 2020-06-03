@@ -8,7 +8,7 @@ DOC_FIGURES = figures/behaviour.png figures/florence.png figures/layout.png \
               figures/style.png figures/window.png figures/minimize.png \
               figures/configuration.png figures/move.png figures/bigger.png \
               figures/smaller.png figures/close.png figures/switch.png
-DOC_LINGUAS = fr ru
+DOC_LINGUAS = fr ru de
 
 man_MANS = florence.1 florence_applet.1
 EXTRA_DIST = $(man_MANS)

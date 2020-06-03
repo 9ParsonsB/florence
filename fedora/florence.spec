@@ -59,7 +59,7 @@ desktop-file-install \
         --dir=%{buildroot}%{_datadir}/applications \
         %{buildroot}%{_datadir}/applications/%{name}.desktop
 
-install -pDm0644 data/%{name}.svg %{buildroot}%{_datadir}/pixmaps/%{name}.svg
+install -pDm0644 data/%{name}.svg %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
 
 %find_lang %{name}
 
@@ -78,7 +78,7 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 %{_datadir}/applications/%{name}.*
 %{_datadir}/gnome/help/%{name}/
 %{_datadir}/omf/%{name}/
-%{_datadir}/pixmaps/%{name}.svg
+%{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
 %{_datadir}/glib-2.0/schemas/org.%{name}.gschema.xml
 %{_mandir}/man1/%{name}.*
 %{_mandir}/man1/%{name}_applet.*

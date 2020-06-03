@@ -110,7 +110,7 @@ gboolean flo_mouse_leave_event (GtkWidget *window, GdkEvent *event, gpointer use
 	}
 #endif
 	END_FUNC
-	return FALSE;
+	return TRUE;
 }
 
 /* handles button press events */
@@ -119,7 +119,7 @@ gboolean flo_button_press_event (GtkWidget *window, GdkEventButton *event, gpoin
 	START_FUNC
 	struct florence *florence=(struct florence *)user_data;
 	struct key *key=NULL;
-	
+
 	if (event) {
 		key=status_hit_get(florence->status, (gint)((GdkEventButton*)event)->x,
 #ifdef ENABLE_RAMBLE
@@ -156,7 +156,7 @@ gboolean flo_button_press_event (GtkWidget *window, GdkEventButton *event, gpoin
 	}
 #endif
 	END_FUNC
-	return FALSE;
+	return TRUE;
 }
 
 /* handles button release events */
@@ -185,7 +185,7 @@ gboolean flo_button_release_event (GtkWidget *window, GdkEvent *event, gpointer 
 	}
 #endif
 	END_FUNC
-	return FALSE;
+	return TRUE;
 }
 
 /* update the timer representation: to be called periodically */
@@ -302,7 +302,7 @@ gboolean flo_mouse_enter_event (GtkWidget *window, GdkEvent *event, gpointer use
 	}
 	status_release_latched(florence->status, NULL);
 	END_FUNC
-	return FALSE;
+	return TRUE;
 }
 
 /* Triggered by gconf when the "keep_on_top" parameter is changed. */

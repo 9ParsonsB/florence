@@ -1,4 +1,4 @@
-AC_INIT([Florence virtual keyboard], [0.6.3], [f.agrech@gmail.com], [florence])
+AC_INIT([Florence virtual keyboard], [0.6.4], [f.agrech@gmail.com], [florence])
 AC_CONFIG_HEADERS(config.h)
 AM_INIT_AUTOMAKE(no-dist-gzip dist-bzip2)
 LT_INIT
@@ -131,9 +131,9 @@ AC_FUNC_LSTAT_FOLLOWS_SLASHED_SYMLINK
 AC_CHECK_FUNCS([setlocale memset memchr sscanf strcmp strrchr strchr strstr strcpy strncpy strcat atoi putenv fopen fclose fgets fputs lstat opendir readdir closedir])
 
 # Files generated
-ICONDIR=${prefix}/share/pixmaps
+ICONDIR=${prefix}/share/icons/hicolor/scalable/apps
 if test "x$prefix" = "xNONE"; then
-	ICONDIR=/usr/local/share/pixmaps
+	ICONDIR=/usr/local/share/icons/hicolor/scalable/apps
 fi
 AC_SUBST(ICONDIR)
 AC_CONFIG_FILES([Makefile

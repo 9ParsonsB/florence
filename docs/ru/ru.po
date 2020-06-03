@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: florence\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-11-02 20:18+0100\n"
+"POT-Creation-Date: 2017-03-05 14:55+0100\n"
 "PO-Revision-Date: 2011-08-10 17:10+0000\n"
 "Last-Translator: SomeOneBrick <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -21,99 +21,76 @@ msgstr ""
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:166(None)
-#, fuzzy
-msgid "@@image: 'figures/florence.png'; md5=d41d8cd98f00b204e9800998ecf8427e"
-msgstr ""
-"@@изображение: 'figures/florence.png'; md5=ad4d8900416e69900035d27e07e43ac5"
+msgid "@@image: 'figures/florence.png'; md5=a946c1b9b8b3908e0224d6dfc543dec5"
+msgstr "ok"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:180(None)
-#, fuzzy
 msgid "@@image: 'figures/minimize.png'; md5=1263721d2ad27561b0ea722e91673943"
-msgstr ""
-"@@изображение: 'figures/layout.png'; md5=56d00918f2b781fb6626bebfcb698351"
+msgstr "ok"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:187(None)
-#, fuzzy
 msgid ""
 "@@image: 'figures/configuration.png'; md5=a1161344a062b53cab9694be62ef92b4"
-msgstr ""
-"@@изображение: 'figures/layout.png'; md5=56d00918f2b781fb6626bebfcb698351"
+msgstr "ok"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:194(None)
-#, fuzzy
 msgid "@@image: 'figures/move.png'; md5=ff8513c6b8a6dda21dcdb186698494e9"
-msgstr ""
-"@@изображение: 'figures/style.png'; md5=2e56402545536919f65c2d9153425a52"
+msgstr "ok"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:201(None)
-#, fuzzy
 msgid "@@image: 'figures/bigger.png'; md5=dc05f2e5e29bcd4f3d7daebdbe8f19c6"
-msgstr ""
-"@@изображение: 'figures/style.png'; md5=2e56402545536919f65c2d9153425a52"
+msgstr "ok"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:208(None)
-#, fuzzy
 msgid "@@image: 'figures/smaller.png'; md5=824f5876171931996d8238a10c0eca34"
-msgstr ""
-"@@изображение: 'figures/behaviour.png'; md5=e578dc76da690c66e7042e39a8fe1d15"
+msgstr "ok"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:215(None)
-#, fuzzy
-msgid "@@image: 'figures/close.png'; md5=d41d8cd98f00b204e9800998ecf8427e"
-msgstr ""
-"@@изображение: 'figures/style.png'; md5=2e56402545536919f65c2d9153425a52"
+msgid "@@image: 'figures/close.png'; md5=2c33cb8805596b8d74c1097867c67eec"
+msgstr "ok"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:222(None)
-#, fuzzy
-msgid "@@image: 'figures/switch.png'; md5=4100c29cbedeef4c343329c673a3a2b5"
+msgid "@@image: 'figures/switch.png'; md5=b55b9e66547c89be560f652b6585a509"
 msgstr ""
 "@@изображение: 'figures/style.png'; md5=2e56402545536919f65c2d9153425a52"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:243(None)
-#, fuzzy
 msgid "@@image: 'figures/style.png'; md5=60d656cd8b05ee1ab015f4216e2d9089"
-msgstr ""
-"@@изображение: 'figures/behaviour.png'; md5=e578dc76da690c66e7042e39a8fe1d15"
+msgstr "ok"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:267(None)
-#, fuzzy
 msgid "@@image: 'figures/window.png'; md5=841142e8f864bc5547e268d316203f9b"
-msgstr ""
-"@@изображение: 'figures/layout.png'; md5=56d00918f2b781fb6626bebfcb698351"
+msgstr "ok"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:287(None)
-#, fuzzy
 msgid "@@image: 'figures/behaviour.png'; md5=4c0f50e09a6b03a0a482147ab1b35b7e"
-msgstr ""
-"@@изображение: 'figures/behaviour.png'; md5=e578dc76da690c66e7042e39a8fe1d15"
+msgstr "ok"
 
 #. When image changes, this message will be marked fuzzy or untranslated for you.
 #. It doesn't matter what you translate it to: it's not used at all.
 #: C/florence.xml:303(None)
-#, fuzzy
 msgid "@@image: 'figures/layout.png'; md5=caaa70f3613da29e77195996fc5ac1b4"
-msgstr ""
-"@@изображение: 'figures/layout.png'; md5=56d00918f2b781fb6626bebfcb698351"
+msgstr "ok"
 
 #: C/florence.xml:10(title)
 msgid "Florence documentation"
@@ -220,14 +197,13 @@ msgstr "Установить"
 #: C/florence.xml:41(para)
 #, fuzzy
 msgid ""
-"Make sure you have the latest version of Florence (0.6.3 as of November, the "
-"2nd of 2014). You can get it at <ulink url=\"http://sourceforge.net/project/"
+"Make sure you have the latest version of Florence (0.6.4 as of March, the "
+"5th of 2017). You can get it at <ulink url=\"http://sourceforge.net/project/"
 "platformdownload.php?group_id=217749\">Sourceforge</ulink>"
 msgstr ""
-"Проверьте, насколько новую версию Florence Вы используете (версия 0.5.1 на "
-"02 Ноября 2010 года). Вы можете скачать её на <ulink url=\"http://"
-"sourceforge.net/project/platformdownload.php?group_id=217749\">Sourceforge</"
-"ulink>"
+"Проверьте, насколько новую версию Florence Вы используете (версия 0.6.4).Вы "
+"можете скачать её на <ulink url=\"http://sourceforge.net/project/"
+"platformdownload.php?group_id=217749\">Sourceforge</ulink>"
 
 #: C/florence.xml:43(title)
 msgid "Preparing the dependencies"
@@ -354,13 +330,13 @@ msgstr "$"
 
 #: C/florence.xml:63(userinput)
 #, fuzzy, no-wrap
-msgid "tar -xjvf florence-0.6.3.tar.bz2"
-msgstr "tar -xjvf florence-0.5.1.tar.bz2"
+msgid "tar -xjvf florence-0.6.4.tar.bz2"
+msgstr "tar -xjvf florence-0.6.4.tar.bz2"
 
 #: C/florence.xml:64(userinput) C/florence.xml:115(userinput)
 #, fuzzy, no-wrap
-msgid "cd florence-0.6.3"
-msgstr "cd florence-0.5.1"
+msgid "cd florence-0.6.4"
+msgstr "cd florence-0.6.4"
 
 #: C/florence.xml:65(userinput)
 #, no-wrap
