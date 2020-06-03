@@ -124,14 +124,14 @@ StyleShape *Style::getShape( QString name )
     while ( s && it.hasNext() && ( s->getName() != name ) ) {
         s = it.next();
     }
-    return s ? ( s->getName() == name ? s : NULL ) : NULL;
+    return s ? ( s->getName() == name ? s : nullptr ) : nullptr;
 }
 
 StyleSymbol *Style::getSymbol( QString name )
 {
-    if ( name.length() == 0 ) return NULL;
+    if ( name.length() == 0 ) return nullptr;
     QVectorIterator<StyleSymbol *> it(this->symbols);
-    StyleSymbol *s, *ret = NULL;
+    StyleSymbol *s, *ret = nullptr;
     do {
         s = it.next();
         if ( s ) {

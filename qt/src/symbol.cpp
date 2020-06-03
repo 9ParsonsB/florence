@@ -34,7 +34,7 @@ Symbol::Symbol( QString name, Settings *settings )
         this->role = SYMBOL_LEFTTAB;
     }
 
-    this->renderer = NULL;
+    this->renderer = nullptr;
     this->settings = settings;
     if (this->settings && this->settings->getStyle())
         this->renderer = this->settings->getStyle()->getSymbol( this->name );;
@@ -61,7 +61,7 @@ Symbol::Symbol( QDomElement el, Settings *settings )
             this->role = SYMBOL_DEAD;
         }
     }
-    this->renderer = NULL;
+    this->renderer = nullptr;
     this->settings = settings;
     this->connect( this->settings, SIGNAL(styleChanged(Style*)), SLOT(setStyle(Style*)) );
 }
@@ -118,7 +118,7 @@ void Symbol::paint( QPainter *painter, QRectF &bounds, bool hovered )
 ModifiedSymbol::ModifiedSymbol( QDomElement el, Settings *settings )
     : Symbol( el, settings )
 {
-    this->modifier = el.attribute("mod").toInt();
+    this->modifier = static_cast<quint8>(el.attribute("mod").toInt());
 }
 
 ModifiedSymbol::ModifiedSymbol( QString name, quint8 modifier, Settings *settings )

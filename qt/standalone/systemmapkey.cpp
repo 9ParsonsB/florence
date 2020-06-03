@@ -28,7 +28,7 @@ SystemMapKey::SystemMapKey(SystemMap *map, quint8 code)
     this->locker = false;
     this->modifier = this->map->getDesc()->map->modmap[code];
 
-    if ( XkbKeyAction( this->map->getDesc(), (KeyCode)code, 0 ) ) {
+    if ( XkbKeyAction( this->map->getDesc(), static_cast<KeyCode>(code), 0 ) ) {
         switch (XkbKeyAction(this->map->getDesc(), code, 0)->type) {
         case XkbSA_LockMods: this->locker = true; break;
         case XkbSA_SetMods: this->modifier = XkbKeyAction( this->map->getDesc(), code, 0 )->mods.mask;
@@ -48,7 +48,7 @@ SystemMapKey::SystemMapKey(SystemMap *map, quint8 code)
         }
         break;
     case XkbClampIntoRange:
-        group = num_groups - 1;
+        group = static_cast<quint8>(num_groups - 1);
         break;
     case XkbWrapIntoRange:
     default:
@@ -80,11 +80,11 @@ ModifiedSymbol *SystemMapKey::generateSymbol( quint8 mod, quint8 group, quint8 l
 
     Settings *settings = this->map->getSettings();
     Style *style = settings->getStyle();
-    ModifiedSymbol *symbol = NULL;
+    ModifiedSymbol *symbol = nullptr;
     if ( style->getSymbol( name ) ) {
         symbol = new ModifiedSymbol( name, mod, settings );
     } else {
-        uint unicode = (uint)keysym2ucs( sym );
+        uint unicode = static_cast<uint>(keysym2ucs( sym ));
         if (unicode)
             symbol = new ModifiedSymbol( QString( QChar( unicode ) ), mod, settings );
         else

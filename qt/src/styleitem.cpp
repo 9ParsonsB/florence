@@ -39,7 +39,7 @@ StyleItem::StyleItem( QDomElement el, QString colors[], QDomElement defs )
     this->name = name.text();
     QDomElement svg = el.firstChildElement("svg");
     if ( svg.isNull() ) {
-        this->renderer = NULL;
+        this->renderer = nullptr;
     } else {
         if ( !defs.isNull() ) svg.insertBefore( defs, QDomNode() );
         QDomDocument doc;

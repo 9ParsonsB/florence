@@ -21,7 +21,7 @@ FlorenceException::FlorenceException( QString message )
     this->message = message;
 }
 
-const char* FlorenceException::what () const throw()
+const char* FlorenceException::what () const noexcept
 {
     return this->message.toLatin1();
 }

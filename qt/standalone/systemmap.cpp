@@ -60,9 +60,9 @@ bool SystemMap::load(Settings *settings)
             delete this->keys[i];
         }
         if (i >= this->getDesc()->min_key_code && i <= this->getDesc()->max_key_code)
-            this->keys[i] = new SystemMapKey(this, i);
+            this->keys[i] = new SystemMapKey(this, static_cast<quint8>(i));
         else
-            this->keys[i] = NULL;
+            this->keys[i] = nullptr;
     }
 
     return true;
@@ -87,5 +87,5 @@ Symbol *SystemMap::getSymbol( quint8 code )
 {
     if ( this->keys[code] ) {
         return static_cast<SystemMapKey *>(this->keys[code])->getSymbol( this->modifier );
-    } else return NULL;
+    } else return nullptr;
 }

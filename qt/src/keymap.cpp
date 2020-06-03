@@ -50,7 +50,7 @@ bool Keymap::load( QString file, Settings *settings )
     for ( int i = 0 ; i < 256 ; i++ ) {
         if ( this->keys[i] ) {
             delete this->keys[i];
-            this->keys[i] = NULL;
+            this->keys[i] = nullptr;
         }
     }
 
@@ -59,7 +59,7 @@ bool Keymap::load( QString file, Settings *settings )
 
     QDomElement key = root.firstChildElement("key");
     while ( !key.isNull() ) {
-        quint8 code = key.attribute("code").toInt();
+        quint8 code = static_cast<quint8>(key.attribute("code").toInt());
         this->keys[code] = new KeymapKey( key, settings );
         key = key.nextSiblingElement("key");
     }
@@ -72,7 +72,7 @@ Symbol *Keymap::getSymbol( quint8 code )
 {
     if ( this->keys[code] ) {
         return this->keys[code]->getSymbol( this->modifier );
-    } else return NULL;
+    } else return nullptr;
 }
 
 quint8 Keymap::getKeyModifier( quint8 code )
@@ -105,7 +105,7 @@ KeymapKey::KeymapKey( QDomElement el, Settings *settings )
     if ( el.attribute("mod").isNull() ) {
         this->modifier = 0;
     } else {
-        this->modifier = el.attribute("mod").toInt();
+        this->modifier = static_cast<quint8>(el.attribute("mod").toInt());
     }
     this->locker = !el.attribute("locker").isNull();
     QDomElement symbol = el.firstChildElement("symbol");
@@ -127,7 +127,7 @@ KeymapKey::~KeymapKey()
 Symbol *KeymapKey::getSymbol( quint8 mod )
 {
     int score = -1;
-    ModifiedSymbol *ret = NULL;
+    ModifiedSymbol *ret = nullptr;
 
     foreach( ModifiedSymbol *s, this->symbols ) {
         if ( ( mod & s->getModifier() ) > score ) {

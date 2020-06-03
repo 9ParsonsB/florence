@@ -24,7 +24,7 @@
 Florence::Florence( QWidget *parent )
     : QGraphicsView( parent )
 {
-    this->focusKey = NULL;
+    this->focusKey = nullptr;
 
     this->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
     this->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
@@ -183,7 +183,7 @@ void Florence::leaveEvent( QEvent *event )
 {
     this->autoRepeatTimer->stop();
     if ( this->focusKey ) this->focusKey->hoverLeaveEvent();
-    this->focusKey = NULL;
+    this->focusKey = nullptr;
     QGraphicsView::leaveEvent( event );
 }
 
@@ -192,7 +192,7 @@ void Florence::mouseReleaseEvent( QMouseEvent *event )
     //Key *k = static_cast<Key *>( this->scene()->itemAt( this->mapToScene( event->pos() ) ) );
     if ( this->focusKey ) this->focusKey->mouseReleaseEvent();
     if ( this->autoRepeatTimer->isActive() ) this->autoRepeatTimer->stop();
-    this->focusKey = NULL;
+    this->focusKey = nullptr;
     QGraphicsView::mouseReleaseEvent( event );
 }
 

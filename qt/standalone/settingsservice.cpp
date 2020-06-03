@@ -14,7 +14,7 @@ void SettingsService::load() {
     QSettings settings(SETTINGS_ORGANISATION, SETTINGS_APPLICATION);
     this->setStyle(settings.value(SETTINGS_STYLE, this->styleFile).toString());
     this->setFont(settings.value(SETTINGS_FONT, SETTINGS_FONT_DEFAULT).toString());
-    this->setFontSize(settings.value(SETTINGS_FONT_SIZE, SETTINGS_FONT_SIZE_DEFAULT).toInt());
+    this->setFontSize(static_cast<quint8>(settings.value(SETTINGS_FONT_SIZE, SETTINGS_FONT_SIZE_DEFAULT).toInt()));
 }
 
 void SettingsService::save() {
