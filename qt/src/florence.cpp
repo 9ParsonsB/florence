@@ -76,6 +76,8 @@ bool Florence::loadKeyboard( QDomElement *keyboard, qreal xOffset, qreal yOffset
         k->setStyle( this->settings->getStyle() );
         this->connect( k, SIGNAL(inputText(Symbol::symbol_role,QString)),
                        SLOT(inputText(Symbol::symbol_role, QString)) );
+        this->connect( k, SIGNAL(actionTrigger(QString)),
+                       SLOT(actionTrigger(QString)) );
         this->connect( k, SIGNAL(latchKey(Key*)), SLOT(latchKey(Key*)) );
         this->connect( k, SIGNAL(unlatchKey(Key*)), SLOT(unlatchKey(Key*)) );
         this->connect( k, SIGNAL(lockKey(Key*)), SLOT(lockKey(Key*)) );
@@ -371,6 +373,10 @@ void Florence::inputText( enum Symbol::symbol_role role, QString text )
         default:
             break;
     }
+}
+
+void Florence::actionTrigger( QString code ) {
+    emit action(code);
 }
 
 void Florence::keyPressedSlot( quint8 code )

@@ -220,6 +220,14 @@ signals:
       */
     void leftTab();
 
+    /*! \fn action()
+      * \brief Action trigger
+      *
+      * This signal is emitted when an action key is triggered
+      * \param action The action code triggered
+      */
+    void action( QString code );
+
     /*! \fn keyPressed()
       * \brief key pressed signal.
       *
@@ -261,6 +269,7 @@ private:
 
 private slots:
     void inputText( enum Symbol::symbol_role role, QString text );
+    void actionTrigger( QString action );
 
     void repeat();
 

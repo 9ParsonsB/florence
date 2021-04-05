@@ -20,12 +20,56 @@
 #include "key.h"
 #include "florence.h"
 
+KeyAction::KeyAction( QDomElement el, Settings *settings ) {
+    QDomElement action = el.firstChildElement("action");
+    this->symbols << new ModifiedSymbol(action.text(), 0, settings);
+    QDomElement modifier = el.firstChildElement("modifier");
+    while ( !modifier.isNull() ) {
+        QDomElement code = el.firstChildElement("code");
+        QDomElement action = el.firstChildElement("action");
+        this->symbols << new ModifiedSymbol(action.text(),
+                                            static_cast<quint8>(code.text().toInt()), settings);
+        modifier = modifier.nextSiblingElement("modifier");
+    }
+}
+
+KeyAction::~KeyAction()
+{
+    foreach( ModifiedSymbol *s, this->symbols ) {
+        delete s;
+    }
+}
+
+Symbol *KeyAction::getSymbol( quint8 mod )
+{
+    int score = -1;
+    ModifiedSymbol *ret = nullptr;
+
+    foreach( ModifiedSymbol *s, this->symbols ) {
+        if ( ( mod & s->getModifier() ) > score ) {
+            ret = s;
+            score = ( mod & ret->getModifier() );
+        }
+    }
+
+    return ret;
+}
+
 Key::Key( QDomElement el, Settings *settings, qreal xOffset, qreal yOffset )
     : QGraphicsSvgItem()
 {
     bool ok;
-    QDomElement code = el.firstChildElement("code");
-    this->code = static_cast<quint8>(code.text().toInt(&ok));
+
+    QDomElement action = el.firstChildElement("action");
+    if (action.isNull()) {
+        QDomElement code = el.firstChildElement("code");
+        this->code = static_cast<quint8>(code.text().toInt(&ok));
+        this->action = nullptr;
+    } else {
+        this->code = 0;
+        this->action = new KeyAction(el, settings);
+    }
+
     QDomElement xpos = el.firstChildElement("xpos");
     qreal x = xpos.text().toDouble(&ok);
     QDomElement ypos = el.firstChildElement("ypos");
@@ -77,6 +121,13 @@ Key::Key( QDomElement el, Settings *settings, qreal xOffset, qreal yOffset )
     this->connect( settings, SIGNAL(colorChanged(enum StyleItem::style_colours,QString)), SLOT(redraw()) );
     this->connect( settings, SIGNAL(opacityChanged(qreal)), SLOT(redraw()) );
     this->connect( settings, SIGNAL(fontChanged(QString)), SLOT(redraw()) );
+}
+
+Key::~Key()
+{
+    if (this->action) {
+        delete this->action;
+    }
 }
 
 void Key::setStyle( Style *style )
@@ -145,9 +196,15 @@ void Key::paint( QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
                        QColor( 0, 0, 0, static_cast<int>((1.0-this->settings->getOpacity()) * 255.0 )) );
 
     painter->restore();
+
     Symbol *s;
-    if ( ( s = this->settings->getKeymap()->getSymbol(this->code) ) )
-        s->paint( painter, this->bounds, hovered );
+    if (this->action) {
+        if ( ( s = this->action->getSymbol(this->settings->getKeymap()->getModifier()) ) )
+            s->paint( painter, this->bounds, hovered );
+    } else {
+        if ( ( s = this->settings->getKeymap()->getSymbol(this->code) ) )
+            s->paint( painter, this->bounds, hovered );
+    }
 }
 
 void Key::hoverEnterEvent ()
@@ -195,7 +252,6 @@ void Key::mouseReleaseEvent ()
             break;
         case KEY_LOCKED:
             emit unlockKey( this );
-            [[clang::fallthrough]];
         case KEY_PRESSED: // Should not happen
             this->settings->getKeymap()->removeModifier( mod );
             this->status = KEY_RELEASED;
@@ -231,7 +287,13 @@ bool Key::unlatch()
 
 void Key::press()
 {
-    if ( this->settings->getKeymap()->getKeyModifier( this->code ) == 0 ) {
+    if ( this->action ) {
+        this->hovered = true;
+        this->setZValue(1);
+        this->status = KEY_PRESSED;
+        this->update();
+        releaseTimer.start(200);
+    } else if ( this->settings->getKeymap()->getKeyModifier( this->code ) == 0 ) {
         emit keyPressed( this->code );
         Symbol *s = this->settings->getKeymap()->getSymbol( this->code );
         emit inputText( s->getRole(), s->getName() );
@@ -246,7 +308,12 @@ void Key::press()
 
 void Key::release()
 {
-    emit keyReleased( this->code );
+    if ( this->action ) {
+        Symbol *s = this->action->getSymbol(this->settings->getKeymap()->getModifier());
+        emit actionTrigger(s->getName());
+    } else {
+        emit keyReleased( this->code );
+    }
     if ( releaseTimer.isActive() ) releaseTimer.stop();
     this->hovered = false;
     this->setZValue(0);

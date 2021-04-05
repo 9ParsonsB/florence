@@ -9,7 +9,8 @@ SOURCES += main.cpp \
     systemmapkey.cpp \
     keysym2ucs.c \
     service.cpp \
-    settingsservice.cpp
+    settingsservice.cpp \
+    manager.cpp
 HEADERS += \
     simulator.h \
     florenceexception.h \
@@ -17,6 +18,7 @@ HEADERS += \
     systemmapkey.h \
     keysym2ucs.h \
     service.h \
-    settingservice.h
+    settingservice.h \
+    manager.h
 INCLUDEPATH += ../src
 LIBS += -lflorence_qt -lXtst -lX11

@@ -36,7 +36,12 @@ static const QString css (""
 StyleItem::StyleItem( QDomElement el, QString colors[], QDomElement defs )
 {
     QDomElement name = el.firstChildElement("name");
-    this->name = name.text();
+    if (name.isNull()) {
+        QDomElement action = el.firstChildElement("action");
+        this->name = action.text();
+    } else {
+        this->name = name.text();
+    }
     QDomElement svg = el.firstChildElement("svg");
     if ( svg.isNull() ) {
         this->renderer = nullptr;

@@ -177,6 +177,10 @@ public:
       * \see Keymap::getKeyModifier
       */
     void removeModifier( quint8 mod );
+    /*! \fn getModifier()
+      * \brief Return the current modifier
+      */
+    quint8 getModifier();
 
 protected:
     quint8 modifier;

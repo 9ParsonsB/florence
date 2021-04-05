@@ -24,6 +24,51 @@
 #include "style.h"
 #include "keymap.h"
 
+/*! \class KeyAction
+  * \brief Key action
+  *
+  * Actions keys don't have a key code, instead they have actions that can be modified as follow:
+  * \code
+  * <key>
+  *     <ation>action</action>
+  *     <modifier>
+  *         <code>modifier code 1</code>
+  *         <action>action 1</action>
+  *     <modifier>
+  *     <modifier>
+  *         <code>modifier code 2</code>
+  *         <action>action 2</action>
+  *     <modifier>
+  *     ...
+  * </key>
+  * \endcode
+  */
+class KeyAction {
+
+public:
+    /*! \fn KeyAction( QDomElement el, Settings *settings )
+      * \brief Constructor
+      *
+      * Instantiates a KeyAction element.
+      * \param el DOM element representing the key in the Layout file.
+      * \param settings The settings object used to instantiate the symbols.
+      */
+    KeyAction( QDomElement el, Settings *settings );
+
+    /*! \fn ~KeyAction()
+      * \brief Destructor
+      */
+    ~KeyAction();
+
+    /*! \fn getSymbol( quint8 modifier )
+      * \brief Return the action symbol for given modifier
+      */
+    Symbol *getSymbol( quint8 modifier );
+
+private:
+    QVector<ModifiedSymbol *> symbols;
+};
+
 /*! \class Key
   * \brief This class represents a key on the keyboard.
   *
@@ -101,6 +146,11 @@ public:
       */
     Key( QDomElement el, Settings *settings, qreal xOffset = 0.0, qreal yOffset = 0.0 );
 
+    /*! \fn ~Key()
+     * \brief Destructor.
+     */
+    ~Key();
+
     /*! \fn hoverEnterEvent()
       * \brief Notifies the key that it is pointed either by touch or mouse.
       *
@@ -159,17 +209,25 @@ signals:
       */
     void inputText( enum Symbol::symbol_role role, QString text );
 
+    /*! \fn actionTrigger( QString action )
+      * \brief action signal.
+      *
+      * This signal is emitted when an action key is triggered
+      * \param action code of the action (the <action> text of the layout file)
+      */
+    void actionTrigger( QString action );
+
     /*! \fn void keyPressed()
       * \brief key pressed signal.
       *
-      * This signal is emitted when a key is pressed.
+      * This signal is emitted when a non modifier key is pressed.
       * \param code hardware key code of the key pressed.
       */
     void keyPressed( quint8 code );
     /*! \fn void keyReleased()
       * \brief key released signal.
       *
-      * This signal is emitted when a non key is released.
+      * This signal is emitted when a non modifier key is released.
       * \param code hardware key code of the key pressed.
       */
     void keyReleased( quint8 code );
@@ -230,6 +288,8 @@ protected:
 private:
     Settings *settings;
 
+    KeyAction *action;
+    // or
     quint8 code;
     enum key_status status;
 

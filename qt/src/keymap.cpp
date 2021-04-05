@@ -77,7 +77,11 @@ Symbol *Keymap::getSymbol( quint8 code )
 
 quint8 Keymap::getKeyModifier( quint8 code )
 {
-    return this->keys[code]->getModifier();
+    if (this->keys[code]) {
+        return this->keys[code]->getModifier();
+    } else {
+        return 0;
+    }
 }
 
 bool Keymap::isLocker( quint8 code )
@@ -93,6 +97,11 @@ void Keymap::addModifier( quint8 mod )
 void Keymap::removeModifier( quint8 mod )
 {
     this->modifier -= mod;
+}
+
+quint8 Keymap::getModifier()
+{
+    return this->modifier;
 }
 
 KeymapKey::KeymapKey()

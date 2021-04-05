@@ -21,6 +21,7 @@
 #include "systemmap.h"
 #include "service.h"
 #include "settingservice.h"
+#include "manager.h"
 
 int main(int argc, char *argv[])
 {
@@ -30,6 +31,7 @@ int main(int argc, char *argv[])
     Florence *keyboard = new Florence();
     SettingsService *settings = new SettingsService(keyboard);
     Service *service = new Service(keyboard, settings);
+    Manager *manager = new Manager();
 
     settings->load();
 
@@ -39,6 +41,7 @@ int main(int argc, char *argv[])
 
     QObject::connect( keyboard, SIGNAL(keyPressed(quint8)), simulator, SLOT(keyPress(quint8)) );
     QObject::connect( keyboard, SIGNAL(keyReleased(quint8)), simulator, SLOT(keyRelease(quint8)) );
+    QObject::connect( keyboard, SIGNAL(action(QString)), manager, SLOT(action(QString)) );
     service->listen();
 
     keyboard->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::WindowDoesNotAcceptFocus);
