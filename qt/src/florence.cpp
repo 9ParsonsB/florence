@@ -52,39 +52,27 @@ Florence::~Florence()
     delete this->graphicsScene;
 }
 
-bool Florence::setLayout( QString file )
+bool Florence::getKeyboardSize( QDomElement *keyboard, qreal *width, qreal *height )
 {
     bool ok;
-    QDomDocument layout;
-    QFile f(file);
 
-    if ( !f.open( QIODevice::ReadOnly ) ) return false;
-    if ( !layout.setContent(&f) ) {
-        f.close();
-        return false;
-    }
-    f.close();
-
-    QDomElement root = layout.documentElement();
-    QDomElement keyboard = root.firstChildElement("keyboard");
-    if (keyboard.isNull()) return false;
-    QDomElement width = keyboard.firstChildElement("width");
-    QDomElement height = keyboard.firstChildElement("height");
-    if ( width.isNull() || height.isNull() ) return false;
-    this->sceneWidth = width.text().toDouble(&ok);
+    if (keyboard->isNull()) return false;
+    QDomElement w = keyboard->firstChildElement("width");
+    QDomElement h = keyboard->firstChildElement("height");
+    if ( w.isNull() || h.isNull() ) return false;
+    *width = w.text().toDouble(&ok);
     if (!ok) return false;
-    this->sceneHeight = height.text().toDouble(&ok);
+    *height = h.text().toDouble(&ok);
     if (!ok) return false;
 
-    foreach ( QGraphicsItem *it, this->scene()->items() ) {
-        this->scene()->removeItem( it );
-        Key *k = static_cast<Key *>(it);
-        delete k;
-    }
+    return true;
+}
 
-    QDomElement key = keyboard.firstChildElement("key");
+bool Florence::loadKeyboard( QDomElement *keyboard, qreal xOffset, qreal yOffset )
+{
+    QDomElement key = keyboard->firstChildElement("key");
     while ( !key.isNull() ) {
-        Key *k = new Key( key, this->settings );
+        Key *k = new Key( key, this->settings, xOffset, yOffset );
         k->setStyle( this->settings->getStyle() );
         this->connect( k, SIGNAL(inputText(Symbol::symbol_role,QString)),
                        SLOT(inputText(Symbol::symbol_role, QString)) );
@@ -97,6 +85,128 @@ bool Florence::setLayout( QString file )
         this->connect( k, SIGNAL(keyReleased(quint8)), SLOT(keyReleasedSlot(quint8)) );
         this->scene()->addItem(k);
         key = key.nextSiblingElement("key");
+    }
+
+    return true;
+}
+
+bool Florence::setLayout( QString file )
+{
+    QDomDocument layout;
+    QFile f(file);
+
+    if ( !f.open( QIODevice::ReadOnly ) ) return false;
+    if ( !layout.setContent(&f) ) {
+        f.close();
+        return false;
+    }
+    f.close();
+
+    foreach ( QGraphicsItem *it, this->scene()->items() ) {
+        this->scene()->removeItem( it );
+        Key *k = static_cast<Key *>(it);
+        delete k;
+    }
+
+    QDomElement root = layout.documentElement();
+    QDomElement keyboard = root.firstChildElement("keyboard");
+
+    if (!this->getKeyboardSize( &keyboard, &this->sceneWidth, &this->sceneHeight)) {
+        return false;
+    }
+
+    qreal width;
+    qreal height;
+    qreal xOffset = 0.0;
+    qreal yOffset = 0.0;
+
+    QList<QDomElement *> left;
+    QList<QDomElement *> right;
+    QList<QDomElement *> top;
+    QList<QDomElement *> bottom;
+
+    QDomElement extension = root.firstChildElement("extension");
+    while ( !extension.isNull() ) {
+        QDomElement placement = extension.firstChildElement("placement");
+        QString pos = placement.text();
+        if (pos == QStringLiteral("left")) {
+            QDomElement *extKeyboard = new QDomElement(extension.firstChildElement("keyboard"));
+            if (this->getKeyboardSize( extKeyboard, &width, &height)) {
+                left << extKeyboard;
+                this->sceneWidth += width;
+                xOffset += width;
+            }
+        } else if (pos == QStringLiteral("right")) {
+            QDomElement *extKeyboard = new QDomElement(extension.firstChildElement("keyboard"));
+            if (this->getKeyboardSize( extKeyboard, &width, &height)) {
+                right << extKeyboard;
+                this->sceneWidth += width;
+            }
+        } else if (pos == QStringLiteral("top")) {
+            QDomElement *extKeyboard = new QDomElement(extension.firstChildElement("keyboard"));
+            if (this->getKeyboardSize( extKeyboard, &width, &height)) {
+                top << extKeyboard;
+                this->sceneHeight += height;
+                yOffset += height;
+            }
+        } else if (pos == QStringLiteral("bottom")) {
+            QDomElement *extKeyboard = new QDomElement(extension.firstChildElement("keyboard"));
+            if (this->getKeyboardSize( extKeyboard, &width, &height)) {
+                bottom << extKeyboard;
+                this->sceneHeight += height;
+            }
+        }
+        extension = extension.nextSiblingElement("extension");
+    }
+
+    qreal x = 0.0;
+    qreal y = 0.0;
+    for (int i = 0; i < left.size(); i++) {
+        QDomElement *extKeyboard = left.at(i);
+        if (this->getKeyboardSize( extKeyboard, &width, &height)) {
+            if (!this->loadKeyboard( extKeyboard, x, yOffset )) {
+                return false;
+            }
+            x += width;
+        }
+        delete extKeyboard;
+    }
+    for (int i = 0; i < top.size(); i++) {
+        QDomElement *extKeyboard = top.at(i);
+        if (this->getKeyboardSize( extKeyboard, &width, &height)) {
+            if (!this->loadKeyboard( extKeyboard, xOffset, y )) {
+                return false;
+            }
+            y += height;
+        }
+        delete extKeyboard;
+    }
+    if (this->getKeyboardSize( &keyboard, &width, &height)) {
+        if (!this->loadKeyboard( &keyboard, xOffset, yOffset )) {
+            return false;
+        }
+        x += width;
+        y += height;
+    }
+    for (int i = 0; i < right.size(); i++) {
+        QDomElement *extKeyboard = right.at(i);
+        if (this->getKeyboardSize( extKeyboard, &width, &height)) {
+            if (!this->loadKeyboard( extKeyboard, x, yOffset )) {
+                return false;
+            }
+            x += width;
+        }
+        delete extKeyboard;
+    }
+    for (int i = 0; i < bottom.size(); i++) {
+        QDomElement *extKeyboard = bottom.at(i);
+        if (this->getKeyboardSize( extKeyboard, &width, &height)) {
+            if (!this->loadKeyboard( extKeyboard, xOffset, y )) {
+                return false;
+            }
+            y += height;
+        }
+        delete extKeyboard;
     }
 
     return true;

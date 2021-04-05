@@ -256,6 +256,9 @@ private:
     QVector<Key *> lockedKeys;
     QTimer *autoRepeatTimer;
 
+    bool getKeyboardSize( QDomElement *keyboard, qreal *width, qreal *height );
+    bool loadKeyboard( QDomElement *keyboard, qreal xOffset = 0.0, qreal yOffset = 0.0 );
+
 private slots:
     void inputText( enum Symbol::symbol_role role, QString text );
 

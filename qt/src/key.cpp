@@ -20,7 +20,7 @@
 #include "key.h"
 #include "florence.h"
 
-Key::Key( QDomElement el, Settings *settings )
+Key::Key( QDomElement el, Settings *settings, qreal xOffset, qreal yOffset )
     : QGraphicsSvgItem()
 {
     bool ok;
@@ -36,7 +36,7 @@ Key::Key( QDomElement el, Settings *settings )
     QDomElement height = el.firstChildElement("height");
     if (height.isNull()) this->height = 2.0;
     else this->height = height.text().toDouble(&ok);
-    this->setPos( x, y );
+    this->setPos( x + xOffset, y + yOffset );
     bounds = QRectF(-this->width/2.0, -(this->height/2.0), this->width, this->height);
 
     QDomElement shape = el.firstChildElement("shape");

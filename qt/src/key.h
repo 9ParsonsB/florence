@@ -96,8 +96,10 @@ public:
       * Instantiates a Key object.
       * \param el Pointer to the parsed XML document containing the key description.
       * \param settings Pointer to the settings object of the Keyboard.
+      * \param xOffset Abscissa offset
+      * \param yOffset Ordinate offset
       */
-    Key( QDomElement el, Settings *settings );
+    Key( QDomElement el, Settings *settings, qreal xOffset = 0.0, qreal yOffset = 0.0 );
 
     /*! \fn hoverEnterEvent()
       * \brief Notifies the key that it is pointed either by touch or mouse.
