@@ -292,6 +292,9 @@ private slots:
     void lockKey( Key *key );
     void unlockKey( Key *key );
     void unlatchAll();
+
+    void layoutChanged( QString layout );
+    void extensionsChanged();
 };
 
 #endif // FLORENCE_H

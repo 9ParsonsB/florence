@@ -35,6 +35,9 @@ int main(int argc, char *argv[])
 
     settings->load();
 
+    QVector<QString> extensions;
+    extensions << "actionkys";
+    keyboard->getSettings()->setExtensions(extensions);
     SystemMap *map = new SystemMap();
     map->load(keyboard->getSettings());
     keyboard->setKeymap(map);

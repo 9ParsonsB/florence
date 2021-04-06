@@ -40,7 +40,10 @@ Florence::Florence( QWidget *parent )
     connect(this->autoRepeatTimer, SIGNAL(timeout()), this, SLOT(repeat()));
 
     this->settings = new Settings();
-    this->setLayout( ":/florence.xml" );
+    this->setLayout( this->settings->getLayout() );
+
+    connect(this->settings, SIGNAL(layoutChanged(QString)), this, SLOT(layoutChanged(QString)));
+    connect(this->settings, SIGNAL(extensionsChanged(QVector<QString>)), this, SLOT(extensionsChanged()));
 }
 
 Florence::~Florence()
@@ -129,35 +132,39 @@ bool Florence::setLayout( QString file )
     QList<QDomElement *> top;
     QList<QDomElement *> bottom;
 
+    QVector<QString> activated = this->settings->getExtensions();
     QDomElement extension = root.firstChildElement("extension");
     while ( !extension.isNull() ) {
-        QDomElement placement = extension.firstChildElement("placement");
-        QString pos = placement.text();
-        if (pos == QStringLiteral("left")) {
-            QDomElement *extKeyboard = new QDomElement(extension.firstChildElement("keyboard"));
-            if (this->getKeyboardSize( extKeyboard, &width, &height)) {
-                left << extKeyboard;
-                this->sceneWidth += width;
-                xOffset += width;
-            }
-        } else if (pos == QStringLiteral("right")) {
-            QDomElement *extKeyboard = new QDomElement(extension.firstChildElement("keyboard"));
-            if (this->getKeyboardSize( extKeyboard, &width, &height)) {
-                right << extKeyboard;
-                this->sceneWidth += width;
-            }
-        } else if (pos == QStringLiteral("top")) {
-            QDomElement *extKeyboard = new QDomElement(extension.firstChildElement("keyboard"));
-            if (this->getKeyboardSize( extKeyboard, &width, &height)) {
-                top << extKeyboard;
-                this->sceneHeight += height;
-                yOffset += height;
-            }
-        } else if (pos == QStringLiteral("bottom")) {
-            QDomElement *extKeyboard = new QDomElement(extension.firstChildElement("keyboard"));
-            if (this->getKeyboardSize( extKeyboard, &width, &height)) {
-                bottom << extKeyboard;
-                this->sceneHeight += height;
+        QDomElement id = extension.firstChildElement("identifiant");
+        if (activated.indexOf(id.text()) > -1) {
+            QDomElement placement = extension.firstChildElement("placement");
+            QString pos = placement.text();
+            if (pos == QStringLiteral("left")) {
+                QDomElement *extKeyboard = new QDomElement(extension.firstChildElement("keyboard"));
+                if (this->getKeyboardSize( extKeyboard, &width, &height)) {
+                    left << extKeyboard;
+                    this->sceneWidth += width;
+                    xOffset += width;
+                }
+            } else if (pos == QStringLiteral("right")) {
+                QDomElement *extKeyboard = new QDomElement(extension.firstChildElement("keyboard"));
+                if (this->getKeyboardSize( extKeyboard, &width, &height)) {
+                    right << extKeyboard;
+                    this->sceneWidth += width;
+                }
+            } else if (pos == QStringLiteral("top")) {
+                QDomElement *extKeyboard = new QDomElement(extension.firstChildElement("keyboard"));
+                if (this->getKeyboardSize( extKeyboard, &width, &height)) {
+                    top << extKeyboard;
+                    this->sceneHeight += height;
+                    yOffset += height;
+                }
+            } else if (pos == QStringLiteral("bottom")) {
+                QDomElement *extKeyboard = new QDomElement(extension.firstChildElement("keyboard"));
+                if (this->getKeyboardSize( extKeyboard, &width, &height)) {
+                    bottom << extKeyboard;
+                    this->sceneHeight += height;
+                }
             }
         }
         extension = extension.nextSiblingElement("extension");
@@ -383,23 +390,23 @@ void Florence::unlatchAll()
 void Florence::inputText( enum Symbol::symbol_role role, QString text )
 {
     switch ( role ) {
-        case Symbol::SYMBOL_TEXT:
-            emit inputText( text );
-            break;
-        case Symbol::SYMBOL_BACKSPACE:
-            emit backspace();
-            break;
-        case Symbol::SYMBOL_RETURN:
-            emit enter();
-            break;
-        case Symbol::SYMBOL_TAB:
-            emit tab();
-            break;
-        case Symbol::SYMBOL_LEFTTAB:
-            emit leftTab();
-            break;
-        default:
-            break;
+    case Symbol::SYMBOL_TEXT:
+        emit inputText( text );
+        break;
+    case Symbol::SYMBOL_BACKSPACE:
+        emit backspace();
+        break;
+    case Symbol::SYMBOL_RETURN:
+        emit enter();
+        break;
+    case Symbol::SYMBOL_TAB:
+        emit tab();
+        break;
+    case Symbol::SYMBOL_LEFTTAB:
+        emit leftTab();
+        break;
+    default:
+        break;
     }
 }
 
@@ -423,6 +430,16 @@ void Florence::keyReleasedSlot( quint8 code )
     foreach ( Key *k, this->lockedKeys ) {
         if ( !k->isLocker() ) emit keyReleased( k->getCode() );
     }
+}
+
+void Florence::layoutChanged(QString layout)
+{
+    this->setLayout( layout );
+}
+
+void Florence::extensionsChanged()
+{
+    this->setLayout( this->settings->getLayout() );
 }
 
 Settings *Florence::getSettings()

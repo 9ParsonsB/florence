@@ -35,6 +35,7 @@ Settings::Settings()
     this->keymap = new Keymap();
     this->setStyle( ":default.style" );
     this->setKeymap( ":/us.xml" );
+    this->setLayout( ":/florence.xml" );
 }
 
 Settings::~Settings()
@@ -76,6 +77,16 @@ Style *Settings::getStyle()
 Keymap *Settings::getKeymap()
 {
     return this->keymap;
+}
+
+QString Settings::getLayout()
+{
+    return this->layout;
+}
+
+QVector<QString> Settings::getExtensions()
+{
+    return this->extensions;
 }
 
 void Settings::setOpacity( qreal opacity )
@@ -123,6 +134,19 @@ bool Settings::setKeymap( QString file )
 void Settings::setKeymap( Keymap *map )
 {
     if ( this->keymap ) delete this->keymap;
-    this-> keymap = map;
+    this->keymap = map;
     emit keymapChanged( this->keymap );
+}
+
+bool Settings::setLayout( QString layout )
+{
+    this->layout = layout;
+    emit layoutChanged( this->layout );
+    return true;
+}
+
+void Settings::setExtensions( QVector<QString> extensions )
+{
+    this->extensions = extensions;
+    emit extensionsChanged( this->extensions );
 }

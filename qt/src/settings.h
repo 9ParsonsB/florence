@@ -32,6 +32,7 @@
   *    <li><b>Colors</b>: The colors used to draw the keyboard.</li>
   *    <li><b>Style</b>: The style used to draw the keyboard.</li>
   *    <li><b>Keymap</b>: The language dependant Keymap used to map the symbols to the key codes in the layout.</li>
+  *    <li><b>Extensions</b>: The list of keyboard activated extension ids</li>
   * </ul>
   * Note it is not necessary to put the layout in the Settings object because only the Florence object is interested in this option.
   */
@@ -82,6 +83,14 @@ public:
       * \returns The keymap used to associate key codes to symbols.
       */
     Keymap *getKeymap();
+    /*! \fn getLayout()
+      * \returns The layout file name.
+      */
+    QString getLayout();
+    /*! \fn getExtensions()
+      * \returns The keyboard activated extension ids.
+      */
+    QVector<QString> getExtensions();
 
     /*! \fn setOpacity( qreal opacity )
       * \param opacity The opacity of the widget.
@@ -122,6 +131,14 @@ public:
       * \see Keymap
       */
     bool setKeymap( QString file );
+    /*! \fn setExtensions( QVector<QString> extensions )
+      * \param extensions The new list of activated extension ids.
+      */
+    void setExtensions( QVector<QString> extensions );
+    /*! \fn setLayout( QString file )
+      * \param file The new layout file name.
+      */
+    bool setLayout( QString file );
 
 signals:
     /*! \fn colorChanged( enum StyleItem::style_colours color, QString value )
@@ -139,6 +156,11 @@ signals:
       * \see Settings::setKeymap()
       */
     void keymapChanged( Keymap *keymap );
+    /*! \fn layoutChanged( QString layout )
+      * \brief This signal is emitted when the layout has been changed with the Settings::setKeymap() method.
+      * \see Settings::setLayout()
+      */
+    void layoutChanged( QString layout );
     /*! \fn opacityChanged( qreal opacity )
       * \brief This signal is emitted when the opacity has been changed with the Settings::setOpacity() method.
       * \see Settings::setKeymap()
@@ -149,6 +171,11 @@ signals:
       * \see Settings::setFont()
       */
     void fontChanged( QString font );
+    /*! \fn extensionsChanged( QVector<QString> extensions )
+      * \brief This signal is emitted when the list of activated extensions has been changed with the Settings::setExtensions() method.
+      * \see Settings::setExtensions()
+      */
+    void extensionsChanged( QVector<QString> extensions );
 
 private:
     qreal opacity;
@@ -157,6 +184,8 @@ private:
     QString colors[StyleItem::STYLE_NUM_COLOURS];
     Style *style;
     Keymap *keymap;
+    QString layout;
+    QVector<QString> extensions;
 };
 
 #endif // SETTINGS_H
