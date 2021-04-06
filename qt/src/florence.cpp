@@ -19,12 +19,14 @@
 #include <QDomElement>
 #include <QPainter>
 #include <QMouseEvent>
+#include <QDebug>
 #include "florence.h"
 
 Florence::Florence( QWidget *parent )
     : QGraphicsView( parent )
 {
     this->focusKey = nullptr;
+    this->moving = false;
 
     this->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
     this->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
@@ -77,7 +79,7 @@ bool Florence::loadKeyboard( QDomElement *keyboard, qreal xOffset, qreal yOffset
         this->connect( k, SIGNAL(inputText(Symbol::symbol_role,QString)),
                        SLOT(inputText(Symbol::symbol_role, QString)) );
         this->connect( k, SIGNAL(actionTrigger(QString)),
-                       SLOT(actionTrigger(QString)) );
+                       SIGNAL(actionTrigger(QString)) );
         this->connect( k, SIGNAL(latchKey(Key*)), SLOT(latchKey(Key*)) );
         this->connect( k, SIGNAL(unlatchKey(Key*)), SLOT(unlatchKey(Key*)) );
         this->connect( k, SIGNAL(lockKey(Key*)), SLOT(lockKey(Key*)) );
@@ -260,6 +262,12 @@ void Florence::resizeEvent( QResizeEvent *event )
 void Florence::mousePressEvent( QMouseEvent *event )
 {
     this->mouseMoveEvent( event );
+    if (this->focusKey->getAction() == QStringLiteral("move")) {
+        QPoint p = this->mapToGlobal(QPoint(0,0));
+        this->startX = event->globalX() - p.x();
+        this->startY = event->globalY() - p.y();
+        this->moving = true;
+    }
 }
 
 void Florence::mouseDoubleClickEvent( QMouseEvent *event )
@@ -269,15 +277,25 @@ void Florence::mouseDoubleClickEvent( QMouseEvent *event )
 
 void Florence::mouseMoveEvent( QMouseEvent *event )
 {
-    if ( event->buttons() > Qt::NoButton )  {
+    if (this->moving) {
+        QPoint p = this->mapToGlobal(QPoint(0,0));
+        int x = event->globalX() - p.x();
+        int y = event->globalY() - p.y();
+        emit actionMove(x - this->startX, y - this->startY);
+        this->focusKey->setPressed();
+    } else if ( event->buttons() > Qt::NoButton )  {
         Key *k = static_cast<Key *>( this->scene()->itemAt( this->mapToScene( event->pos() ), QGraphicsView::transform() ) );
         if ( k != this->focusKey ) {
             this->autoRepeatTimer->stop();
-            if ( this->focusKey ) this->focusKey->hoverLeaveEvent();
+            if ( this->focusKey ) {
+                this->focusKey->hoverLeaveEvent();
+            }
             this->focusKey = k;
             if ( k ) {
                 k->hoverEnterEvent();
-                this->autoRepeatTimer->start( 1000 );
+                if (k->getCode() > 0) {
+                    this->autoRepeatTimer->start( 1000 );
+                }
             }
         }
     }
@@ -293,9 +311,11 @@ void Florence::repeat()
 
 void Florence::leaveEvent( QEvent *event )
 {
-    this->autoRepeatTimer->stop();
-    if ( this->focusKey ) this->focusKey->hoverLeaveEvent();
-    this->focusKey = nullptr;
+    if (!this->moving) {
+        this->autoRepeatTimer->stop();
+        if ( this->focusKey ) this->focusKey->hoverLeaveEvent();
+        this->focusKey = nullptr;
+    }
     QGraphicsView::leaveEvent( event );
 }
 
@@ -305,6 +325,14 @@ void Florence::mouseReleaseEvent( QMouseEvent *event )
     if ( this->focusKey ) this->focusKey->mouseReleaseEvent();
     if ( this->autoRepeatTimer->isActive() ) this->autoRepeatTimer->stop();
     this->focusKey = nullptr;
+    if (this->moving) {
+        this->releaseMouse();
+        QPoint p = this->mapToGlobal(QPoint(0,0));
+        int x = event->globalX() - p.x();
+        int y = event->globalY() - p.y();
+        emit actionMove(x - this->startX, y - this->startY);
+    }
+    this->moving = false;
     QGraphicsView::mouseReleaseEvent( event );
 }
 
@@ -373,10 +401,6 @@ void Florence::inputText( enum Symbol::symbol_role role, QString text )
         default:
             break;
     }
-}
-
-void Florence::actionTrigger( QString code ) {
-    emit action(code);
 }
 
 void Florence::keyPressedSlot( quint8 code )

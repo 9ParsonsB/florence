@@ -166,7 +166,7 @@ public:
       */
     void hoverLeaveEvent();
     /*! \fn mouseReleaseEvent()
-      * \brief Notifies the key of a press event.
+      * \brief Notifies the key of a release event.
       *
       * This will trigger the action configured in the Keymap for the key code of this key.
       * Call this function when the mouse button is released or on touch end.
@@ -180,6 +180,12 @@ public:
       * This function is called on all keys when a non modifier key is pressed.
       */
     bool unlatch();
+    /*! \fn setPressed()
+      * \brief Notifies the key of a press event.
+      *
+      * Call this function when the mouse button is pressed or on touch start.
+      */
+    void setPressed();
     /*! \fn press
       * \brief Press the key.
       *
@@ -193,6 +199,12 @@ public:
       * \returns the hardware key code of the key.
       */
     quint8 getCode();
+    /*! \fn getAction
+      * \brief Get the action name of the key
+      * \returns the action name of the key
+      */
+    QString getAction();
+
     /*! \fn isLocker()
       * \brief Returns true if the key is a locker key.
       * \returns true if the key is a locker key.
@@ -212,7 +224,7 @@ signals:
     /*! \fn actionTrigger( QString action )
       * \brief action signal.
       *
-      * This signal is emitted when an action key is triggered
+      * This signal is emitted when an action key is pressed
       * \param action code of the action (the <action> text of the layout file)
       */
     void actionTrigger( QString action );

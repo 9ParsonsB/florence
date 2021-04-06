@@ -220,13 +220,21 @@ signals:
       */
     void leftTab();
 
-    /*! \fn action()
+    /*! \fn actionTrigger()
       * \brief Action trigger
       *
-      * This signal is emitted when an action key is triggered
+      * This signal is emitted when an action key is pressed
       * \param action The action code triggered
       */
-    void action( QString code );
+    void actionTrigger( QString code );
+    /*! \fn actionMove()
+      * \brief Move action
+      *
+      * This signal is emitted the keyboard is requested to be moved
+      * \param x the screen abscissa requested
+      * \param y the screen ordinate requested
+      */
+    void actionMove( int x, int y );
 
     /*! \fn keyPressed()
       * \brief key pressed signal.
@@ -264,12 +272,15 @@ private:
     QVector<Key *> lockedKeys;
     QTimer *autoRepeatTimer;
 
+    bool moving;
+    int startX;
+    int startY;
+
     bool getKeyboardSize( QDomElement *keyboard, qreal *width, qreal *height );
     bool loadKeyboard( QDomElement *keyboard, qreal xOffset = 0.0, qreal yOffset = 0.0 );
 
 private slots:
     void inputText( enum Symbol::symbol_role role, QString text );
-    void actionTrigger( QString action );
 
     void repeat();
 

@@ -285,22 +285,26 @@ bool Key::unlatch()
     return ret;
 }
 
+void Key::setPressed()
+{
+    this->hovered = true;
+    this->setZValue(1);
+    this->status = KEY_PRESSED;
+    this->update();
+}
+
 void Key::press()
 {
-    if ( this->action ) {
-        this->hovered = true;
-        this->setZValue(1);
-        this->status = KEY_PRESSED;
-        this->update();
+    if (this->action) {
+        Symbol *s = this->action->getSymbol(this->settings->getKeymap()->getModifier());
+        emit actionTrigger(s->getName());
+        this->setPressed();
         releaseTimer.start(200);
     } else if ( this->settings->getKeymap()->getKeyModifier( this->code ) == 0 ) {
         emit keyPressed( this->code );
         Symbol *s = this->settings->getKeymap()->getSymbol( this->code );
         emit inputText( s->getRole(), s->getName() );
-        this->hovered = true;
-        this->setZValue(1);
-        this->status = KEY_PRESSED;
-        this->update();
+        this->setPressed();
         emit unlatchAll();
         releaseTimer.start(200);
     }
@@ -308,12 +312,7 @@ void Key::press()
 
 void Key::release()
 {
-    if ( this->action ) {
-        Symbol *s = this->action->getSymbol(this->settings->getKeymap()->getModifier());
-        emit actionTrigger(s->getName());
-    } else {
-        emit keyReleased( this->code );
-    }
+    emit keyReleased( this->code );
     if ( releaseTimer.isActive() ) releaseTimer.stop();
     this->hovered = false;
     this->setZValue(0);
@@ -324,6 +323,16 @@ void Key::release()
 quint8 Key::getCode()
 {
     return this->code;
+}
+
+QString Key::getAction()
+{
+    if (this->action) {
+        Symbol *s = this->action->getSymbol(this->settings->getKeymap()->getModifier());
+        return s->getName();
+    } else {
+        return nullptr;
+    }
 }
 
 bool Key::isLocker()
