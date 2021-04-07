@@ -43,14 +43,11 @@ int main(int argc, char *argv[])
     map->load(keyboard->getSettings());
     keyboard->setKeymap(map);
 
-    QPoint pos = keyboard->pos();
-    QSize size = keyboard->getSize();
-    keyboard->setGeometry(pos.x(), pos.y(), size.width() * 20, size.height() * 20);
-
     QObject::connect( keyboard, SIGNAL(keyPressed(quint8)), simulator, SLOT(keyPress(quint8)) );
     QObject::connect( keyboard, SIGNAL(keyReleased(quint8)), simulator, SLOT(keyRelease(quint8)) );
     QObject::connect( keyboard, SIGNAL(actionTrigger(QString)), manager, SLOT(actionTrigger(QString)) );
     QObject::connect( keyboard, SIGNAL(actionMove(int, int)), manager, SLOT(actionMove(int, int)) );
+    QObject::connect( keyboard, SIGNAL(actionResize(int, int)), manager, SLOT(actionResize(int, int)) );
     service->listen();
 
     keyboard->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::WindowDoesNotAcceptFocus);

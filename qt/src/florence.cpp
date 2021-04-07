@@ -27,6 +27,7 @@ Florence::Florence( QWidget *parent )
 {
     this->focusKey = nullptr;
     this->moving = false;
+    this->resizing = false;
 
     this->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
     this->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
@@ -268,12 +269,21 @@ void Florence::resizeEvent( QResizeEvent *event )
 
 void Florence::mousePressEvent( QMouseEvent *event )
 {
+    this->moving = false;
+    this->resizing = false;
     this->mouseMoveEvent( event );
-    if (this->focusKey->getAction() == QStringLiteral("move")) {
-        QPoint p = this->mapToGlobal(QPoint(0,0));
-        this->startX = event->globalX() - p.x();
-        this->startY = event->globalY() - p.y();
-        this->moving = true;
+    if (this->focusKey) {
+        this->moving = (this->focusKey->getAction() == QStringLiteral("move"));
+        this->resizing = (this->focusKey->getAction() == QStringLiteral("resize"));
+        if (this->moving) {
+            QPoint p = this->mapToGlobal(QPoint(0,0));
+            this->startX = event->globalX() - p.x();
+            this->startY = event->globalY() - p.y();
+        } else if (this->resizing) {
+            QPoint p = this->mapToGlobal(QPoint(this->size().width(), this->size().height()));
+            this->startX = event->globalX() - p.x();
+            this->startY = event->globalY() - p.y();
+        }
     }
 }
 
@@ -289,6 +299,12 @@ void Florence::mouseMoveEvent( QMouseEvent *event )
         int x = event->globalX() - p.x();
         int y = event->globalY() - p.y();
         emit actionMove(x - this->startX, y - this->startY);
+        this->focusKey->setPressed();
+    } else if (this->resizing) {
+        QPoint p = this->mapToGlobal(QPoint(this->size().width(), this->size().height()));
+        int x = event->globalX() - p.x();
+        int y = event->globalY() - p.y();
+        emit actionResize(x - this->startX, y - this->startY);
         this->focusKey->setPressed();
     } else if ( event->buttons() > Qt::NoButton )  {
         Key *k = static_cast<Key *>( this->scene()->itemAt( this->mapToScene( event->pos() ), QGraphicsView::transform() ) );
@@ -318,7 +334,7 @@ void Florence::repeat()
 
 void Florence::leaveEvent( QEvent *event )
 {
-    if (!this->moving) {
+    if (!(this->moving||this->resizing)) {
         this->autoRepeatTimer->stop();
         if ( this->focusKey ) this->focusKey->hoverLeaveEvent();
         this->focusKey = nullptr;
@@ -333,13 +349,18 @@ void Florence::mouseReleaseEvent( QMouseEvent *event )
     if ( this->autoRepeatTimer->isActive() ) this->autoRepeatTimer->stop();
     this->focusKey = nullptr;
     if (this->moving) {
-        this->releaseMouse();
         QPoint p = this->mapToGlobal(QPoint(0,0));
         int x = event->globalX() - p.x();
         int y = event->globalY() - p.y();
         emit actionMove(x - this->startX, y - this->startY);
+    } else if (this->resizing) {
+        QPoint p = this->mapToGlobal(QPoint(this->size().width(), this->size().height()));
+        int x = event->globalX() - p.x();
+        int y = event->globalY() - p.y();
+        emit actionResize(x - this->startX, y - this->startY);
     }
     this->moving = false;
+    this->resizing = false;
     QGraphicsView::mouseReleaseEvent( event );
 }
 

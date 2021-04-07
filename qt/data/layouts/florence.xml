@@ -457,14 +457,14 @@
 <extension>
 	<_name>Florence keys</_name>
 	<identifiant>actionkys</identifiant>
-	<placement>left</placement>
+	<placement>right</placement>
 	<keyboard>
 	<width>2</width>
 	<height>10</height>
 	<key>
 		<action>reduce</action>
 		<modifier>
-			<code>8</code> <!-- alt -->
+			<code>8</code>
 			<action>close</action>
 		</modifier>
 		<xpos>1</xpos>
@@ -472,10 +472,6 @@
 	</key>
 	<key>
 		<action>config</action>
-		<modifier>
-			<code>8</code> <!-- alt -->
-			<action>switch</action>
-		</modifier>
 		<xpos>1</xpos>
 		<ypos>3</ypos>
 	</key>
@@ -485,12 +481,7 @@
 		<ypos>5</ypos>
 	</key>
 	<key>
-		<action>bigger</action>
-		<xpos>1</xpos>
-		<ypos>7</ypos>
-	</key>
-	<key>
-		<action>smaller</action>
+		<action>resize</action>
 		<xpos>1</xpos>
 		<ypos>9</ypos>
 	</key>

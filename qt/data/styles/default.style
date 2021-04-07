@@ -125,11 +125,17 @@
     </symbol>
     <symbol>
       <name>Super_[LR]</name>
-      <svg xmlns="http://www.w3.org/2000/svg" width="100" viewBox="0 0 100 100" version="1.1" height="100">
-        <path d="M 50,22.5 C 34.841781,22.5 22.5,34.841781 22.5,50 22.5,65.158219 34.841781,77.5 50,77.5 65.158219,77.5 77.5,65.158219 77.5,50 77.5,34.841781 65.158219,22.5 50,22.5 z m 0,5 C 62.456018,27.5 72.5,37.543982 72.5,50 72.5,62.456018 62.456018,72.5 50,72.5 37.543982,72.5 27.5,62.456018 27.5,50 27.5,37.543982 37.543982,27.5 50,27.5 z" class="symbol"/>
-        <ellipse transform="matrix(0.83333331,0,0,1,8.0000011,0)" ry="4" rx="6" cy="42" cx="42" class="symbol"/>
-        <ellipse transform="matrix(0.83333334,0,0,1,8.6666665,0)" ry="4" rx="6" cy="42" cx="58" class="symbol"/>
-        <path d="m 36.96875,55.46875 a 2.50025,2.50025 0 0 0 -1.75,4.3125 C 39.004424,63.566924 44.666667,64.5 50,64.5 c 5.333333,0 10.995576,-0.933076 14.78125,-4.71875 a 2.5190679,2.5190679 0 1 0 -3.5625,-3.5625 C 59.004424,58.433076 54.666667,59.5 50,59.5 c -4.666667,0 -9.004424,-1.066924 -11.21875,-3.28125 a 2.50025,2.50025 0 0 0 -1.8125,-0.75 z" class="symbol"/>
+      <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1" width="64" height="64" viewBox="0 -10 64 64">
+        <rect width="64" height="44" x="0" y="0" class="symbol-outline"/>
+        <rect width="9" height="8" x="8" y="6" class="symbol-fill"/>
+        <rect width="9" height="8" x="21" y="6" class="symbol-fill"/>
+        <rect width="9" height="8" x="34" y="6" class="symbol-fill"/>
+        <rect width="9" height="8" x="47" y="6" class="symbol-fill"/>
+        <rect width="9" height="8" x="8" y="18" class="symbol-fill"/>
+        <rect width="9" height="8" x="21" y="18" class="symbol-fill"/>
+        <rect width="9" height="8" x="34" y="18" class="symbol-fill"/>
+        <rect width="9" height="8" x="47" y="18" class="symbol-fill"/>
+        <rect width="48" height="8" x="8" y="30" class="symbol-fill"/>
       </svg>
     </symbol>
     <symbol>
@@ -362,6 +368,12 @@
       <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100" height="100" viewBox="0 0 100 100">
         <path class="symbol" d="m 35,42.5 0,5 20,0 0,-5 -20,0 z"/>
         <path class="symbol" d="m 45,22.4375 c -12.42586,0 -22.5625,10.13664 -22.5625,22.5625 0,12.42586 10.13664,22.5625 22.5625,22.5625 5.315839,0 10.230259,-1.841568 14.09375,-4.9375 l 14.125,14.15625 3.5625,-3.5625 L 62.625,59.09375 C 65.720932,55.230259 67.5625,50.315839 67.5625,45 67.5625,32.57414 57.42586,22.4375 45,22.4375 z m 0,5.125 c 9.669626,0 17.4375,7.767874 17.4375,17.4375 0,9.669626 -7.767874,17.4375 -17.4375,17.4375 -9.669626,0 -17.4375,-7.767874 -17.4375,-17.4375 0,-9.669626 7.767874,-17.4375 17.4375,-17.4375 z"/>
+      </svg>
+    </symbol>
+    <symbol>
+      <action>resize</action>
+      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100" height="100" viewBox="0 0 100 100">
+        <path class="symbol" d="m30 30h11.915l-3.9718 3.9718 28.085 28.085 3.972-3.972v11.915h-11.915l3.971-3.972-28.084-28.084-3.972 3.971z"/>
       </svg>
     </symbol>
   </symbols>

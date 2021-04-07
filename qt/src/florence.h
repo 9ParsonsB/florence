@@ -236,10 +236,18 @@ signals:
       * \brief Move action
       *
       * This signal is emitted the keyboard is requested to be moved
-      * \param x the screen abscissa requested
-      * \param y the screen ordinate requested
+      * \param x the delta screen abscissa requested
+      * \param y the delta screen ordinate requested
       */
-    void actionMove( int x, int y );
+    void actionMove( int dx, int dy );
+    /*! \fn actionResize()
+      * \brief Resize action
+      *
+      * This signal is emitted the keyboard is requested to be resized
+      * \param x the delta screen width requested
+      * \param y the delta screen height requested
+      */
+    void actionResize( int dw, int dh );
 
     /*! \fn keyPressed()
       * \brief key pressed signal.
@@ -278,6 +286,7 @@ private:
     QTimer *autoRepeatTimer;
 
     bool moving;
+    bool resizing;
     int startX;
     int startY;
 

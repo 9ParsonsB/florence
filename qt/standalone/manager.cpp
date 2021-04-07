@@ -26,14 +26,20 @@ Manager::Manager( Florence *keyboard, SettingsService *settings, QObject *parent
 
 void Manager::actionTrigger( QString action )
 {
-    if (action == QStringLiteral("move")) {
+    if (action == QStringLiteral("move") || action == QStringLiteral("resize")) {
         this->settings->save();
     } else {
         qDebug() << "trigger " << action;
     }
 }
 
-void Manager::actionMove( int x, int y )
+void Manager::actionMove( int dx, int dy )
 {
-    this->keyboard->move(this->keyboard->x() + x, this->keyboard->y() + y);
+    this->keyboard->move(this->keyboard->x() + dx, this->keyboard->y() + dy);
+}
+
+void Manager::actionResize( int dw, int dh )
+{
+    QSize size = keyboard->size();
+    this->keyboard->resize(size.width() + dw, size.height() + dh);
 }

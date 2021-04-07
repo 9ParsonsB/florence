@@ -39,11 +39,17 @@ public slots:
     /*! \fn actionTrigger
       * \brief Called when an action is triggered by the user
       */
+
     void actionTrigger( QString action );
     /*! \fn actionMove
       * \brief Called when the user moves the keyboard
       */
-    void actionMove( int x, int y );
+    void actionMove( int dx, int dy );
+
+    /*! \fn actionResize
+      * \brief Called when the user resizes the keyboard
+      */
+    void actionResize( int dw, int dh );
 
 private:
     Florence *keyboard;
