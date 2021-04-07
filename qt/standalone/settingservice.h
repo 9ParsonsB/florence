@@ -16,7 +16,7 @@
 #define SETTINGS_FONT_SIZE "fontSize"
 #define SETTINGS_FONT_SIZE_DEFAULT "16"
 #define SETTINGS_POS "pos"
-#define SETTINGS_POS_DEFAULT "0,0"
+#define SETTINGS_POS_DEFAULT QPoint(0,0)
 
 /*! \class Settings
   * \brief Stores application settings.
