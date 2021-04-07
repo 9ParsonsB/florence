@@ -31,6 +31,12 @@ static const QString css (""
     "    stroke: @TEXT_OUTLINE_COLOR@;\n"
     "    stroke-width: 2px;\n"
     "}\n"
+    ".symbol-fill {\n"
+    "    fill: @TEXT_COLOR@;\n"
+    "}\n"
+    ".symbol-outline {\n"
+    "    fill: @TEXT_OUTLINE_COLOR@;\n"
+    "}\n"
     "</style>");
 
 StyleItem::StyleItem( QDomElement el, QString colors[], QDomElement defs )

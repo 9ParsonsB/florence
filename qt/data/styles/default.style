@@ -125,17 +125,17 @@
     </symbol>
     <symbol>
       <name>Super_[LR]</name>
-      <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1" width="64" height="64" viewBox="0 -10 64 64">
-        <rect width="64" height="44" x="0" y="0" class="symbol-outline"/>
-        <rect width="9" height="8" x="8" y="6" class="symbol-fill"/>
-        <rect width="9" height="8" x="21" y="6" class="symbol-fill"/>
-        <rect width="9" height="8" x="34" y="6" class="symbol-fill"/>
-        <rect width="9" height="8" x="47" y="6" class="symbol-fill"/>
-        <rect width="9" height="8" x="8" y="18" class="symbol-fill"/>
-        <rect width="9" height="8" x="21" y="18" class="symbol-fill"/>
-        <rect width="9" height="8" x="34" y="18" class="symbol-fill"/>
-        <rect width="9" height="8" x="47" y="18" class="symbol-fill"/>
-        <rect width="48" height="8" x="8" y="30" class="symbol-fill"/>
+      <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1" width="64" height="64" viewBox="0 0 64 64">
+        <rect width="64" height="44" x="0" y="10" class="symbol-outline"/>
+        <rect width="9" height="8" x="8" y="16" class="symbol-fill"/>
+        <rect width="9" height="8" x="21" y="16" class="symbol-fill"/>
+        <rect width="9" height="8" x="34" y="16" class="symbol-fill"/>
+        <rect width="9" height="8" x="47" y="16" class="symbol-fill"/>
+        <rect width="9" height="8" x="8" y="28" class="symbol-fill"/>
+        <rect width="9" height="8" x="21" y="28" class="symbol-fill"/>
+        <rect width="9" height="8" x="34" y="28" class="symbol-fill"/>
+        <rect width="9" height="8" x="47" y="28" class="symbol-fill"/>
+        <rect width="48" height="8" x="8" y="40" class="symbol-fill"/>
       </svg>
     </symbol>
     <symbol>
