@@ -44,7 +44,7 @@ void SettingsService::save()
     settings.setValue(SETTINGS_STYLE, this->styleFile);
     settings.setValue(SETTINGS_FONT, this->keyboard->getSettings()->getFont());
     settings.setValue(SETTINGS_FONT_SIZE, this->keyboard->getSettings()->getFontSize());
-    settings.setValue(SETTINGS_POS, this->keyboard->pos());
+    settings.setValue(SETTINGS_POS, this->keyboard->geometry().topLeft());
     settings.setValue(SETTINGS_SIZE, this->keyboard->size());
 }
 
@@ -66,11 +66,12 @@ void SettingsService::setFontSize(quint8 size)
 
 void SettingsService::setPos(QPoint pos)
 {
-    this->keyboard->move(pos);
+    QSize size = this->keyboard->size();
+    this->keyboard->setGeometry(pos.x(), pos.y(), size.width(), size.height());
 }
 
 void SettingsService::setSize(QSize size)
 {
-    QPoint pos = this->keyboard->pos();
+    QPoint pos = this->keyboard->geometry().topLeft();
     this->keyboard->setGeometry(pos.x(), pos.y(), size.width(), size.height());
 }

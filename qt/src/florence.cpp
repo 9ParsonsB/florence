@@ -276,11 +276,11 @@ void Florence::mousePressEvent( QMouseEvent *event )
         this->moving = (this->focusKey->getAction() == QStringLiteral("move"));
         this->resizing = (this->focusKey->getAction() == QStringLiteral("resize"));
         if (this->moving) {
-            QPoint p = this->mapToGlobal(QPoint(0,0));
+            QPoint p = this->mapToGlobal(this->rect().topLeft());
             this->startX = event->globalX() - p.x();
             this->startY = event->globalY() - p.y();
         } else if (this->resizing) {
-            QPoint p = this->mapToGlobal(QPoint(this->size().width(), this->size().height()));
+            QPoint p = this->mapToGlobal(this->rect().bottomRight());
             this->startX = event->globalX() - p.x();
             this->startY = event->globalY() - p.y();
         }
@@ -295,13 +295,13 @@ void Florence::mouseDoubleClickEvent( QMouseEvent *event )
 void Florence::mouseMoveEvent( QMouseEvent *event )
 {
     if (this->moving) {
-        QPoint p = this->mapToGlobal(QPoint(0,0));
+        QPoint p = this->mapToGlobal(this->rect().topLeft());
         int x = event->globalX() - p.x();
         int y = event->globalY() - p.y();
         emit actionMove(x - this->startX, y - this->startY);
         this->focusKey->setPressed();
     } else if (this->resizing) {
-        QPoint p = this->mapToGlobal(QPoint(this->size().width(), this->size().height()));
+        QPoint p = this->mapToGlobal(this->rect().bottomRight());
         int x = event->globalX() - p.x();
         int y = event->globalY() - p.y();
         emit actionResize(x - this->startX, y - this->startY);
@@ -349,12 +349,12 @@ void Florence::mouseReleaseEvent( QMouseEvent *event )
     if ( this->autoRepeatTimer->isActive() ) this->autoRepeatTimer->stop();
     this->focusKey = nullptr;
     if (this->moving) {
-        QPoint p = this->mapToGlobal(QPoint(0,0));
+        QPoint p = this->mapToGlobal(this->rect().topLeft());
         int x = event->globalX() - p.x();
         int y = event->globalY() - p.y();
         emit actionMove(x - this->startX, y - this->startY);
     } else if (this->resizing) {
-        QPoint p = this->mapToGlobal(QPoint(this->size().width(), this->size().height()));
+        QPoint p = this->mapToGlobal(this->rect().bottomRight());
         int x = event->globalX() - p.x();
         int y = event->globalY() - p.y();
         emit actionResize(x - this->startX, y - this->startY);

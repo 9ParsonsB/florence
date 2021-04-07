@@ -14,7 +14,8 @@
 //    You should have received a copy of the GNU General Public License
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <QMouseEvent>
+#include <QWindow>
+#include <QScreen>
 #include <QDebug>
 #include "manager.h"
 
@@ -35,11 +36,46 @@ void Manager::actionTrigger( QString action )
 
 void Manager::actionMove( int dx, int dy )
 {
-    this->keyboard->move(this->keyboard->x() + dx, this->keyboard->y() + dy);
+    QScreen *screen = this->keyboard->window()->windowHandle()->screen();
+    QRect geometry = screen->availableGeometry();
+    QSize size = keyboard->size();
+    QPoint pos = this->keyboard->mapToGlobal(this->keyboard->rect().topLeft());
+    int x = pos.x() + dx;
+    int y = pos.y() + dy;
+    if (x < geometry.left()) {
+        x = geometry.left();
+    }
+    if (x + size.width() > geometry.right()) {
+        x = geometry.right() - size.width();
+    }
+    if (y < geometry.top()) {
+        y = geometry.top();
+    }
+    if (y + size.height() > geometry.bottom()) {
+        y = geometry.bottom() - size.height();
+    }
+    this->keyboard->setGeometry(x, y, size.width(), size.height());
 }
 
 void Manager::actionResize( int dw, int dh )
 {
-    QSize size = keyboard->size();
-    this->keyboard->resize(size.width() + dw, size.height() + dh);
+    QScreen *screen = this->keyboard->window()->windowHandle()->screen();
+    QRect geometry = screen->availableGeometry();
+    QPoint pos = this->keyboard->mapToGlobal(this->keyboard->rect().topLeft());
+    QSize size = this->keyboard->size();
+    int w = size.width() + dw;
+    int h = size.height() + dh;
+    if (w < 100) {
+        w = 100;
+    }
+    if (pos.x() + w > geometry.right()) {
+        w = geometry.right() - pos.x();
+    }
+    if (h < 50) {
+        h = 50;
+    }
+    if (pos.y() + h > geometry.bottom()) {
+        h = geometry.bottom() - pos.y();
+    }
+    this->keyboard->setGeometry(pos.x(), pos.y(), w, h);
 }
