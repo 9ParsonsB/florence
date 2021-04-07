@@ -446,3 +446,7 @@ Settings *Florence::getSettings()
 {
     return this->settings;
 }
+
+QSize Florence::getSize() {
+    return QSize(this->sceneWidth, this->sceneHeight);
+}

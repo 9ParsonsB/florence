@@ -41,6 +41,8 @@ int main(int argc, char *argv[])
     SystemMap *map = new SystemMap();
     map->load(keyboard->getSettings());
     keyboard->setKeymap(map);
+    QSize size = keyboard->getSize();
+    keyboard->resize(size.width() * 20, size.height() * 20);
 
     QObject::connect( keyboard, SIGNAL(keyPressed(quint8)), simulator, SLOT(keyPress(quint8)) );
     QObject::connect( keyboard, SIGNAL(keyReleased(quint8)), simulator, SLOT(keyRelease(quint8)) );

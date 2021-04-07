@@ -182,6 +182,11 @@ public:
       */
     Settings *getSettings();
 
+    /*! \fn getSize()
+      * \brief Get the size (in logical units) of the keyboard
+      */
+    QSize getSize();
+
 signals:
     /*! \fn inputText( QString text )
       * \brief Input text signal.
