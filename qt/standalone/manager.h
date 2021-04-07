@@ -18,6 +18,7 @@
 #define MANAGER_H
 
 #include <QObject>
+#include "settingservice.h"
 #include "florence.h"
 
 /*! \class Manager
@@ -30,7 +31,7 @@ public:
     /*! \fn Manager
       * \brief Constructor
       */
-    explicit Manager( Florence *keyboard, QObject *parent = 0 );
+    explicit Manager( Florence *keyboard, SettingsService * settings, QObject *parent = 0 );
 
 signals:
 
@@ -46,6 +47,7 @@ public slots:
 
 private:
     Florence *keyboard;
+    SettingsService *settings;
 };
 
 #endif // MANAGER_H

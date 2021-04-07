@@ -18,14 +18,19 @@
 #include <QDebug>
 #include "manager.h"
 
-Manager::Manager( Florence *keyboard, QObject *parent ) : QObject(parent)
+Manager::Manager( Florence *keyboard, SettingsService *settings, QObject *parent ) : QObject(parent)
 {
     this->keyboard = keyboard;
+    this->settings = settings;
 }
 
 void Manager::actionTrigger( QString action )
 {
-    qDebug() << "trigger " << action;
+    if (action == QStringLiteral("move")) {
+        this->settings->save();
+    } else {
+        qDebug() << "trigger " << action;
+    }
 }
 
 void Manager::actionMove( int x, int y )

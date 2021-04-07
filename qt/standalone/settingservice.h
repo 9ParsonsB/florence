@@ -15,6 +15,8 @@
 #define SETTINGS_FONT_DEFAULT "sans"
 #define SETTINGS_FONT_SIZE "fontSize"
 #define SETTINGS_FONT_SIZE_DEFAULT "16"
+#define SETTINGS_POS "pos"
+#define SETTINGS_POS_DEFAULT "0,0"
 
 /*! \class Settings
   * \brief Stores application settings.
@@ -30,7 +32,7 @@ public:
       *
       * \param keyboard the Florence keyboard widget to apply the settings to.
       */
-    explicit SettingsService(Florence *keyboard, QObject *parent = 0);
+    explicit SettingsService( Florence *keyboard, QObject *parent = 0 );
 
     /*! \fn ~SettingsService()
       * \brief Destructor.
@@ -42,9 +44,10 @@ public:
 public slots:
     Q_SCRIPTABLE void load();
     Q_SCRIPTABLE void save();
-    Q_SCRIPTABLE void setStyle(QString styleFile);
-    Q_SCRIPTABLE void setFont(QString font);
-    Q_SCRIPTABLE void setFontSize(quint8 size);
+    Q_SCRIPTABLE void setStyle( QString styleFile );
+    Q_SCRIPTABLE void setFont( QString font );
+    Q_SCRIPTABLE void setFontSize( quint8 size );
+    Q_SCRIPTABLE void setPos( QPoint pos );
 
 private:
     Florence *keyboard;
