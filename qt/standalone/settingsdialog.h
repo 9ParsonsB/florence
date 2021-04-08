@@ -1,5 +1,5 @@
 //    This file is part of Florence Virtual Keyboard, QT version.
-//    Copyright (C) 2014 François Agrech
+//    Copyright (C) 2021 François Agrech
 //
 //    This program is free software: you can redistribute it and/or modify
 //    it under the terms of the GNU General Public License as published by
@@ -14,14 +14,29 @@
 //    You should have received a copy of the GNU General Public License
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include "florenceexception.h"
+#ifndef CONFIG_H
+#define CONFIG_H
 
-FlorenceException::FlorenceException( QString message )
-{
-    this->message = message;
-}
+#include <QDialog>
+#include <QDBusInterface>
+#undef None
+#include "ui_config.h"
 
-const char* FlorenceException::what() const noexcept
+class SettingsDialog : public QDialog
 {
-    return this->message.toLatin1();
-}
+    Q_OBJECT
+
+public:
+    SettingsDialog( QDialog * parent = 0 );
+    ~SettingsDialog();
+
+private:
+    Ui_config *ui;
+    QDBusInterface *dbus;
+
+private slots:
+    void setFont();
+};
+
+
+#endif // CONFIG_H

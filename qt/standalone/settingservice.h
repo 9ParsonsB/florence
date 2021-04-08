@@ -62,7 +62,10 @@ public slots:
     Q_SCRIPTABLE void load();
     Q_SCRIPTABLE void save();
     Q_SCRIPTABLE void setStyle( QString styleFile );
-    Q_SCRIPTABLE void setFont( QString font );
+
+    Q_SCRIPTABLE bool setFont( QString font );
+    Q_SCRIPTABLE QString getFont();
+
     Q_SCRIPTABLE void setFontSize( quint8 size );
     Q_SCRIPTABLE void setPos( QPoint pos );
     Q_SCRIPTABLE void setSize( QSize size );

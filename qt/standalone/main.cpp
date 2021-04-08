@@ -15,6 +15,7 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QApplication>
+#include <QCommandLineParser>
 #include "qtextstream.h"
 #include "simulator.h"
 #include "florence.h"
@@ -22,11 +23,14 @@
 #include "service.h"
 #include "settingservice.h"
 #include "manager.h"
+#include "settingsdialog.h"
 
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
+void openConfig() {
+    SettingsDialog *config = new SettingsDialog();
+    config->show();
+}
 
+void run() {
     Simulator *simulator = new Simulator();
     Florence *keyboard = new Florence();
     SettingsService *settings = new SettingsService(keyboard);
@@ -53,6 +57,29 @@ int main(int argc, char *argv[])
     keyboard->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::WindowDoesNotAcceptFocus);
 
     keyboard->show();
+}
+
+int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    QApplication::setApplicationName("Florence");
+    QApplication::setApplicationVersion("1.0");
+
+    QCommandLineParser parser;
+    parser.setApplicationDescription("Florence virtual keyboard");
+    parser.addHelpOption();
+    parser.addVersionOption();
+
+    QCommandLineOption openSettings("c", QApplication::translate("main", "Open settings dialog"));
+    parser.addOption(openSettings);
+
+    parser.process(a);
+    bool config = parser.isSet(openSettings);
+    if (config) {
+        openConfig();
+    } else {
+        run();
+    }
 
     return a.exec();
 }

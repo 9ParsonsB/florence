@@ -10,7 +10,8 @@ SOURCES += main.cpp \
     keysym2ucs.c \
     service.cpp \
     settingsservice.cpp \
-    manager.cpp
+    manager.cpp \
+    settingsdialog.cpp
 HEADERS += \
     simulator.h \
     florenceexception.h \
@@ -19,6 +20,10 @@ HEADERS += \
     keysym2ucs.h \
     service.h \
     settingservice.h \
-    manager.h
+    manager.h \
+    settingsdialog.h
 INCLUDEPATH += ../src
 LIBS += -lflorence_qt -lXtst -lX11
+
+FORMS += \
+    config.ui

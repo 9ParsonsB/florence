@@ -54,9 +54,15 @@ void SettingsService::setStyle(QString styleFile)
     this->keyboard->setStyle(this->styleFile);
 }
 
-void SettingsService::setFont(QString font)
+QString SettingsService::getFont()
+{
+    return this->keyboard->getSettings()->getFont();
+}
+
+bool SettingsService::setFont(QString font)
 {
     this->keyboard->setFont(font);
+    return true;
 }
 
 void SettingsService::setFontSize(quint8 size)

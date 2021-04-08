@@ -18,6 +18,7 @@
 #include <QScreen>
 #include <QDebug>
 #include "manager.h"
+#include "settingsdialog.h"
 
 Manager::Manager( Florence *keyboard, SettingsService *settings, QObject *parent ) : QObject(parent)
 {
@@ -29,6 +30,9 @@ void Manager::actionTrigger( QString action )
 {
     if (action == QStringLiteral("move") || action == QStringLiteral("resize")) {
         this->settings->save();
+    } if (action == QStringLiteral("config")) {
+        SettingsDialog *config = new SettingsDialog();
+        config->show();
     } else {
         qDebug() << "trigger " << action;
     }
