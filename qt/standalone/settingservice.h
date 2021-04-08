@@ -61,8 +61,8 @@ public:
     ~SettingsService();
 
 public slots:
-    Q_SCRIPTABLE void load();
-    Q_SCRIPTABLE void save();
+    Q_SCRIPTABLE bool load();
+    Q_SCRIPTABLE bool save();
     Q_SCRIPTABLE void setStyle( QString styleFile );
 
     Q_SCRIPTABLE bool setFont( QString font );

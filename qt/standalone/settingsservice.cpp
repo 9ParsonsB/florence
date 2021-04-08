@@ -28,7 +28,7 @@ SettingsService::~SettingsService()
 
 }
 
-void SettingsService::load()
+bool SettingsService::load()
 {
     QSettings settings(SETTINGS_ORGANISATION, SETTINGS_APPLICATION);
     this->setStyle(settings.value(SETTINGS_STYLE, this->styleFile).toString());
@@ -37,9 +37,11 @@ void SettingsService::load()
     this->setSize(settings.value(SETTINGS_SIZE, SETTINGS_SIZE_DEFAULT).toSize());
     this->setTransparent(settings.value(SETTINGS_TRANSPARENT, SETTINGS_TRANSPARENT_DEFAULT).toBool());
     this->setDecorated(settings.value(SETTINGS_DECORATED, SETTINGS_DECORATED_DEFAULT).toBool());
+
+    return true;
 }
 
-void SettingsService::save()
+bool SettingsService::save()
 {
     QSettings settings(SETTINGS_ORGANISATION, SETTINGS_APPLICATION);
     settings.setValue(SETTINGS_STYLE, this->styleFile);
@@ -48,6 +50,8 @@ void SettingsService::save()
     settings.setValue(SETTINGS_SIZE, this->keyboard->size());
     settings.setValue(SETTINGS_TRANSPARENT, this->getTransparent());
     settings.setValue(SETTINGS_DECORATED, this->getDecorated());
+
+    return true;
 }
 
 void SettingsService::setStyle(QString styleFile)

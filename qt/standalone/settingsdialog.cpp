@@ -43,6 +43,8 @@ SettingsDialog::SettingsDialog( QWidget * parent )
     }
 
     QObject::connect(ui->font, SIGNAL(clicked(bool)), this, SLOT(setFont()));
+
+    QObject::connect(this, SIGNAL(finished(int)), this, SLOT(end(int)));
 }
 
 SettingsDialog::~SettingsDialog()
@@ -67,3 +69,17 @@ void SettingsDialog::setFont()
     }
 }
 
+void SettingsDialog::end( int accept )
+{
+    if (accept) {
+        QDBusReply<bool> reply = this->dbus->call("save");
+        if (!reply.isValid()) {
+            qDebug() << reply.error().message();
+        }
+    } else {
+        QDBusReply<bool> reply = this->dbus->call("load");
+        if (!reply.isValid()) {
+            qDebug() << reply.error().message();
+        }
+    }
+}

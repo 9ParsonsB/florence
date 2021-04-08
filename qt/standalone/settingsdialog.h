@@ -36,6 +36,7 @@ private:
 
 private slots:
     void setFont();
+    void end( int accept );
 };
 
 
