@@ -35,6 +35,8 @@ void Manager::actionTrigger( QString action )
         config->show();
     } else if (action == QStringLiteral("reduce")) {
         this->keyboard->showMinimized();
+    } else if (action == QStringLiteral("close")) {
+        this->keyboard->close();
     } else {
         qDebug() << "trigger " << action;
     }

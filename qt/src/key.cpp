@@ -25,8 +25,8 @@ KeyAction::KeyAction( QDomElement el, Settings *settings ) {
     this->symbols << new ModifiedSymbol(action.text(), 0, settings);
     QDomElement modifier = el.firstChildElement("modifier");
     while ( !modifier.isNull() ) {
-        QDomElement code = el.firstChildElement("code");
-        QDomElement action = el.firstChildElement("action");
+        QDomElement code = modifier.firstChildElement("code");
+        QDomElement action = modifier.firstChildElement("action");
         this->symbols << new ModifiedSymbol(action.text(),
                                             static_cast<quint8>(code.text().toInt()), settings);
         modifier = modifier.nextSiblingElement("modifier");
