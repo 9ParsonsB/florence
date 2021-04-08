@@ -17,6 +17,7 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
+#include <QFont>
 #include "style.h"
 #include "keymap.h"
 
@@ -100,10 +101,6 @@ public:
       * \param font The font of the symbols.
       */
     void setFont( QString font );
-    /*! \fn setFontSize( quint8 size )
-      * \param size The size of the font to be used to draw key symbols.
-      */
-    void setFontSize( quint8 size );
     /*! \fn setColor( enum StyleItem::style_colours color, QString value )
       * \param color The style element to set the color to.
       * \param value A string that represents the value of the color in one of those format:
@@ -180,7 +177,6 @@ signals:
 private:
     qreal opacity;
     QString font;
-    quint8 fontSize;
     QString colors[StyleItem::STYLE_NUM_COLOURS];
     Style *style;
     Keymap *keymap;

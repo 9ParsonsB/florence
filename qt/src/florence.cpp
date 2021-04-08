@@ -31,7 +31,7 @@ Florence::Florence( QWidget *parent )
 
     this->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
     this->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
-    this->setStyleSheet( "background: transparent; border-style: none;" );
+    this->setStyleSheet( "Florence{background: transparent; border-style: none;}" );
     this->setContentsMargins(0, 0, 0, 0);
     this->graphicsScene = new QGraphicsScene( this );
     this->setScene( this->graphicsScene );
@@ -242,11 +242,6 @@ void Florence::setOpacity( qreal opacity )
 void Florence::setFont( QString font )
 {
     this->settings->setFont( font );
-}
-
-void Florence::setFontSize( quint8 size )
-{
-    this->settings->setFontSize( size );
 }
 
 void Florence::setKeymap( Keymap *map )

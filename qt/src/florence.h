@@ -172,11 +172,6 @@ public:
       */
     void setFont( QString font );
 
-    /*! \fn setFontSize( quint8 size )
-      * \param size The size of the font to be used to draw key symbols.
-      */
-    void setFontSize( quint8 size );
-
     /*! \fn getSettings()
       * \brief Get the settings object.
       */

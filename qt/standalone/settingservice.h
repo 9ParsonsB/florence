@@ -27,9 +27,7 @@
 #define SETTINGS_STYLE "style"
 #define SETTINGS_STYLE_DEFAULT "default"
 #define SETTINGS_FONT "font"
-#define SETTINGS_FONT_DEFAULT "sans"
-#define SETTINGS_FONT_SIZE "fontSize"
-#define SETTINGS_FONT_SIZE_DEFAULT "16"
+#define SETTINGS_FONT_DEFAULT "sans,12"
 #define SETTINGS_POS "pos"
 #define SETTINGS_POS_DEFAULT QPoint(0,0)
 #define SETTINGS_SIZE "size"
@@ -66,7 +64,6 @@ public slots:
     Q_SCRIPTABLE bool setFont( QString font );
     Q_SCRIPTABLE QString getFont();
 
-    Q_SCRIPTABLE void setFontSize( quint8 size );
     Q_SCRIPTABLE void setPos( QPoint pos );
     Q_SCRIPTABLE void setSize( QSize size );
 

@@ -95,7 +95,8 @@ void Symbol::paint( QPainter *painter, QRectF &bounds, bool hovered )
         if ( hovered ) z = 1.2;
 
         QPainterPath textPath;
-        QFont font( this->settings->getFont(), this->settings->getFontSize() );
+        QFont font;
+        font.fromString( this->settings->getFont() );
         textPath.addText(0, 0, font, text);
 
         QFontMetrics fm(font);

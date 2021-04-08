@@ -31,7 +31,7 @@ void Manager::actionTrigger( QString action )
     if (action == QStringLiteral("move") || action == QStringLiteral("resize")) {
         this->settings->save();
     } else if (action == QStringLiteral("config")) {
-        SettingsDialog *config = new SettingsDialog();
+        SettingsDialog *config = new SettingsDialog(this->keyboard);
         config->show();
     } else if (action == QStringLiteral("reduce")) {
         this->keyboard->showMinimized();

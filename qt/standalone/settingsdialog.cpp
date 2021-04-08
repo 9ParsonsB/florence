@@ -20,7 +20,7 @@
 #include "settingsdialog.h"
 #include "service.h"
 
-SettingsDialog::SettingsDialog( QDialog * parent )
+SettingsDialog::SettingsDialog( QWidget * parent )
     : QDialog(parent),
       ui(new Ui_config)
 {
@@ -53,8 +53,10 @@ SettingsDialog::~SettingsDialog()
 void SettingsDialog::setFont()
 {
     bool ok;
+    QFont original;
+    original.fromString(ui->font->text().replace("&", ""));
     QFont font = QFontDialog::getFont(
-                    &ok, QFont(ui->font->text()), this);
+                    &ok, original, this);
     if (ok) {
         QDBusReply<bool> reply = this->dbus->call("setFont", font.toString());
         if (reply.isValid()) {
