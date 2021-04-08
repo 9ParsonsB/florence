@@ -30,9 +30,11 @@ void Manager::actionTrigger( QString action )
 {
     if (action == QStringLiteral("move") || action == QStringLiteral("resize")) {
         this->settings->save();
-    } if (action == QStringLiteral("config")) {
+    } else if (action == QStringLiteral("config")) {
         SettingsDialog *config = new SettingsDialog();
         config->show();
+    } else if (action == QStringLiteral("reduce")) {
+        this->keyboard->showMinimized();
     } else {
         qDebug() << "trigger " << action;
     }
