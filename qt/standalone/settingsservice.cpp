@@ -35,6 +35,8 @@ void SettingsService::load()
     this->setFont(settings.value(SETTINGS_FONT, SETTINGS_FONT_DEFAULT).toString());
     this->setPos(settings.value(SETTINGS_POS, SETTINGS_POS_DEFAULT).toPoint());
     this->setSize(settings.value(SETTINGS_SIZE, SETTINGS_SIZE_DEFAULT).toSize());
+    this->setTransparent(settings.value(SETTINGS_TRANSPARENT, SETTINGS_TRANSPARENT_DEFAULT).toBool());
+    this->setDecorated(settings.value(SETTINGS_DECORATED, SETTINGS_DECORATED_DEFAULT).toBool());
 }
 
 void SettingsService::save()
@@ -44,6 +46,8 @@ void SettingsService::save()
     settings.setValue(SETTINGS_FONT, this->keyboard->getSettings()->getFont());
     settings.setValue(SETTINGS_POS, this->keyboard->geometry().topLeft());
     settings.setValue(SETTINGS_SIZE, this->keyboard->size());
+    settings.setValue(SETTINGS_TRANSPARENT, this->getTransparent());
+    settings.setValue(SETTINGS_DECORATED, this->getDecorated());
 }
 
 void SettingsService::setStyle(QString styleFile)
@@ -73,4 +77,30 @@ void SettingsService::setSize(QSize size)
 {
     QPoint pos = this->keyboard->geometry().topLeft();
     this->keyboard->setGeometry(pos.x(), pos.y(), size.width(), size.height());
+}
+
+bool SettingsService::setTransparent( bool transparent )
+{
+    this->keyboard->setAttribute(Qt::WA_TranslucentBackground, transparent);
+    return true;
+}
+
+bool SettingsService::getTransparent()
+{
+    return this->keyboard->testAttribute(Qt::WA_TranslucentBackground);
+}
+
+bool SettingsService::setDecorated( bool decorated )
+{
+    if (decorated) {
+        this->keyboard->setWindowFlags(this->keyboard->windowFlags() & (~Qt::FramelessWindowHint));
+    } else {
+        this->keyboard->setWindowFlags(this->keyboard->windowFlags() | Qt::FramelessWindowHint);
+    }
+    return true;
+}
+
+bool SettingsService::getDecorated()
+{
+    return !(this->keyboard->windowFlags() & Qt::FramelessWindowHint);
 }

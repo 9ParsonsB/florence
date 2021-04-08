@@ -32,6 +32,10 @@
 #define SETTINGS_POS_DEFAULT QPoint(0,0)
 #define SETTINGS_SIZE "size"
 #define SETTINGS_SIZE_DEFAULT QSize(640,200)
+#define SETTINGS_TRANSPARENT "transparent"
+#define SETTINGS_TRANSPARENT_DEFAULT false
+#define SETTINGS_DECORATED "decorated"
+#define SETTINGS_DECORATED_DEFAULT true
 
 /*! \class Settings
   * \brief Stores application settings.
@@ -63,6 +67,12 @@ public slots:
 
     Q_SCRIPTABLE bool setFont( QString font );
     Q_SCRIPTABLE QString getFont();
+
+    Q_SCRIPTABLE bool setTransparent( bool transparent );
+    Q_SCRIPTABLE bool getTransparent();
+
+    Q_SCRIPTABLE bool setDecorated( bool decorated );
+    Q_SCRIPTABLE bool getDecorated();
 
     Q_SCRIPTABLE void setPos( QPoint pos );
     Q_SCRIPTABLE void setSize( QSize size );

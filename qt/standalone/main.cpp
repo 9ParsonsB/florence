@@ -38,8 +38,6 @@ void run() {
     Service *service = new Service(keyboard, settings);
     Manager *manager = new Manager(keyboard, settings);
 
-    settings->load();
-
     QVector<QString> extensions;
     extensions << "actionkys";
     keyboard->getSettings()->setExtensions(extensions);
@@ -55,6 +53,7 @@ void run() {
     service->listen();
 
     keyboard->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::WindowDoesNotAcceptFocus);
+    settings->load();
 
     keyboard->show();
 }
