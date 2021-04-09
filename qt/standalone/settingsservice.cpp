@@ -21,6 +21,7 @@ SettingsService::SettingsService(Florence *keyboard, QObject *parent) : QObject(
 {
     this->keyboard = keyboard;
     this->styleFile = SETTINGS_STYLE_DEFAULT;
+    qRegisterMetaTypeStreamOperators<QStringList>("list");
 }
 
 SettingsService::~SettingsService()
@@ -37,6 +38,7 @@ bool SettingsService::load()
     this->setSize(settings.value(SETTINGS_SIZE, SETTINGS_SIZE_DEFAULT).toSize());
     this->setTransparent(settings.value(SETTINGS_TRANSPARENT, SETTINGS_TRANSPARENT_DEFAULT).toBool());
     this->setDecorated(settings.value(SETTINGS_DECORATED, SETTINGS_DECORATED_DEFAULT).toBool());
+    this->setExtensions(settings.value(SETTINGS_EXTENSIONS, SETTINGS_EXTENSIONS_DEFAULT).toStringList());
 
     return true;
 }
@@ -50,6 +52,7 @@ bool SettingsService::save()
     settings.setValue(SETTINGS_SIZE, this->keyboard->size());
     settings.setValue(SETTINGS_TRANSPARENT, this->getTransparent());
     settings.setValue(SETTINGS_DECORATED, this->getDecorated());
+    settings.setValue(SETTINGS_EXTENSIONS, QVariant::fromValue(this->getExtensions()));
 
     return true;
 }
@@ -86,7 +89,6 @@ void SettingsService::setSize(QSize size)
 bool SettingsService::setTransparent( bool transparent )
 {
     this->keyboard->setAttribute(Qt::WA_TranslucentBackground, transparent);
-    this->keyboard->repaint();
     return true;
 }
 
@@ -109,4 +111,15 @@ bool SettingsService::setDecorated( bool decorated )
 bool SettingsService::getDecorated()
 {
     return !(this->keyboard->windowFlags() & Qt::FramelessWindowHint);
+}
+
+bool SettingsService::setExtensions( QStringList extensions )
+{
+    this->keyboard->getSettings()->setExtensions(extensions.toVector());
+    return true;
+}
+
+QStringList SettingsService::getExtensions()
+{
+    return this->keyboard->getSettings()->getExtensions().toList();
 }

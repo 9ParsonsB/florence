@@ -244,6 +244,10 @@ bool Florence::setLayout( QString file )
     }
 
     this->scene()->setSceneRect(0, 0, this->sceneWidth, this->sceneHeight);
+    QTransform matrix;
+    matrix.scale(this->width()/this->scene()->width(), this->height()/this->scene()->height());
+    this->setTransform( matrix, false );
+
     return true;
 }
 

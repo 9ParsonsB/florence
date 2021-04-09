@@ -40,14 +40,14 @@ void Manager::actionTrigger( QString action )
     } else if (action.startsWith("extend.")) {
         QStringList parts = action.split(".");
         QString ext = parts.at(1);
-        QVector<QString> extensions = this->keyboard->getSettings()->getExtensions();
+        QStringList extensions = this->settings->getExtensions();
         if (extensions.contains(ext)) {
             extensions.removeAll(ext);
         } else {
             extensions << ext;
         }
         QSize initial = this->keyboard->getSize();
-        this->keyboard->getSettings()->setExtensions(extensions);
+        this->settings->setExtensions(extensions);
         QSize final = this->keyboard->getSize();
         QSize size = this->keyboard->size();
         this->keyboard->resize(size.width() * final.width() / initial.width(),

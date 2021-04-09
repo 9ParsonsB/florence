@@ -36,6 +36,8 @@
 #define SETTINGS_TRANSPARENT_DEFAULT false
 #define SETTINGS_DECORATED "decorated"
 #define SETTINGS_DECORATED_DEFAULT true
+#define SETTINGS_EXTENSIONS "extensions"
+#define SETTINGS_EXTENSIONS_DEFAULT {"actionkys"}
 
 /*! \class Settings
   * \brief Stores application settings.
@@ -76,6 +78,9 @@ public slots:
 
     Q_SCRIPTABLE void setPos( QPoint pos );
     Q_SCRIPTABLE void setSize( QSize size );
+
+    Q_SCRIPTABLE bool setExtensions( QStringList extensions );
+    Q_SCRIPTABLE QStringList getExtensions();
 
 private:
     Florence *keyboard;

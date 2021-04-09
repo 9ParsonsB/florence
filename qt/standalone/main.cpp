@@ -32,14 +32,15 @@ void openConfig() {
 
 void run() {
     Simulator *simulator = new Simulator();
+
     Florence *keyboard = new Florence();
+    keyboard->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::WindowDoesNotAcceptFocus);
+
     SettingsService *settings = new SettingsService(keyboard);
+    settings->load();
     Service *service = new Service(keyboard, settings);
     Manager *manager = new Manager(keyboard, settings);
 
-    QVector<QString> extensions;
-    extensions << "actionkys";
-    keyboard->getSettings()->setExtensions(extensions);
     SystemMap *map = new SystemMap();
     map->load(keyboard->getSettings());
     keyboard->setKeymap(map);
@@ -49,11 +50,8 @@ void run() {
     QObject::connect( keyboard, SIGNAL(actionTrigger(QString)), manager, SLOT(actionTrigger(QString)) );
     QObject::connect( keyboard, SIGNAL(actionMove(int, int)), manager, SLOT(actionMove(int, int)) );
     QObject::connect( keyboard, SIGNAL(actionResize(int, int)), manager, SLOT(actionResize(int, int)) );
+
     service->listen();
-
-    keyboard->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::WindowDoesNotAcceptFocus);
-    settings->load();
-
     keyboard->show();
 }
 
