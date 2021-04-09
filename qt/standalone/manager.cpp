@@ -37,6 +37,21 @@ void Manager::actionTrigger( QString action )
         this->keyboard->showMinimized();
     } else if (action == QStringLiteral("close")) {
         this->keyboard->close();
+    } else if (action.startsWith("extend.")) {
+        QStringList parts = action.split(".");
+        QString ext = parts.at(1);
+        QVector<QString> extensions = this->keyboard->getSettings()->getExtensions();
+        if (extensions.contains(ext)) {
+            extensions.removeAll(ext);
+        } else {
+            extensions << ext;
+        }
+        QSize initial = this->keyboard->getSize();
+        this->keyboard->getSettings()->setExtensions(extensions);
+        QSize final = this->keyboard->getSize();
+        QSize size = this->keyboard->size();
+        this->keyboard->resize(size.width() * final.width() / initial.width(),
+                               size.height() * final.height() / initial.height());
     } else {
         qDebug() << "trigger " << action;
     }

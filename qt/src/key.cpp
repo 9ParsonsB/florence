@@ -22,12 +22,22 @@
 
 KeyAction::KeyAction( QDomElement el, Settings *settings ) {
     QDomElement action = el.firstChildElement("action");
-    this->symbols << new ModifiedSymbol(action.text(), 0, settings);
+    QDomElement param = el.firstChildElement("param");
+    QString a = action.text();
+    if (!param.isNull()) {
+        a += QStringLiteral(".") + param.text();
+    }
+    this->symbols << new ModifiedSymbol(a, 0, settings);
     QDomElement modifier = el.firstChildElement("modifier");
     while ( !modifier.isNull() ) {
         QDomElement code = modifier.firstChildElement("code");
         QDomElement action = modifier.firstChildElement("action");
-        this->symbols << new ModifiedSymbol(action.text(),
+        QDomElement param = modifier.firstChildElement("param");
+        QString a = action.text();
+        if (!param.isNull()) {
+            a += QStringLiteral(".") + param.text();
+        }
+        this->symbols << new ModifiedSymbol(a,
                                             static_cast<quint8>(code.text().toInt()), settings);
         modifier = modifier.nextSiblingElement("modifier");
     }
@@ -297,9 +307,13 @@ void Key::press()
 {
     if (this->action) {
         Symbol *s = this->action->getSymbol(this->settings->getKeymap()->getModifier());
-        emit actionTrigger(s->getName());
         this->setPressed();
-        releaseTimer.start(200);
+        QString action = s->getName();
+        // For extend, layout will be updated and key won't exist anymore
+        if (!action.startsWith("extend.")) {
+            releaseTimer.start(200);
+        }
+        emit actionTrigger(action);
     } else if ( this->settings->getKeymap()->getKeyModifier( this->code ) == 0 ) {
         emit keyPressed( this->code );
         Symbol *s = this->settings->getKeymap()->getSymbol( this->code );
@@ -337,5 +351,10 @@ QString Key::getAction()
 
 bool Key::isLocker()
 {
+    if (this->action) {
+        Symbol *s = this->action->getSymbol(this->settings->getKeymap()->getModifier());
+        QString action = s->getName();
+        return action.startsWith("extend.");
+    }
     return this->settings->getKeymap()->isLocker( this ->code );
 }

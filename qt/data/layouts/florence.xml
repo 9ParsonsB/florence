@@ -455,6 +455,66 @@
 </extension>
 
 <extension>
+	<_name>Navigation keys</_name>
+	<identifiant>standardnv</identifiant>
+	<placement>right</placement>
+	<keyboard>
+	<width>6</width>
+	<height>10</height>
+	<key>
+		<code>118</code>
+		<xpos>1</xpos>
+		<ypos>1</ypos>
+	</key>
+	<key>
+		<code>110</code>
+		<xpos>3</xpos>
+		<ypos>1</ypos>
+	</key>
+	<key>
+		<code>112</code>
+		<xpos>5</xpos>
+		<ypos>1</ypos>
+	</key>
+	<key>
+		<code>119</code>
+		<xpos>1</xpos>
+		<ypos>3</ypos>
+	</key>
+	<key>
+		<code>115</code>
+		<xpos>3</xpos>
+		<ypos>3</ypos>
+	</key>
+	<key>
+		<code>117</code>
+		<xpos>5</xpos>
+		<ypos>3</ypos>
+	</key>
+	<key>
+		<code>111</code>
+		<xpos>3</xpos>
+		<ypos>7</ypos>
+	</key>
+	<key>
+		<code>113</code>
+		<xpos>1</xpos>
+		<ypos>9</ypos>
+	</key>
+	<key>
+		<code>116</code>
+		<xpos>3</xpos>
+		<ypos>9</ypos>
+	</key>
+	<key>
+		<code>114</code>
+		<xpos>5</xpos>
+		<ypos>9</ypos>
+	</key>
+	</keyboard>
+</extension>
+
+<extension>
 	<_name>Florence keys</_name>
 	<identifiant>actionkys</identifiant>
 	<placement>right</placement>
@@ -479,6 +539,12 @@
 		<action>move</action>
 		<xpos>1</xpos>
 		<ypos>5</ypos>
+	</key>
+	<key>
+		<action>extend</action>
+		<param>standardnv</param>
+		<xpos>1</xpos>
+		<ypos>7</ypos>
 	</key>
 	<key>
 		<action>resize</action>

@@ -115,6 +115,7 @@ bool Florence::setLayout( QString file )
         Key *k = static_cast<Key *>(it);
         delete k;
     }
+    this->scene()->clear();
 
     QDomElement root = layout.documentElement();
     QDomElement keyboard = root.firstChildElement("keyboard");
@@ -221,6 +222,7 @@ bool Florence::setLayout( QString file )
         delete extKeyboard;
     }
 
+    this->scene()->setSceneRect(0, 0, this->sceneWidth, this->sceneHeight);
     return true;
 }
 
