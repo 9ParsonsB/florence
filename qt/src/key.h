@@ -151,6 +151,16 @@ public:
      */
     ~Key();
 
+    /*! \fn getStatus
+      * \brief Returns the status of the key
+      */
+    enum key_status getStatus();
+    /*! \fn setStatus
+      * \brief Set the status of the key
+      * \param status the status
+      */
+    void setStatus(enum key_status status);
+
     /*! \fn hoverEnterEvent()
       * \brief Notifies the key that it is pointed either by touch or mouse.
       *

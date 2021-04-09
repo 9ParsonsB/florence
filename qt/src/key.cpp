@@ -140,6 +140,17 @@ Key::~Key()
     }
 }
 
+enum Key::key_status Key::getStatus()
+{
+    return this->status;
+}
+
+void Key::setStatus(enum Key::key_status status)
+{
+    this->status = status;
+    this->update();
+}
+
 void Key::setStyle( Style *style )
 {
     if ( style->getShape( this->keyShape ) ) {
@@ -310,7 +321,17 @@ void Key::press()
         this->setPressed();
         QString action = s->getName();
         // For extend, layout will be updated and key won't exist anymore
-        if (!action.startsWith("extend.")) {
+        if (action.startsWith("extend.")) {
+            QStringList parts = action.split(".");
+            QString ext = parts.at(1);
+            QVector<QString> extensions = this->settings->getExtensions();
+            if (extensions.contains(ext)) {
+                this->status = KEY_RELEASED;
+            } else {
+                this->status = KEY_LOCKED;
+            }
+            this->update();
+        } else {
             releaseTimer.start(200);
         }
         emit actionTrigger(action);

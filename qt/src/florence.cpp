@@ -110,9 +110,22 @@ bool Florence::setLayout( QString file )
     }
     f.close();
 
+    this->focusKey = nullptr;
+    this->latchedKeys.clear();
+    this->lockedKeys.clear();
+    QVector<QString> lockedActions;
+    QVector<quint8> lockedCodes;
+
     foreach ( QGraphicsItem *it, this->scene()->items() ) {
         this->scene()->removeItem( it );
         Key *k = static_cast<Key *>(it);
+        if (k->getStatus() == Key::KEY_LOCKED) {
+            if (k->getCode() > 0) {
+                lockedCodes << k->getCode();
+            } else {
+                lockedActions << k->getAction();
+            }
+        }
         delete k;
     }
     this->scene()->clear();
@@ -220,6 +233,14 @@ bool Florence::setLayout( QString file )
             y += height;
         }
         delete extKeyboard;
+    }
+
+    foreach ( QGraphicsItem *it, this->scene()->items() ) {
+        Key *k = static_cast<Key *>(it);
+        if (lockedActions.contains(k->getAction()) || lockedCodes.contains(k->getCode())) {
+            k->setStatus(Key::KEY_LOCKED);
+            this->lockedKeys << k;
+        }
     }
 
     this->scene()->setSceneRect(0, 0, this->sceneWidth, this->sceneHeight);
