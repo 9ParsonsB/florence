@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>394</width>
+    <height>294</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,18 +15,25 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
-      <widget class="QLabel" name="fontLabel">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QCheckBox" name="decorated">
        <property name="text">
-        <string>Font</string>
+        <string>Decorated</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
+     <item>
+      <widget class="QCheckBox" name="transparent">
+       <property name="text">
+        <string>Transparent</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="font">
        <property name="text">
-        <string>select</string>
+        <string>Font</string>
        </property>
       </widget>
      </item>

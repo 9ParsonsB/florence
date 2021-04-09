@@ -35,6 +35,8 @@ private:
     QDBusInterface *dbus;
 
 private slots:
+    void setTransparent(bool);
+    void setDecorated(bool);
     void setFont();
     void end( int accept );
 };

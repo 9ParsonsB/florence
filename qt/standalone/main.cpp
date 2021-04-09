@@ -34,7 +34,6 @@ void run() {
     Simulator *simulator = new Simulator();
     Florence *keyboard = new Florence();
     SettingsService *settings = new SettingsService(keyboard);
-    settings->load();
     Service *service = new Service(keyboard, settings);
     Manager *manager = new Manager(keyboard, settings);
 

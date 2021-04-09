@@ -260,6 +260,13 @@ void Florence::resizeEvent( QResizeEvent *event )
     matrix.scale(this->width()/this->scene()->width(), this->height()/this->scene()->height());
     this->setTransform( matrix, false );
     QGraphicsView::resizeEvent( event );
+    emit actionTrigger("resize");
+}
+
+void Florence::moveEvent( QMoveEvent *event )
+{
+    QGraphicsView::moveEvent(event);
+    emit actionTrigger("move");
 }
 
 void Florence::mousePressEvent( QMouseEvent *event )

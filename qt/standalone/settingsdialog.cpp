@@ -42,7 +42,23 @@ SettingsDialog::SettingsDialog( QWidget * parent )
         qDebug() << font.error().message();
     }
 
+    QDBusReply<bool> transparent = this->dbus->call("getTransparent");
+    if (transparent.isValid()) {
+        ui->transparent->setChecked(transparent.value());
+    } else {
+        qDebug() << font.error().message();
+    }
+
+    QDBusReply<bool> decorated = this->dbus->call("getDecorated");
+    if (decorated.isValid()) {
+        ui->decorated->setChecked(decorated.value());
+    } else {
+        qDebug() << font.error().message();
+    }
+
     QObject::connect(ui->font, SIGNAL(clicked(bool)), this, SLOT(setFont()));
+    QObject::connect(ui->transparent, SIGNAL(toggled(bool)), this, SLOT(setTransparent(bool)));
+    QObject::connect(ui->decorated, SIGNAL(clicked(bool)), this, SLOT(setDecorated(bool)));
 
     QObject::connect(this, SIGNAL(finished(int)), this, SLOT(end(int)));
 }
@@ -66,6 +82,22 @@ void SettingsDialog::setFont()
         } else {
             qDebug() << reply.error().message();
         }
+    }
+}
+
+void SettingsDialog::setTransparent( bool transparent )
+{
+    QDBusReply<bool> reply = this->dbus->call("setTransparent", transparent);
+    if (!reply.isValid()) {
+        qDebug() << reply.error().message();
+    }
+}
+
+void SettingsDialog::setDecorated( bool decorated )
+{
+    QDBusReply<bool> reply = this->dbus->call("setDecorated", decorated);
+    if (!reply.isValid()) {
+        qDebug() << reply.error().message();
     }
 }
 

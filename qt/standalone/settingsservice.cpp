@@ -86,6 +86,7 @@ void SettingsService::setSize(QSize size)
 bool SettingsService::setTransparent( bool transparent )
 {
     this->keyboard->setAttribute(Qt::WA_TranslucentBackground, transparent);
+    this->keyboard->repaint();
     return true;
 }
 
@@ -101,6 +102,7 @@ bool SettingsService::setDecorated( bool decorated )
     } else {
         this->keyboard->setWindowFlags(this->keyboard->windowFlags() | Qt::FramelessWindowHint);
     }
+    this->keyboard->show();
     return true;
 }
 

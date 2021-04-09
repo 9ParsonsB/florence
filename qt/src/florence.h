@@ -265,6 +265,7 @@ signals:
 
 protected:
     void resizeEvent( QResizeEvent *event );
+    void moveEvent( QMoveEvent *event );
     void mousePressEvent( QMouseEvent *event );
     void mouseDoubleClickEvent( QMouseEvent *event );
     void mouseMoveEvent( QMouseEvent *event );
