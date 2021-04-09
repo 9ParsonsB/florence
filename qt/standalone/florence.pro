@@ -25,5 +25,9 @@ HEADERS += \
 INCLUDEPATH += ../src
 LIBS += -lflorence_qt -lXtst -lX11
 
+prefix.path = /usr
+target.path = $$prefix.path/bin
+INSTALLS += target
+
 FORMS += \
     config.ui
