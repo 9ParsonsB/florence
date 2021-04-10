@@ -56,9 +56,17 @@ SettingsDialog::SettingsDialog( QWidget * parent )
         qDebug() << font.error().message();
     }
 
+    QDBusReply<qreal> opacity = this->dbus->call("getOpacity");
+    if (opacity.isValid()) {
+        ui->opacity->setValue((int)(opacity.value() * 100.0));
+    } else {
+        qDebug() << font.error().message();
+    }
+
     QObject::connect(ui->font, SIGNAL(clicked(bool)), this, SLOT(setFont()));
     QObject::connect(ui->transparent, SIGNAL(toggled(bool)), this, SLOT(setTransparent(bool)));
     QObject::connect(ui->decorated, SIGNAL(clicked(bool)), this, SLOT(setDecorated(bool)));
+    QObject::connect(ui->opacity, SIGNAL(valueChanged(int)), this, SLOT(setOpacity(int)));
 
     QObject::connect(this, SIGNAL(finished(int)), this, SLOT(end(int)));
 }
@@ -96,6 +104,14 @@ void SettingsDialog::setTransparent( bool transparent )
 void SettingsDialog::setDecorated( bool decorated )
 {
     QDBusReply<bool> reply = this->dbus->call("setDecorated", decorated);
+    if (!reply.isValid()) {
+        qDebug() << reply.error().message();
+    }
+}
+
+void SettingsDialog::setOpacity( int opacity )
+{
+    QDBusReply<bool> reply = this->dbus->call("setOpacity", ((qreal)opacity) / 100.0);
     if (!reply.isValid()) {
         qDebug() << reply.error().message();
     }

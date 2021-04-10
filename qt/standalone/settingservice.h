@@ -38,6 +38,8 @@
 #define SETTINGS_DECORATED_DEFAULT true
 #define SETTINGS_EXTENSIONS "extensions"
 #define SETTINGS_EXTENSIONS_DEFAULT {"actionkys"}
+#define SETTINGS_OPACITY "opacity"
+#define SETTINGS_OPACITY_DEFAULT 1.0
 
 /*! \class Settings
   * \brief Stores application settings.
@@ -75,6 +77,9 @@ public slots:
 
     Q_SCRIPTABLE bool setDecorated( bool decorated );
     Q_SCRIPTABLE bool getDecorated();
+
+    Q_SCRIPTABLE bool setOpacity( qreal opacity );
+    Q_SCRIPTABLE qreal getOpacity();
 
     Q_SCRIPTABLE void setPos( QPoint pos );
     Q_SCRIPTABLE void setSize( QSize size );

@@ -38,6 +38,7 @@ private slots:
     void setTransparent(bool);
     void setDecorated(bool);
     void setFont();
+    void setOpacity(int);
     void end( int accept );
 };
 

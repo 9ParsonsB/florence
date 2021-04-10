@@ -39,6 +39,7 @@ bool SettingsService::load()
     this->setTransparent(settings.value(SETTINGS_TRANSPARENT, SETTINGS_TRANSPARENT_DEFAULT).toBool());
     this->setDecorated(settings.value(SETTINGS_DECORATED, SETTINGS_DECORATED_DEFAULT).toBool());
     this->setExtensions(settings.value(SETTINGS_EXTENSIONS, SETTINGS_EXTENSIONS_DEFAULT).toStringList());
+    this->setOpacity(settings.value(SETTINGS_OPACITY, SETTINGS_OPACITY_DEFAULT).toReal());
 
     return true;
 }
@@ -53,6 +54,7 @@ bool SettingsService::save()
     settings.setValue(SETTINGS_TRANSPARENT, this->getTransparent());
     settings.setValue(SETTINGS_DECORATED, this->getDecorated());
     settings.setValue(SETTINGS_EXTENSIONS, QVariant::fromValue(this->getExtensions()));
+    settings.setValue(SETTINGS_OPACITY, this->getOpacity());
 
     return true;
 }
@@ -111,6 +113,17 @@ bool SettingsService::setDecorated( bool decorated )
 bool SettingsService::getDecorated()
 {
     return !(this->keyboard->windowFlags() & Qt::FramelessWindowHint);
+}
+
+bool SettingsService::setOpacity( qreal opacity )
+{
+    this->keyboard->setOpacity(opacity);
+    return true;
+}
+
+qreal SettingsService::getOpacity()
+{
+    return this->keyboard->getSettings()->getOpacity();
 }
 
 bool SettingsService::setExtensions( QStringList extensions )
