@@ -115,6 +115,7 @@ bool Florence::setLayout( QString file )
     this->lockedKeys.clear();
     QVector<QString> lockedActions;
     QVector<quint8> lockedCodes;
+    QVector<quint8> latchedCodes;
 
     foreach ( QGraphicsItem *it, this->scene()->items() ) {
         this->scene()->removeItem( it );
@@ -125,6 +126,8 @@ bool Florence::setLayout( QString file )
             } else {
                 lockedActions << k->getAction();
             }
+        } else if (k->getStatus() == Key::KEY_LATCHED) {
+            latchedCodes << k->getCode();
         }
         delete k;
     }
@@ -240,6 +243,9 @@ bool Florence::setLayout( QString file )
         if (lockedActions.contains(k->getAction()) || lockedCodes.contains(k->getCode())) {
             k->setStatus(Key::KEY_LOCKED);
             this->lockedKeys << k;
+        } else if (latchedCodes.contains(k->getCode())) {
+            k->setStatus(Key::KEY_LATCHED);
+            this->latchedKeys << k;
         }
     }
 

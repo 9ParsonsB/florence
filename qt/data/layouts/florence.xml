@@ -354,6 +354,96 @@
 </keyboard>
 
 <extension>
+	<_name>Function keys</_name>
+	<identifiant>standardfn</identifiant>
+	<placement>top</placement>
+	<keyboard>
+	<width>44</width>
+	<height>2</height>
+	<key>
+		<code>9</code>
+		<xpos>1</xpos>
+		<ypos>1</ypos>
+	</key>
+	<key>
+		<code>67</code>
+		<xpos>5</xpos>
+		<ypos>1</ypos>
+	</key>
+	<key>
+		<code>68</code>
+		<xpos>7</xpos>
+		<ypos>1</ypos>
+	</key>
+	<key>
+		<code>69</code>
+		<xpos>9</xpos>
+		<ypos>1</ypos>
+	</key>
+	<key>
+		<code>70</code>
+		<xpos>11</xpos>
+		<ypos>1</ypos>
+	</key>
+	<key>
+		<code>71</code>
+		<xpos>14</xpos>
+		<ypos>1</ypos>
+	</key>
+	<key>
+		<code>72</code>
+		<xpos>16</xpos>
+		<ypos>1</ypos>
+	</key>
+	<key>
+		<code>73</code>
+		<xpos>18</xpos>
+		<ypos>1</ypos>
+	</key>
+	<key>
+		<code>74</code>
+		<xpos>20</xpos>
+		<ypos>1</ypos>
+	</key>
+	<key>
+		<code>75</code>
+		<xpos>23</xpos>
+		<ypos>1</ypos>
+	</key>
+	<key>
+		<code>76</code>
+		<xpos>25</xpos>
+		<ypos>1</ypos>
+	</key>
+	<key>
+		<code>95</code>
+		<xpos>27</xpos>
+		<ypos>1</ypos>
+	</key>
+	<key>
+		<code>96</code>
+		<xpos>29</xpos>
+		<ypos>1</ypos>
+	</key>
+	<key>
+		<code>107</code>
+		<xpos>39</xpos>
+		<ypos>1</ypos>
+	</key>
+	<key>
+		<code>78</code>
+		<xpos>41</xpos>
+		<ypos>1</ypos>
+	</key>
+	<key>
+		<code>127</code>
+		<xpos>43</xpos>
+		<ypos>1</ypos>
+	</key>
+	</keyboard>
+</extension>
+
+<extension>
 	<_name>Numeric keys</_name>
 	<identifiant>standardnm</identifiant>
 	<placement>right</placement>
@@ -543,6 +633,16 @@
 	<key>
 		<action>extend</action>
 		<param>standardnv</param>
+		<modifier>
+			<code>4</code>
+			<action>extend</action>
+			<param>standardnm</param>
+		</modifier>
+		<modifier>
+			<code>1</code>
+			<action>extend</action>
+			<param>standardfn</param>
+		</modifier>
 		<xpos>1</xpos>
 		<ypos>7</ypos>
 	</key>

@@ -78,6 +78,9 @@ Key::Key( QDomElement el, Settings *settings, qreal xOffset, qreal yOffset )
     } else {
         this->code = 0;
         this->action = new KeyAction(el, settings);
+        if (settings->getExtensions().contains(action.text())) {
+            this->status = KEY_LOCKED;
+        }
     }
 
     QDomElement xpos = el.firstChildElement("xpos");

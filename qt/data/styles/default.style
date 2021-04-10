@@ -52,7 +52,7 @@
         <g class="shape">
           <path id="mini_s" d="M34 2 L85.625 2 C101.625 2 117.625 18 117.625 33 C117.625 49 101.625 64 85.625 64 L34 64 C18 64 2 49 2 33 C2 18 18 2 34 2"/>
         </g>
-        <use xlink:href="#mini_s" style="fill:black;"/>
+        <use xlink:href="#mini_s" style="fill:url(#gradient);"/>
       </svg>
     </shape>
     <shape>
@@ -61,7 +61,7 @@
         <g class="shape">
           <path id="small_s" d="M33 2 C49 2 64 18 64 34 L64 98 C64 114 49 130 33 130 C18 130 2 114 2 98 L2 34 C2 18 18 2 33 2"/>
         </g>
-        <use xlink:href="#small_s" style="fill:black;"/>
+        <use xlink:href="#small_s" style="fill:url(#gradient);"/>
       </svg>
     </shape>
     <shape>
@@ -97,7 +97,7 @@
         <g class="shape">
           <path id="High_s" d="M34 2 L98 2 C114 2 130 18 130 34 L130 230 C130 246 114 262 98 262 L34 262 C18 262 2 246 2 230 L2 34 C2 18 18 2 34 2"/>
         </g>
-        <use xlink:href="#High_s" style="fill:black;"/>
+        <use xlink:href="#High_s" style="fill:url(#gradient);"/>
       </svg>
     </shape>
     <shape>
@@ -181,6 +181,10 @@
       </svg>
     </symbol>
     <symbol>
+      <name>KP_Begin</name>
+      <label></label>
+    </symbol>
+    <symbol>
       <name>(Shift_[LR]|(KP_|)Up)</name>
       <svg xmlns="http://www.w3.org/2000/svg" width="100" viewBox="0 0 100 100" version="1.1" height="100">
         <path d="M 45,45 35,45 50,30 65,45 55,45 55,70 45,70 45,45 z" class="symbol"/>
@@ -198,7 +202,7 @@
       </svg>
     </symbol>
     <symbol>
-      <name>(KP_|)Page_Up</name>
+      <name>((KP_|)Page_Up|(KP_|)Prior)</name>
       <svg xmlns="http://www.w3.org/2000/svg" width="100" viewBox="0 0 100 100" version="1.1" height="100">
         <path d="m 45,45 -10,0 15,-15 15,15 -10,0 0,4 10,0 0,4 -10,0 0,4 10,0 0,4 -10,0 0,4 10,0 0,4 -10,0 0,1 -10,0 0,-1 -10,0 0,-4 10,0 0,-4 -10,0 0,-4 10,0 0,-4 -10,0 0,-4 10,0 0,-4 z" class="symbol"/>
       </svg>
@@ -214,7 +218,7 @@
       <label xml:lang="fr">fin</label>
     </symbol>
     <symbol>
-      <name>(KP_|)Page_Down</name>
+      <name>((KP_|)Page_Down|(KP_|)Next)</name>
       <svg xmlns="http://www.w3.org/2000/svg" width="100" viewBox="0 0 100 100" version="1.1" height="100">
         <path d="m 45,55 -10,0 15,15 15,-15 -10,0 0,-4 10,0 0,-4 -10,0 0,-4 10,0 0,-4 -10,0 0,-4 10,0 0,-4 -10,0 0,-1 -10,0 0,1 -10,0 0,4 10,0 0,4 -10,0 0,4 10,0 0,4 -10,0 0,4 10,0 0,4 z" class="symbol"/>
       </svg>
@@ -379,9 +383,23 @@
     <symbol>
       <action>extend.standardnv</action>
       <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100" height="100" viewBox="0 0 100 100">
-        <path class="symbol" d="M15 15 50 45 85 15 55 50 85 85 50 55 15 85 45 50z"/>
-        <path class="symbol" d="M50 15 55 45 85 50 55 55 50 85 45 55 15 50 45 45z"/>
+	<rect class="symbol" x="40" y="35" width="20" height="20"/>
+	<path class="symbol-outline" d="M50 40 55 50 45 50z"/>
+	<rect class="symbol" x="15" y="60" width="20" height="20"/>
+	<path class="symbol-outline" d="M20 70 30 65 30 75z"/>
+	<rect class="symbol" x="40" y="60" width="20" height="20"/>
+	<path class="symbol-outline" d="M50 75 45 65 55 65z"/>
+	<rect class="symbol" x="65" y="60" width="20" height="20"/>
+	<path class="symbol-outline" d="M80 70 70 65 70 75z"/>
       </svg>
+    </symbol>
+    <symbol>
+      <action>extend.standardnm</action>
+      <label>123</label>
+    </symbol>
+    <symbol>
+      <action>extend.standardfn</action>
+      <label>Fn</label>
     </symbol>
   </symbols>
 </style>
