@@ -1,0 +1,7 @@
+option('with-docs', type: 'boolean', value: false, description: 'Build with docs (default: enabled)')
+option('with-ramble', type: 'boolean', value: false, description: 'Build with ramble mode (default: disabled)')
+option('with-xkb', type: 'boolean', value: false, description: 'build with xkb (default: disabled)')
+option('with-notifications', type: 'boolean', value: false, description: 'build with with-notifications (default: disabled)')
+option('with-xtst', type: 'boolean', value: true, description: 'Build with Xtst extension (default: enabled)')
+option('with-xrecord', type: 'boolean', value: false, description: 'Build without XRecord extension (requires the Xtst extension) (default: enabled)')
+option('with-at-spi', type: 'boolean', value: true, description: 'Build without at-spi (default: enabled)')
