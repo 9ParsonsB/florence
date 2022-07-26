@@ -4,7 +4,7 @@ top_inc = include_directories('.')
 
 as_version = meson.project_version()
 
-icondir = join_paths(get_option('prefix'), 'share/pixmaps/')
+icondir = join_paths(get_option('prefix'), 'share/pixmaps')
 prefix = get_option('prefix')
 bindir = join_paths(prefix, get_option('bindir'))
 datadir = join_paths(prefix, get_option('datadir'))
@@ -27,7 +27,7 @@ conf.set('ENABLE_GTK3', 1)
 conf.set('ENABLE_GTIO', 1)
 conf.set_quoted('ICONDIR', icondir)
 #conf.set('ICONDIR', '"data"')
-#conf.set('DATADIR', '"data"')
+conf.set_quoted('DATADIR', datadir)
 
 #ICONDIR=${prefix}/share/pixmaps
 
