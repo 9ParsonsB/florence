@@ -87,9 +87,9 @@ else
 endif
 
 
-
-subdir('data')
+# run meson.build in these dirs, in order
 subdir('po')
+subdir('data')
 subdir('src')
 subdir('docs')
 
