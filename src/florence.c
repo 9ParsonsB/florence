@@ -293,17 +293,17 @@ gboolean flo_mouse_enter_event (GtkWidget *window, GdkEvent *event, gpointer use
 	/* Work around gtk bug 556006 */
 	GdkEventCrossing *crossing=(GdkEventCrossing *)event;
 	GdkEventMotion motion;
-	#ifdef ENABLE_RAMBLE
+#ifdef ENABLE_RAMBLE
 	if (status_im_get(florence->status)!=STATUS_IM_RAMBLE) {
-	#endif
+#endif
 		motion.x=crossing->x;
 		motion.y=crossing->y;
 		motion.x_root=crossing->x_root;
 		motion.y_root=crossing->y_root;
 		flo_mouse_move_event(window, (GdkEvent *)(&motion), user_data);
-	#ifdef ENABLE_RAMBLE
+#ifdef ENABLE_RAMBLE
 	}
-	#endif
+#endif
 
 	status_release_latched(florence->status, NULL);
 	END_FUNC
