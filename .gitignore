@@ -19,3 +19,43 @@ mkinstalldirs
 stamp-h1
 libtool
 ltmain.sh
+docs/fr/fr.po
+docs/ru/ru.po
+docs/userdoc.pot
+po/de.po
+po/fr.po
+po/it.po
+po/ru.po
+.*.swp
+compile
+cscope.out
+editor/toolkit.pyc
+src/lib/.dirstamp
+tags
+.idea/
+
+### Meson ###
+# subproject directories
+/subprojects/*
+!/subprojects/*.wrap
+
+# Meson Directories
+meson-logs
+meson-private
+
+# Meson Files
+meson_benchmark_setup.dat
+meson_test_setup.dat
+sanitycheckcpp.cc     # C++ specific
+sanitycheckcpp.exe    # C++ specific
+
+# Ninja
+build.ninja
+.ninja_deps
+.ninja_logs
+
+# Misc
+compile_commands.json
+
+### Ninja ###
+.ninja_log
