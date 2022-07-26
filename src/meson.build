@@ -56,4 +56,4 @@ cflags = [
 # build libflorence
 subdir('lib')
 
-florence = executable('florence', 'main.c', sources: sources, include_directories: [src_inc, lib_inc], dependencies: deps, link_with: libflorence, install: true)
+florence = executable('florence', 'main.c', sources: sources, include_directories: [src_inc, lib_inc, data_inc], dependencies: deps, link_with: libflorence, install: true)
