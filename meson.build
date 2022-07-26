@@ -86,25 +86,7 @@ else
   ramble = dependency('ramble', required : false)
 endif
 
-sources = [
-    'src/main.c',
-    'src/controller.c',
-    'src/florence.c',
-    'src/fsm.c',
-    'src/key.c',
-    'src/keyboard.c',
-    'src/layoutreader.c',
-    'src/menu.c',
-    'src/ramble.c',
-    'src/service.c',
-    'src/status.c',
-    'src/style.c',
-    'src/tools.c',
-    'src/trace.c',
-    'src/trayicon.c',
-    'src/view.c',
-    'src/xkeyboard.c'
-]
+
 
 subdir('data')
 subdir('po')

@@ -6,9 +6,24 @@ config_h = configure_file(output : 'config.h',
 
 sources = [
     config_h,
-    'controller.c',
-    'florence.c',
-    ]
+    'src/main.c',
+    'src/controller.c',
+    'src/florence.c',
+    'src/fsm.c',
+    'src/key.c',
+    'src/keyboard.c',
+    'src/layoutreader.c',
+    'src/menu.c',
+    'src/ramble.c',
+    'src/service.c',
+    'src/status.c',
+    'src/style.c',
+    'src/tools.c',
+    'src/trace.c',
+    'src/trayicon.c',
+    'src/view.c',
+    'src/xkeyboard.c'
+]
 
 src_inc = include_directories('.')
 
