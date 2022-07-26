@@ -22,6 +22,8 @@
 #ifndef FLO_STATUS
 #define FLO_STATUS
 
+#define ENABLE_XTST
+
 #include "system.h"
 #ifdef ENABLE_XTST
 #include <X11/extensions/XTest.h>

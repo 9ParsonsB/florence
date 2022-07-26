@@ -245,6 +245,7 @@ guint xkeyboard_getKeyval(struct xkeyboard *xkeyboard, guint code, GdkModifierTy
 {
 	START_FUNC
 	guint keyval=0;
+	#ifdef ENABLE_XKB
 	XkbStateRec xkbState;
 	Display *disp=(Display *)gdk_x11_get_default_xdisplay();
 	XkbGetState(disp, XkbUseCoreKbd, &xkbState);
@@ -252,6 +253,7 @@ guint xkeyboard_getKeyval(struct xkeyboard *xkeyboard, guint code, GdkModifierTy
 		&keyval, NULL, NULL, NULL)) {
 		keyval=0;
 	}
+	#endif
 	END_FUNC
 	return keyval;
 }

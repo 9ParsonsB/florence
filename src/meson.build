@@ -15,6 +15,8 @@ sources = [
     'menu.c',
     'ramble.c',
     'service.c',
+    'settings.c',
+    'settings-window.c',
     'status.c',
     'style.c',
     'tools.c',

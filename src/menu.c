@@ -19,6 +19,7 @@
 
 */
 
+#include "config.h"
 #include "system.h"
 #include "trace.h"
 #include "settings.h"
