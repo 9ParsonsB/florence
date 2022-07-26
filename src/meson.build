@@ -6,7 +6,6 @@ config_h = configure_file(output : 'config.h',
 
 sources = [
     config_h,
-    'src/main.c',
     'src/controller.c',
     'src/florence.c',
     'src/fsm.c',
@@ -55,4 +54,4 @@ cflags = [
 # build libflorence
 subdir('lib')
 
-florence = executable('florence', sources: sources, include_directories: [src_inc], dependencies: deps, link_with: libflorence, install: true)
+florence = executable('florence', 'main.c', sources: sources, include_directories: [src_inc, lib_inc], dependencies: deps, link_with: libflorence, install: true)

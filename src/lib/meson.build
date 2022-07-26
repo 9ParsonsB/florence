@@ -1,7 +1,7 @@
-headers = files('florence.h')
+lib_headers = files('florence.h')
 
 lib_deps = [dependency('gtk+-3.0')]
+lib_inc = include_directories('.')
+lib_src = files('florence.c')
 
-sources = files('florence.c')
-
-libflorence = shared_library('libflorence', version: '1.0', sources: sources, include_directories: [include_directories('.'), src_inc], dependencies: lib_deps, install: true)
+libflorence = shared_library('libflorence', version: '1.0', sources: lib_src, include_directories: [lib_inc], dependencies: lib_deps, install: true)
