@@ -11,12 +11,6 @@ datadir = join_paths(prefix, get_option('datadir'))
 localedir = join_paths(prefix, get_option('localedir'))
 desktopdir = join_paths(datadir, 'applications')
 pkgdatadir = join_paths(datadir, meson.project_name())
-if get_option('depdatadir') == ''
-  depdatadir = datadir
-else
-  depdatadir = get_option('depdatadir')
-endif
-dbusdir = join_paths(depdatadir, 'dbus-1/interfaces')
 po_dir = join_paths(meson.project_source_root(), 'po')
 #add_project_arguments('-DENABLE_XTST=1', language: 'c')
 #add_project_arguments('-DICONDIR="data\"', language: 'c')
