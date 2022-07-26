@@ -1,7 +1,9 @@
 project('florence', 'c', version: '0.6.4')
-conf = configuration_data()
+top_inc = include_directories('.')
 
+conf = configuration_data()
 as_version = meson.project_version()
+
 conf.set_quoted('VERSION', as_version)
 conf.set_quoted('LC_ALL', 'C')
 
@@ -21,7 +23,7 @@ po_dir = join_paths(meson.project_source_root(), 'po')
 #add_project_arguments('-DENABLE_XTST=1', language: 'c')
 #add_project_arguments('-DICONDIR="data\"', language: 'c')
 #add_project_arguments('-DDATADIR="/usr/local/share/pixmaps"', language: 'c')
-
+florencelocaledir= join_paths(get_option('prefix'), get_option('localedir'))
 # Options
 
 if get_option('with-docs')
@@ -134,4 +136,4 @@ sources = [
 
 
 #add_project_arguments('-DVERSION=4', language: 'c')
-executable('florence', sources: sources, include_directories: ['src', 'build'], dependencies : florencedep)
+executable('florence', sources: sources, include_directories: ['src'], dependencies : florencedep)
