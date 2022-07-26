@@ -9,12 +9,25 @@ conf.set('HAVE_LIBM', 1)
 conf.set('ENABLE_GTK3', 1)
 conf.set('ENABLE_GTIO', 1)
 
+#conf.set('ICONDIR', '"data"')
+#conf.set('DATADIR', '"data"')
+
+#ICONDIR=${prefix}/share/pixmaps
+
+icondir = join_paths(get_option('prefix'), 'share/pixmaps/')
+conf.set_quoted('ICONDIR', icondir)
+
+po_dir = join_paths(meson.project_source_root(), 'po')
+#add_project_arguments('-DENABLE_XTST=1', language: 'c')
+#add_project_arguments('-DICONDIR="data\"', language: 'c')
+#add_project_arguments('-DDATADIR="/usr/local/share/pixmaps"', language: 'c')
+
 # Options
 
 if get_option('with-docs')
     # TODO: add dependency scrollkeepr-config
     # set ENABLE_HELP
-    config.set('ENABLE_HELP', 1)
+    conf.set('ENABLE_HELP', 1)
     gnome = import('gnome')
 
     gnome.gtkdoc('florence')
@@ -37,6 +50,8 @@ if get_option('with-xtst')
     else
         xrecord = dependency('xrecord', required: false)
     endif
+    else
+    xtst = dependency('xtst', required: false)
 endif
 
 
@@ -52,10 +67,10 @@ endif
 # TODO: test if both xtst and at-spi are disabled: ERROR
 
 if get_option('with-xkb')
-    xkb = dependency('xkb')
+    xkb = dependency('xkbcommon')
     conf.set('ENABLE_XKB', 1)
 else
-    xkb = dependency('xkb', required : false)
+    xkb = dependency('xkbcommon', required : false)
 endif
 
 
@@ -80,6 +95,43 @@ endif
 configure_file(output : 'config.h',
                configuration : conf)
 
-florencedep = [dependency('gtk+-3.0'), dependency('xext'), dependency('gmodule-2.0'), dependency('cairo'), dependency('librsvg-2.0'), dependency('libxml-2.0'), dependency('gstreamer-1.0'), ramble, xkb]
+florencedep = [
+    dependency('gtk+-3.0'),
+    dependency('xext'),
+    dependency('gmodule-2.0'),
+    dependency('cairo'),
+    dependency('librsvg-2.0'),
+    dependency('libxml-2.0'),
+    dependency('gstreamer-1.0'),
+    # dependency('x11'),
+    ramble,
+    xkb,
+    xtst,
+    spi,
+    xrecord
+]
 
-executable('florence', 'src/main.c', dependencies : florencedep)
+sources = [
+    'src/main.c',
+    'src/controller.c',
+    'src/florence.c',
+    'src/fsm.c',
+    'src/key.c',
+    'src/keyboard.c',
+    'src/layoutreader.c',
+    'src/menu.c',
+    'src/ramble.c',
+    'src/service.c',
+    'src/status.c',
+    'src/style.c',
+    'src/tools.c',
+    'src/trace.c',
+    'src/trayicon.c',
+    'src/view.c',
+    'src/xkeyboard.c'
+]
+
+
+
+#add_project_arguments('-DVERSION=4', language: 'c')
+executable('florence', sources: sources, include_directories: ['src', 'build'], dependencies : florencedep)
