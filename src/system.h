@@ -145,6 +145,8 @@
 #include <utime.h>
 #endif
 
+#define HAVE_STRING_H
+
 /* Don't use bcopy!  Use memmove if source and destination may overlap,
    memcpy otherwise.  */
 

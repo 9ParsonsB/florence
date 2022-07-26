@@ -19,6 +19,7 @@
 
 */
 
+#include "config.h"
 #include "system.h"
 #include <stdio.h>
 #include <sys/stat.h>
