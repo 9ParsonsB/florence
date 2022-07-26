@@ -38,7 +38,7 @@ deps = [
     dependency('librsvg-2.0'),
     dependency('libxml-2.0'),
     dependency('gstreamer-1.0'),
-    # dependency('x11'),
+    dependency('X11'),
     ramble,
     xkb,
     xtst,
