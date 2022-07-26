@@ -14,7 +14,6 @@ src_inc = include_directories('.')
 
 cc = meson.get_compiler('c')
 
-
 deps = [
     dependency('gtk+-3.0'),
     dependency('xext'),

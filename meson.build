@@ -58,7 +58,8 @@ if get_option('with-xtst')
     else
         xrecord = dependency('xrecord', required: false)
     endif
-    else
+else
+    xrecord = dependency('xrecord', required: false)
     xtst = dependency('xtst', required: false)
 endif
 
@@ -84,9 +85,6 @@ if get_option('with-ramble')
 else
   ramble = dependency('ramble', required : false)
 endif
-
-
-
 
 sources = [
     'src/main.c',
