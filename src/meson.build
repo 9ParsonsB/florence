@@ -10,6 +10,7 @@ sources = [
     'florence.c',
     ]
 
+src_inc = include_directories('.')
 
 cc = meson.get_compiler('c')
 
@@ -40,4 +41,4 @@ cflags = [
 # build libflorence
 subdir('lib')
 
-florence = executable('florence', sources: sources, include_directories: [top_inc, include_directories('.')], dependencies: deps, link_with: libflorence, install: true)
+florence = executable('florence', sources: sources, include_directories: [src_inc], dependencies: deps, link_with: libflorence, install: true)
