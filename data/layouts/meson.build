@@ -1,4 +1,4 @@
-layoutsdir = datadir + '/layouts'
+layoutsdir = join_paths(datadir, '/layouts')
 
 layout_DATA = ['florence.xml', 'florence-alt.xml', 'compact.xml', 'compact-alt.xml']
 
@@ -7,4 +7,4 @@ layout_compact_alt = configure_file(input: 'compact-alt.xml.in.in', output: 'com
 layout_florence = configure_file(input: 'florence.xml.in.in', output: 'florence.xml.in', configuration: conf)
 layout_florence_alt = configure_file(input: 'florence-alt.xml.in.in', output: 'florence-alt.xml.in', configuration: conf)
 
-install_data([layout_compact, layout_compact_alt, layout_florence, layout_florence_alt], rename: layout_DATA, install_dir: datadir)
+install_data([layout_compact, layout_compact_alt, layout_florence, layout_florence_alt], rename: layout_DATA, install_dir: layoutsdir)
