@@ -4,18 +4,22 @@ top_inc = include_directories('.')
 
 as_version = meson.project_version()
 
-icondir = join_paths(get_option('prefix'), 'share/pixmaps')
+datadirname = 'share'
+pkg_name = meson.project_name()
+
+icondir = join_paths(get_option('prefix'), datadirname, 'pixmaps')
 prefix = get_option('prefix')
 bindir = join_paths(prefix, get_option('bindir'))
 opt_datadir = get_option('datadir')
 mandir = get_option('mandir')
-datadir = join_paths(prefix, opt_datadir, 'florence')
+datadir = join_paths(prefix, opt_datadir, pkg_name)
 localedir = join_paths(prefix, get_option('localedir'))
 desktopdir = join_paths(datadir, 'applications')
-pkgdatadir = join_paths(datadir, meson.project_name())
+pkgdatadir = join_paths(datadir, pkg_name)
 po_dir = join_paths(meson.project_source_root(), 'po')
-florencelocaledir = join_paths(get_option('prefix'), get_option('localedir'))
-
+datarootdir = join_paths(prefix, datadirname)
+docdir = join_paths(datarootdir, '/doc/', pkg_tar_name)
+florencelocaledir = join_paths(prefix, datadirname, '/locale')
 
 conf = configuration_data()
 conf.set_quoted('VERSION', as_version)
@@ -33,6 +37,8 @@ debug('datadir:', datadir)
 debug('localedir:', localedir)
 debug('icondir:', icondir)
 debug('mandir:', mandir)
+debug('florencelocaledir:', florencelocaledir)
+debug('datarootdir:', datarootdir)
 
 
 #ICONDIR=${prefix}/share/pixmaps
