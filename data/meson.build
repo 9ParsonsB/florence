@@ -1,5 +1,5 @@
 gnome = import('gnome')
-schemadir = join_paths(datadir, 'glib-2.0', 'schemas')
+schemadir = join_paths(prefix, 'glib-2.0', 'schemas')
 
 data_inc = include_directories('.')
 data_conf = configuration_data()
