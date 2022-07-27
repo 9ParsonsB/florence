@@ -18,7 +18,7 @@ desktopdir = join_paths(datadir, 'applications')
 pkgdatadir = join_paths(datadir, pkg_name)
 po_dir = join_paths(meson.project_source_root(), 'po')
 datarootdir = join_paths(prefix, datadirname)
-docdir = join_paths(datarootdir, '/doc/', pkg_tar_name)
+docdir = join_paths(datarootdir, '/doc/', pkg_name)
 florencelocaledir = join_paths(prefix, datadirname, '/locale')
 
 conf = configuration_data()
