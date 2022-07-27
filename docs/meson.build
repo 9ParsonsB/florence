@@ -1,16 +1,16 @@
 doc_figures = files(
-  'figures/behaviour.png',
-  'figures/florence.png',
-  'figures/layout.png',
-  'figures/style.png',
-  'figures/window.png',
-  'figures/minimize.png',
-  'figures/configuration.png',
-  'figures/move.png',
-  'figures/bigger.png',
-  'figures/smaller.png',
-  'figures/close.png',
-  'figures/switch.png',)
+  'C/figures/behaviour.png',
+  'C/figures/florence.png',
+  'C/figures/layout.png',
+  'C/figures/style.png',
+  'C/figures/window.png',
+  'C/figures/minimize.png',
+  'C/figures/configuration.png',
+  'C/figures/move.png',
+  'C/figures/bigger.png',
+  'C/figures/smaller.png',
+  'C/figures/close.png',
+  'C/figures/switch.png',)
 
 
 man_florence_file = 'florence.1'
