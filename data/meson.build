@@ -7,6 +7,11 @@ data_xml = 'org.florence.gschema.xml'
 
 florence_schema_xml = configure_file(input: data_xml + '.in', output: data_xml, configuration: data_conf)
 
+
+#install gnome settings schema
 install_data(florence_schema_xml, install_dir: schemadir)
 
+
 #doc_resources = gnome.compile_resources('florence', data_xml, c_name:'florence')
+
+subdir('layouts')

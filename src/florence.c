@@ -468,4 +468,3 @@ void flo_free(struct florence *florence)
 	xmlMemoryDump();
 	END_FUNC
 }
-
