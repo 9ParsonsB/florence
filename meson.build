@@ -7,15 +7,13 @@ as_version = meson.project_version()
 icondir = join_paths(get_option('prefix'), 'share/pixmaps')
 prefix = get_option('prefix')
 bindir = join_paths(prefix, get_option('bindir'))
-datadir = join_paths(prefix, get_option('datadir'))
+opt_datadir = get_option('datadir')
+datadir = join_paths(prefix, opt_datadir, 'florence')
 localedir = join_paths(prefix, get_option('localedir'))
 desktopdir = join_paths(datadir, 'applications')
 pkgdatadir = join_paths(datadir, meson.project_name())
 po_dir = join_paths(meson.project_source_root(), 'po')
-#add_project_arguments('-DENABLE_XTST=1', language: 'c')
-#add_project_arguments('-DICONDIR="data\"', language: 'c')
-#add_project_arguments('-DDATADIR="/usr/local/share/pixmaps"', language: 'c')
-florencelocaledir= join_paths(get_option('prefix'), get_option('localedir'))
+florencelocaledir = join_paths(get_option('prefix'), get_option('localedir'))
 
 
 conf = configuration_data()
@@ -27,7 +25,13 @@ conf.set('ENABLE_GTK3', 1)
 conf.set('ENABLE_GTIO', 1)
 conf.set_quoted('ICONDIR', icondir)
 #conf.set('ICONDIR', '"data"')
-conf.set_quoted('DATADIR', datadir)
+conf.set_quoted('DATADIR', datadir )
+
+debug('prefix:', prefix)
+debug('datadir:', datadir)
+debug('localedir:', localedir)
+debug('icondir:', icondir)
+
 
 #ICONDIR=${prefix}/share/pixmaps
 
