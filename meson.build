@@ -8,6 +8,7 @@ icondir = join_paths(get_option('prefix'), 'share/pixmaps')
 prefix = get_option('prefix')
 bindir = join_paths(prefix, get_option('bindir'))
 opt_datadir = get_option('datadir')
+mandir = get_option('mandir')
 datadir = join_paths(prefix, opt_datadir, 'florence')
 localedir = join_paths(prefix, get_option('localedir'))
 desktopdir = join_paths(datadir, 'applications')
@@ -31,6 +32,7 @@ debug('prefix:', prefix)
 debug('datadir:', datadir)
 debug('localedir:', localedir)
 debug('icondir:', icondir)
+debug('mandir:', mandir)
 
 
 #ICONDIR=${prefix}/share/pixmaps
