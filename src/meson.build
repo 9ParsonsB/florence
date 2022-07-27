@@ -4,6 +4,18 @@ gnome = import('gnome')
 config_h = configure_file(output : 'config.h',
                configuration : conf)
 
+florence_pc = 'florence-1.0.pc'
+
+pc_conf = configuration_data()
+
+pc_conf.set('@prefix@', prefix)
+pc_conf.set('@exec_prefix@', '${prefix}')
+pc_conf.set('@libdir@', '${exec_prefix}/lib')
+pc_conf.set('@includedir@', '${prefix}/include')
+pc_conf.set('@PACKAGE_VERSION@', version)
+
+pc = configure_file(input: florence_pc + '.in', output: florence_pc, configuration: pc_conf)
+
 sources = [
     config_h,
     'controller.c',
@@ -45,13 +57,6 @@ deps = [
     spi,
     xrecord
 ]
-
-
-cflags = [
-  '-DICONDIR="@0@"'.format(icondir),
-  '-DFLORENCELOCALEDIR="@0@"'.format(florencelocaledir),
-  '-DDATADIR="@0@"'.format(datadir),
-  ]
 
 # build libflorence
 subdir('lib')
