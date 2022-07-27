@@ -18,8 +18,8 @@ man_florece_applet_file = 'florence_applet.1'
 
 man_conf = configuration_data()
 
-man_florence = configure_file(input: man_florence_file + '.in', output: man_florence_file, conf: man_conf)
-man_florence_applet = configure_file(input: man_florece_applet_file + '.in', output: man_florece_applet_file, conf: man_conf)
+man_florence = configure_file(input: man_florence_file + '.in', output: man_florence_file, configuration: man_conf)
+man_florence_applet = configure_file(input: man_florece_applet_file + '.in', output: man_florece_applet_file, configuration: man_conf)
 
 man_files = [man_florence, man_florence_applet]
 
