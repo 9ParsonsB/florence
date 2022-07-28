@@ -8,11 +8,11 @@ florence_pc = 'florence-1.0.pc'
 
 pc_conf = configuration_data()
 
-pc_conf.set('@prefix@', prefix)
-pc_conf.set('@exec_prefix@', '${prefix}')
-pc_conf.set('@libdir@', '${exec_prefix}/lib')
-pc_conf.set('@includedir@', '${prefix}/include')
-pc_conf.set('@PACKAGE_VERSION@', as_version)
+pc_conf.set('prefix', prefix)
+pc_conf.set('exec_prefix', '${prefix}')
+pc_conf.set('libdir', '${exec_prefix}/lib')
+pc_conf.set('includedir', '${prefix}/include')
+pc_conf.set('PACKAGE_VERSION', as_version)
 
 pc = configure_file(input: florence_pc + '.in', output: florence_pc, configuration: pc_conf)
 
