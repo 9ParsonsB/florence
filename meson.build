@@ -7,6 +7,8 @@ as_version = meson.project_version()
 datadirname = 'share'
 pkg_name = meson.project_name()
 
+namespace = 'org.florence'
+
 icondir = join_paths(get_option('prefix'), datadirname, 'pixmaps')
 prefix = get_option('prefix')
 bindir = join_paths(prefix, get_option('bindir'))
