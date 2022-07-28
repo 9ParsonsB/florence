@@ -100,8 +100,16 @@ endif
 
 
 # run meson.build in these dirs, in order
+
+# translations
 subdir('po')
+
+# runtime & install data
 subdir('data')
+
+# source code
 subdir('src')
+
+# documentation
 subdir('docs')
 
