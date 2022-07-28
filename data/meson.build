@@ -30,6 +30,6 @@ install_data(
 )
 
 # install gnome settings schema to system on install
-meson.add_install_script('glib-compile-schemas', schemadir)
+#meson.add_install_script('glib-compile-schemas', schemadir)
 
 subdir('layouts')
