@@ -4,6 +4,32 @@ gnome = import('gnome')
 config_h = configure_file(output : 'config.h',
                configuration : conf)
 
+# florence.server is an xml file defining bonobo endpoints.
+# it's basically an old OLE/COM/KParts/DBus
+# gnome implementation of bonobo is called `ORBit`
+
+# TODO: migrate to GIO or DBus for bonobo functionality (if required)
+
+# this file will need to be transformed twice
+# once for project settings, and once for translations
+florence_server_file = 'florence.server'
+
+server_conf = configuration_data()
+server_conf.set('BINDIR', bindir)
+
+# ISSUE: not sure where this is meant to install to
+# ISSUE: uncommenting this causes build issues
+#florence_server = i18n.merge_file(
+#  input: configure_file(
+#    input: florence_server_file +'.in.in',
+#    output: florence_server_file + '.in',
+#    configuration: server_conf),
+#  output: florence_server_file,
+#  po_dir: po_dir,
+#  type: 'xml',
+#  install: true)
+
+
 florence_pc = 'florence-1.0.pc'
 
 pc_conf = configuration_data()
