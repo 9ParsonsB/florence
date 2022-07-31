@@ -1,6 +1,5 @@
 data/florence.desktop.in.in
 data/florence.glade
-data/org.florence.gschema.xml.in
 data/layouts/florence.xml.in.in
 data/layouts/florence-alt.xml.in.in
 data/layouts/compact.xml.in.in

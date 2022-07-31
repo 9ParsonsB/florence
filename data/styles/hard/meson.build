@@ -1,7 +1,7 @@
 style_hard_dir = styledir / 'hard'
 
-style_hard_in =
-  ['default.svg',
+style_hard = [
+  'default.svg',
   'return.svg',
   'space.svg',
   'wide.svg',
@@ -13,9 +13,9 @@ style_hard_in =
   'small.svg']
 
 style_hard_conf = configuration_data()
-style_hard_conf.set('BASEDIR' / style_hard_dir)
+style_hard_conf.set('BASEDIR', style_hard_dir)
 
-foreach i: style_hard_in
+foreach i: style_hard
   configure_file(
     input: i + '.in',
     output: i,

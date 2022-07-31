@@ -8,7 +8,7 @@ sound_conf.set('SNDDIR', style_default_sounds_dir)
 configure_file(
   input: sounds_xml + '.in',
   output: sounds_xml,
-  configuration_data: sound_conf,
+  configuration: sound_conf,
   install: true,
   install_dir: style_default_sounds_dir)
 

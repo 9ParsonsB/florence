@@ -18,7 +18,7 @@ svg11_files = [
 
 foreach i: svg11_files
   custom_target(
-    'gen-florence-rng',
+    'gen-svg11-rng-' + i,
       input: i + '.rnc',
       output: i + '.rng',
       command: [trang_command, '-I rnc', '-O rng', '@INPUT@', '@OUTPUT@'],
