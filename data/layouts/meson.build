@@ -1,4 +1,7 @@
-layoutsdir = join_paths(datadir, '/layouts')
+layoutsdir = join_paths(datadir, 'layouts')
+
+debug('layout: datadir:', datadir)
+debug('layout: layoutsdir:', layoutsdir)
 
 layout_DATA = ['florence.xml', 'florence-alt.xml', 'compact.xml', 'compact-alt.xml']
 
