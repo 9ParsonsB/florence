@@ -9,19 +9,19 @@ pkg_name = meson.project_name()
 
 namespace = 'org.florence'
 
-icondir = join_paths(get_option('prefix'), datadirname, 'pixmaps')
+icondir = get_option('prefix') / datadirname / 'pixmaps'
 prefix = get_option('prefix')
-bindir = join_paths(prefix, get_option('bindir'))
+bindir = prefix / get_option('bindir')
 opt_datadir = get_option('datadir')
 mandir = get_option('mandir')
-datadir = join_paths(prefix, opt_datadir, pkg_name)
-localedir = join_paths(prefix, get_option('localedir'))
-desktopdir = join_paths(datadir, 'applications')
-pkgdatadir = join_paths(datadir, pkg_name)
-po_dir = join_paths(meson.project_source_root(), 'po')
-datarootdir = join_paths(prefix, datadirname)
-docdir = join_paths(datarootdir, 'doc', pkg_name)
-florencelocaledir = join_paths(prefix, datadirname, 'locale')
+datadir = prefix / opt_datadir / pkg_name
+localedir = prefix / get_option('localedir')
+desktopdir = datadir / 'applications'
+pkgdatadir = datadir / pkg_name
+po_dir = meson.project_source_root() / 'po'
+datarootdir = prefix / datadirname
+docdir = datarootdir / 'doc' / pkg_name
+florencelocaledir = prefix / datadirname / 'locale'
 
 conf = configuration_data()
 conf.set_quoted('VERSION', as_version)

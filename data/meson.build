@@ -23,9 +23,22 @@ debug('podir:', po_dir)
 #compile the schema in the current directory, for when running in debug mode
 compile_schemas = gnome.compile_schemas(build_by_default: true)
 
+florence_rng_file = pkg_name + '.rng'
+florence_rnc_file = pkg_name + '.rnc'
+trang_command = get_variable('TRANG_COMMAND', 'trang')
+
+# install rng file to datadir / 'relaxng'
+florence_rng = custom_target(
+  'gen-florence-rng',
+    input: florence_rnc_file,
+    output: florence_rng_file,
+    command: [trang_command, '-I rnc', '-O rng', '@INPUT@', '@OUTPUT@'],
+    install: true,
+    install_dir: datadir / 'relaxng')
+
 # install schema to gio schemadir
 install_data(
-  data_xml,
+  [data_xml, florence_rnc_file],
   install_dir: schemadir,
 )
 
@@ -33,3 +46,5 @@ install_data(
 #meson.add_install_script('glib-compile-schemas', schemadir)
 
 subdir('layouts')
+subdir('styles')
+subdir('svg11')
